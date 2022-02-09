@@ -1,0 +1,42 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>nz.ac.wgtn.nullannoinference</groupId>
+  <artifactId>nullannoinference-parent</artifactId>
+  <packaging>pom</packaging>
+  <version>0.0.1</version>
+  <name>nullannoinference-parent</name>
+  <properties>
+      <project-version>10.0.1</project-version>
+      <maven.compiler.target>9</maven.compiler.target>
+      <maven.compiler.source>9</maven.compiler.source>
+  </properties>
+
+  <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+   </licenses>
+   <scm>
+       <url>https://github.com/jensdietrich/yamf.git</url>
+   </scm>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M4</version>
+                <configuration>
+                    <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+  <modules>
+      <module>nullannoinference-agent</module>
+  </modules>
+  <url>http://maven.apache.org</url>
+</project>
