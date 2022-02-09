@@ -92,7 +92,7 @@
               <archive>
                 <manifest>
                   <mainClass>
-                    nz.ac.wgtn.ecs.semdiff.annotator.MvnProjectAnnotator
+                    nz.ac.wgtn.nullannoinference.annotator.MvnProjectAnnotator
                   </mainClass>
                 </manifest>
               </archive>
