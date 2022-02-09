@@ -6,10 +6,10 @@
     <version>0.0.1</version>
   </parent>
   <groupId>nz.ac.wgtn.nullannoinference</groupId>
-  <artifactId>nullannoinference-agent</artifactId>
+  <artifactId>nullannoinference-refiner</artifactId>
   <packaging>jar</packaging>
   <version>0.0.1</version>
-  <name>nullannoinference-agent</name>
+  <name>nullannoinference-refiner</name>
   <build>
     <plugins>
       <plugin>

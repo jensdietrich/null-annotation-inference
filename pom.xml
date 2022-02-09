@@ -19,7 +19,7 @@
         </license>
    </licenses>
    <scm>
-       <url>https://github.com/jensdietrich/yamf.git</url>
+       <url>https://github.com/jensdietrich/null-annotation-inference</url>
    </scm>
 
     <build>
@@ -37,6 +37,7 @@
 
   <modules>
       <module>nullannoinference-agent</module>
+      <module>nullannoinference-refiner</module>
   </modules>
   <url>http://maven.apache.org</url>
 </project>
