@@ -1,0 +1,2934 @@
+[
+   {
+      "method": "newString",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.StringUtils::newString:290",
+         "org.apache.commons.codec.binary.StringUtils::newStringUtf8:416",
+         "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput_CODEC229:151"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "([BLjava/nio/charset/Charset;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.binary.StringUtils"
+   },
+   {
+      "method": "encodeBase64",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.Base64::encodeBase64:216",
+         "org.apache.commons.codec.binary.Base64::encodeBase64:197",
+         "org.apache.commons.codec.binary.Base64::encodeBase64:182",
+         "org.apache.commons.codec.binary.Base64Test::testEmptyBase64:402"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([BZZ)[B",
+      "class": "org.apache.commons.codec.binary.Base64"
+   },
+   {
+      "method": "assertDecodeObject",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.BinaryCodecTest::assertDecodeObject:183",
+         "org.apache.commons.codec.binary.BinaryCodecTest::testDecodeObject:165"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "([BLjava/lang/String;)V",
+      "class": "org.apache.commons.codec.binary.BinaryCodecTest"
+   },
+   {
+      "method": "nysiis",
+      "stacktrace": [
+         "org.apache.commons.codec.language.Nysiis::nysiis:314",
+         "org.apache.commons.codec.language.Nysiis::encode:226",
+         "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.Nysiis"
+   },
+   {
+      "method": "doDecoding",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QCodec::doDecoding:193",
+         "org.apache.commons.codec.net.QCodecTest::testNullInput:62"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.net.QCodec"
+   },
+   {
+      "method": "getBytesUnchecked",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.StringUtils::getBytesUnchecked:172",
+         "org.apache.commons.codec.binary.StringUtilsTest::testGetBytesUncheckedNullInput:125"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;)[B",
+      "class": "org.apache.commons.codec.binary.StringUtils"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QuotedPrintableCodec::encode:396",
+         "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeNull:144"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.net.QuotedPrintableCodec"
+   },
+   {
+      "method": "clean",
+      "stacktrace": [
+         "org.apache.commons.codec.language.SoundexUtils::clean:55",
+         "org.apache.commons.codec.language.SoundexTest::testSoundexUtilsNullBehaviour:334"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.SoundexUtils"
+   },
+   {
+      "method": "newStringIso8859_1",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.StringUtils::newStringIso8859_1:336",
+         "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput_CODEC229:152"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "([B)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.binary.StringUtils"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.BaseNCodec::encode:485",
+         "org.apache.commons.codec.binary.Base16Test::testEmptyBase16:143"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.binary.BaseNCodec"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.language.MatchRatingApproachEncoder::encode:127",
+         "org.apache.commons.codec.language.MatchRatingApproachEncoderTest::testGetEncoding_Null_to_Nothing:281"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.MatchRatingApproachEncoder"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QCodec::encode:287",
+         "org.apache.commons.codec.net.QCodecTest::testEncodeObjects:141"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "class": "org.apache.commons.codec.net.QCodec"
+   },
+   {
+      "method": "read",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.BaseNCodecInputStream::read:145",
+         "org.apache.commons.codec.binary.Base32InputStreamTest::testReadNull:425"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([BII)I",
+      "class": "org.apache.commons.codec.binary.BaseNCodecInputStream"
+   },
+   {
+      "method": "doubleMetaphone",
+      "stacktrace": [
+         "org.apache.commons.codec.language.DoubleMetaphone::doubleMetaphone:189",
+         "org.apache.commons.codec.language.DoubleMetaphone::isDoubleMetaphoneEqual:244",
+         "org.apache.commons.codec.language.DoubleMetaphoneTest::doubleMetaphoneEqualTest:1038",
+         "org.apache.commons.codec.language.DoubleMetaphoneTest::testIsDoubleMetaphoneEqualBasic:1135"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;Z)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.DoubleMetaphone"
+   },
+   {
+      "method": "containsAlphabetOrPad",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.BaseNCodec::containsAlphabetOrPad:409",
+         "org.apache.commons.codec.binary.BaseNCodecTest::testContainsAlphabetOrPad:187"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)Z",
+      "class": "org.apache.commons.codec.binary.BaseNCodec"
+   },
+   {
+      "method": "cleanInput",
+      "stacktrace": [
+         "org.apache.commons.codec.language.DoubleMetaphone::cleanInput:888",
+         "org.apache.commons.codec.language.DoubleMetaphone::doubleMetaphone:86",
+         "org.apache.commons.codec.language.DoubleMetaphone::doubleMetaphone:75",
+         "org.apache.commons.codec.language.DoubleMetaphoneTest::testEmpty:1115"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.DoubleMetaphone"
+   },
+   {
+      "method": "decodeUrl",
+      "stacktrace": [
+         "org.apache.commons.codec.net.URLCodec::decodeUrl:188",
+         "org.apache.commons.codec.net.URLCodecTest::testDecodeWithNullArray:201"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.net.URLCodec"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.URLCodec::encode:250",
+         "org.apache.commons.codec.net.URLCodecTest::testEncodeDecodeNull:124"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.URLCodec"
+   },
+   {
+      "method": "encodeBase64String",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.Base64::encodeBase64String:279",
+         "org.apache.commons.codec.binary.Base64Test::testByteToStringVariations:1269"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "([B)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.binary.Base64"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.language.Nysiis::encode:226",
+         "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.Nysiis"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.URLCodec::decode:302",
+         "org.apache.commons.codec.net.URLCodecTest::testEncodeDecodeNull:126"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.URLCodec"
+   },
+   {
+      "method": "md5Crypt",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.Md5Crypt::md5Crypt:230",
+         "org.apache.commons.codec.digest.Md5Crypt::md5Crypt:184",
+         "org.apache.commons.codec.digest.Md5CryptTest::testMd5CryptNullData:78"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([BLjava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.digest.Md5Crypt"
+   },
+   {
+      "method": "md5Crypt",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.Md5Crypt::md5Crypt:230",
+         "org.apache.commons.codec.digest.Md5CryptTest::testMd5CryptExplicitCallWithThreadLocalRandom:68"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "([BLjava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.digest.Md5Crypt"
+   },
+   {
+      "method": "toByteArray",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.BinaryCodec::toByteArray:295",
+         "org.apache.commons.codec.binary.BinaryCodecTest::testToByteArrayFromString:378"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)[B",
+      "class": "org.apache.commons.codec.binary.BinaryCodec"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.PercentCodec::encode:242",
+         "org.apache.commons.codec.net.PercentCodecTest::testEncodeNullObject:97"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "class": "org.apache.commons.codec.net.PercentCodec"
+   },
+   {
+      "method": "colognePhonetic",
+      "stacktrace": [
+         "org.apache.commons.codec.language.ColognePhonetic::colognePhonetic:315",
+         "org.apache.commons.codec.language.ColognePhonetic::encode:402",
+         "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.ColognePhonetic"
+   },
+   {
+      "method": "newStringUtf16",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.StringUtils::newStringUtf16:368",
+         "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput_CODEC229:154"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "([B)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.binary.StringUtils"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QCodec::decode:317",
+         "org.apache.commons.codec.net.QCodecTest::testDecodeObjects:167"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "class": "org.apache.commons.codec.net.QCodec"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QCodec::decode:266",
+         "org.apache.commons.codec.net.QCodecTest::testDecodeStringWithNull:128"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.QCodec"
+   },
+   {
+      "method": "<init>",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.HmacUtils::<init>:907",
+         "org.apache.commons.codec.digest.HmacUtils::<init>:946",
+         "org.apache.commons.codec.digest.HmacAlgorithmsTest::testHmacHexFailInputStream:178"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "(Ljava/lang/String;[B)",
+      "class": "org.apache.commons.codec.digest.HmacUtils"
+   },
+   {
+      "method": "decodeQuotedPrintable",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QuotedPrintableCodec::decodeQuotedPrintable:380",
+         "org.apache.commons.codec.net.QuotedPrintableCodecTest::testDecodeWithNullArray:165"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.net.QuotedPrintableCodec"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.BaseNCodec::encode:505",
+         "org.apache.commons.codec.binary.Base64Test::testEmptyBase64:405"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([BII)[B",
+      "class": "org.apache.commons.codec.binary.BaseNCodec"
+   },
+   {
+      "method": "isBase64",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.Base64::isBase64:380",
+         "org.apache.commons.codec.binary.Base64Test::testIsStringBase64:94"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Z",
+      "class": "org.apache.commons.codec.binary.Base64"
+   },
+   {
+      "method": "crypt",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.Crypt::crypt:167",
+         "org.apache.commons.codec.digest.Crypt::crypt:106",
+         "org.apache.commons.codec.digest.CryptTest::testDefaultCryptVariant:35"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.digest.Crypt"
+   },
+   {
+      "method": "newStringUtf8",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.StringUtils::newStringUtf8:416",
+         "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput_CODEC229:151"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.binary.StringUtils"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QCodec::decode:311",
+         "org.apache.commons.codec.net.QCodecTest::testDecodeObjects:167"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "class": "org.apache.commons.codec.net.QCodec"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.BCodec::decode:266",
+         "org.apache.commons.codec.net.BCodecTest::testDecodeObjects:150"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "class": "org.apache.commons.codec.net.BCodec"
+   },
+   {
+      "method": "sha256Crypt",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.Sha2Crypt::sha256Crypt:89",
+         "org.apache.commons.codec.digest.Sha256CryptTest::testSha256CryptNullData:78"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.digest.Sha2Crypt"
+   },
+   {
+      "method": "newStringUtf16Le",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.StringUtils::newStringUtf16Le:400",
+         "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput_CODEC229:156"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "([B)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.binary.StringUtils"
+   },
+   {
+      "method": "soundex",
+      "stacktrace": [
+         "org.apache.commons.codec.language.Soundex::soundex:304",
+         "org.apache.commons.codec.language.Soundex::encode:251",
+         "org.apache.commons.codec.language.SoundexUtils::difference:85",
+         "org.apache.commons.codec.language.Soundex::difference:216",
+         "org.apache.commons.codec.language.SoundexTest::testDifference:94"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.Soundex"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QCodec::encode:233",
+         "org.apache.commons.codec.net.QCodecTest::testEncodeStringWithNull:120"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.QCodec"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.BaseNCodec::decode:429",
+         "org.apache.commons.codec.binary.BaseNCodec::decode:473",
+         "org.apache.commons.codec.binary.Base16Test::testStringToByteVariations:468"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.binary.BaseNCodec"
+   },
+   {
+      "method": "isBase64",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.Base64::isBase64:361",
+         "org.apache.commons.codec.binary.Base64::isBase64:380",
+         "org.apache.commons.codec.binary.Base64Test::testIsStringBase64:94"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)Z",
+      "class": "org.apache.commons.codec.binary.Base64"
+   },
+   {
+      "method": "newStringUtf16Be",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.StringUtils::newStringUtf16Be:384",
+         "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput_CODEC229:155"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.binary.StringUtils"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.URLCodec::decode:349",
+         "org.apache.commons.codec.net.URLCodecTest::testDecodeObjects:281"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "class": "org.apache.commons.codec.net.URLCodec"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.language.DaitchMokotoffSoundex::encode:425",
+         "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.DaitchMokotoffSoundex"
+   },
+   {
+      "method": "<init>",
+      "stacktrace": [
+         "org.apache.commons.codec.net.PercentCodec::<init>:80",
+         "org.apache.commons.codec.net.PercentCodecTest::testSafeCharEncodeDecodeObject:129"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([BZ)",
+      "class": "org.apache.commons.codec.net.PercentCodec"
+   },
+   {
+      "method": "crypt",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.Crypt::crypt:75",
+         "org.apache.commons.codec.digest.Crypt::crypt:167",
+         "org.apache.commons.codec.digest.Crypt::crypt:106",
+         "org.apache.commons.codec.digest.CryptTest::testDefaultCryptVariant:35"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "([BLjava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.digest.Crypt"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QuotedPrintableCodec::decode:451",
+         "org.apache.commons.codec.net.QuotedPrintableCodec::decode:492",
+         "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeDecodeNull:113"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;Ljava/nio/charset/Charset;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.QuotedPrintableCodec"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.language.DoubleMetaphone::encode:216",
+         "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.DoubleMetaphone"
+   },
+   {
+      "method": "getByteBufferUtf8",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.StringUtils::getByteBufferUtf8:114",
+         "org.apache.commons.codec.binary.StringUtilsTest::testByteBufferUtf8:244"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;)Ljava/nio/ByteBuffer;",
+      "class": "org.apache.commons.codec.binary.StringUtils"
+   },
+   {
+      "method": "soundex",
+      "stacktrace": [
+         "org.apache.commons.codec.language.RefinedSoundex::soundex:189",
+         "org.apache.commons.codec.language.RefinedSoundex::encode:162",
+         "org.apache.commons.codec.language.SoundexUtils::difference:85",
+         "org.apache.commons.codec.language.RefinedSoundex::difference:129",
+         "org.apache.commons.codec.language.RefinedSoundexTest::testDifference:40"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.RefinedSoundex"
+   },
+   {
+      "method": "removeAccents",
+      "stacktrace": [
+         "org.apache.commons.codec.language.MatchRatingApproachEncoder::removeAccents:367",
+         "org.apache.commons.codec.language.MatchRatingApproachEncoderTest::testAccentRemoval_NullValue_ReturnNullSuccessfully:82"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.MatchRatingApproachEncoder"
+   },
+   {
+      "method": "newStringUtf16",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.StringUtils::newStringUtf16:368",
+         "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput_CODEC229:154"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.binary.StringUtils"
+   },
+   {
+      "method": "encodeBase64",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.Base64::encodeBase64:253",
+         "org.apache.commons.codec.binary.Base64::encodeBase64:216",
+         "org.apache.commons.codec.binary.Base64::encodeBase64:197",
+         "org.apache.commons.codec.binary.Base64::encodeBase64:182",
+         "org.apache.commons.codec.binary.Base64Test::testEmptyBase64:402"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "([BZZI)[B",
+      "class": "org.apache.commons.codec.binary.Base64"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QuotedPrintableCodec::encode:602",
+         "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeStringWithNull:173"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.QuotedPrintableCodec"
+   },
+   {
+      "method": "<init>",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.Base32OutputStream::<init>:125",
+         "org.apache.commons.codec.binary.Base32OutputStreamTest::testStrictDecoding:358"
+      ],
+      "kind": "ARGUMENT",
+      "index": 3,
+      "descriptor": "(Ljava/io/OutputStream;ZI[BLorg/apache/commons/codec/CodecPolicy;)",
+      "class": "org.apache.commons.codec.binary.Base32OutputStream"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.URLCodec::encode:324",
+         "org.apache.commons.codec.net.URLCodecTest::testEncodeObjects:235"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "class": "org.apache.commons.codec.net.URLCodec"
+   },
+   {
+      "method": "getHmacMd5",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.HmacUtils::getHmacMd5:109",
+         "org.apache.commons.codec.digest.HmacUtilsTest::testNullKey:164"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)Ljavax/crypto/Mac;",
+      "class": "org.apache.commons.codec.digest.HmacUtils"
+   },
+   {
+      "method": "decodeText",
+      "stacktrace": [
+         "org.apache.commons.codec.net.RFC1522Codec::decodeText:155",
+         "org.apache.commons.codec.net.RFC1522CodecTest::testNullInput:55"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.RFC1522Codec"
+   },
+   {
+      "method": "doDecoding",
+      "stacktrace": [
+         "org.apache.commons.codec.net.BCodec::doDecoding:145",
+         "org.apache.commons.codec.net.BCodecTest::testNullInput:67"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.net.BCodec"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QuotedPrintableCodec::decode:473",
+         "org.apache.commons.codec.net.QuotedPrintableCodecTest::testDecodeStringWithNull:181"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.QuotedPrintableCodec"
+   },
+   {
+      "method": "encodeQuotedPrintable",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QuotedPrintableCodec::encodeQuotedPrintable:278",
+         "org.apache.commons.codec.net.QuotedPrintableCodec::encodeQuotedPrintable:258",
+         "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeUrlWithNullBitSet:154"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/util/BitSet;[BZ)[B",
+      "class": "org.apache.commons.codec.net.QuotedPrintableCodec"
+   },
+   {
+      "method": "encodeQuotedPrintable",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QuotedPrintableCodec::encodeQuotedPrintable:278",
+         "org.apache.commons.codec.net.QuotedPrintableCodec::encode:396",
+         "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeNull:144"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "(Ljava/util/BitSet;[BZ)[B",
+      "class": "org.apache.commons.codec.net.QuotedPrintableCodec"
+   },
+   {
+      "method": "encodeBase64",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.Base64::encodeBase64:182",
+         "org.apache.commons.codec.binary.Base64Test::testEmptyBase64:402"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.binary.Base64"
+   },
+   {
+      "method": "<init>",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.Base64::<init>:521",
+         "org.apache.commons.codec.binary.Base64Test::testBase64:116"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "(I[B)",
+      "class": "org.apache.commons.codec.binary.Base64"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.PercentCodec::decode:192",
+         "org.apache.commons.codec.net.PercentCodecTest::testPercentEncoderDecoderWithNullOrEmptyInput:110"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.net.PercentCodec"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.BaseNCodec::encode:488",
+         "org.apache.commons.codec.binary.Base16Test::testEmptyBase16:143"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.binary.BaseNCodec"
+   },
+   {
+      "method": "newStringIso8859_1",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.StringUtils::newStringIso8859_1:336",
+         "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput_CODEC229:152"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.binary.StringUtils"
+   },
+   {
+      "method": "isEncodeEquals",
+      "stacktrace": [
+         "org.apache.commons.codec.language.MatchRatingApproachEncoder::isEncodeEquals:213",
+         "org.apache.commons.codec.language.MatchRatingApproachEncoderTest::testCompare_SurnameCornerCase_Nulls_NoMatch:496"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Z",
+      "class": "org.apache.commons.codec.language.MatchRatingApproachEncoder"
+   },
+   {
+      "method": "isEncodeEquals",
+      "stacktrace": [
+         "org.apache.commons.codec.language.MatchRatingApproachEncoder::isEncodeEquals:213",
+         "org.apache.commons.codec.language.MatchRatingApproachEncoderTest::testCompare_SurnameCornerCase_Nulls_NoMatch:496"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Z",
+      "class": "org.apache.commons.codec.language.MatchRatingApproachEncoder"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QuotedPrintableCodec::encode:434",
+         "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeDecodeNull:111"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.QuotedPrintableCodec"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QCodec::encode:293",
+         "org.apache.commons.codec.net.QCodecTest::testEncodeObjects:141"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "class": "org.apache.commons.codec.net.QCodec"
+   },
+   {
+      "method": "toAsciiBytes",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.BinaryCodec::toAsciiBytes:152",
+         "org.apache.commons.codec.binary.BinaryCodecTest::testToAsciiBytes:819"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.binary.BinaryCodec"
+   },
+   {
+      "method": "decodeBase64",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.Base64::decodeBase64:158",
+         "org.apache.commons.codec.binary.Base64Test::testStringToByteVariations:1296"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;)[B",
+      "class": "org.apache.commons.codec.binary.Base64"
+   },
+   {
+      "method": "doDecoding",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QCodec::doDecoding:171",
+         "org.apache.commons.codec.net.QCodecTest::testNullInput:62"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.net.QCodec"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.language.bm.BeiderMorseEncoder::encode:98",
+         "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.bm.BeiderMorseEncoder"
+   },
+   {
+      "method": "isAvailable",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.DigestUtils::isAvailable:381",
+         "org.apache.commons.codec.digest.DigestUtilsTest::testIsAvailable:146"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Z",
+      "class": "org.apache.commons.codec.digest.DigestUtils"
+   },
+   {
+      "method": "decodeBase64",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.Base64::decodeBase64:143",
+         "org.apache.commons.codec.binary.Base64Test::testEmptyBase64:410"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.binary.Base64"
+   },
+   {
+      "method": "doEncoding",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QCodec::doEncoding:166",
+         "org.apache.commons.codec.net.QCodecTest::testNullInput:63"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.net.QCodec"
+   },
+   {
+      "method": "newString",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.StringUtils::newString:319",
+         "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput:146"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "([BLjava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.binary.StringUtils"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.language.RefinedSoundex::encode:162",
+         "org.apache.commons.codec.language.SoundexUtils::difference:85",
+         "org.apache.commons.codec.language.RefinedSoundex::difference:129",
+         "org.apache.commons.codec.language.RefinedSoundexTest::testDifference:40"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.RefinedSoundex"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.BCodec::encode:242",
+         "org.apache.commons.codec.net.BCodecTest::testEncodeObjects:126"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "class": "org.apache.commons.codec.net.BCodec"
+   },
+   {
+      "method": "newStringUsAscii",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.StringUtils::newStringUsAscii:352",
+         "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput_CODEC229:153"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.binary.StringUtils"
+   },
+   {
+      "method": "encodeInteger",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.Base64::encodeInteger:319",
+         "org.apache.commons.codec.binary.Base64Test::testCodeIntegerNull:262"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/math/BigInteger;)[B",
+      "class": "org.apache.commons.codec.binary.Base64"
+   },
+   {
+      "method": "insertAlwaysEncodeChars",
+      "stacktrace": [
+         "org.apache.commons.codec.net.PercentCodec::insertAlwaysEncodeChars:91",
+         "org.apache.commons.codec.net.PercentCodec::<init>:82",
+         "org.apache.commons.codec.net.PercentCodecTest::testSafeCharEncodeDecodeObject:129"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)V",
+      "class": "org.apache.commons.codec.net.PercentCodec"
+   },
+   {
+      "method": "fromAscii",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.BinaryCodec::fromAscii:112",
+         "org.apache.commons.codec.binary.BinaryCodecTest::testFromAsciiCharArray:391"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([C)[B",
+      "class": "org.apache.commons.codec.binary.BinaryCodec"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QuotedPrintableCodec::decode:492",
+         "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeDecodeNull:113"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.QuotedPrintableCodec"
+   },
+   {
+      "method": "difference",
+      "stacktrace": [
+         "org.apache.commons.codec.language.RefinedSoundex::difference:129",
+         "org.apache.commons.codec.language.RefinedSoundexTest::testDifference:40"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;)I",
+      "class": "org.apache.commons.codec.language.RefinedSoundex"
+   },
+   {
+      "method": "encodeQuotedPrintable",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QuotedPrintableCodec::encodeQuotedPrintable:258",
+         "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeUrlWithNullBitSet:154"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/util/BitSet;[B)[B",
+      "class": "org.apache.commons.codec.net.QuotedPrintableCodec"
+   },
+   {
+      "method": "difference",
+      "stacktrace": [
+         "org.apache.commons.codec.language.RefinedSoundex::difference:129",
+         "org.apache.commons.codec.language.RefinedSoundexTest::testDifference:40"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;)I",
+      "class": "org.apache.commons.codec.language.RefinedSoundex"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QCodec::encode:248",
+         "org.apache.commons.codec.net.QCodecTest::testEncodeDecodeNull:111"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.QCodec"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.BCodec::encode:188",
+         "org.apache.commons.codec.net.BCodecTest::testEncodeStringWithNull:106"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.BCodec"
+   },
+   {
+      "method": "<init>",
+      "stacktrace": [
+         "org.apache.commons.codec.language.bm.Rule$Phoneme::<init>:108",
+         "org.apache.commons.codec.language.bm.RuleTest::testSubSequenceWorks:90"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "(Ljava/lang/CharSequence;Lorg/apache/commons/codec/language/bm/Languages$LanguageSet;)",
+      "class": "org.apache.commons.codec.language.bm.Rule$Phoneme"
+   },
+   {
+      "method": "toAsciiChars",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.BinaryCodec::toAsciiChars:182",
+         "org.apache.commons.codec.binary.BinaryCodecTest::testToAsciiChars:942"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)[C",
+      "class": "org.apache.commons.codec.binary.BinaryCodec"
+   },
+   {
+      "method": "<init>",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.Base32InputStream::<init>:98",
+         "org.apache.commons.codec.binary.Base32InputStreamTest::testCodec105:70"
+      ],
+      "kind": "ARGUMENT",
+      "index": 3,
+      "descriptor": "(Ljava/io/InputStream;ZI[B)",
+      "class": "org.apache.commons.codec.binary.Base32InputStream"
+   },
+   {
+      "method": "crypt",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.UnixCrypt::crypt:203",
+         "org.apache.commons.codec.digest.UnixCrypt::crypt:183",
+         "org.apache.commons.codec.digest.UnixCryptTest::testUnixCryptNullData:88"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([BLjava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.digest.UnixCrypt"
+   },
+   {
+      "method": "md5Crypt",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.Md5Crypt::md5Crypt:255",
+         "org.apache.commons.codec.digest.Md5Crypt::md5Crypt:230",
+         "org.apache.commons.codec.digest.Md5CryptTest::testMd5CryptExplicitCallWithThreadLocalRandom:68"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "([BLjava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.digest.Md5Crypt"
+   },
+   {
+      "method": "crypt",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.UnixCrypt::crypt:203",
+         "org.apache.commons.codec.digest.UnixCrypt::crypt:183",
+         "org.apache.commons.codec.digest.UnixCryptTest::testUnixCryptExplicitCall:64"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "([BLjava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.digest.UnixCrypt"
+   },
+   {
+      "method": "md5Crypt",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.Md5Crypt::md5Crypt:255",
+         "org.apache.commons.codec.digest.Md5Crypt::md5Crypt:230",
+         "org.apache.commons.codec.digest.Md5Crypt::md5Crypt:184",
+         "org.apache.commons.codec.digest.Md5CryptTest::testMd5CryptNullData:78"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([BLjava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.digest.Md5Crypt"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.language.ColognePhonetic::encode:402",
+         "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.ColognePhonetic"
+   },
+   {
+      "method": "newStringUtf8",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.StringUtils::newStringUtf8:416",
+         "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput_CODEC229:151"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "([B)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.binary.StringUtils"
+   },
+   {
+      "method": "newStringUtf16Be",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.StringUtils::newStringUtf16Be:384",
+         "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput_CODEC229:155"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "([B)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.binary.StringUtils"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.language.Metaphone::encode:402",
+         "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.Metaphone"
+   },
+   {
+      "method": "hmacSha512",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.HmacUtils::hmacSha512:718",
+         "org.apache.commons.codec.digest.HmacUtilsTest::testSha512HMacFail:261"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B[B)[B",
+      "class": "org.apache.commons.codec.digest.HmacUtils"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.language.Soundex::encode:251",
+         "org.apache.commons.codec.language.SoundexUtils::difference:85",
+         "org.apache.commons.codec.language.Soundex::difference:216",
+         "org.apache.commons.codec.language.SoundexTest::testDifference:94"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.Soundex"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.URLCodec::encode:317",
+         "org.apache.commons.codec.net.URLCodecTest::testEncodeObjects:235"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "class": "org.apache.commons.codec.net.URLCodec"
+   },
+   {
+      "method": "<init>",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.Base64::<init>:584",
+         "org.apache.commons.codec.binary.Base64Test::testBase64ImpossibleSamples:1331"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "(I[BZLorg/apache/commons/codec/CodecPolicy;)",
+      "class": "org.apache.commons.codec.binary.Base64"
+   },
+   {
+      "method": "sha512Crypt",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.Sha2Crypt::sha512Crypt:582",
+         "org.apache.commons.codec.digest.Sha2Crypt::sha512Crypt:560",
+         "org.apache.commons.codec.digest.Crypt::crypt:76",
+         "org.apache.commons.codec.digest.Crypt::crypt:167",
+         "org.apache.commons.codec.digest.Crypt::crypt:106",
+         "org.apache.commons.codec.digest.CryptTest::testDefaultCryptVariant:35"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "([BLjava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.digest.Sha2Crypt"
+   },
+   {
+      "method": "differenceEncoded",
+      "stacktrace": [
+         "org.apache.commons.codec.language.SoundexUtils::differenceEncoded:110",
+         "org.apache.commons.codec.language.SoundexTest::testSoundexUtilsNullBehaviour:336"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;)I",
+      "class": "org.apache.commons.codec.language.SoundexUtils"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QuotedPrintableCodec::decode:492",
+         "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeDecodeNull:113"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.QuotedPrintableCodec"
+   },
+   {
+      "method": "apr1Crypt",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.Md5Crypt::apr1Crypt:80",
+         "org.apache.commons.codec.digest.Apr1CryptTest::testApr1CryptNullData:92"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.digest.Md5Crypt"
+   },
+   {
+      "method": "sha512Crypt",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.Sha2Crypt::sha512Crypt:582",
+         "org.apache.commons.codec.digest.Sha2Crypt::sha512Crypt:560",
+         "org.apache.commons.codec.digest.Sha512CryptTest::testSha512CryptNullData:68"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([BLjava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.digest.Sha2Crypt"
+   },
+   {
+      "method": "differenceEncoded",
+      "stacktrace": [
+         "org.apache.commons.codec.language.SoundexUtils::differenceEncoded:110",
+         "org.apache.commons.codec.language.SoundexTest::testSoundexUtilsNullBehaviour:337"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;)I",
+      "class": "org.apache.commons.codec.language.SoundexUtils"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.language.Soundex::encode:251",
+         "org.apache.commons.codec.language.SoundexUtils::difference:85",
+         "org.apache.commons.codec.language.Soundex::difference:216",
+         "org.apache.commons.codec.language.SoundexTest::testDifference:94"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.Soundex"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.language.DoubleMetaphone::encode:205",
+         "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeEmpty:56"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "class": "org.apache.commons.codec.language.DoubleMetaphone"
+   },
+   {
+      "method": "getBytesUtf8",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.StringUtils::getBytesUtf8:269",
+         "org.apache.commons.codec.digest.HmacUtils::<init>:933",
+         "org.apache.commons.codec.digest.HmacAlgorithmsTest::testHmacFailString:168"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)[B",
+      "class": "org.apache.commons.codec.binary.StringUtils"
+   },
+   {
+      "method": "encodeBase64",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.Base64::encodeBase64:182",
+         "org.apache.commons.codec.binary.Base64Test::testEmptyBase64:402"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.binary.Base64"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.BCodec::encode:182",
+         "org.apache.commons.codec.net.BCodecTest::testEncodeStringWithNull:106"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.BCodec"
+   },
+   {
+      "method": "newString",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.StringUtils::newString:313",
+         "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput:146"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([BLjava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.binary.StringUtils"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.URLCodec::encode:200",
+         "org.apache.commons.codec.net.URLCodecTest::testEncodeNull:180"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.net.URLCodec"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.URLCodec::decode:342",
+         "org.apache.commons.codec.net.URLCodecTest::testDecodeObjects:281"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "class": "org.apache.commons.codec.net.URLCodec"
+   },
+   {
+      "method": "decodeQuotedPrintable",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QuotedPrintableCodec::decodeQuotedPrintable:357",
+         "org.apache.commons.codec.net.QuotedPrintableCodecTest::testDecodeWithNullArray:165"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.net.QuotedPrintableCodec"
+   },
+   {
+      "method": "getByteBufferUtf8",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.StringUtils::getByteBufferUtf8:114",
+         "org.apache.commons.codec.binary.StringUtilsTest::testByteBufferUtf8:244"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Ljava/nio/ByteBuffer;",
+      "class": "org.apache.commons.codec.binary.StringUtils"
+   },
+   {
+      "method": "fromAscii",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.BinaryCodec::fromAscii:80",
+         "org.apache.commons.codec.binary.BinaryCodecTest::testFromAsciiByteArray:487"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.binary.BinaryCodec"
+   },
+   {
+      "method": "getDigest",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.DigestUtils::getDigest:195",
+         "org.apache.commons.codec.digest.DigestUtils::isAvailable:381",
+         "org.apache.commons.codec.digest.MessageDigestAlgorithmsTest::testDigestPath:176",
+         "org.apache.commons.codec.digest.MessageDigestAlgorithmsTest::testDigestPathOpenOptionsEmpty:185"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "(Ljava/lang/String;Ljava/security/MessageDigest;)Ljava/security/MessageDigest;",
+      "class": "org.apache.commons.codec.digest.DigestUtils"
+   },
+   {
+      "method": "getDigest",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.DigestUtils::getDigest:195",
+         "org.apache.commons.codec.digest.DigestUtils::isAvailable:381",
+         "org.apache.commons.codec.digest.DigestUtilsTest::testIsAvailable:146"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;Ljava/security/MessageDigest;)Ljava/security/MessageDigest;",
+      "class": "org.apache.commons.codec.digest.DigestUtils"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.BaseNCodec::decode:437",
+         "org.apache.commons.codec.binary.BaseNCodec::decode:473",
+         "org.apache.commons.codec.binary.Base16Test::testStringToByteVariations:468"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.binary.BaseNCodec"
+   },
+   {
+      "method": "newStringUsAscii",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.StringUtils::newStringUsAscii:352",
+         "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput_CODEC229:153"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "([B)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.binary.StringUtils"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.URLCodec::encode:234",
+         "org.apache.commons.codec.net.URLCodecTest::testEncodeStringWithNull:209"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.URLCodec"
+   },
+   {
+      "method": "doEncoding",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QCodec::doEncoding:155",
+         "org.apache.commons.codec.net.QCodecTest::testNullInput:63"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.net.QCodec"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.language.bm.BeiderMorseEncoder::encode:95",
+         "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.bm.BeiderMorseEncoder"
+   },
+   {
+      "method": "sha2Crypt",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.Sha2Crypt::sha2Crypt:170",
+         "org.apache.commons.codec.digest.Sha2Crypt::sha256Crypt:113",
+         "org.apache.commons.codec.digest.Sha2Crypt::sha256Crypt:89",
+         "org.apache.commons.codec.digest.Sha256CryptTest::testSha256CryptNullData:78"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([BLjava/lang/String;Ljava/lang/String;ILjava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.digest.Sha2Crypt"
+   },
+   {
+      "method": "nysiis",
+      "stacktrace": [
+         "org.apache.commons.codec.language.Nysiis::nysiis:246",
+         "org.apache.commons.codec.language.Nysiis::encode:226",
+         "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.Nysiis"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.URLCodec::decode:280",
+         "org.apache.commons.codec.net.URLCodecTest::testDecodeStringWithNull:217"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.URLCodec"
+   },
+   {
+      "method": "decodeBase64",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.Base64::decodeBase64:143",
+         "org.apache.commons.codec.binary.Base64Test::testEmptyBase64:410"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.binary.Base64"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.URLCodec::decode:277",
+         "org.apache.commons.codec.net.URLCodecTest::testDecodeStringWithNull:217"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.URLCodec"
+   },
+   {
+      "method": "<init>",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.Base64OutputStream::<init>:129",
+         "org.apache.commons.codec.binary.Base64OutputStreamTest::testStrictDecoding:368"
+      ],
+      "kind": "ARGUMENT",
+      "index": 3,
+      "descriptor": "(Ljava/io/OutputStream;ZI[BLorg/apache/commons/codec/CodecPolicy;)",
+      "class": "org.apache.commons.codec.binary.Base64OutputStream"
+   },
+   {
+      "method": "decodeBase64",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.Base64::decodeBase64:158",
+         "org.apache.commons.codec.binary.Base64Test::testStringToByteVariations:1296"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)[B",
+      "class": "org.apache.commons.codec.binary.Base64"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.BCodec::decode:227",
+         "org.apache.commons.codec.net.BCodecTest::testDecodeStringWithNull:114"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.BCodec"
+   },
+   {
+      "method": "<init>",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.Base32InputStream::<init>:122",
+         "org.apache.commons.codec.binary.Base32InputStreamTest::testStrictDecoding:577"
+      ],
+      "kind": "ARGUMENT",
+      "index": 3,
+      "descriptor": "(Ljava/io/InputStream;ZI[BLorg/apache/commons/codec/CodecPolicy;)",
+      "class": "org.apache.commons.codec.binary.Base32InputStream"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.BCodec::encode:248",
+         "org.apache.commons.codec.net.BCodecTest::testEncodeObjects:126"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "class": "org.apache.commons.codec.net.BCodec"
+   },
+   {
+      "method": "getInitializedMac",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.HmacUtils::getInitializedMac:209",
+         "org.apache.commons.codec.digest.HmacAlgorithmsTest::testGetHmacNullKey:153"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "(Lorg/apache/commons/codec/digest/HmacAlgorithms;[B)Ljavax/crypto/Mac;",
+      "class": "org.apache.commons.codec.digest.HmacUtils"
+   },
+   {
+      "method": "toCharset",
+      "stacktrace": [
+         "org.apache.commons.codec.Charsets::toCharset:147",
+         "org.apache.commons.codec.CharsetsTest::testToCharset:34"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/nio/charset/Charset;)Ljava/nio/charset/Charset;",
+      "class": "org.apache.commons.codec.Charsets"
+   },
+   {
+      "method": "metaphone",
+      "stacktrace": [
+         "org.apache.commons.codec.language.Metaphone::metaphone:92",
+         "org.apache.commons.codec.language.Metaphone::encode:402",
+         "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.Metaphone"
+   },
+   {
+      "method": "getByteBuffer",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.StringUtils::getByteBuffer:93",
+         "org.apache.commons.codec.binary.StringUtils::getByteBufferUtf8:114",
+         "org.apache.commons.codec.binary.StringUtilsTest::testByteBufferUtf8:244"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;Ljava/nio/charset/Charset;)Ljava/nio/ByteBuffer;",
+      "class": "org.apache.commons.codec.binary.StringUtils"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.PercentCodec::decode:215",
+         "org.apache.commons.codec.net.PercentCodecTest::testPercentEncoderDecoderWithNullOrEmptyInput:110"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.net.PercentCodec"
+   },
+   {
+      "method": "<init>",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.HmacUtils::<init>:933",
+         "org.apache.commons.codec.digest.HmacAlgorithmsTest::testHmacFailString:168"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "(Lorg/apache/commons/codec/digest/HmacAlgorithms;Ljava/lang/String;)",
+      "class": "org.apache.commons.codec.digest.HmacUtils"
+   },
+   {
+      "method": "toCharset",
+      "stacktrace": [
+         "org.apache.commons.codec.Charsets::toCharset:160",
+         "org.apache.commons.codec.CharsetsTest::testToCharset:33"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Ljava/nio/charset/Charset;",
+      "class": "org.apache.commons.codec.Charsets"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.BCodec::encode:203",
+         "org.apache.commons.codec.net.BCodecTest::testEncodeDecodeNull:98"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.BCodec"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QuotedPrintableCodec::decode:541",
+         "org.apache.commons.codec.net.QuotedPrintableCodecTest::testDecodeObjects:230"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "class": "org.apache.commons.codec.net.QuotedPrintableCodec"
+   },
+   {
+      "method": "difference",
+      "stacktrace": [
+         "org.apache.commons.codec.language.Soundex::difference:216",
+         "org.apache.commons.codec.language.SoundexTest::testDifference:94"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;)I",
+      "class": "org.apache.commons.codec.language.Soundex"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.language.RefinedSoundex::encode:162",
+         "org.apache.commons.codec.language.SoundexUtils::difference:85",
+         "org.apache.commons.codec.language.RefinedSoundex::difference:129",
+         "org.apache.commons.codec.language.RefinedSoundexTest::testDifference:40"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.RefinedSoundex"
+   },
+   {
+      "method": "decodeText",
+      "stacktrace": [
+         "org.apache.commons.codec.net.RFC1522Codec::decodeText:126",
+         "org.apache.commons.codec.net.RFC1522CodecTest::testNullInput:55"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.RFC1522Codec"
+   },
+   {
+      "method": "<init>",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.Base32::<init>:317",
+         "org.apache.commons.codec.binary.Base32::<init>:289",
+         "org.apache.commons.codec.binary.Base32::<init>:178",
+         "org.apache.commons.codec.binary.Base32InputStream::<init>:77",
+         "org.apache.commons.codec.binary.Base32InputStreamTest::testStrictDecoding:571"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "(I[BZBLorg/apache/commons/codec/CodecPolicy;)",
+      "class": "org.apache.commons.codec.binary.Base32"
+   },
+   {
+      "method": "doEncoding",
+      "stacktrace": [
+         "org.apache.commons.codec.net.BCodec::doEncoding:140",
+         "org.apache.commons.codec.net.BCodecTest::testNullInput:68"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.net.BCodec"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.PercentCodec::encode:121",
+         "org.apache.commons.codec.net.PercentCodecTest::testPercentEncoderDecoderWithNullOrEmptyInput:109"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.net.PercentCodec"
+   },
+   {
+      "method": "difference",
+      "stacktrace": [
+         "org.apache.commons.codec.language.Soundex::difference:216",
+         "org.apache.commons.codec.language.SoundexTest::testDifference:94"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;)I",
+      "class": "org.apache.commons.codec.language.Soundex"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QuotedPrintableCodec::encode:434",
+         "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeDecodeNull:111"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.QuotedPrintableCodec"
+   },
+   {
+      "method": "getBytesUtf8",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.StringUtils::getBytesUtf8:269",
+         "org.apache.commons.codec.digest.HmacUtils::<init>:933",
+         "org.apache.commons.codec.digest.HmacAlgorithmsTest::testHmacFailString:168"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;)[B",
+      "class": "org.apache.commons.codec.binary.StringUtils"
+   },
+   {
+      "method": "<init>",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.Base32::<init>:238",
+         "org.apache.commons.codec.binary.Base32InputStream::<init>:98",
+         "org.apache.commons.codec.binary.Base32InputStreamTest::testCodec105:70"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "(I[B)",
+      "class": "org.apache.commons.codec.binary.Base32"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.language.ColognePhonetic::encode:402",
+         "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.ColognePhonetic"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.BaseNCodec::decode:473",
+         "org.apache.commons.codec.binary.Base16Test::testStringToByteVariations:468"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;)[B",
+      "class": "org.apache.commons.codec.binary.BaseNCodec"
+   },
+   {
+      "method": "hmacMd5",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.HmacUtils::hmacMd5:262",
+         "org.apache.commons.codec.digest.HmacUtilsTest::testMd5HMacFail:158"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B[B)[B",
+      "class": "org.apache.commons.codec.digest.HmacUtils"
+   },
+   {
+      "method": "sha512Crypt",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.Sha2Crypt::sha512Crypt:612",
+         "org.apache.commons.codec.digest.Sha512CryptTest::testSha512CryptExplicitCallThreadLocalRandom:63"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "([BLjava/lang/String;Ljava/util/Random;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.digest.Sha2Crypt"
+   },
+   {
+      "method": "doubleMetaphone",
+      "stacktrace": [
+         "org.apache.commons.codec.language.DoubleMetaphone::doubleMetaphone:75",
+         "org.apache.commons.codec.language.DoubleMetaphoneTest::testEmpty:1115"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.DoubleMetaphone"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.BinaryCodec::decode:240",
+         "org.apache.commons.codec.binary.BinaryCodecTest::assertDecodeObject:183",
+         "org.apache.commons.codec.binary.BinaryCodecTest::testDecodeObject:165"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "class": "org.apache.commons.codec.binary.BinaryCodec"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.BCodec::decode:272",
+         "org.apache.commons.codec.net.BCodecTest::testDecodeObjects:150"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "class": "org.apache.commons.codec.net.BCodec"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.PercentCodec::encode:130",
+         "org.apache.commons.codec.net.PercentCodecTest::testPercentEncoderDecoderWithNullOrEmptyInput:109"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.net.PercentCodec"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QuotedPrintableCodec::encode:515",
+         "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeObjects:199"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "class": "org.apache.commons.codec.net.QuotedPrintableCodec"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QCodec::encode:251",
+         "org.apache.commons.codec.net.QCodecTest::testEncodeDecodeNull:111"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.QCodec"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.URLCodec::encode:231",
+         "org.apache.commons.codec.net.URLCodecTest::testEncodeStringWithNull:209"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.URLCodec"
+   },
+   {
+      "method": "encodeUrl",
+      "stacktrace": [
+         "org.apache.commons.codec.net.URLCodec::encodeUrl:154",
+         "org.apache.commons.codec.net.URLCodec::encode:200",
+         "org.apache.commons.codec.net.URLCodecTest::testEncodeNull:180"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/util/BitSet;[B)[B",
+      "class": "org.apache.commons.codec.net.URLCodec"
+   },
+   {
+      "method": "equals",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.StringUtils::equals:71",
+         "org.apache.commons.codec.language.DoubleMetaphone::isDoubleMetaphoneEqual:244",
+         "org.apache.commons.codec.language.DoubleMetaphoneTest::doubleMetaphoneEqualTest:1038",
+         "org.apache.commons.codec.language.DoubleMetaphoneTest::testIsDoubleMetaphoneEqualBasic:1135"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Z",
+      "class": "org.apache.commons.codec.binary.StringUtils"
+   },
+   {
+      "method": "getDigest",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.DigestUtils::getDigest:197",
+         "org.apache.commons.codec.digest.DigestUtils::isAvailable:381",
+         "org.apache.commons.codec.digest.DigestUtilsTest::testIsAvailable:145"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;Ljava/security/MessageDigest;)Ljava/security/MessageDigest;",
+      "class": "org.apache.commons.codec.digest.DigestUtils"
+   },
+   {
+      "method": "equals",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.StringUtils::equals:71",
+         "org.apache.commons.codec.language.DoubleMetaphone::isDoubleMetaphoneEqual:244",
+         "org.apache.commons.codec.language.DoubleMetaphoneTest::doubleMetaphoneEqualTest:1038",
+         "org.apache.commons.codec.language.DoubleMetaphoneTest::testIsDoubleMetaphoneEqualBasic:1135"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Z",
+      "class": "org.apache.commons.codec.binary.StringUtils"
+   },
+   {
+      "method": "sha256Crypt",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.Sha2Crypt::sha256Crypt:110",
+         "org.apache.commons.codec.digest.Sha2Crypt::sha256Crypt:89",
+         "org.apache.commons.codec.digest.Sha256CryptTest::testSha256CryptNullData:78"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "([BLjava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.digest.Sha2Crypt"
+   },
+   {
+      "method": "sha256Crypt",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.Sha2Crypt::sha256Crypt:110",
+         "org.apache.commons.codec.digest.Sha2Crypt::sha256Crypt:89",
+         "org.apache.commons.codec.digest.Sha256CryptTest::testSha256CryptNullData:78"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([BLjava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.digest.Sha2Crypt"
+   },
+   {
+      "method": "<init>",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.Base64::<init>:552",
+         "org.apache.commons.codec.binary.Base64::<init>:521",
+         "org.apache.commons.codec.binary.Base64Test::testBase64:116"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "(I[BZ)",
+      "class": "org.apache.commons.codec.binary.Base64"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.URLCodec::encode:200",
+         "org.apache.commons.codec.net.URLCodecTest::testEncodeNull:180"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.net.URLCodec"
+   },
+   {
+      "method": "encodeToString",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.BaseNCodec::encodeToString:559",
+         "org.apache.commons.codec.binary.Base16Test::testByteToStringVariations:450"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.binary.BaseNCodec"
+   },
+   {
+      "method": "encodeText",
+      "stacktrace": [
+         "org.apache.commons.codec.net.RFC1522Codec::encodeText:104",
+         "org.apache.commons.codec.net.RFC1522CodecTest::testNullInput:56"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.RFC1522Codec"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.BCodec::encode:206",
+         "org.apache.commons.codec.net.BCodecTest::testEncodeDecodeNull:98"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.BCodec"
+   },
+   {
+      "method": "getByteBuffer",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.StringUtils::getByteBuffer:96",
+         "org.apache.commons.codec.binary.StringUtils::getByteBufferUtf8:114",
+         "org.apache.commons.codec.binary.StringUtilsTest::testByteBufferUtf8:244"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;Ljava/nio/charset/Charset;)Ljava/nio/ByteBuffer;",
+      "class": "org.apache.commons.codec.binary.StringUtils"
+   },
+   {
+      "method": "write",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.BaseNCodecOutputStream::write:166",
+         "org.apache.commons.codec.binary.Base32OutputStreamTest::testWriteToNullCoverage:331"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([BII)V",
+      "class": "org.apache.commons.codec.binary.BaseNCodecOutputStream"
+   },
+   {
+      "method": "getBytes",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.StringUtils::getBytes:130",
+         "org.apache.commons.codec.binary.StringUtils::getBytesUtf8:269",
+         "org.apache.commons.codec.digest.HmacUtils::<init>:933",
+         "org.apache.commons.codec.digest.HmacAlgorithmsTest::testHmacFailString:168"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;Ljava/nio/charset/Charset;)[B",
+      "class": "org.apache.commons.codec.binary.StringUtils"
+   },
+   {
+      "method": "cleanInput",
+      "stacktrace": [
+         "org.apache.commons.codec.language.DoubleMetaphone::cleanInput:895",
+         "org.apache.commons.codec.language.DoubleMetaphone::doubleMetaphone:86",
+         "org.apache.commons.codec.language.DoubleMetaphone::isDoubleMetaphoneEqual:244",
+         "org.apache.commons.codec.language.DoubleMetaphoneTest::doubleMetaphoneEqualTest:1038",
+         "org.apache.commons.codec.language.DoubleMetaphoneTest::testIsDoubleMetaphoneEqualBasic:1135"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.DoubleMetaphone"
+   },
+   {
+      "method": "doubleMetaphone",
+      "stacktrace": [
+         "org.apache.commons.codec.language.DoubleMetaphone::doubleMetaphone:86",
+         "org.apache.commons.codec.language.DoubleMetaphone::doubleMetaphone:75",
+         "org.apache.commons.codec.language.DoubleMetaphoneTest::testEmpty:1115"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;Z)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.DoubleMetaphone"
+   },
+   {
+      "method": "md5Crypt",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.Md5Crypt::md5Crypt:283",
+         "org.apache.commons.codec.digest.Md5Crypt::md5Crypt:255",
+         "org.apache.commons.codec.digest.Md5Crypt::md5Crypt:230",
+         "org.apache.commons.codec.digest.Md5CryptTest::testMd5CryptExplicitCallWithThreadLocalRandom:68"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "([BLjava/lang/String;Ljava/lang/String;Ljava/util/Random;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.digest.Md5Crypt"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QuotedPrintableCodec::decode:476",
+         "org.apache.commons.codec.net.QuotedPrintableCodecTest::testDecodeStringWithNull:181"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.QuotedPrintableCodec"
+   },
+   {
+      "method": "doDecoding",
+      "stacktrace": [
+         "org.apache.commons.codec.net.BCodec::doDecoding:148",
+         "org.apache.commons.codec.net.BCodecTest::testNullInput:67"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.net.BCodec"
+   },
+   {
+      "method": "md5Crypt",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.Md5Crypt::md5Crypt:283",
+         "org.apache.commons.codec.digest.Md5Crypt::md5Crypt:255",
+         "org.apache.commons.codec.digest.Md5Crypt::md5Crypt:230",
+         "org.apache.commons.codec.digest.Md5Crypt::md5Crypt:184",
+         "org.apache.commons.codec.digest.Md5CryptTest::testMd5CryptNullData:78"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([BLjava/lang/String;Ljava/lang/String;Ljava/util/Random;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.digest.Md5Crypt"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QCodec::decode:272",
+         "org.apache.commons.codec.net.QCodecTest::testDecodeStringWithNull:128"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.QCodec"
+   },
+   {
+      "method": "getBytesUnchecked",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.StringUtils::getBytesUnchecked:178",
+         "org.apache.commons.codec.binary.StringUtilsTest::testGetBytesUncheckedNullInput:125"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;)[B",
+      "class": "org.apache.commons.codec.binary.StringUtils"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.BinaryCodec::decode:225",
+         "org.apache.commons.codec.binary.BinaryCodecTest::assertDecodeObject:186",
+         "org.apache.commons.codec.binary.BinaryCodecTest::testDecodeObject:165"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.binary.BinaryCodec"
+   },
+   {
+      "method": "newString",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.StringUtils::newString:290",
+         "org.apache.commons.codec.binary.StringUtils::newStringUtf8:416",
+         "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput_CODEC229:151"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([BLjava/nio/charset/Charset;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.binary.StringUtils"
+   },
+   {
+      "method": "sha512Crypt",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.Sha2Crypt::sha512Crypt:560",
+         "org.apache.commons.codec.digest.Sha512CryptTest::testSha512CryptNullData:68"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.digest.Sha2Crypt"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QuotedPrintableCodec::encode:396",
+         "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeNull:144"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.net.QuotedPrintableCodec"
+   },
+   {
+      "method": "clean",
+      "stacktrace": [
+         "org.apache.commons.codec.language.SoundexUtils::clean:41",
+         "org.apache.commons.codec.language.SoundexTest::testSoundexUtilsNullBehaviour:334"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.SoundexUtils"
+   },
+   {
+      "method": "<init>",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.HmacUtils::<init>:946",
+         "org.apache.commons.codec.digest.HmacAlgorithmsTest::testHmacHexFailInputStream:178"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "(Lorg/apache/commons/codec/digest/HmacAlgorithms;[B)",
+      "class": "org.apache.commons.codec.digest.HmacUtils"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QuotedPrintableCodec::encode:580",
+         "org.apache.commons.codec.net.QuotedPrintableCodec::encode:434",
+         "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeDecodeNull:111"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;Ljava/nio/charset/Charset;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.QuotedPrintableCodec"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.BCodec::decode:221",
+         "org.apache.commons.codec.net.BCodecTest::testDecodeStringWithNull:114"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.BCodec"
+   },
+   {
+      "method": "encodeBase64",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.Base64::encodeBase64:216",
+         "org.apache.commons.codec.binary.Base64::encodeBase64:197",
+         "org.apache.commons.codec.binary.Base64::encodeBase64:182",
+         "org.apache.commons.codec.binary.Base64Test::testEmptyBase64:402"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "([BZZ)[B",
+      "class": "org.apache.commons.codec.binary.Base64"
+   },
+   {
+      "method": "crypt",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.UnixCrypt::crypt:183",
+         "org.apache.commons.codec.digest.UnixCryptTest::testUnixCryptNullData:88"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.digest.UnixCrypt"
+   },
+   {
+      "method": "difference",
+      "stacktrace": [
+         "org.apache.commons.codec.language.SoundexUtils::difference:85",
+         "org.apache.commons.codec.language.Soundex::difference:216",
+         "org.apache.commons.codec.language.SoundexTest::testDifference:94"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "(Lorg/apache/commons/codec/StringEncoder;Ljava/lang/String;Ljava/lang/String;)I",
+      "class": "org.apache.commons.codec.language.SoundexUtils"
+   },
+   {
+      "method": "removeAccents",
+      "stacktrace": [
+         "org.apache.commons.codec.language.MatchRatingApproachEncoder::removeAccents:350",
+         "org.apache.commons.codec.language.MatchRatingApproachEncoderTest::testAccentRemoval_NullValue_ReturnNullSuccessfully:82"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.MatchRatingApproachEncoder"
+   },
+   {
+      "method": "difference",
+      "stacktrace": [
+         "org.apache.commons.codec.language.SoundexUtils::difference:85",
+         "org.apache.commons.codec.language.Soundex::difference:216",
+         "org.apache.commons.codec.language.SoundexTest::testDifference:94"
+      ],
+      "kind": "ARGUMENT",
+      "index": 2,
+      "descriptor": "(Lorg/apache/commons/codec/StringEncoder;Ljava/lang/String;Ljava/lang/String;)I",
+      "class": "org.apache.commons.codec.language.SoundexUtils"
+   },
+   {
+      "method": "encodeBase64",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.Base64::encodeBase64:197",
+         "org.apache.commons.codec.binary.Base64::encodeBase64:182",
+         "org.apache.commons.codec.binary.Base64Test::testEmptyBase64:402"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([BZ)[B",
+      "class": "org.apache.commons.codec.binary.Base64"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.language.Nysiis::encode:226",
+         "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.Nysiis"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.PercentCodec::encode:237",
+         "org.apache.commons.codec.net.PercentCodecTest::testEncodeNullObject:97"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "class": "org.apache.commons.codec.net.PercentCodec"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.language.Caverphone1::encode:45",
+         "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.Caverphone1"
+   },
+   {
+      "method": "getSystemProperty",
+      "stacktrace": [
+         "org.apache.commons.lang3.SystemUtils::getSystemProperty:1604",
+         "org.apache.commons.lang3.SystemUtils::<clinit>:88",
+         "org.apache.commons.codec.digest.HmacAlgorithmsTest::data:104"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.lang3.SystemUtils"
+   },
+   {
+      "method": "soundex",
+      "stacktrace": [
+         "org.apache.commons.codec.language.RefinedSoundex::soundex:216",
+         "org.apache.commons.codec.language.RefinedSoundex::encode:162",
+         "org.apache.commons.codec.language.SoundexUtils::difference:85",
+         "org.apache.commons.codec.language.RefinedSoundex::difference:129",
+         "org.apache.commons.codec.language.RefinedSoundexTest::testDifference:40"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.RefinedSoundex"
+   },
+   {
+      "method": "<init>",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.Base64InputStream::<init>:125",
+         "org.apache.commons.codec.binary.Base64InputStreamTest::testStrictDecoding:592"
+      ],
+      "kind": "ARGUMENT",
+      "index": 3,
+      "descriptor": "(Ljava/io/InputStream;ZI[BLorg/apache/commons/codec/CodecPolicy;)",
+      "class": "org.apache.commons.codec.binary.Base64InputStream"
+   },
+   {
+      "method": "encodeBase64String",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.Base64::encodeBase64String:279",
+         "org.apache.commons.codec.binary.Base64Test::testByteToStringVariations:1269"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.binary.Base64"
+   },
+   {
+      "method": "decodeUrl",
+      "stacktrace": [
+         "org.apache.commons.codec.net.URLCodec::decodeUrl:168",
+         "org.apache.commons.codec.net.URLCodecTest::testDecodeWithNullArray:201"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.net.URLCodec"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.URLCodec::encode:256",
+         "org.apache.commons.codec.net.URLCodecTest::testEncodeDecodeNull:124"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.URLCodec"
+   },
+   {
+      "method": "<init>",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.Base64InputStream::<init>:102",
+         "org.apache.commons.codec.binary.Base64InputStreamTest::testCodec105:79"
+      ],
+      "kind": "ARGUMENT",
+      "index": 3,
+      "descriptor": "(Ljava/io/InputStream;ZI[B)",
+      "class": "org.apache.commons.codec.binary.Base64InputStream"
+   },
+   {
+      "method": "hmacSha256",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.HmacUtils::hmacSha256:490",
+         "org.apache.commons.codec.digest.HmacUtilsTest::testSha256HMacFail:215"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B[B)[B",
+      "class": "org.apache.commons.codec.digest.HmacUtils"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QuotedPrintableCodec::encode:507",
+         "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeObjects:199"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "class": "org.apache.commons.codec.net.QuotedPrintableCodec"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.PercentCodec::decode:255",
+         "org.apache.commons.codec.net.PercentCodecTest::testDecodeNullObject:85"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "class": "org.apache.commons.codec.net.PercentCodec"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.PercentCodec::decode:260",
+         "org.apache.commons.codec.net.PercentCodecTest::testDecodeNullObject:85"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "class": "org.apache.commons.codec.net.PercentCodec"
+   },
+   {
+      "method": "hmacSha384",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.HmacUtils::hmacSha384:604",
+         "org.apache.commons.codec.digest.HmacUtilsTest::testSha384HMacFail:238"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B[B)[B",
+      "class": "org.apache.commons.codec.digest.HmacUtils"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.language.Caverphone2::encode:45",
+         "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.Caverphone2"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.BaseNCodec::decode:473",
+         "org.apache.commons.codec.binary.Base16Test::testStringToByteVariations:468"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)[B",
+      "class": "org.apache.commons.codec.binary.BaseNCodec"
+   },
+   {
+      "method": "doubleMetaphone",
+      "stacktrace": [
+         "org.apache.commons.codec.language.DoubleMetaphone::doubleMetaphone:75",
+         "org.apache.commons.codec.language.DoubleMetaphoneTest::testEmpty:1115"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.DoubleMetaphone"
+   },
+   {
+      "method": "soundex",
+      "stacktrace": [
+         "org.apache.commons.codec.language.Soundex::soundex:330",
+         "org.apache.commons.codec.language.Soundex::encode:251",
+         "org.apache.commons.codec.language.SoundexUtils::difference:85",
+         "org.apache.commons.codec.language.Soundex::difference:216",
+         "org.apache.commons.codec.language.SoundexTest::testDifference:94"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.Soundex"
+   },
+   {
+      "method": "hmacSha1",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.HmacUtils::hmacSha1:376",
+         "org.apache.commons.codec.digest.HmacUtilsTest::testSha1HMacFail:192"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B[B)[B",
+      "class": "org.apache.commons.codec.digest.HmacUtils"
+   },
+   {
+      "method": "newStringUtf16Le",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.StringUtils::newStringUtf16Le:400",
+         "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput_CODEC229:156"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.binary.StringUtils"
+   },
+   {
+      "method": "encodeText",
+      "stacktrace": [
+         "org.apache.commons.codec.net.RFC1522Codec::encodeText:107",
+         "org.apache.commons.codec.net.RFC1522CodecTest::testNullInput:56"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.RFC1522Codec"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.URLCodec::decode:296",
+         "org.apache.commons.codec.net.URLCodecTest::testEncodeDecodeNull:126"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.URLCodec"
+   },
+   {
+      "method": "encodeBase64",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.Base64::encodeBase64:238",
+         "org.apache.commons.codec.binary.Base64::encodeBase64:216",
+         "org.apache.commons.codec.binary.Base64::encodeBase64:197",
+         "org.apache.commons.codec.binary.Base64::encodeBase64:182",
+         "org.apache.commons.codec.binary.Base64Test::testEmptyBase64:402"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([BZZI)[B",
+      "class": "org.apache.commons.codec.binary.Base64"
+   },
+   {
+      "method": "doEncoding",
+      "stacktrace": [
+         "org.apache.commons.codec.net.BCodec::doEncoding:137",
+         "org.apache.commons.codec.net.BCodecTest::testNullInput:68"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.net.BCodec"
+   },
+   {
+      "method": "colognePhonetic",
+      "stacktrace": [
+         "org.apache.commons.codec.language.ColognePhonetic::colognePhonetic:385",
+         "org.apache.commons.codec.language.ColognePhonetic::encode:402",
+         "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.ColognePhonetic"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.BaseNCodec::encode:513",
+         "org.apache.commons.codec.binary.Base64Test::testEmptyBase64:405"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "([BII)[B",
+      "class": "org.apache.commons.codec.binary.BaseNCodec"
+   },
+   {
+      "method": "encodeQuotedPrintable",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QuotedPrintableCodec::encodeQuotedPrintable:340",
+         "org.apache.commons.codec.net.QuotedPrintableCodec::encode:396",
+         "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeNull:144"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/util/BitSet;[BZ)[B",
+      "class": "org.apache.commons.codec.net.QuotedPrintableCodec"
+   },
+   {
+      "method": "encodeToString",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.BaseNCodec::encodeToString:559",
+         "org.apache.commons.codec.binary.Base16Test::testByteToStringVariations:450"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "([B)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.binary.BaseNCodec"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.language.DaitchMokotoffSoundex::encode:428",
+         "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.DaitchMokotoffSoundex"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.language.DoubleMetaphone::encode:216",
+         "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.language.DoubleMetaphone"
+   },
+   {
+      "method": "apr1Crypt",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.Md5Crypt::apr1Crypt:121",
+         "org.apache.commons.codec.digest.Apr1CryptTest::testApr1CryptExplicitCall:82"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "([BLjava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.digest.Md5Crypt"
+   },
+   {
+      "method": "apr1Crypt",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.Md5Crypt::apr1Crypt:121",
+         "org.apache.commons.codec.digest.Md5Crypt::apr1Crypt:80",
+         "org.apache.commons.codec.digest.Apr1CryptTest::testApr1CryptNullData:92"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([BLjava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.digest.Md5Crypt"
+   },
+   {
+      "method": "encodeBase64",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.Base64::encodeBase64:197",
+         "org.apache.commons.codec.binary.Base64::encodeBase64:182",
+         "org.apache.commons.codec.binary.Base64Test::testEmptyBase64:402"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "([BZ)[B",
+      "class": "org.apache.commons.codec.binary.Base64"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QuotedPrintableCodec::decode:533",
+         "org.apache.commons.codec.net.QuotedPrintableCodecTest::testDecodeObjects:230"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "class": "org.apache.commons.codec.net.QuotedPrintableCodec"
+   },
+   {
+      "method": "encodeUrl",
+      "stacktrace": [
+         "org.apache.commons.codec.net.URLCodec::encodeUrl:128",
+         "org.apache.commons.codec.net.URLCodec::encode:200",
+         "org.apache.commons.codec.net.URLCodecTest::testEncodeNull:180"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "(Ljava/util/BitSet;[B)[B",
+      "class": "org.apache.commons.codec.net.URLCodec"
+   },
+   {
+      "method": "encodeUrl",
+      "stacktrace": [
+         "org.apache.commons.codec.net.URLCodec::encodeUrl:128",
+         "org.apache.commons.codec.net.URLCodecTest::testEncodeUrlWithNullBitSet:190"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/util/BitSet;[B)[B",
+      "class": "org.apache.commons.codec.net.URLCodec"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QuotedPrintableCodec::encode:605",
+         "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeStringWithNull:173"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.QuotedPrintableCodec"
+   },
+   {
+      "method": "decode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QuotedPrintableCodec::decode:454",
+         "org.apache.commons.codec.net.QuotedPrintableCodec::decode:492",
+         "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeDecodeNull:113"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;Ljava/nio/charset/Charset;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.QuotedPrintableCodec"
+   },
+   {
+      "method": "getInitializedMac",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.HmacUtils::getInitializedMac:230",
+         "org.apache.commons.codec.digest.HmacUtilsTest::testInitializedMacNullAlgo:126"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;[B)Ljavax/crypto/Mac;",
+      "class": "org.apache.commons.codec.digest.HmacUtils"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.BinaryCodec::encode:265",
+         "org.apache.commons.codec.binary.BinaryCodecTest::testEncodeByteArray:696"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)[B",
+      "class": "org.apache.commons.codec.binary.BinaryCodec"
+   },
+   {
+      "method": "getInitializedMac",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.HmacUtils::getInitializedMac:230",
+         "org.apache.commons.codec.digest.HmacUtils::<init>:907",
+         "org.apache.commons.codec.digest.HmacUtils::<init>:946",
+         "org.apache.commons.codec.digest.HmacAlgorithmsTest::testHmacHexFailInputStream:178"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "(Ljava/lang/String;[B)Ljavax/crypto/Mac;",
+      "class": "org.apache.commons.codec.digest.HmacUtils"
+   },
+   {
+      "method": "md5Crypt",
+      "stacktrace": [
+         "org.apache.commons.codec.digest.Md5Crypt::md5Crypt:184",
+         "org.apache.commons.codec.digest.Md5CryptTest::testMd5CryptNullData:78"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.digest.Md5Crypt"
+   },
+   {
+      "method": "<init>",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.Base32::<init>:289",
+         "org.apache.commons.codec.binary.Base32::<init>:178",
+         "org.apache.commons.codec.binary.Base32InputStream::<init>:77",
+         "org.apache.commons.codec.binary.Base32InputStreamTest::testStrictDecoding:571"
+      ],
+      "kind": "ARGUMENT",
+      "index": 1,
+      "descriptor": "(I[BZB)",
+      "class": "org.apache.commons.codec.binary.Base32"
+   },
+   {
+      "method": "isEmpty",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.BinaryCodec::isEmpty:139",
+         "org.apache.commons.codec.binary.BinaryCodec::toAsciiBytes:152",
+         "org.apache.commons.codec.binary.BinaryCodecTest::testToAsciiBytes:819"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "([B)Z",
+      "class": "org.apache.commons.codec.binary.BinaryCodec"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QuotedPrintableCodec::encode:583",
+         "org.apache.commons.codec.net.QuotedPrintableCodec::encode:434",
+         "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeDecodeNull:111"
+      ],
+      "kind": "RETURN_VALUE",
+      "index": -1,
+      "descriptor": "(Ljava/lang/String;Ljava/nio/charset/Charset;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.QuotedPrintableCodec"
+   },
+   {
+      "method": "encode",
+      "stacktrace": [
+         "org.apache.commons.codec.net.QCodec::encode:227",
+         "org.apache.commons.codec.net.QCodecTest::testEncodeStringWithNull:120"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+      "class": "org.apache.commons.codec.net.QCodec"
+   },
+   {
+      "method": "getBytes",
+      "stacktrace": [
+         "org.apache.commons.codec.binary.StringUtils::getBytes:127",
+         "org.apache.commons.codec.binary.StringUtils::getBytesUtf8:269",
+         "org.apache.commons.codec.digest.HmacUtils::<init>:933",
+         "org.apache.commons.codec.digest.HmacAlgorithmsTest::testHmacFailString:168"
+      ],
+      "kind": "ARGUMENT",
+      "index": 0,
+      "descriptor": "(Ljava/lang/String;Ljava/nio/charset/Charset;)[B",
+      "class": "org.apache.commons.codec.binary.StringUtils"
+   }
+]
