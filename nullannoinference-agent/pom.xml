@@ -39,7 +39,7 @@
         <version>3.3.0</version>
         <configuration>
           <!-- get all project dependencies -->
-          <finalName>semdiff-nullable-dynamic-analyser</finalName>
+          <finalName>nullannoinference-agent</finalName>
           <appendAssemblyId>false</appendAssemblyId>
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>

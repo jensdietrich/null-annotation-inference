@@ -28,7 +28,7 @@ The system variable `nz.ac.wgtn.nullannoinference.context` can be used to includ
 are executed. This is useful as API issues might be reported in another systems the system under analysis depends on. Usually this
 information can also be inferred from stack traces captured. 
 
-Example usage: `java -Dnz.ac.wgtn.nullannoinference.includes=com.example,org.example -javaagent:semdiff-nullable-dynamic-analyser.jar .. `
+Example usage: `java -Dnz.ac.wgtn.nullannoinference.includes=com.example,org.example -javaagent:nullannoinference-agent.jar .. `
 
 ``
 
