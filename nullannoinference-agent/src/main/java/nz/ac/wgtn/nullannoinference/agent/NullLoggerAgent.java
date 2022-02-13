@@ -22,7 +22,7 @@ public class NullLoggerAgent {
         Runtime.getRuntime().addShutdownHook(saveResult);
     }
 
-    public static final String PACKAGE_PREFIX = "semdiff-nullable-analyser-includes";
+    public static final String PACKAGE_PREFIX = "nz.ac.wgtn.nullannoinference.includes";
 
     static void log(String msg) {
         System.out.println(NullLoggerAgent.class.getSimpleName() + ": " + msg);

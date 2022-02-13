@@ -21,7 +21,7 @@ import static net.bytebuddy.matcher.ElementMatchers.*;
  */
 public abstract class NullChecks {
 
-    public static final String CONTEXT = System.getProperty("semdiff-nullable-analyser-context");
+    public static final String CONTEXT = System.getProperty("nz.ac.wgtn.nullannoinference.context");
 
     static {
         System.out.println(NullChecks.class.getName() + "::CONTEXT set to " + CONTEXT);
