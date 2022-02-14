@@ -50,11 +50,10 @@ public class NullLoggerAgent {
         new AgentBuilder.Default()
             .with(new DebugListener())
             // .with(AgentBuilder.Listener.StreamWriting.toSystemError())
-            .ignore(nameStartsWith("net.bytebuddy."))
+            .ignore(nameStartsWith("net.bytebuddy.").or(nameStartsWith("java.").or(nameStartsWith("javax.").or(nameStartsWith("sun.")).or(nameStartsWith("com.sun.")))))
             .type(matcher)
             .transform((builder, td, cl, m) -> builder.visit(NullChecks.MethodWithoutReturnValues.VISITOR))
             .transform((builder, td, cl, m) -> builder.visit(NullChecks.MethodWithReturnValues.VISITOR))
-            .transform((builder, td, cl, m) -> builder.visit(NullChecks.FieldAccess.VISITOR))
             .installOn(inst);
     }
 

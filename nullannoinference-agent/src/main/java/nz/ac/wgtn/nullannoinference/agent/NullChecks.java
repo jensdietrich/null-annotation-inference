@@ -141,28 +141,4 @@ public abstract class NullChecks {
         }
     }
 
-    public static class FieldAccess {
-
-        private static Method FIELD_INTERCEPTOR = null;
-        static {
-            try {
-                FIELD_INTERCEPTOR = FieldAccess.class.getDeclaredMethod("interceptFieldWrite", Object.class,Object.class);
-            } catch (Exception x) {
-                x.printStackTrace();
-            }
-        }
-        public static final AsmVisitorWrapper VISITOR = MemberSubstitution.relaxed()
-            .field(ElementMatchers.any())
-            .onWrite()
-            //.replaceWith(FIELD_INTERCEPTOR)
-            .replaceWithChain(
-
-            )
-            .on(ElementMatchers.isMethod());
-
-        public static void interceptFieldWrite(Object object,Object value) {
-            System.out.println("intercepted field write in object " + object + " , attempt to set value to " + value);
-        }
-    }
-
 }
