@@ -931,7 +931,7 @@
       </activation>
       <properties>
         <!-- LANG-1265: allow tests to access private fields/methods of java.base classes via reflection -->
-        <argLine>-Xmx512m --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED -javaagent:semdiff-nullable-dynamic-analyser.jar -Dsemdiff-nullable-analyser-includes=org.apache.commons -Dsemdiff-nullable-analyser-context=commons-lang3</argLine>
+        <argLine>-Xmx512m --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED -javaagent:nullannoinference-agent.jar -Dnz.ac.wgtn.nullannoinference.includes=org.apache.commons -Dnz.ac.wgtn.nullannoinference.context=commons-lang</argLine>
         <!-- coverall version 4.3.0 does not work with java 9, see https://github.com/trautonen/coveralls-maven-plugin/issues/112 -->
         <coveralls.skip>true</coveralls.skip>
       </properties>
