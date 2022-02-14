@@ -4,9 +4,9 @@
 ## @author jens dietrich
 
 ## TODO pass variables as parameters, using this as template for other experiments
-REPO="https://github.com/apache/commons-codec.git"
-VERSION="rel/commons-codec-1.15"
-NAME="commons-codec"
+REPO=$1
+VERSION=$2
+NAME=$3
 AGENT="nullannoinference-agent/target/nullannoinference-agent.jar"
 
 if [ -f "$NAME" ]; then
