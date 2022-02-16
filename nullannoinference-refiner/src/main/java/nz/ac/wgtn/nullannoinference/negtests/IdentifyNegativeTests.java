@@ -3,39 +3,32 @@ package nz.ac.wgtn.nullannoinference.negtests;
 import com.google.common.base.Preconditions;
 import org.apache.commons.io.FileUtils;
 import org.objectweb.asm.*;
-
 import java.io.*;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
+
+import static nz.ac.wgtn.nullannoinference.negtests.SantitiseObservedIssues.LOGGER;
 
 /**
- * Script to analyse projects for thee presence of negative tests.
+ * Script to analyse projects for the presence of negative tests.
  * Will produce a csv file (\t-separated) containing of class name, test method name (no descriptor, assuming that test methods are not overloaded).
  * @author jens dietrich
  */
 public class IdentifyNegativeTests {
 
     public static final String CSV_SEP = "\t";
+    public static final String COUNT_NEGATIVE_TESTS = "negative tests detected";
 
-    public static void main (String[] args) throws IOException {
+    public static void run  (File mvnProjectRootFolder, File outputFile, Map<String,Integer> counts) throws IOException {
+        Preconditions.checkArgument(mvnProjectRootFolder.exists(),mvnProjectRootFolder.getAbsolutePath() + " must exist");
+        Preconditions.checkArgument(mvnProjectRootFolder.isDirectory(),mvnProjectRootFolder.getAbsolutePath() + " must be a folder");
 
-        Preconditions.checkArgument(args.length==2,"two arguments required -- the root folder of folders containing poms, and the name of the output file (csv)");
-        File rootFolder = new File(args[0]);
-        Preconditions.checkArgument(rootFolder.exists(),rootFolder.getAbsolutePath() + " must exist");
-        Preconditions.checkArgument(rootFolder.isDirectory(),rootFolder.getAbsolutePath() + " must be a folder");
-        File output = new File(args[1]);
+        LOGGER.info("Analysis project for negative tests " + mvnProjectRootFolder.getAbsolutePath());
 
         Set<Method> methods = new TreeSet<>();
+        methods.addAll(findNegativeTests(mvnProjectRootFolder));
+        counts.put(COUNT_NEGATIVE_TESTS,methods.size());
 
-        for (File program:rootFolder.listFiles(f -> f.isDirectory())) {
-            String name = program.getName();
-            System.out.println("analysing: " + name);
-            methods.addAll(findNegativeTests(program));
-        }
-
-        try (PrintWriter out = new PrintWriter(new FileWriter(output))) {
+        try (PrintWriter out = new PrintWriter(new FileWriter(outputFile))) {
             for (Method m:methods) {
                 out.print(m.getClassName());
                 out.print(CSV_SEP);
@@ -47,7 +40,7 @@ public class IdentifyNegativeTests {
             }
         }
 
-        System.out.println("Analysis results written to " + output.getAbsolutePath());
+        LOGGER.info("Analysis results written to " + outputFile.getAbsolutePath());
 
 
     }
@@ -55,7 +48,7 @@ public class IdentifyNegativeTests {
     static Set<Method> findNegativeTests(File project) throws IOException {
         File compiledTestClasses = new File(project,"target/test-classes");
         if (!compiledTestClasses.exists()) {
-            throw new IllegalStateException("project must be built before analysis can be found (mvn test, or mvn test-compile)");
+            throw new IllegalStateException("project " + project.getAbsolutePath() + " must be built before analysis can be found (\"mvn test\", or \"mvn test-compile\")");
         }
         Collection<File> classFiles = FileUtils.listFiles(compiledTestClasses,new String[]{"class"},true);
         if (classFiles.isEmpty()) {

@@ -6,7 +6,10 @@ import com.google.common.graph.Graphs;
 import com.google.common.graph.Traverser;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import nz.ac.wgtn.nullannoinference.LogSystem;
 import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.Logger;
+
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.*;
@@ -19,6 +22,8 @@ import java.util.stream.Stream;
  * @author jens dietrich
  */
 public class InferAdditionalIssues {
+
+    public static final Logger LOGGER = LogSystem.getLogger("infer-additional-issues");
 
     public static void main (String[] args) throws Exception {
 
