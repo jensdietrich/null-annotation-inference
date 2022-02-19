@@ -2,6 +2,7 @@ package nz.ac.wgtn.nullannoinference.lsp;
 
 import com.google.common.collect.Sets;
 import com.google.common.graph.Graph;
+import nz.ac.wgtn.nullannoinference.commons.Issue;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -16,7 +17,7 @@ public class TestIssueInference {
     @Test
     public void testNullableArgumentPropagatedDown() throws IOException {
 
-        Issue issue = new Issue("foo.B","foo","(Ljava/lang/Object;)Ljava/lang/String;", Issue.IssueType.ARGUMENT,0);
+        Issue issue = new Issue("foo.B","foo","(Ljava/lang/Object;)Ljava/lang/String;", null,Issue.IssueType.ARGUMENT,0);
         File project = new File(TestOverrideExtractor.class.getResource("/test-project").getFile());
         assumeTrue(project.exists());
         assumeTrue(new File(project, "target/classes").exists(), "project containing test data (resources/test-project) has not been built, build test projects with mvn compile");
@@ -38,7 +39,7 @@ public class TestIssueInference {
     @Test
     public void testNullableReturnPropagatedUp() throws IOException {
 
-        Issue issue = new Issue("foo.B","foo","(Ljava/lang/Object;)Ljava/lang/String;", Issue.IssueType.RETURN_VALUE,-1);
+        Issue issue = new Issue("foo.B","foo","(Ljava/lang/Object;)Ljava/lang/String;", null,Issue.IssueType.RETURN_VALUE,-1);
         File project = new File(TestOverrideExtractor.class.getResource("/test-project").getFile());
         assumeTrue(project.exists());
         assumeTrue(new File(project, "target/classes").exists(), "tested project has not been built, build test projects with mvn compile");

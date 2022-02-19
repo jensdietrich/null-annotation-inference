@@ -5,6 +5,8 @@ import net.bytebuddy.asm.AsmVisitorWrapper;
 import net.bytebuddy.asm.MemberSubstitution;
 import net.bytebuddy.description.ModifierReviewable;
 import net.bytebuddy.matcher.ElementMatchers;
+import nz.ac.wgtn.nullannoinference.commons.Issue;
+import nz.ac.wgtn.nullannoinference.commons.IssueStore;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Executable;

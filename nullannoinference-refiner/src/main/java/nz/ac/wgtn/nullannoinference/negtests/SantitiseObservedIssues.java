@@ -3,9 +3,9 @@ package nz.ac.wgtn.nullannoinference.negtests;
 import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
 import nz.ac.wgtn.nullannoinference.LogSystem;
+import nz.ac.wgtn.nullannoinference.commons.Issue;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Logger;
-
 import java.io.*;
 import java.nio.file.Path;
 import java.util.*;

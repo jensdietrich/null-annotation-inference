@@ -39,6 +39,7 @@
       <module>nullannoinference-agent</module>
       <module>nullannoinference-refiner</module>
       <module>nullannoinference-annotator</module>
+      <module>nullannoinference-commons</module>
   </modules>
   <url>http://maven.apache.org</url>
 </project>

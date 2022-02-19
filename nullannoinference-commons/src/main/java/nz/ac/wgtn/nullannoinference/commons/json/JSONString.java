@@ -1,4 +1,4 @@
-package nz.ac.wgtn.nullannoinference.agent.shaded.org.json;
+package nz.ac.wgtn.nullannoinference.commons.json;
 
 /*
 Copyright (c) 2002 JSON.org
@@ -25,45 +25,19 @@ SOFTWARE.
  */
 
 /**
- * The JSONException is thrown by the JSON.org classes when things are amiss.
- *
- * @author JSON.org
- * @version 2015-12-09
+ * The <code>JSONString</code> interface allows a <code>toJSONString()</code>
+ * method so that a class can change the behavior of
+ * <code>JSONObject.toString()</code>, <code>JSONArray.toString()</code>,
+ * and <code>JSONWriter.value(</code>Object<code>)</code>. The
+ * <code>toJSONString</code> method will be used instead of the default behavior
+ * of using the Object's <code>toString()</code> method and quoting the result.
  */
-public class JSONException extends RuntimeException {
-    /** Serialization ID */
-    private static final long serialVersionUID = 0;
-
+public interface JSONString {
     /**
-     * Constructs a JSONException with an explanatory message.
+     * The <code>toJSONString</code> method allows a class to produce its own JSON
+     * serialization.
      *
-     * @param message
-     *            Detail about the reason for the exception.
+     * @return A strictly syntactically correct JSON text.
      */
-    public JSONException(final String message) {
-        super(message);
-    }
-
-    /**
-     * Constructs a JSONException with an explanatory message and cause.
-     * 
-     * @param message
-     *            Detail about the reason for the exception.
-     * @param cause
-     *            The cause.
-     */
-    public JSONException(final String message, final Throwable cause) {
-        super(message, cause);
-    }
-
-    /**
-     * Constructs a new JSONException with the specified cause.
-     * 
-     * @param cause
-     *            The cause.
-     */
-    public JSONException(final Throwable cause) {
-        super(cause.getMessage(), cause);
-    }
-
+    public String toJSONString();
 }

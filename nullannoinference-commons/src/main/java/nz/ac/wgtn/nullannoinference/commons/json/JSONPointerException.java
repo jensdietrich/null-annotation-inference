@@ -1,7 +1,7 @@
-package nz.ac.wgtn.nullannoinference.agent.shaded.org.json;
+package nz.ac.wgtn.nullannoinference.commons.json;
 
 /*
-Copyright (c) 2018 JSON.org
+Copyright (c) 2002 JSON.org
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -24,20 +24,22 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
-
-import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-
-@Documented
-@Retention(RUNTIME)
-@Target({METHOD})
 /**
- * Use this annotation on a getter method to override the Bean name
- * parser for Bean -&gt; JSONObject mapping. If this annotation is
- * present at any level in the class hierarchy, then the method will
- * not be serialized from the bean into the JSONObject.
+ * The JSONPointerException is thrown by {@link JSONPointer} if an error occurs
+ * during evaluating a pointer.
+ * 
+ * @author JSON.org
+ * @version 2016-05-13
  */
-public @interface JSONPropertyIgnore { }
+public class JSONPointerException extends JSONException {
+    private static final long serialVersionUID = 8872944667561856751L;
+
+    public JSONPointerException(String message) {
+        super(message);
+    }
+
+    public JSONPointerException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+}

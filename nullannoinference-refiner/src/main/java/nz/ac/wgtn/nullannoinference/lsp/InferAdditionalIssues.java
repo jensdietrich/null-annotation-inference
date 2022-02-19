@@ -7,6 +7,7 @@ import com.google.common.graph.Traverser;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import nz.ac.wgtn.nullannoinference.LogSystem;
+import nz.ac.wgtn.nullannoinference.commons.Issue;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Logger;
 

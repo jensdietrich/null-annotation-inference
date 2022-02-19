@@ -4,6 +4,7 @@ import net.bytebuddy.agent.builder.AgentBuilder;
 import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.matcher.ElementMatcher;
 import net.bytebuddy.matcher.ElementMatchers;
+import nz.ac.wgtn.nullannoinference.commons.IssueStore;
 
 import java.lang.instrument.Instrumentation;
 import java.util.stream.Stream;
@@ -44,8 +45,6 @@ public class NullLoggerAgent {
                 .reduce(ElementMatchers.none(), (aggregation,next) ->  (aggregation.equals(ElementMatchers.none()))? next:aggregation.or(next));
 
         log("Instrumenting classes matching condition: " + matcher);
-
-
 
         new AgentBuilder.Default()
             .with(new DebugListener())

@@ -1,6 +1,4 @@
-package nz.ac.wgtn.nullannoinference.lsp;
-
-import com.google.gson.annotations.SerializedName;
+package nz.ac.wgtn.nullannoinference.commons;
 
 import java.util.List;
 import java.util.Objects;
@@ -11,32 +9,32 @@ import java.util.Objects;
  */
 public class Issue {
 
-    enum IssueType {RETURN_VALUE, ARGUMENT}
+    public enum IssueType {RETURN_VALUE, ARGUMENT}
 
-    @SerializedName("class")
     private String className = null;
-    @SerializedName("method")
     private String methodName = null;
     private String descriptor = null;
     private IssueType kind = null;
     private int argsIndex = -1;
-
-    // by design not included in equal/hashcode -- additional property for provenance
+    private String context = null;
     private List<String> stacktrace = null;
+    private String trigger = null;  // root context , requires sanitisation of stacktrace to be meaningful
 
-    public Issue(String className, String methodName, String descriptor, IssueType kind) {
+    public Issue(String className, String methodName, String descriptor, String context, IssueType kind) {
         this.className = className;
         this.methodName = methodName;
         this.descriptor = descriptor;
+        this.context = context;
         this.kind = kind;
     }
 
-    public Issue(String className, String methodName, String descriptor,IssueType kind, int argsIndex) {
+    public Issue(String className, String methodName, String descriptor, String context,IssueType kind, int argsIndex) {
         this.className = className;
         this.methodName = methodName;
         this.descriptor = descriptor;
         this.kind = kind;
         this.argsIndex = argsIndex;
+        this.context = context;
     }
 
     public String getClassName() {
@@ -63,22 +61,35 @@ public class Issue {
         return stacktrace;
     }
 
-    public void setStacktrace(List<String> stacktrace) {
-        this.stacktrace = stacktrace;
+    public String getTrigger() {
+        return trigger;
     }
 
+    public String getContext() {
+        return context;
+    }
+
+    public void setStacktrace(List<String> stacktrace) {
+        this.stacktrace = stacktrace;
+        if (this.stacktrace!=null && !this.stacktrace.isEmpty()) {
+            this.trigger = this.stacktrace.get(this.stacktrace.size()-1);
+        }
+        else {
+            this.trigger = null;
+        }
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Issue issue = (Issue) o;
-        return argsIndex == issue.argsIndex && Objects.equals(className, issue.className) && Objects.equals(methodName, issue.methodName) && Objects.equals(descriptor, issue.descriptor) && kind == issue.kind && Objects.equals(stacktrace, issue.stacktrace);
+        return argsIndex == issue.argsIndex && Objects.equals(className, issue.className) && Objects.equals(methodName, issue.methodName) && Objects.equals(descriptor, issue.descriptor) && kind == issue.kind && Objects.equals(context, issue.context) && Objects.equals(trigger, issue.trigger);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(className, methodName, descriptor, kind, argsIndex, stacktrace);
+        return Objects.hash(className, methodName, descriptor, kind, argsIndex, context, trigger);
     }
 
     @Override
@@ -87,6 +98,7 @@ public class Issue {
                 "className='" + className + '\'' +
                 ", methodName='" + methodName + '\'' +
                 ", descriptor='" + descriptor + '\'' +
+                ", context='" + context + '\'' +
                 ", kind=" + kind +
                 ", argsIndex=" + argsIndex +
                 '}';

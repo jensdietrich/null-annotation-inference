@@ -54,7 +54,7 @@
               <Premain-Class>nz.ac.wgtn.nullannoinference.agent.NullLoggerAgent</Premain-Class>
               <Can-Redefine-Classes>true</Can-Redefine-Classes>
               <Can-Retransform-Classes>true</Can-Retransform-Classes>
-            </manifestEntries>semdiff-nullable-dynamic-analyser.jar
+            </manifestEntries>
           </archive>
         </configuration>
         <executions>
@@ -84,7 +84,7 @@
     <dependency>
       <groupId>net.bytebuddy</groupId>
       <artifactId>byte-buddy</artifactId>
-      <version>1.11.5</version>
+      <version>1.12.8</version>
     </dependency>
     <dependency>
       <groupId>net.bytebuddy</groupId>
@@ -102,6 +102,11 @@
       <artifactId>junit-jupiter</artifactId>
       <version>RELEASE</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>nz.ac.wgtn.nullannoinference</groupId>
+      <artifactId>nullannoinference-commons</artifactId>
+      <version>[0.0.1,)</version>
     </dependency>
   </dependencies>
 </project>

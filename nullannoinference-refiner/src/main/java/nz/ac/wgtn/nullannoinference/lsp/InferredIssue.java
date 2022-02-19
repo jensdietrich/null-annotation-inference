@@ -1,5 +1,6 @@
 package nz.ac.wgtn.nullannoinference.lsp;
 
+import nz.ac.wgtn.nullannoinference.commons.Issue;
 import java.util.Objects;
 
 /**
@@ -15,13 +16,13 @@ public class InferredIssue extends Issue {
     private Issue parent = null;
 
     public InferredIssue(String className, String methodName, String descriptor, IssueType kind, Inference inference, Issue parent) {
-        super(className, methodName, descriptor, kind);
+        super(className, methodName, descriptor, null,kind);
         this.inference = inference;
         this.parent = parent;
     }
 
     public InferredIssue(String className, String methodName, String descriptor, IssueType kind, int argsIndex, Inference inference, Issue parent) {
-        super(className, methodName, descriptor, kind, argsIndex);
+        super(className, methodName, descriptor,null, kind, argsIndex);
         this.inference = inference;
         this.parent = parent;
     }

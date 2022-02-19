@@ -1,7 +1,7 @@
 package nz.ac.wgtn.nullannoinference.agent.test;
 
-import nz.ac.wgtn.nullannoinference.agent.Issue;
-import nz.ac.wgtn.nullannoinference.agent.IssueStore;
+import nz.ac.wgtn.nullannoinference.commons.Issue;
+import nz.ac.wgtn.nullannoinference.commons.IssueStore;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

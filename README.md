@@ -13,6 +13,7 @@ The tool is designed for Maven projects, and contains three modules:
 2. A __refiner__ module that performs a static bytecode analysis on the program and refines the issues collected by both removing and adding nullability issues
 3. An __annotator__ module that inserts nullable annotations into the project, and also adds the dependency to the artifact containing the annotations to the projects pom (such as [JSR305](https://mvnrepository.com/artifact/com.google.code.findbugs/jsr305), particular annotation mechanisms to be used are pluggable). 
 
+There is also a __commons__ module containing some code used by several other modules.
 
 ## Build and Usage Instructions
 

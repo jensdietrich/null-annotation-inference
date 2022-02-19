@@ -1,4 +1,4 @@
-package nz.ac.wgtn.nullannoinference.agent.shaded.org.json;
+package nz.ac.wgtn.nullannoinference.commons.json;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;

@@ -1,5 +1,7 @@
-package nz.ac.wgtn.nullannoinference.agent;
+package nz.ac.wgtn.nullannoinference.commons;
 
+import nz.ac.wgtn.nullannoinference.commons.json.JSONArray;
+import nz.ac.wgtn.nullannoinference.commons.json.JSONObject;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,7 +13,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import nz.ac.wgtn.nullannoinference.agent.shaded.org.json.*;
 
 
 /**
@@ -104,12 +105,12 @@ public class IssueStore {
     }
 
     // persistence
-    static void save () {
+    public static void save () {
         JSONArray array = new JSONArray();
         for (Issue issue:issues) {
             JSONObject jobj = new JSONObject();
-            jobj.put("class",issue.getClassName());
-            jobj.put("method",issue.getMethodName());
+            jobj.put("className",issue.getClassName());
+            jobj.put("methodName",issue.getMethodName());
             jobj.put("descriptor",issue.getDescriptor());
             jobj.put("kind",issue.getKind().name());
             jobj.put("index",issue.getArgsIndex());
@@ -121,11 +122,11 @@ public class IssueStore {
             }
             array.put(jobj);
         }
-        NullLoggerAgent.log("null issues discovered: " + array.length());
+        System.out.println("null issues discovered: " + array.length());
         String json = array.toString(3);
         try (PrintWriter out = new PrintWriter(new FileWriter(FILE_NAME + '-' + System.currentTimeMillis() + ".json"))) {
             out.println(json);
-            NullLoggerAgent.log("null issues observed written to " + new File(FILE_NAME).getAbsolutePath());
+            System.out.println("null issues observed written to " + new File(FILE_NAME).getAbsolutePath());
         } catch (IOException e) {
             e.printStackTrace();
         }
