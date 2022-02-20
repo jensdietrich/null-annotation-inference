@@ -37,6 +37,7 @@
 
   <modules>
       <module>nullannoinference-agent</module>
+      <module>nullannoinference-agent2</module>
       <module>nullannoinference-refiner</module>
       <module>nullannoinference-annotator</module>
       <module>nullannoinference-commons</module>

@@ -9,7 +9,7 @@ import java.util.Objects;
  */
 public class Issue {
 
-    public enum IssueType {RETURN_VALUE, ARGUMENT}
+    public enum IssueType {RETURN_VALUE, ARGUMENT,FIELD}
 
     private String className = null;
     private String methodName = null;
