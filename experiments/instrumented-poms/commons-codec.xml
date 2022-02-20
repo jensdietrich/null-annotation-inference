@@ -306,7 +306,7 @@ limitations under the License.
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
-          <argLine>-javaagent:nullannoinference-agent.jar -Dnz.ac.wgtn.nullannoinference.includes=org.apache.commons -Dnz.ac.wgtn.nullannoinference.context=commons-codec</argLine>
+          <argLine>-javaagent:nullannoinference-agent.jar -javaagent:nullannoinference-agent2.jar -Dnz.ac.wgtn.nullannoinference.includes=org.apache.commons -Dnz.ac.wgtn.nullannoinference.context=commons-codec</argLine>
           <forkCount>1</forkCount>
           <excludes>
             <exclude>**/*AbstractTest.java</exclude>

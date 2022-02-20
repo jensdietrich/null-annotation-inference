@@ -605,7 +605,7 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
           <configuration>
-          <argLine>-javaagent:nullannoinference-agent.jar -Dnz.ac.wgtn.nullannoinference.includes=org.apache.commons -Dnz.ac.wgtn.nullannoinference.context=commons-collections</argLine>
+          <argLine>-javaagent:nullannoinference-agent.jar -javaagent:nullannoinference-agent2.jar -Dnz.ac.wgtn.nullannoinference.includes=org.apache.commons -Dnz.ac.wgtn.nullannoinference.context=commons-collections</argLine>
           <forkCount>1</forkCount>
             <includes>
               <include>**/*Test.java</include>
