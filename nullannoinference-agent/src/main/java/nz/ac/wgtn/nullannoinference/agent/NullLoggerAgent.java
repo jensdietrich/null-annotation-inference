@@ -9,7 +9,6 @@ import nz.ac.wgtn.nullannoinference.commons.IssueStore;
 import java.lang.instrument.Instrumentation;
 import java.util.stream.Stream;
 
-import static net.bytebuddy.matcher.ElementMatchers.*;
 import static net.bytebuddy.matcher.ElementMatchers.nameStartsWith;
 
 /**
@@ -23,14 +22,16 @@ public class NullLoggerAgent {
         Runtime.getRuntime().addShutdownHook(saveResult);
     }
 
-    public static final String PACKAGE_PREFIX = "nz.ac.wgtn.nullannoinference.includes";
+    public static final String PACKAGE_PREFIX_SYS_PROPERTY = "nz.ac.wgtn.nullannoinference.includes";
 
     static void log(String msg) {
         System.out.println(NullLoggerAgent.class.getSimpleName() + ": " + msg);
     }
+
+
     public static void premain(String arg, Instrumentation inst) {
 
-        String prefix = System.getProperty(PACKAGE_PREFIX);
+        String prefix = System.getProperty(PACKAGE_PREFIX_SYS_PROPERTY);
         if (prefix==null) {
             log("No class name prefix set, instrumenting all classes possible");
         }
@@ -53,6 +54,7 @@ public class NullLoggerAgent {
             .type(matcher)
             .transform((builder, td, cl, m) -> builder.visit(NullChecks.MethodWithoutReturnValues.VISITOR))
             .transform((builder, td, cl, m) -> builder.visit(NullChecks.MethodWithReturnValues.VISITOR))
+            .transform((builder, td, cl, m) -> builder.visit(NullChecks.Constructors.VISITOR))
             .installOn(inst);
     }
 

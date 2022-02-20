@@ -1,6 +1,10 @@
-## README
+## The Agent Module
 
 This module provides an agent that instruments executing code (such as tests), looks for `null` values in arguments and return values, and logs the results to files `null-issues-observed-while-testing*.json`.
+It also intercepts object creating by instrumenting constructors, and checks for nullable fields (static and non-static) by analysing fields after object construction
+using reflection. However, it does not check for nullability of fields that are written later.
+For this purpose, another agent is required, and there is a separate module provided for this purpose. 
+
 
 Example:
 

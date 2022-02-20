@@ -10,6 +10,7 @@ import nz.ac.wgtn.nullannoinference.commons.IssueStore;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Executable;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -50,6 +51,28 @@ public abstract class NullChecks {
             IssueStore.add(issue);
         }
     }
+
+    // check the state of object using reflection
+    public static void checkThis(Executable method, Object object){
+     //   if ((method instanceof Constructor)) { // also check synthetic methods as the target is to annotate fields, not methods
+            // todo: extend this to super classes within scope (need to match against prefix)
+            for (Field field:object.getClass().getDeclaredFields()) {
+                if (!field.getType().isPrimitive()) {
+                    try {
+                        field.setAccessible(true);
+                        Object value = field.get(object);
+                        if (value==null) {
+                            Issue issue = new Issue(field.getDeclaringClass().getName(), field.getName(), getTypeNameInByteCodeFormat(field.getType()), CONTEXT, Issue.IssueType.FIELD, -1);
+                            IssueStore.add(issue);
+                        }
+                    } catch (Exception x) {
+                        x.printStackTrace();
+                    }
+                }
+            }
+       // }
+    }
+
 
     public static boolean mustCheck(Executable method) {
          return !method.isSynthetic();
@@ -141,6 +164,21 @@ public abstract class NullChecks {
         public static void onEntry(@Advice.Origin Executable method,@Advice.AllArguments Object[] args)  {
             NullChecks.checkArguments(method, args);
         }
+    }
+
+    public static class Constructors {
+
+        public static final AsmVisitorWrapper VISITOR = Advice.to(Constructors.class)
+            .on(any()
+            .and(isConstructor())
+            );
+
+        @Advice.OnMethodExit
+        public static void onExit(@Advice.Origin Executable method,@Advice.This Object object)  {
+            System.out.println("constructor exit");
+            NullChecks.checkThis(method, object);
+        }
+
     }
 
 }

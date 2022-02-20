@@ -19,6 +19,7 @@ public class Dynamic {
             .redefine(clazz)
             .visit(NullChecks.MethodWithoutReturnValues.VISITOR)
             .visit(NullChecks.MethodWithReturnValues.VISITOR)
+            .visit(NullChecks.Constructors.VISITOR)
             .make()
             .load(clazz.getClassLoader(), classReloadingStrategy);
     }
