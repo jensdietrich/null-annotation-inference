@@ -169,16 +169,12 @@ public abstract class NullChecks {
     public static class Constructors {
 
         public static final AsmVisitorWrapper VISITOR = Advice.to(Constructors.class)
-            .on(any()
-            .and(isConstructor())
-            );
+            .on(any().and(isConstructor()));
 
         @Advice.OnMethodExit
         public static void onExit(@Advice.Origin Executable method,@Advice.This Object object)  {
-            System.out.println("constructor exit");
             NullChecks.checkThis(method, object);
         }
-
     }
 
 }
