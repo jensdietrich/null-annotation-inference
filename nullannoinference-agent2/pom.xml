@@ -38,7 +38,7 @@
         <version>3.3.0</version>
         <configuration>
           <!-- get all project dependencies -->
-          <finalName>nullannoinference-agent</finalName>
+          <finalName>nullannoinference-agent2</finalName>
           <appendAssemblyId>false</appendAssemblyId>
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>

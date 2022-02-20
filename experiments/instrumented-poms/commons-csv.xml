@@ -291,7 +291,7 @@
             <exclude>**/perf/PerformanceTest.java</exclude>
           </excludes>
             <forkCount>1</forkCount>
-            <argLine>-javaagent:nullannoinference-agent.jar -Dnz.ac.wgtn.nullannoinference.includes=org.apache.commons -Dnz.ac.wgtn.nullannoinference.context=commons-csv</argLine>
+            <argLine>-javaagent:nullannoinference-agent.jar -javaagent:nullannoinference-agent2.jar -Dnz.ac.wgtn.nullannoinference.includes=org.apache.commons -Dnz.ac.wgtn.nullannoinference.context=commons-csv</argLine>
         </configuration>
       </plugin>
       <!-- Allow checkstyle to be run interactively; keep in sync with report config below -->

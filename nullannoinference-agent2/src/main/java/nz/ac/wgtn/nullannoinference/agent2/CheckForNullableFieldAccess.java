@@ -10,7 +10,7 @@ import org.objectweb.asm.Opcodes;
 import java.lang.reflect.Method;
 
 /**
- * Instrument field writes, insert log statement.
+ * Instrument field writes, insert log statement to create nullable issue if null is set.
  * @author jens dietrich
  */
 public class CheckForNullableFieldAccess extends ClassVisitor {
@@ -35,13 +35,16 @@ public class CheckForNullableFieldAccess extends ClassVisitor {
         this.className = name;
     }
 
-
     @Override
     public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
-
         MethodVisitor mv = super.visitMethod(access, name, descriptor, signature,exceptions);
-
-        return new LogFieldAccessVisitor(mv);
+        boolean isRegularMethod = !(name.equals("<clinit>") || name.equals("<init>"));
+        if (isRegularMethod) {
+            return new LogFieldAccessVisitor(mv);
+        }
+        else {
+            return mv;
+        }
     }
 
     static class LogFieldAccessVisitor extends MethodVisitor {
@@ -54,13 +57,14 @@ public class CheckForNullableFieldAccess extends ClassVisitor {
 
         @Override
         public void visitFieldInsn(int opcode, String owner, String name, String descriptor) {
-
-            if (descriptor.startsWith("L") || descriptor.startsWith("[")) {
-                mv.visitInsn(Opcodes.DUP);
-                mv.visitLdcInsn(owner);
-                mv.visitLdcInsn(name);
-                mv.visitLdcInsn(descriptor);
-                mv.visitMethodInsn(Opcodes.INVOKESTATIC, CheckForNullableFieldAccess.class.getName().replace('.', '/'), "fieldAccessLogged", "(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V", false);
+            if (opcode==Opcodes.PUTFIELD || opcode==Opcodes.PUTSTATIC) { // writes only
+                if (descriptor.startsWith("L") || descriptor.startsWith("[")) { // objects and array types only
+                    mv.visitInsn(Opcodes.DUP);
+                    mv.visitLdcInsn(owner);
+                    mv.visitLdcInsn(name);
+                    mv.visitLdcInsn(descriptor);
+                    mv.visitMethodInsn(Opcodes.INVOKESTATIC, CheckForNullableFieldAccess.class.getName().replace('.', '/'), "fieldAccessLogged", "(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V", false);
+                }
             }
             super.visitFieldInsn(opcode, owner, name, descriptor);
         }

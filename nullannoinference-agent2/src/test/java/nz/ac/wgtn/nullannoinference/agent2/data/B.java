@@ -28,4 +28,8 @@ public class B {
         F5 = "";
     }
 
+    public static String getF1() {
+        return F1;
+    }
+
 }

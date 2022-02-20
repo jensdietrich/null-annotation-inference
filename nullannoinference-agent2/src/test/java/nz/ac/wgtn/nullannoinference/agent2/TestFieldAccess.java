@@ -85,6 +85,12 @@ public class TestFieldAccess {
         assertEquals(0, IssueStore.getIssues().size());
     }
 
+    // no oracle needed -- instrumentation would cause verification error as it would result in a corrupt state
+    @Test
+    public void testNonStaticFieldRead() {
+        new A().getF1();
+    }
+
     @Test
     public void testStaticFieldAccessString() {
         B.resetF1();
@@ -145,5 +151,11 @@ public class TestFieldAccess {
     public void testStaticFieldForFP() {
         B.dontResetF5();
         assertEquals(0, IssueStore.getIssues().size());
+    }
+
+    // no oracle needed -- instrumentation would cause verification error as it would result in a corrupt state
+    @Test
+    public void testStaticFieldRead() {
+        B.getF1();
     }
 }

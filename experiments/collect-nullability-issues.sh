@@ -8,6 +8,7 @@ REPO=$1
 VERSION=$2
 NAME=$3
 AGENT="nullannoinference-agent/target/nullannoinference-agent.jar"
+AGENT2="nullannoinference-agent2/target/nullannoinference-agent2.jar"
 ROOT="$(pwd)"
 PROJECT_FOLDER=$ROOT/projects/original/$NAME
 
@@ -34,6 +35,11 @@ if [ ! -f "$AGENT" ]; then
     exit 1
 fi
 cp $AGENT $PROJECT_FOLDER
+if [ ! -f "$AGENT2" ]; then
+    echo "Agent not found - must build entire project first: $AGENT2"
+    exit 1
+fi
+cp $AGENT2 $PROJECT_FOLDER
 cd $ROOT
 cp instrumented-poms/$NAME.xml $PROJECT_FOLDER/pom-instrumented.xml
 

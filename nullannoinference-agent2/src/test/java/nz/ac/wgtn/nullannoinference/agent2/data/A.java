@@ -28,4 +28,8 @@ public class A {
         this.f5 = "";
     }
 
+    public String getF1() {
+        return f1;
+    }
+
 }

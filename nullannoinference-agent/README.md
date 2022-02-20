@@ -6,14 +6,14 @@ Example:
 
     [
         {
-            "method": "m3",
+            "methodName": "m3",
             "kind": "ARGUMENT",
             "index": 0,
             "descriptor": "(Ljava/lang/Object;)V",
             "class": "Foo"
         },
         {
-            "method": "m1",
+            "methodName": "m1",
             "kind": "RETURN_VALUE",
             "index": -1,
             "descriptor": "()Ljava/lang/Object;",
