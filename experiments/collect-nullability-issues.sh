@@ -3,7 +3,6 @@
 ## script to fetch program, run instrumented tests and collect nullability issues
 ## @author jens dietrich
 
-## TODO pass variables as parameters, using this as template for other experiments
 REPO=$1
 VERSION=$2
 NAME=$3

@@ -35,7 +35,7 @@ public class Main {
         options.addRequiredOption("p","project",true,"the folder containing the Maven project (i.e. containing pom.xml) to be analysed, the project must have been built with \"mvn test\" (required)");
         options.addOption("n","negativetests",true,"a csv file where information about negative tests detected will be save in CSV format (optional, default is " + NEGATIVE_TEST_SUMMARY_FILE_NAME + ")");
         options.addOption("s","sanitisedissues",true,"a folder where the issues not removed by the negative test sanitisation will be saved (optional, default is " + SANITISED_NULLABILITY_ISSUES + ")");
-        options.addOption("a","propagatenullabilityforarguments",true,"whether to propagate nullability for arguments to subtypes (optional, default is " + PROPAGATE_NULLABILITY_FOR_ARGUMENTS + ")");
+        options.addOption("a","propagate4args",true,"whether to propagate nullability for arguments to subtypes (optional, default is " + PROPAGATE_NULLABILITY_FOR_ARGUMENTS + ")");
 
         CommandLineParser parser = new DefaultParser() {
             @Override
