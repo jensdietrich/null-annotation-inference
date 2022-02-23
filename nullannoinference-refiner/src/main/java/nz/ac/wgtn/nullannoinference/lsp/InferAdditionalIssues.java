@@ -26,43 +26,38 @@ public class InferAdditionalIssues {
 
     public static final Logger LOGGER = LogSystem.getLogger("infer-additional-issues");
 
-    public static void main (String[] args) throws Exception {
+    public static void run (File issueInputFolder,File projectRootFolder, File outputFile,String prefix, boolean propagateNullabilityInArguments) throws Exception {
 
-        Preconditions.checkArgument(args.length == 4, "four arguments required -- a folder containing issues (json-encoded, will be checked recursively), a root folder of projects containing byte code (.class definitions in target/classes, and file name containing inferred issues, and a package prefix restricting classes to be investigated");
-        File issueInputFolder = new File(args[0]);
         Preconditions.checkArgument(issueInputFolder.exists(), issueInputFolder.getAbsolutePath() + " must exist");
         Preconditions.checkArgument(issueInputFolder.isDirectory(), issueInputFolder.getAbsolutePath() + " must be a folder");
 
-        File projectRootFolder = new File(args[1]);
         Preconditions.checkArgument(projectRootFolder.exists(), issueInputFolder.getAbsolutePath() + " must exist");
         Preconditions.checkArgument(projectRootFolder.isDirectory(), issueInputFolder.getAbsolutePath() + " must be a folder");
         List<File> projectFolders = getProjectFolders(projectRootFolder);
 
-        File outputFile = new File(args[2]);
         if (!outputFile.getParentFile().exists()) {
             outputFile.getParentFile().mkdirs();
         }
-        String prefix = args[3];
 
-        System.out.println("reading issues from " + issueInputFolder.getAbsolutePath());
+        LOGGER.info("reading issues from " + issueInputFolder.getAbsolutePath());
         System.out.println("analysing projects in " + projectRootFolder.getAbsolutePath());
         for (File projectFolder:projectFolders) {
            System.out.println("\t-"+projectFolder.getAbsolutePath());
         }
-        System.out.println("additional inferred issues will be written to  " + outputFile.getAbsolutePath());
-        System.out.println("only classes with the following name will be considered  " + prefix);
+        LOGGER.info("additional inferred issues will be written to  " + outputFile.getAbsolutePath());
+        LOGGER.info("only classes starting with the following name will be considered  " + prefix);
 
 
         // extract overrides
         File[] arr = projectFolders.toArray(new File[projectFolders.size()]);
         Graph<OwnedMethod> overrides = OverrideExtractor.extractOverrides(t -> t.startsWith(prefix),arr);
 
-        System.out.println("" + overrides.edges().size() + " override relationships found");
+        LOGGER.info("" + overrides.edges().size() + " override relationships found");
 
         // extract issues
         Set<Issue> issues = new HashSet<>();
         for (File file:FileUtils.listFiles(issueInputFolder,new String[]{"json"},true)) {
-            System.out.println("Processing " + file.getAbsolutePath());
+            LOGGER.info("Processing " + file.getAbsolutePath());
             Gson gson = new Gson();
             try (Reader in = new FileReader(file)) {
                 Type listType = new TypeToken<ArrayList<Issue>>() {}.getType();
@@ -70,18 +65,18 @@ public class InferAdditionalIssues {
                 issues.addAll(issues2);
             }
         }
-        System.out.println("" + issues.size() + " issues imported");
+        LOGGER.info("" + issues.size() + " issues imported");
 
-        Set<InferredIssue> inferredIssues = inferIssuesViaLSPPropagation(issues,overrides);
+        Set<InferredIssue> inferredIssues = inferIssuesViaLSPPropagation(issues,overrides,propagateNullabilityInArguments);
         try (Writer out = new FileWriter(outputFile)) {
             Gson gson = new Gson();
             gson.toJson(inferredIssues,out);
-            System.out.println("Additional issues written to " + outputFile.getAbsolutePath());
+            LOGGER.info("Additional issues written to " + outputFile.getAbsolutePath());
         }
 
     }
 
-    static Set<InferredIssue> inferIssuesViaLSPPropagation(Set<Issue> issues, Graph<OwnedMethod> overrides) {
+    static Set<InferredIssue> inferIssuesViaLSPPropagation(Set<Issue> issues, Graph<OwnedMethod> overrides, boolean propagateNullabilityInArguments) {
         AtomicInteger countInferredReturnIssues = new AtomicInteger(0);
         AtomicInteger countInferredArgIssues = new AtomicInteger(0);
         Set<InferredIssue> inferredIssues = new HashSet<>();
@@ -106,7 +101,7 @@ public class InferAdditionalIssues {
                 }
 
                 // propagate nullable argument types to overriding methods in arg types
-                if (issue.getKind() == Issue.IssueType.ARGUMENT) {
+                if (propagateNullabilityInArguments && issue.getKind() == Issue.IssueType.ARGUMENT) {
                     Traverser.forGraph(overriden)
                         .breadthFirst(method)
                         .forEach(m -> {
@@ -124,8 +119,8 @@ public class InferAdditionalIssues {
             }
         }
 
-        System.out.println("Nullable return type issues inferred: " + countInferredReturnIssues.get());
-        System.out.println("Nullable arg type issues inferred: " + countInferredArgIssues.get());
+        LOGGER.info("Nullable return type issues inferred: " + countInferredReturnIssues.get());
+        LOGGER.info("Nullable arg type issues inferred: " + countInferredArgIssues.get());
 
         return inferredIssues;
     }
