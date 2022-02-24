@@ -8,6 +8,8 @@ import org.apache.commons.cli.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Logger;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -115,15 +117,27 @@ public class Main {
         LOGGER.info("Removing issues caused by negative tests");
         SantitiseObservedIssues.run(inputFolder,sanitisedIssuesFolder,negativeTestSummaryFile,counts);
 
-        File additionalIssuesOutputFile = new File(sanitisedIssuesFolder,"addditional-issues.json");
+        File additionalIssuesOutputFile = new File(sanitisedIssuesFolder,"additional-issues.json");
         LOGGER.info("Inferring additional nullability annotations for sub and super types");
         LOGGER.info("\tpropagate nullability to return types of overridden methods in supertypes: true");
         LOGGER.info("\tpropagate nullability to arguments type of overriding methods in subtypes: " + propagate4args);
         InferAdditionalIssues.run(sanitisedIssuesFolder,projectFolder, additionalIssuesOutputFile.getAbsoluteFile(),packagePrefix, propagate4args,counts);
 
-        LOGGER.info("Summary of actions performed");
+        LOGGER.info("Summary of actions performed:");
         for (String key:counts.keySet()) {
             LOGGER.info(key + " : " + counts.get(key));
+        }
+
+        try (PrintWriter out = new PrintWriter(new FileWriter(summaryFile))) {
+            for (String key:counts.keySet()) {
+                out.print(key);
+                out.print('\t');
+                out.println(counts.get(key));
+            }
+            LOGGER.error("Summary written to " + summaryFile.getAbsolutePath());
+        }
+        catch (Exception x) {
+            LOGGER.error("Error writing summary to " + summaryFile.getAbsolutePath(),x);
         }
 
     }
