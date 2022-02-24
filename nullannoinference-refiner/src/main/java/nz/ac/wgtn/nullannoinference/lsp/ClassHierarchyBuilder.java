@@ -28,7 +28,7 @@ public class ClassHierarchyBuilder {
     private static void add(Predicate<String> typeFilter, MutableGraph<String> graph,File project) throws IOException {
         File compiledTestClasses = new File(project,"target/classes");
         if (!compiledTestClasses.exists()) {
-            throw new IllegalStateException("project must be built before analysis can be found (mvn class)");
+            throw new IllegalStateException("project must be built before analysis can be found (mvn compile)");
         }
         Collection<File> classFiles = FileUtils.listFiles(compiledTestClasses,new String[]{"class"},true);
         if (classFiles.isEmpty()) {

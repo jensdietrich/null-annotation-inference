@@ -25,31 +25,28 @@ import java.util.stream.Stream;
 public class InferAdditionalIssues {
 
     public static final Logger LOGGER = LogSystem.getLogger("infer-additional-issues");
+    public static final String COUNT_NULLABILITY_ISSUES_INFERRED = "additional issues inferred";
 
-    public static void run (File issueInputFolder,File projectRootFolder, File outputFile,String prefix, boolean propagateNullabilityInArguments) throws Exception {
+    public static void run (File issueInputFolder,File projectFolder, File outputFile,String prefix, boolean propagateNullabilityInArguments,Map<String,Integer> counts) throws Exception {
 
         Preconditions.checkArgument(issueInputFolder.exists(), issueInputFolder.getAbsolutePath() + " must exist");
         Preconditions.checkArgument(issueInputFolder.isDirectory(), issueInputFolder.getAbsolutePath() + " must be a folder");
 
-        Preconditions.checkArgument(projectRootFolder.exists(), issueInputFolder.getAbsolutePath() + " must exist");
-        Preconditions.checkArgument(projectRootFolder.isDirectory(), issueInputFolder.getAbsolutePath() + " must be a folder");
-        List<File> projectFolders = getProjectFolders(projectRootFolder);
+        Preconditions.checkArgument(projectFolder.exists(), projectFolder.getAbsolutePath() + " must exist");
+        Preconditions.checkArgument(projectFolder.isDirectory(), projectFolder.getAbsolutePath() + " must be a folder");
 
         if (!outputFile.getParentFile().exists()) {
             outputFile.getParentFile().mkdirs();
         }
 
         LOGGER.info("reading issues from " + issueInputFolder.getAbsolutePath());
-        System.out.println("analysing projects in " + projectRootFolder.getAbsolutePath());
-        for (File projectFolder:projectFolders) {
-           System.out.println("\t-"+projectFolder.getAbsolutePath());
-        }
+        LOGGER.info("analysing project" + projectFolder.getAbsolutePath());
         LOGGER.info("additional inferred issues will be written to  " + outputFile.getAbsolutePath());
         LOGGER.info("only classes starting with the following name will be considered  " + prefix);
 
 
         // extract overrides
-        File[] arr = projectFolders.toArray(new File[projectFolders.size()]);
+        File[] arr = new File[]{projectFolder};
         Graph<OwnedMethod> overrides = OverrideExtractor.extractOverrides(t -> t.startsWith(prefix),arr);
 
         LOGGER.info("" + overrides.edges().size() + " override relationships found");
@@ -73,6 +70,7 @@ public class InferAdditionalIssues {
             gson.toJson(inferredIssues,out);
             LOGGER.info("Additional issues written to " + outputFile.getAbsolutePath());
         }
+        counts.put(COUNT_NULLABILITY_ISSUES_INFERRED,inferredIssues.size());
 
     }
 

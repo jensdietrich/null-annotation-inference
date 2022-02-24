@@ -12,7 +12,7 @@ ROOT="$(pwd)"
 PROJECT_FOLDER=$ROOT/projects/original/$NAME
 
 
-if [ -f "$PROJECT_FOLDER" ]; then
+if [ -d "$PROJECT_FOLDER" ]; then
     echo "Using existing project: $PROJECT_FOLDER"
 else
     echo "Cloning project from $REPO"
@@ -49,7 +49,7 @@ mvn clean test -f pom-instrumented.xml -Drat.skip=true
 
 # move issues into issues-collected folder
 cd $ROOT
-if [ ! -f issues-collected/$NAME ]
+if [ ! -d issues-collected/$NAME ]
 then
     mkdir issues-collected/$NAME
 fi

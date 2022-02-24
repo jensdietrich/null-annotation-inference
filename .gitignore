@@ -5,3 +5,4 @@ negative-tests.csv
 nullannoinference-agent2/target
 *.class
 nullannoinference-commons/target
+experiments/issues-inferred
