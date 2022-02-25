@@ -6,6 +6,7 @@ import com.google.common.graph.Graphs;
 import com.google.common.graph.Traverser;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import nz.ac.wgtn.nullannoinference.IssueAggregator;
 import nz.ac.wgtn.nullannoinference.LogSystem;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
 import org.apache.commons.io.FileUtils;
@@ -26,6 +27,7 @@ public class InferAdditionalIssues {
 
     public static final Logger LOGGER = LogSystem.getLogger("infer-additional-issues");
     public static final String COUNT_NULLABILITY_ISSUES_INFERRED = "additional issues inferred";
+    public static final String COUNT_NULLABILITY_ISSUES_INFERRED_AGGREGATED = "additional issues inferred (aggregated)";
 
     public static void run (File issueInputFolder,File projectFolder, File outputFile,String prefix, boolean propagateNullabilityInArguments,Map<String,Integer> counts) throws Exception {
 
@@ -71,6 +73,9 @@ public class InferAdditionalIssues {
             LOGGER.info("Additional issues written to " + outputFile.getAbsolutePath());
         }
         counts.put(COUNT_NULLABILITY_ISSUES_INFERRED,inferredIssues.size());
+
+        Collection<Issue> aggregatedIssues = IssueAggregator.aggregate(inferredIssues);
+        counts.put(COUNT_NULLABILITY_ISSUES_INFERRED_AGGREGATED,aggregatedIssues.size());
 
     }
 

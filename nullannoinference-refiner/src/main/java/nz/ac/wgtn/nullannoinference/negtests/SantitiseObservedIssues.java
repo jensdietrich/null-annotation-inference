@@ -2,6 +2,7 @@ package nz.ac.wgtn.nullannoinference.negtests;
 
 import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
+import nz.ac.wgtn.nullannoinference.IssueAggregator;
 import nz.ac.wgtn.nullannoinference.LogSystem;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
 import org.apache.commons.io.FileUtils;
@@ -19,7 +20,9 @@ public class SantitiseObservedIssues {
 
     public static final Logger LOGGER = LogSystem.getLogger("negative-test-analysis");
     public static final String COUNT_ALL_ISSUES = "all issues collected";
-    public static final String COUNT_REMOVED_ISSUES = "issues from negative tests removed";
+    public static final String COUNT_ALL_ISSUES_AGGREGATED = "all issues collected (aggregated)";
+    public static final String COUNT_SANITISED_ISSUES = "sanitised issues";
+    public static final String COUNT_SANITISED_ISSUES_AGGREGATED = "sanitised issues (aggregated)";
 
     public static void run (File originalIssueFolder, File sanitisedIssueFolder,File negativeTestList,Map<String,Integer> counts) throws Exception {
 
@@ -39,22 +42,24 @@ public class SantitiseObservedIssues {
                 .collect(Collectors.toList());
         }
 
-        counts.put(COUNT_ALL_ISSUES,0);
-        counts.put(COUNT_REMOVED_ISSUES,0);
+        Set<Issue> sanitisedIssues = new HashSet<>();
+        Set<Issue> rejectedIssues = new HashSet<>();
+        Set<Issue> allIssues = new HashSet<>();
 
         for (File file:FileUtils.listFiles(originalIssueFolder,new String[]{"json"},true)) {
-            LOGGER.debug("Processing " + file.getAbsolutePath());
+            LOGGER.info("\t reading issues from " + file.getAbsolutePath());
             Gson gson = new Gson();
             try (Reader in = new FileReader(file)){
                 Issue[] issues = gson.fromJson(in,Issue[].class);
                 LOGGER.info("\t" + issues.length + " issues found");
-                counts.compute(COUNT_ALL_ISSUES,(k,v) -> v==null?issues.length:v+issues.length);
+                for (Issue issue:issues) {
+                    allIssues.add(issue);
+                }
 
-                List<Issue> sanitisedIssues = new ArrayList<>();
                 // check for any method in stacktrace -- note that this is O(n^2)
                 for (Issue issue:issues) {
                     if (isCausedByNegativeTest(issue,methods)) {
-                        counts.compute(COUNT_REMOVED_ISSUES,(k,v) -> v==null?1:v+1);
+                        rejectedIssues.add(issue);
                     }
                     else {
                         sanitisedIssues.add(issue);
@@ -75,6 +80,12 @@ public class SantitiseObservedIssues {
                 }
             }
         }
+
+        counts.put(COUNT_ALL_ISSUES,allIssues.size());
+        counts.put(COUNT_ALL_ISSUES_AGGREGATED, IssueAggregator.aggregate(allIssues).size());
+
+        counts.put(COUNT_SANITISED_ISSUES,sanitisedIssues.size());
+        counts.put(COUNT_SANITISED_ISSUES_AGGREGATED, IssueAggregator.aggregate(sanitisedIssues).size());
 
     }
 

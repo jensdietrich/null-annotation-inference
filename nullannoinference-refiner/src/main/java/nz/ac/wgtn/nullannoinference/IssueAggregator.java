@@ -18,7 +18,7 @@ import java.util.Objects;
  */
 public class IssueAggregator {
 
-    public static Collection <Issue> aggregate (Collection<Issue> issues) {
+    public static Collection <Issue> aggregate (Collection<? extends Issue> issues) {
         Map<IssueCore,Issue> index = new HashMap<>();
         for (Issue issue:issues) {
             IssueCore key = new IssueCore(issue.getClassName(),issue.getMethodName(),issue.getDescriptor(),issue.getKind(),issue.getArgsIndex());

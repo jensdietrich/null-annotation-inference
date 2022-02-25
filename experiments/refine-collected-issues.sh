@@ -21,7 +21,7 @@ if [ ! -d "$PROJECT_FOLDER" ]; then
 fi
 
 if [ ! -d "$ISSUE_FOLDER" ]; then
-    echo "No issues found, run collect scripts first: $ISSUE_FOLDER"
+    echo "No issues found, run collect-nullability-*.sh script first: $ISSUE_FOLDER"
     exit 1
 fi
 

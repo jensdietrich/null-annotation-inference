@@ -134,7 +134,7 @@ public class Main {
                 out.print('\t');
                 out.println(counts.get(key));
             }
-            LOGGER.error("Summary written to " + summaryFile.getAbsolutePath());
+            LOGGER.info("Summary written to " + summaryFile.getAbsolutePath());
         }
         catch (Exception x) {
             LOGGER.error("Error writing summary to " + summaryFile.getAbsolutePath(),x);

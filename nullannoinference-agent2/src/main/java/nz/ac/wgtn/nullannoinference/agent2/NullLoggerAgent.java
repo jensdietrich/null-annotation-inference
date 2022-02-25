@@ -1,5 +1,6 @@
 package nz.ac.wgtn.nullannoinference.agent2;
 
+import janala.instrument.SafeClassWriter;
 import nz.ac.wgtn.nullannoinference.commons.IssueStore;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
@@ -25,9 +26,10 @@ public class NullLoggerAgent {
         System.out.println(NullLoggerAgent.class.getSimpleName() + ": " + msg);
     }
 
-
-    // ahentmain needed for testing
+    private static String[] EXCLUDES = new String[]{"java/","javax/","org/objectweb/asm","sun/","com/sun/","jdk/"};
+    // agentmain needed for testing
     public static void agentmain(String agentArgs, Instrumentation inst) {
+
         premain(agentArgs,inst);
     }
     public static void premain(String agentArgs, Instrumentation inst) {
@@ -45,9 +47,19 @@ public class NullLoggerAgent {
             @Override
             public byte[] transform(ClassLoader classLoader, String s, Class<?> aClass, ProtectionDomain protectionDomain, byte[] bytes) throws IllegalClassFormatException {
 
+
+                for (String exclude:EXCLUDES) {
+                    if (s.startsWith(exclude)) {
+                        return bytes;
+                    }
+                }
+
                 if (prefix2==null || s.startsWith(prefix2)) {
+
                     ClassReader reader = new ClassReader(bytes);
-                    ClassWriter writer = new ClassWriter(reader, ClassWriter.COMPUTE_FRAMES);
+
+                    // this prevents some issues with the standard class writer leading to duplicate class errors
+                    ClassWriter writer = new SafeClassWriter(reader,classLoader,ClassWriter.COMPUTE_FRAMES);
                     try {
                         CheckForNullableFieldAccess visitor = new CheckForNullableFieldAccess(writer);
                         reader.accept(visitor, 0);
@@ -57,7 +69,7 @@ public class NullLoggerAgent {
                         x.printStackTrace();
                     }
                 }
-                return null;
+                return bytes;
             }
         });
     }
