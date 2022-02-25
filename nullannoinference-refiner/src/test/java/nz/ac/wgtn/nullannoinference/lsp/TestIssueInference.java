@@ -32,7 +32,7 @@ public class TestIssueInference {
         assertEquals(issue.getDescriptor(),newIssue.getDescriptor());
         assertEquals(0,newIssue.getArgsIndex());
         assertEquals(Issue.IssueType.ARGUMENT,newIssue.getKind());
-        assertEquals(InferredIssue.Inference.PROPAGATE_ARGUMENT_TO_OVERRIDING_METHOD,newIssue.getInference());
+        assertEquals(Issue.ProvenanceType.INFERRED_ARGUMENT,newIssue.getProvenanceType());
         assertEquals(issue,newIssue.getParent());
     }
 
@@ -68,7 +68,7 @@ public class TestIssueInference {
         assertEquals(issue.getDescriptor(),newIssue.getDescriptor());
         assertEquals(-1,newIssue.getArgsIndex());
         assertEquals(Issue.IssueType.RETURN_VALUE,newIssue.getKind());
-        assertEquals(InferredIssue.Inference.PROPAGATE_NULLABLE_RETURN_TO_OVERRIDEN_METHOD,newIssue.getInference());
+        assertEquals(Issue.ProvenanceType.INFERRED_RETURN,newIssue.getProvenanceType());
         assertEquals(issue,newIssue.getParent());
     }
 
@@ -90,7 +90,7 @@ public class TestIssueInference {
         assertEquals(issue.getDescriptor(),newIssue.getDescriptor());
         assertEquals(-1,newIssue.getArgsIndex());
         assertEquals(Issue.IssueType.RETURN_VALUE,newIssue.getKind());
-        assertEquals(InferredIssue.Inference.PROPAGATE_NULLABLE_RETURN_TO_OVERRIDEN_METHOD,newIssue.getInference());
+        assertEquals(Issue.ProvenanceType.INFERRED_RETURN,newIssue.getProvenanceType());
         assertEquals(issue,newIssue.getParent());
     }
 }

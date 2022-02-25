@@ -6,12 +6,11 @@ import com.google.common.graph.Graphs;
 import com.google.common.graph.Traverser;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import nz.ac.wgtn.nullannoinference.IssueAggregator;
+import nz.ac.wgtn.nullannoinference.commons.IssueAggregator;
 import nz.ac.wgtn.nullannoinference.LogSystem;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Logger;
-
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.*;
@@ -95,7 +94,8 @@ public class InferAdditionalIssues {
                             if (!Objects.equals(method,m)) {
                                 assert Objects.equals(method.getName(),m.getName());
                                 assert Objects.equals(method.getDescriptor(),m.getDescriptor());
-                                InferredIssue newIssue = new InferredIssue(m.getOwner(),m.getName(),m.getDescriptor(), Issue.IssueType.RETURN_VALUE,-1, InferredIssue.Inference.PROPAGATE_NULLABLE_RETURN_TO_OVERRIDEN_METHOD, issue);
+                                InferredIssue newIssue = new InferredIssue(m.getOwner(),m.getName(),m.getDescriptor(), Issue.IssueType.RETURN_VALUE,-1, issue);
+                                newIssue.setProvenanceType(Issue.ProvenanceType.INFERRED_RETURN);
                                 if (inferredIssues.add(newIssue)) {
                                     countInferredReturnIssues.incrementAndGet();
                                 }
@@ -112,7 +112,8 @@ public class InferAdditionalIssues {
                                 assert Objects.equals(method.getName(),m.getName());
                                 assert Objects.equals(method.getDescriptor(),m.getDescriptor());
                                 countInferredArgIssues.incrementAndGet();
-                                InferredIssue newIssue = new InferredIssue(m.getOwner(),m.getName(),m.getDescriptor(), Issue.IssueType.ARGUMENT, issue.getArgsIndex(), InferredIssue.Inference.PROPAGATE_ARGUMENT_TO_OVERRIDING_METHOD, issue);
+                                InferredIssue newIssue = new InferredIssue(m.getOwner(),m.getName(),m.getDescriptor(), Issue.IssueType.ARGUMENT, issue.getArgsIndex(), issue);
+                                newIssue.setProvenanceType(Issue.ProvenanceType.INFERRED_ARGUMENT);
                                 if (inferredIssues.add(newIssue)) {
                                     countInferredArgIssues.incrementAndGet();
                                 }
@@ -132,6 +133,5 @@ public class InferAdditionalIssues {
         return Stream.of(rootFolder.listFiles(f -> f.isDirectory() && !f.isHidden()))
             .collect(Collectors.toList());
     }
-
 
 }

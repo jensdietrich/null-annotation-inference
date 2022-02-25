@@ -139,6 +139,5 @@ public class Main {
         catch (Exception x) {
             LOGGER.error("Error writing summary to " + summaryFile.getAbsolutePath(),x);
         }
-
     }
 }

@@ -2,7 +2,7 @@ package nz.ac.wgtn.nullannoinference.negtests;
 
 import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
-import nz.ac.wgtn.nullannoinference.IssueAggregator;
+import nz.ac.wgtn.nullannoinference.commons.IssueAggregator;
 import nz.ac.wgtn.nullannoinference.LogSystem;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
 import org.apache.commons.io.FileUtils;

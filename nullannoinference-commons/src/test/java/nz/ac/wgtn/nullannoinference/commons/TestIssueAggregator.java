@@ -1,6 +1,7 @@
-package nz.ac.wgtn.nullannoinference;
+package nz.ac.wgtn.nullannoinference.commons;
 
 import nz.ac.wgtn.nullannoinference.commons.Issue;
+import nz.ac.wgtn.nullannoinference.commons.IssueAggregator;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collection;

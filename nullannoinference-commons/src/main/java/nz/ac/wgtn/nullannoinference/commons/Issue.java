@@ -10,11 +10,13 @@ import java.util.Objects;
 public class Issue {
 
     public enum IssueType {RETURN_VALUE, ARGUMENT,FIELD}
+    public enum ProvenanceType {COLLECTED, INFERRED_RETURN, INFERRED_ARGUMENT}
 
     private String className = null;
     private String methodName = null;
     private String descriptor = null;
     private IssueType kind = null;
+    private ProvenanceType provenanceType = ProvenanceType.COLLECTED;
     private int argsIndex = -1;
     private String context = null;
     private List<String> stacktrace = null;
@@ -35,6 +37,14 @@ public class Issue {
         this.kind = kind;
         this.argsIndex = argsIndex;
         this.context = context;
+    }
+
+    public ProvenanceType getProvenanceType() {
+        return provenanceType;
+    }
+
+    public void setProvenanceType(ProvenanceType provenanceType) {
+        this.provenanceType = provenanceType;
     }
 
     public String getClassName() {
@@ -84,12 +94,12 @@ public class Issue {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Issue issue = (Issue) o;
-        return argsIndex == issue.argsIndex && Objects.equals(className, issue.className) && Objects.equals(methodName, issue.methodName) && Objects.equals(descriptor, issue.descriptor) && kind == issue.kind && Objects.equals(context, issue.context) && Objects.equals(trigger, issue.trigger);
+        return argsIndex == issue.argsIndex && Objects.equals(className, issue.className) && Objects.equals(methodName, issue.methodName) && Objects.equals(descriptor, issue.descriptor) && kind == issue.kind && provenanceType == issue.provenanceType && Objects.equals(context, issue.context) && Objects.equals(stacktrace, issue.stacktrace) && Objects.equals(trigger, issue.trigger);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(className, methodName, descriptor, kind, argsIndex, context, trigger);
+        return Objects.hash(className, methodName, descriptor, kind, provenanceType, argsIndex, context, stacktrace, trigger);
     }
 
     @Override
@@ -98,9 +108,12 @@ public class Issue {
                 "className='" + className + '\'' +
                 ", methodName='" + methodName + '\'' +
                 ", descriptor='" + descriptor + '\'' +
-                ", context='" + context + '\'' +
                 ", kind=" + kind +
+                ", provenanceType=" + provenanceType +
                 ", argsIndex=" + argsIndex +
+                ", context='" + context + '\'' +
+                ", stacktrace=" + stacktrace +
+                ", trigger='" + trigger + '\'' +
                 '}';
     }
 }

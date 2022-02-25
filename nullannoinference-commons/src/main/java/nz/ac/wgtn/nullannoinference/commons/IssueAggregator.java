@@ -1,11 +1,6 @@
-package nz.ac.wgtn.nullannoinference;
+package nz.ac.wgtn.nullannoinference.commons;
 
-import nz.ac.wgtn.nullannoinference.commons.Issue;
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * An utility that takes a collection of issues, and returns a new collection of issues that is a subset of the first one,
@@ -18,13 +13,18 @@ import java.util.Objects;
  */
 public class IssueAggregator {
 
-    public static Collection <Issue> aggregate (Collection<? extends Issue> issues) {
+    public static Set<Issue> aggregate (Set<? extends Issue> issues) {
         Map<IssueCore,Issue> index = new HashMap<>();
         for (Issue issue:issues) {
             IssueCore key = new IssueCore(issue.getClassName(),issue.getMethodName(),issue.getDescriptor(),issue.getKind(),issue.getArgsIndex());
-            index.put(key,issue);
+            Object oldValue = index.put(key,issue);
+            if (oldValue!=null) {
+                System.out.println("duplicate value replaced");
+            }
         }
-        return index.values();
+        Set<Issue> aggregatedIssues = new HashSet<>();
+        aggregatedIssues.addAll(index.values());
+        return aggregatedIssues;
     }
 
     static class IssueCore {
