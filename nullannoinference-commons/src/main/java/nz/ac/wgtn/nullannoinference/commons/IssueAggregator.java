@@ -18,6 +18,7 @@ public class IssueAggregator {
         for (Issue issue:issues) {
             IssueCore key = new IssueCore(issue.getClassName(),issue.getMethodName(),issue.getDescriptor(),issue.getKind(),issue.getArgsIndex());
             Object oldValue = index.put(key,issue);
+            // for debugging only
             if (oldValue!=null) {
                 System.out.println("duplicate value replaced");
             }

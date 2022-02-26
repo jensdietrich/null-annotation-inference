@@ -41,6 +41,7 @@
       <module>nullannoinference-refiner</module>
       <module>nullannoinference-annotator</module>
       <module>nullannoinference-commons</module>
+      <module>nullannoinference-experiments-analysis</module>
   </modules>
   <url>http://maven.apache.org</url>
 </project>

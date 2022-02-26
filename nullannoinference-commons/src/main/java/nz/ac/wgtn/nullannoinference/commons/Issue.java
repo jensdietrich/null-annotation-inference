@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Issue {
 
     public enum IssueType {RETURN_VALUE, ARGUMENT,FIELD}
-    public enum ProvenanceType {COLLECTED, INFERRED_RETURN, INFERRED_ARGUMENT}
+    public enum ProvenanceType {COLLECTED, INFERRED}
 
     private String className = null;
     private String methodName = null;
@@ -21,6 +21,7 @@ public class Issue {
     private String context = null;
     private List<String> stacktrace = null;
     private String trigger = null;  // root context , requires sanitisation of stacktrace to be meaningful
+    private Issue parent = null;
 
     public Issue(String className, String methodName, String descriptor, String context, IssueType kind) {
         this.className = className;
@@ -37,6 +38,15 @@ public class Issue {
         this.kind = kind;
         this.argsIndex = argsIndex;
         this.context = context;
+    }
+
+    public Issue getParent() {
+        return parent;
+    }
+
+    public void setParent(Issue parent) {
+        this.parent = parent;
+        this.provenanceType = ProvenanceType.INFERRED;
     }
 
     public ProvenanceType getProvenanceType() {
@@ -97,23 +107,5 @@ public class Issue {
         return argsIndex == issue.argsIndex && Objects.equals(className, issue.className) && Objects.equals(methodName, issue.methodName) && Objects.equals(descriptor, issue.descriptor) && kind == issue.kind && provenanceType == issue.provenanceType && Objects.equals(context, issue.context) && Objects.equals(stacktrace, issue.stacktrace) && Objects.equals(trigger, issue.trigger);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(className, methodName, descriptor, kind, provenanceType, argsIndex, context, stacktrace, trigger);
-    }
 
-    @Override
-    public String toString() {
-        return "Issue{" +
-                "className='" + className + '\'' +
-                ", methodName='" + methodName + '\'' +
-                ", descriptor='" + descriptor + '\'' +
-                ", kind=" + kind +
-                ", provenanceType=" + provenanceType +
-                ", argsIndex=" + argsIndex +
-                ", context='" + context + '\'' +
-                ", stacktrace=" + stacktrace +
-                ", trigger='" + trigger + '\'' +
-                '}';
-    }
 }

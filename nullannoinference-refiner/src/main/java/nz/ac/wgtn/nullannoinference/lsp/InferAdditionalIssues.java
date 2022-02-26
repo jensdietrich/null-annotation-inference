@@ -65,7 +65,7 @@ public class InferAdditionalIssues {
         }
         LOGGER.info("" + issues.size() + " issues imported");
 
-        Set<InferredIssue> inferredIssues = inferIssuesViaLSPPropagation(issues,overrides,propagateNullabilityInArguments);
+        Set<Issue> inferredIssues = inferIssuesViaLSPPropagation(issues,overrides,propagateNullabilityInArguments);
         try (Writer out = new FileWriter(outputFile)) {
             Gson gson = new Gson();
             gson.toJson(inferredIssues,out);
@@ -78,10 +78,10 @@ public class InferAdditionalIssues {
 
     }
 
-    static Set<InferredIssue> inferIssuesViaLSPPropagation(Set<Issue> issues, Graph<OwnedMethod> overrides, boolean propagateNullabilityInArguments) {
+    static Set<Issue> inferIssuesViaLSPPropagation(Set<Issue> issues, Graph<OwnedMethod> overrides, boolean propagateNullabilityInArguments) {
         AtomicInteger countInferredReturnIssues = new AtomicInteger(0);
         AtomicInteger countInferredArgIssues = new AtomicInteger(0);
-        Set<InferredIssue> inferredIssues = new HashSet<>();
+        Set<Issue> inferredIssues = new HashSet<>();
         Graph<OwnedMethod> overriden = Graphs.transpose(overrides);
         for (Issue issue:issues) {
             OwnedMethod method = new OwnedMethod(issue.getClassName(),issue.getMethodName(),issue.getDescriptor());
@@ -94,8 +94,8 @@ public class InferAdditionalIssues {
                             if (!Objects.equals(method,m)) {
                                 assert Objects.equals(method.getName(),m.getName());
                                 assert Objects.equals(method.getDescriptor(),m.getDescriptor());
-                                InferredIssue newIssue = new InferredIssue(m.getOwner(),m.getName(),m.getDescriptor(), Issue.IssueType.RETURN_VALUE,-1, issue);
-                                newIssue.setProvenanceType(Issue.ProvenanceType.INFERRED_RETURN);
+                                Issue newIssue = new Issue(m.getOwner(),m.getName(),m.getDescriptor(),issue.getContext(), Issue.IssueType.RETURN_VALUE,-1);
+                                newIssue.setParent(issue);
                                 if (inferredIssues.add(newIssue)) {
                                     countInferredReturnIssues.incrementAndGet();
                                 }
@@ -112,8 +112,8 @@ public class InferAdditionalIssues {
                                 assert Objects.equals(method.getName(),m.getName());
                                 assert Objects.equals(method.getDescriptor(),m.getDescriptor());
                                 countInferredArgIssues.incrementAndGet();
-                                InferredIssue newIssue = new InferredIssue(m.getOwner(),m.getName(),m.getDescriptor(), Issue.IssueType.ARGUMENT, issue.getArgsIndex(), issue);
-                                newIssue.setProvenanceType(Issue.ProvenanceType.INFERRED_ARGUMENT);
+                                Issue newIssue = new Issue(m.getOwner(),m.getName(),m.getDescriptor(), issue.getContext(),Issue.IssueType.ARGUMENT, issue.getArgsIndex());
+                                newIssue.setParent(issue);
                                 if (inferredIssues.add(newIssue)) {
                                     countInferredArgIssues.incrementAndGet();
                                 }
@@ -133,5 +133,6 @@ public class InferAdditionalIssues {
         return Stream.of(rootFolder.listFiles(f -> f.isDirectory() && !f.isHidden()))
             .collect(Collectors.toList());
     }
+
 
 }

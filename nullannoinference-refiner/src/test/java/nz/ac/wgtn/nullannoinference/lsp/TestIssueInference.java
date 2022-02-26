@@ -4,11 +4,9 @@ import com.google.common.collect.Sets;
 import com.google.common.graph.Graph;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
 import org.junit.jupiter.api.Test;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Set;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
@@ -23,16 +21,16 @@ public class TestIssueInference {
         assumeTrue(new File(project, "target/classes").exists(), "project containing test data (resources/test-project) has not been built, build test projects with mvn compile");
         Graph<OwnedMethod> overrides = OverrideExtractor.extractOverrides(t -> t.startsWith("foo."),project);
 
-        Set<InferredIssue> newIssues = InferAdditionalIssues.inferIssuesViaLSPPropagation(Sets.newHashSet(issue),overrides,true);
+        Set<Issue> newIssues = InferAdditionalIssues.inferIssuesViaLSPPropagation(Sets.newHashSet(issue),overrides,true);
 
         assertEquals(1,newIssues.size());
-        InferredIssue newIssue = newIssues.iterator().next();
+        Issue newIssue = newIssues.iterator().next();
         assertEquals("foo.C",newIssue.getClassName());
         assertEquals(issue.getMethodName(),newIssue.getMethodName());
         assertEquals(issue.getDescriptor(),newIssue.getDescriptor());
         assertEquals(0,newIssue.getArgsIndex());
         assertEquals(Issue.IssueType.ARGUMENT,newIssue.getKind());
-        assertEquals(Issue.ProvenanceType.INFERRED_ARGUMENT,newIssue.getProvenanceType());
+        assertEquals(Issue.ProvenanceType.INFERRED,newIssue.getProvenanceType());
         assertEquals(issue,newIssue.getParent());
     }
 
@@ -45,7 +43,7 @@ public class TestIssueInference {
         assumeTrue(new File(project, "target/classes").exists(), "project containing test data (resources/test-project) has not been built, build test projects with mvn compile");
         Graph<OwnedMethod> overrides = OverrideExtractor.extractOverrides(t -> t.startsWith("foo."),project);
 
-        Set<InferredIssue> newIssues = InferAdditionalIssues.inferIssuesViaLSPPropagation(Sets.newHashSet(issue),overrides,false);
+        Set<Issue> newIssues = InferAdditionalIssues.inferIssuesViaLSPPropagation(Sets.newHashSet(issue),overrides,false);
 
         assertEquals(0,newIssues.size());
     }
@@ -59,16 +57,16 @@ public class TestIssueInference {
         assumeTrue(new File(project, "target/classes").exists(), "tested project has not been built, build test projects with mvn compile");
         Graph<OwnedMethod> overrides = OverrideExtractor.extractOverrides(t -> t.startsWith("foo."),project);
 
-        Set<InferredIssue> newIssues = InferAdditionalIssues.inferIssuesViaLSPPropagation(Sets.newHashSet(issue),overrides,true);
+        Set<Issue> newIssues = InferAdditionalIssues.inferIssuesViaLSPPropagation(Sets.newHashSet(issue),overrides,true);
 
         assertEquals(1,newIssues.size());
-        InferredIssue newIssue = newIssues.iterator().next();
+        Issue newIssue = newIssues.iterator().next();
         assertEquals("foo.A",newIssue.getClassName());
         assertEquals(issue.getMethodName(),newIssue.getMethodName());
         assertEquals(issue.getDescriptor(),newIssue.getDescriptor());
         assertEquals(-1,newIssue.getArgsIndex());
         assertEquals(Issue.IssueType.RETURN_VALUE,newIssue.getKind());
-        assertEquals(Issue.ProvenanceType.INFERRED_RETURN,newIssue.getProvenanceType());
+        assertEquals(Issue.ProvenanceType.INFERRED,newIssue.getProvenanceType());
         assertEquals(issue,newIssue.getParent());
     }
 
@@ -81,16 +79,16 @@ public class TestIssueInference {
         assumeTrue(new File(project, "target/classes").exists(), "tested project has not been built, build test projects with mvn compile");
         Graph<OwnedMethod> overrides = OverrideExtractor.extractOverrides(t -> t.startsWith("foo."),project);
 
-        Set<InferredIssue> newIssues = InferAdditionalIssues.inferIssuesViaLSPPropagation(Sets.newHashSet(issue),overrides,false);
+        Set<Issue> newIssues = InferAdditionalIssues.inferIssuesViaLSPPropagation(Sets.newHashSet(issue),overrides,false);
 
         assertEquals(1,newIssues.size());
-        InferredIssue newIssue = newIssues.iterator().next();
+        Issue newIssue = newIssues.iterator().next();
         assertEquals("foo.A",newIssue.getClassName());
         assertEquals(issue.getMethodName(),newIssue.getMethodName());
         assertEquals(issue.getDescriptor(),newIssue.getDescriptor());
         assertEquals(-1,newIssue.getArgsIndex());
         assertEquals(Issue.IssueType.RETURN_VALUE,newIssue.getKind());
-        assertEquals(Issue.ProvenanceType.INFERRED_RETURN,newIssue.getProvenanceType());
+        assertEquals(Issue.ProvenanceType.INFERRED,newIssue.getProvenanceType());
         assertEquals(issue,newIssue.getParent());
     }
 }
