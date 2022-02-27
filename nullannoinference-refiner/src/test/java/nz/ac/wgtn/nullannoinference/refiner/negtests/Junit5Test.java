@@ -1,4 +1,4 @@
-package nz.ac.wgtn.nullannoinference.negtests;
+package nz.ac.wgtn.nullannoinference.refiner.negtests;
 
 import org.junit.jupiter.api.Test;
 

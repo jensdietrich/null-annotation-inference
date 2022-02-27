@@ -1,9 +1,9 @@
-package nz.ac.wgtn.nullannoinference;
+package nz.ac.wgtn.nullannoinference.refiner;
 
 import com.google.common.base.Preconditions;
-import nz.ac.wgtn.nullannoinference.lsp.InferAdditionalIssues;
-import nz.ac.wgtn.nullannoinference.negtests.IdentifyNegativeTests;
-import nz.ac.wgtn.nullannoinference.negtests.SantitiseObservedIssues;
+import nz.ac.wgtn.nullannoinference.refiner.lsp.InferAdditionalIssues;
+import nz.ac.wgtn.nullannoinference.refiner.negtests.IdentifyNegativeTests;
+import nz.ac.wgtn.nullannoinference.refiner.negtests.SantitiseObservedIssues;
 import org.apache.commons.cli.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Logger;

@@ -1,4 +1,4 @@
-package nz.ac.wgtn.nullannoinference.lsp;
+package nz.ac.wgtn.nullannoinference.refiner.lsp;
 
 import com.google.common.collect.Multimap;
 import com.google.common.graph.Graph;

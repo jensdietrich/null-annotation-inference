@@ -1,18 +1,19 @@
-package nz.ac.wgtn.nullannoinference.lsp;
+package nz.ac.wgtn.nullannoinference.refiner.negtests;
 
 import java.util.Objects;
 
 /**
- * Simple representation of a Java method. By design it EXCLUDES ownership.
- * @see OwnedMethod
+ * Simple representation of a Java method.
  * @author jens diietrich
  */
 public class Method implements Comparable<Method> {
     private String name = null;
+    private String className = null;
     private String descriptor = null;
 
-    public Method(String name, String descriptor) {
+    public Method(String className, String name, String descriptor) {
         this.name = name;
+        this.className = className;
         this.descriptor = descriptor;
     }
 
@@ -29,6 +30,13 @@ public class Method implements Comparable<Method> {
         this.name = name;
     }
 
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
 
     public String getDescriptor() {
         return descriptor;
@@ -43,16 +51,16 @@ public class Method implements Comparable<Method> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Method method = (Method) o;
-        return Objects.equals(name, method.name) && Objects.equals(descriptor, method.descriptor);
+        return Objects.equals(name, method.name) && Objects.equals(className, method.className) && Objects.equals(descriptor, method.descriptor);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, descriptor);
+        return Objects.hash(name, className, descriptor);
     }
 
     @Override
     public String toString() {
-        return name + descriptor;
+        return className + "::" + name + descriptor;
     }
 }

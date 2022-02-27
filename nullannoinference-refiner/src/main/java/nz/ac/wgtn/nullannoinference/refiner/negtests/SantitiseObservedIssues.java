@@ -1,9 +1,9 @@
-package nz.ac.wgtn.nullannoinference.negtests;
+package nz.ac.wgtn.nullannoinference.refiner.negtests;
 
 import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
 import nz.ac.wgtn.nullannoinference.commons.IssueAggregator;
-import nz.ac.wgtn.nullannoinference.LogSystem;
+import nz.ac.wgtn.nullannoinference.refiner.LogSystem;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Logger;

@@ -1,4 +1,4 @@
-package nz.ac.wgtn.nullannoinference.negtests;
+package nz.ac.wgtn.nullannoinference.refiner.negtests;
 
 import com.google.common.base.Preconditions;
 import org.apache.commons.io.FileUtils;
@@ -6,7 +6,7 @@ import org.objectweb.asm.*;
 import java.io.*;
 import java.util.*;
 
-import static nz.ac.wgtn.nullannoinference.negtests.SantitiseObservedIssues.LOGGER;
+import static nz.ac.wgtn.nullannoinference.refiner.negtests.SantitiseObservedIssues.LOGGER;
 
 /**
  * Script to analyse projects for the presence of negative tests.

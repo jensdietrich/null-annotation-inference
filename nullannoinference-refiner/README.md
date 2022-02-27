@@ -1,7 +1,7 @@
 # The Refiner Module
 
 
-usage: `java -cp <classpath> nz.ac.wgtn.nullannoinference.Main [-a <arg>] -i <arg> [-n <arg>] -p
+usage: `java -cp <classpath> nz.ac.wgtn.nullannoinference.refiner.Main [-a <arg>] -i <arg> [-n <arg>] -p
 <arg> [-s <arg>]`
 
 ## Arguments: 

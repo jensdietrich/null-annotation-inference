@@ -1,4 +1,4 @@
-package nz.ac.wgtn.nullannoinference;
+package nz.ac.wgtn.nullannoinference.refiner;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;

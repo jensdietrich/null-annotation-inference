@@ -28,7 +28,7 @@
           <finalName>nullannoinference-refiner</finalName>
           <archive>
             <manifest>
-              <mainClass>nz.ac.wgtn.nullannoinference.Main</mainClass>
+              <mainClass>nz.ac.wgtn.nullannoinference.refiner.Main</mainClass>
             </manifest>
           </archive>
           <descriptorRefs>
