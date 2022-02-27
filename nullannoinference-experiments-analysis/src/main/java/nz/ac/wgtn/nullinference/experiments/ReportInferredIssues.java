@@ -1,6 +1,7 @@
 package nz.ac.wgtn.nullinference.experiments;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Sets;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
 
 import java.io.File;
@@ -41,26 +42,49 @@ public class ReportInferredIssues {
         try (PrintWriter out = new PrintWriter(outputFile)) {
 
             out.println("\\begin{table}[h!]");
-            out.println("\\begin{tabular}{|l|rrrr|}");
+            out.println("\\begin{tabular}{|l|rrrr|rrr|}");
             out.println(" \\hline");
-            out.println("project & RET & ARG & ALL  \\hline");
+            out.println("project & -RET & -ARG & -FLD & -ALL & +RET & +ARG & +ALL  \\\\ \\hline");
 
             // start latex generation
             for (String project:projects) {
-                File projectFolder = new File(inferredIssuesFolder,project);
-                Set<Issue> inferredIssues = loadIssues(projectFolder,true,IssueFilters.THIS_PROJECT,IssueFilters.INFERRED);
-                Set<Issue> inferredIssuesReturn = loadIssues(projectFolder,true,IssueFilters.THIS_PROJECT,IssueFilters.RETURN,IssueFilters.INFERRED);
-                Set<Issue> inferredIssuesArg = loadIssues(projectFolder,true,IssueFilters.THIS_PROJECT,IssueFilters.ARG,IssueFilters.INFERRED);
+                File projectFolderWithCollectedIssues = new File(collectedIssuesFolder,project);
+                File projectFolderWithInferredIssues = new File(inferredIssuesFolder,project);
+
+                Set<Issue> collectedIssues = loadIssues(projectFolderWithCollectedIssues,true,IssueFilters.THIS_PROJECT,IssueFilters.COLLECTED);
+                Set<Issue> collectedIssuesReturn = loadIssues(projectFolderWithCollectedIssues,true,IssueFilters.THIS_PROJECT,IssueFilters.RETURN,IssueFilters.COLLECTED);
+                Set<Issue> collectedIssuesArg = loadIssues(projectFolderWithCollectedIssues,true,IssueFilters.THIS_PROJECT,IssueFilters.ARG,IssueFilters.COLLECTED);
+                Set<Issue> collectedIssuesField = loadIssues(projectFolderWithCollectedIssues,true,IssueFilters.THIS_PROJECT,IssueFilters.FIELD,IssueFilters.COLLECTED);
+
+                // sanitised issues -- some collected issues have been removed
+                Set<Issue> sanitisedIssues = loadIssues(projectFolderWithInferredIssues,true,IssueFilters.THIS_PROJECT,IssueFilters.COLLECTED);
+                Set<Issue> sanitisedIssuesReturn = loadIssues(projectFolderWithInferredIssues,true,IssueFilters.THIS_PROJECT,IssueFilters.RETURN,IssueFilters.COLLECTED);
+                Set<Issue> sanitisedIssuesArg = loadIssues(projectFolderWithInferredIssues,true,IssueFilters.THIS_PROJECT,IssueFilters.ARG,IssueFilters.COLLECTED);
+                Set<Issue> sanitisedIssuesField = loadIssues(projectFolderWithInferredIssues,true,IssueFilters.THIS_PROJECT,IssueFilters.FIELD,IssueFilters.COLLECTED);
+
+                Set<Issue> inferredIssues = loadIssues(projectFolderWithInferredIssues,true,IssueFilters.THIS_PROJECT,IssueFilters.INFERRED);
+                Set<Issue> inferredIssuesReturn = loadIssues(projectFolderWithInferredIssues,true,IssueFilters.THIS_PROJECT,IssueFilters.RETURN,IssueFilters.INFERRED);
+                Set<Issue> inferredIssuesArg = loadIssues(projectFolderWithInferredIssues,true,IssueFilters.THIS_PROJECT,IssueFilters.ARG,IssueFilters.INFERRED);
 
                 assert inferredIssues.size() == inferredIssuesReturn.size() + inferredIssuesArg.size() ;
 
                 out.print(project);
+                // rejected
                 out.print(" & ");
-                out.print(inferredIssuesReturn.size());
+                out.print("-"+format(collectedIssuesReturn.size()-sanitisedIssuesReturn.size()));
                 out.print(" & ");
-                out.print(inferredIssuesArg.size());
+                out.print("-"+format(collectedIssuesArg.size()-sanitisedIssuesArg.size()));
                 out.print(" & ");
-                out.print(inferredIssues.size());
+                out.print("-"+format(collectedIssuesField.size()-sanitisedIssuesField.size()));
+                out.print(" & ");
+                out.print("-"+format(collectedIssues.size()-sanitisedIssues.size()));
+                // inferred
+                out.print(" & ");
+                out.print("+"+format(inferredIssuesReturn.size()));
+                out.print(" & ");
+                out.print("+"+format(inferredIssuesArg.size()));
+                out.print(" & ");
+                out.print("+"+format(inferredIssues.size()));
                 out.println("\\\\");
             }
             out.println("\\hline");

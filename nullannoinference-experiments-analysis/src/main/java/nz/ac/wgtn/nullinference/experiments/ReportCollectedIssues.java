@@ -34,7 +34,7 @@ public class ReportCollectedIssues {
             out.println("\\begin{table}[h!]");
             out.println("\\begin{tabular}{|l|rrrr|}");
             out.println(" \\hline");
-            out.println("project & RET & ARG & FLD & ALL  \\hline");
+            out.println("project & RET & ARG & FLD & ALL  \\\\ \\hline");
 
             // start latex generation
             for (String project:projects) {
