@@ -1,12 +1,15 @@
 package nz.ac.wgtn.nullinference.experiments;
 
 import nz.ac.wgtn.nullannoinference.commons.Issue;
-
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
+/**
+ * Some commons predicates to filter issues.
+ * @author jens dietrich
+ */
 public class IssueFilters {
 
     public static final Map<String,String> KNOWN_PROJECT_PREFIXES = new HashMap<>();
@@ -32,7 +35,9 @@ public class IssueFilters {
     public static final Predicate<Issue> ARG = issue -> issue.getKind() == Issue.IssueType.ARGUMENT;
     public static final Predicate<Issue> FIELD = issue -> issue.getKind() == Issue.IssueType.FIELD;
     public static final Predicate<Issue> INFERRED = issue -> issue.getProvenanceType() == Issue.ProvenanceType.INFERRED;
-    public static final Predicate<Issue> COLLECTED = issue -> issue.getProvenanceType() == Issue.ProvenanceType.COLLECTED;
+
+    // note that COLLECTED is default TODO can drop null check once data is re-collected
+    public static final Predicate<Issue> COLLECTED = issue -> issue.getProvenanceType() == Issue.ProvenanceType.COLLECTED || issue.getProvenanceType() == null;
 
     // whether an issue has been detected by executinbg a test for which the issue was reported
     public static final Predicate<Issue> THIS_PROJECT = issue -> {

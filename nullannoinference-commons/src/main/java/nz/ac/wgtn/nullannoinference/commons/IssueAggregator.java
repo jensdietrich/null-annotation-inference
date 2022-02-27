@@ -15,14 +15,16 @@ public class IssueAggregator {
 
     public static Set<Issue> aggregate (Set<? extends Issue> issues) {
         Map<IssueCore,Issue> index = new HashMap<>();
+        int duplicateCount = 0;
         for (Issue issue:issues) {
             IssueCore key = new IssueCore(issue.getClassName(),issue.getMethodName(),issue.getDescriptor(),issue.getKind(),issue.getArgsIndex());
             Object oldValue = index.put(key,issue);
             // for debugging only
             if (oldValue!=null) {
-                System.out.println("duplicate value replaced");
+                duplicateCount = duplicateCount + 1;
             }
         }
+        System.out.println(duplicateCount + " duplicates detected");
         Set<Issue> aggregatedIssues = new HashSet<>();
         aggregatedIssues.addAll(index.values());
         return aggregatedIssues;
