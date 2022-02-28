@@ -11,7 +11,7 @@ public class Issue {
 
     public enum IssueType {RETURN_VALUE, ARGUMENT,FIELD}
     public enum ProvenanceType {COLLECTED, INFERRED}
-    public enum Scope {MAIN, TEST, OTHER}
+    public enum Scope {MAIN, TEST, OTHER, UNKNOWN}
 
     private String className = null;
     private String methodName = null;
@@ -23,7 +23,7 @@ public class Issue {
     private List<String> stacktrace = null;
     private String trigger = null;  // root context , requires sanitisation of stacktrace to be meaningful
     private Issue parent = null;
-    private Scope scope = null;
+    private Scope scope = Scope.UNKNOWN;
 
 
     public Issue(String className, String methodName, String descriptor, String context, IssueType kind) {
