@@ -1,6 +1,7 @@
 package nz.ac.wgtn.nullannoinference.refiner;
 
 import com.google.common.base.Preconditions;
+import nz.ac.wgtn.nullannoinference.commons.Issue;
 import nz.ac.wgtn.nullannoinference.refiner.lsp.InferAdditionalIssues;
 import nz.ac.wgtn.nullannoinference.refiner.negtests.IdentifyNegativeTests;
 import nz.ac.wgtn.nullannoinference.refiner.negtests.SantitiseObservedIssues;
@@ -13,6 +14,7 @@ import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.function.Predicate;
 
 /**
  * Main class, entry point for executable jar that is being built.
@@ -25,6 +27,9 @@ public class Main {
     public static final String SANITISED_NULLABILITY_ISSUES = "sanitised_nullability_issues";
     public static final boolean PROPAGATE_NULLABILITY_FOR_ARGUMENTS = false;
     public static final String SUMMARY_FILE_NAME = "summary.csv";
+
+    // TODO make this configurable -- only those issues will be configured
+    public static final Predicate<Issue> ISSUE_FILTER = issue -> issue.getScope()== Issue.Scope.MAIN;
 
     public static final Logger LOGGER = LogSystem.getLogger("main");
 
@@ -115,13 +120,13 @@ public class Main {
         IdentifyNegativeTests.run(projectFolder,negativeTestSummaryFile,counts);
 
         LOGGER.info("Removing issues caused by negative tests");
-        SantitiseObservedIssues.run(inputFolder,sanitisedIssuesFolder,negativeTestSummaryFile,counts);
+        SantitiseObservedIssues.run(inputFolder,sanitisedIssuesFolder,negativeTestSummaryFile,counts,ISSUE_FILTER);
 
         File additionalIssuesOutputFile = new File(sanitisedIssuesFolder,"additional-issues.json");
         LOGGER.info("Inferring additional nullability annotations for sub and super types");
         LOGGER.info("\tpropagate nullability to return types of overridden methods in supertypes: true");
         LOGGER.info("\tpropagate nullability to arguments type of overriding methods in subtypes: " + propagate4args);
-        InferAdditionalIssues.run(sanitisedIssuesFolder,projectFolder, additionalIssuesOutputFile.getAbsoluteFile(),packagePrefix, propagate4args,counts);
+        InferAdditionalIssues.run(sanitisedIssuesFolder,projectFolder, additionalIssuesOutputFile.getAbsoluteFile(),packagePrefix, propagate4args,counts,ISSUE_FILTER);
 
         LOGGER.info("Summary of actions performed:");
         for (String key:counts.keySet()) {

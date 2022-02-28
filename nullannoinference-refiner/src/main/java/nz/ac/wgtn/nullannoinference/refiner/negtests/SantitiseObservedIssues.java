@@ -10,7 +10,9 @@ import org.apache.logging.log4j.Logger;
 import java.io.*;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Copy / filter issues. Remove issues observed running negative tests.
@@ -24,7 +26,7 @@ public class SantitiseObservedIssues {
     public static final String COUNT_SANITISED_ISSUES = "sanitised issues";
     public static final String COUNT_SANITISED_ISSUES_AGGREGATED = "sanitised issues (aggregated)";
 
-    public static void run (File originalIssueFolder, File sanitisedIssueFolder,File negativeTestList,Map<String,Integer> counts) throws Exception {
+    public static void run (File originalIssueFolder, File sanitisedIssueFolder,File negativeTestList,Map<String,Integer> counts, Predicate<Issue> issueFilter) throws Exception {
 
         Preconditions.checkArgument(originalIssueFolder.exists(), originalIssueFolder.getAbsolutePath() + " must exist");
         Preconditions.checkArgument(originalIssueFolder.isDirectory(), originalIssueFolder.getAbsolutePath() + " must be a folder");
@@ -41,6 +43,7 @@ public class SantitiseObservedIssues {
                 .map(tokens -> tokens[0] + "::" + tokens[1] + ":") // in stacktraces this is followed by a line number
                 .collect(Collectors.toList());
         }
+        List<String> methods2 = methods;
 
         Set<Issue> sanitisedIssues = new HashSet<>();
         Set<Issue> rejectedIssues = new HashSet<>();
@@ -52,31 +55,29 @@ public class SantitiseObservedIssues {
             try (Reader in = new FileReader(file)){
                 Issue[] issues = gson.fromJson(in,Issue[].class);
                 LOGGER.info("\t" + issues.length + " issues found");
-                for (Issue issue:issues) {
-                    allIssues.add(issue);
-                }
+                allIssues.addAll(Stream.of(issues).filter(issueFilter).collect(Collectors.toSet()));
 
                 // check for any method in stacktrace -- note that this is O(n^2)
-                for (Issue issue:issues) {
-                    if (isCausedByNegativeTest(issue,methods)) {
+                Stream.of(issues).filter(issueFilter).parallel().forEach(issue -> {
+                    if (isCausedByNegativeTest(issue,methods2)) {
                         rejectedIssues.add(issue);
                     }
                     else {
                         sanitisedIssues.add(issue);
                     }
+                });
+            }
+            // todo write results
+            if (sanitisedIssues.size()>0) {
+                Path rel = originalIssueFolder.toPath().relativize(file.toPath());
+                File sanitised = new File(sanitisedIssueFolder,rel.toString());
+                LOGGER.info("\twriting sanitised set to " + sanitised.getAbsolutePath());
+                if (!sanitised.getParentFile().exists()) {
+                    sanitised.getParentFile().mkdirs();
                 }
-                // todo write results
-                if (sanitisedIssues.size()>0) {
-                    Path rel = originalIssueFolder.toPath().relativize(file.toPath());
-                    File sanitised = new File(sanitisedIssueFolder,rel.toString());
-                    LOGGER.info("\twriting sanitised set to " + sanitised.getAbsolutePath());
-                    if (!sanitised.getParentFile().exists()) {
-                        sanitised.getParentFile().mkdirs();
-                    }
 
-                    try (Writer out = new FileWriter(sanitised)) {
-                        gson.toJson(sanitisedIssues, out);
-                    }
+                try (Writer out = new FileWriter(sanitised)) {
+                    gson.toJson(sanitisedIssues, out);
                 }
             }
         }

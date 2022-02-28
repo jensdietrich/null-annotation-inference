@@ -15,6 +15,7 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -28,7 +29,7 @@ public class InferAdditionalIssues {
     public static final String COUNT_NULLABILITY_ISSUES_INFERRED = "additional issues inferred";
     public static final String COUNT_NULLABILITY_ISSUES_INFERRED_AGGREGATED = "additional issues inferred (aggregated)";
 
-    public static void run (File issueInputFolder,File projectFolder, File outputFile,String prefix, boolean propagateNullabilityInArguments,Map<String,Integer> counts) throws Exception {
+    public static void run (File issueInputFolder, File projectFolder, File outputFile, String prefix, boolean propagateNullabilityInArguments, Map<String,Integer> counts, Predicate<Issue> issueFilter) throws Exception {
 
         Preconditions.checkArgument(issueInputFolder.exists(), issueInputFolder.getAbsolutePath() + " must exist");
         Preconditions.checkArgument(issueInputFolder.isDirectory(), issueInputFolder.getAbsolutePath() + " must be a folder");
@@ -60,7 +61,7 @@ public class InferAdditionalIssues {
             try (Reader in = new FileReader(file)) {
                 Type listType = new TypeToken<ArrayList<Issue>>() {}.getType();
                 List<Issue> issues2 = gson.fromJson(in, listType);
-                issues.addAll(issues2);
+                issues.addAll(issues2.parallelStream().filter(issueFilter).collect(Collectors.toSet()));
             }
         }
         LOGGER.info("" + issues.size() + " issues imported");

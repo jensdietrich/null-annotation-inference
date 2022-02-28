@@ -2,6 +2,10 @@
 
 The refined uses static analysis to improve the precision and recall of issues. 
 
+Note that issues are expected to have a scope set (see scoper module), and only issues are processed 
+that have a main scope. In Maven projects, that corresponds to classes defined in `src/main/java` with binaries
+generated in `target/classes`. 
+
 Issues that are observed in *negative tests*, i.e. tests triggering abnormal behaviour, are removed, while additional issues
 and inferred for sub / superclasses and added by applying Liskov's Substitution Principle.
 
