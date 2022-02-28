@@ -1,9 +1,7 @@
 package nz.ac.wgtn.nullinference.experiments;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.Sets;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -19,7 +17,7 @@ import static nz.ac.wgtn.nullinference.experiments.Utils.*;
  */
 public class ReportInferredIssues {
 
-    public static final String CAPTION = "inferred issues by type";
+    public static final String CAPTION = "inferred issues by type ";
     public static final String LABEL = "tab:inferred";
 
     public static void main (String[] args) throws FileNotFoundException {
@@ -41,34 +39,47 @@ public class ReportInferredIssues {
 
         try (PrintWriter out = new PrintWriter(outputFile)) {
 
-            out.println("\\begin{table}[h!]");
-            out.println("\\begin{tabular}{|l|rrrr|rrr|}");
+            out.println("\\begin{table*}[h!]");
+            out.println("\\begin{tabular}{|l|rrrr|rrrr|rrr|}");
             out.println(" \\hline");
-            out.println("project & -RET & -ARG & -FLD & -ALL & +RET & +ARG & +ALL  \\\\ \\hline");
+            out.println("\\multicolumn{1}{|c}{\\multirow{2}{*}{project}}  & \\multicolumn{4}{|c|}{collected (main scope)} & \\multicolumn{4}{|c|}{neg. test santitised} & \\multicolumn{3}{|c|}{LSP inference} \\\\");
+            out.println(" & RET & ARG & FLD & ALL & -RET & -ARG & -FLD & -ALL & +RET & +ARG & +ALL \\\\ \\hline");
 
             // start latex generation
             for (String project:projects) {
                 File projectFolderWithCollectedIssues = new File(collectedIssuesFolder,project);
                 File projectFolderWithInferredIssues = new File(inferredIssuesFolder,project);
 
-                Set<Issue> collectedIssues = loadIssues(projectFolderWithCollectedIssues,true,IssueFilters.THIS_PROJECT,IssueFilters.COLLECTED);
-                Set<Issue> collectedIssuesReturn = loadIssues(projectFolderWithCollectedIssues,true,IssueFilters.THIS_PROJECT,IssueFilters.RETURN,IssueFilters.COLLECTED);
-                Set<Issue> collectedIssuesArg = loadIssues(projectFolderWithCollectedIssues,true,IssueFilters.THIS_PROJECT,IssueFilters.ARG,IssueFilters.COLLECTED);
-                Set<Issue> collectedIssuesField = loadIssues(projectFolderWithCollectedIssues,true,IssueFilters.THIS_PROJECT,IssueFilters.FIELD,IssueFilters.COLLECTED);
+                Set<Issue> collectedIssues = loadIssues(projectFolderWithCollectedIssues,true,IssueFilters.THIS_PROJECT,IssueFilters.COLLECTED,IssueFilters.MAIN_SCOPE);
+                Set<Issue> collectedIssuesReturn = collectedIssues.parallelStream().filter(IssueFilters.RETURN).collect(Collectors.toSet());
+                Set<Issue> collectedIssuesArg = collectedIssues.parallelStream().filter(IssueFilters.ARG).collect(Collectors.toSet());
+                Set<Issue> collectedIssuesField = collectedIssues.parallelStream().filter(IssueFilters.FIELD).collect(Collectors.toSet());
 
                 // sanitised issues -- some collected issues have been removed
-                Set<Issue> sanitisedIssues = loadIssues(projectFolderWithInferredIssues,true,IssueFilters.THIS_PROJECT,IssueFilters.COLLECTED);
-                Set<Issue> sanitisedIssuesReturn = loadIssues(projectFolderWithInferredIssues,true,IssueFilters.THIS_PROJECT,IssueFilters.RETURN,IssueFilters.COLLECTED);
-                Set<Issue> sanitisedIssuesArg = loadIssues(projectFolderWithInferredIssues,true,IssueFilters.THIS_PROJECT,IssueFilters.ARG,IssueFilters.COLLECTED);
-                Set<Issue> sanitisedIssuesField = loadIssues(projectFolderWithInferredIssues,true,IssueFilters.THIS_PROJECT,IssueFilters.FIELD,IssueFilters.COLLECTED);
+                Set<Issue> sanitisedIssues = loadIssues(projectFolderWithInferredIssues,true,IssueFilters.THIS_PROJECT,IssueFilters.COLLECTED,IssueFilters.MAIN_SCOPE);
+                Set<Issue> sanitisedIssuesReturn = sanitisedIssues.parallelStream().filter(IssueFilters.RETURN).collect(Collectors.toSet());
+                Set<Issue> sanitisedIssuesArg = sanitisedIssues.parallelStream().filter(IssueFilters.ARG).collect(Collectors.toSet());
+                Set<Issue> sanitisedIssuesField = sanitisedIssues.parallelStream().filter(IssueFilters.FIELD).collect(Collectors.toSet());
 
+                // inferred issues do not have the scope attribute set
                 Set<Issue> inferredIssues = loadIssues(projectFolderWithInferredIssues,true,IssueFilters.THIS_PROJECT,IssueFilters.INFERRED);
-                Set<Issue> inferredIssuesReturn = loadIssues(projectFolderWithInferredIssues,true,IssueFilters.THIS_PROJECT,IssueFilters.RETURN,IssueFilters.INFERRED);
-                Set<Issue> inferredIssuesArg = loadIssues(projectFolderWithInferredIssues,true,IssueFilters.THIS_PROJECT,IssueFilters.ARG,IssueFilters.INFERRED);
+                Set<Issue> inferredIssuesReturn = inferredIssues.parallelStream().filter(IssueFilters.RETURN).collect(Collectors.toSet());
+                Set<Issue> inferredIssuesArg = inferredIssues.parallelStream().filter(IssueFilters.ARG).collect(Collectors.toSet());
 
                 assert inferredIssues.size() == inferredIssuesReturn.size() + inferredIssuesArg.size() ;
 
                 out.print(project);
+
+                // baseline
+                out.print(" & ");
+                out.print(format(collectedIssuesReturn.size()));
+                out.print(" & ");
+                out.print(format(collectedIssuesArg.size()));
+                out.print(" & ");
+                out.print(format(collectedIssuesField.size()));
+                out.print(" & ");
+                out.print(format(collectedIssues.size()));
+
                 // rejected
                 out.print(" & ");
                 out.print("-"+format(collectedIssuesReturn.size()-sanitisedIssuesReturn.size()));
@@ -91,7 +102,7 @@ public class ReportInferredIssues {
             out.println("\\end{tabular}");
             out.println("\\caption{" + CAPTION + "}");
             out.println("\\label{" + LABEL + "}");
-            out.println("\\end{table}");
+            out.println("\\end{table*}");
 
         }
 

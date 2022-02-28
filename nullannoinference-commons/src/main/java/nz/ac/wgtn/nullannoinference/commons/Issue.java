@@ -93,6 +93,9 @@ public class Issue {
     }
 
     public Scope getScope() {
+        if (scope==null && parent!=null) {
+            return parent.getScope();
+        }
         return scope;
     }
 

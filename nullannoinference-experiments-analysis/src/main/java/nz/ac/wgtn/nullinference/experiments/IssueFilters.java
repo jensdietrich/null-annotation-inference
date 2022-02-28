@@ -36,6 +36,11 @@ public class IssueFilters {
     public static final Predicate<Issue> FIELD = issue -> issue.getKind() == Issue.IssueType.FIELD;
     public static final Predicate<Issue> INFERRED = issue -> issue.getProvenanceType() == Issue.ProvenanceType.INFERRED;
 
+    // scopes
+    public static final Predicate<Issue> MAIN_SCOPE = issue -> issue.getScope()== Issue.Scope.MAIN;
+    public static final Predicate<Issue> TEST_SCOPE = issue -> issue.getScope() == Issue.Scope.TEST;
+    public static final Predicate<Issue> OTHER_SCOPE = issue -> issue.getScope() == Issue.Scope.OTHER;
+
     // note that COLLECTED is default TODO can drop null check once data is re-collected
     public static final Predicate<Issue> COLLECTED = issue -> issue.getProvenanceType() == Issue.ProvenanceType.COLLECTED || issue.getProvenanceType() == null;
 

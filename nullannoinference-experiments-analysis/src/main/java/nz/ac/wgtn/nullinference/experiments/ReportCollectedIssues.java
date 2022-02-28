@@ -14,7 +14,7 @@ import static nz.ac.wgtn.nullinference.experiments.Utils.*;
  */
 public class ReportCollectedIssues {
 
-    public static final String CAPTION = "collected issues by type";
+    public static final String CAPTION = "Collected issues by type and scope";
     public static final String LABEL = "tab:collected";
 
     public static void main (String[] args) throws FileNotFoundException {
@@ -31,37 +31,66 @@ public class ReportCollectedIssues {
 
         try (PrintWriter out = new PrintWriter(outputFile)) {
 
-            out.println("\\begin{table}[h!]");
-            out.println("\\begin{tabular}{|l|rrrr|}");
+            out.println("\\begin{table*}[h!]");
+            out.println("\\begin{tabular}{|l|rrrr|rrrr|rrrr|}");
             out.println(" \\hline");
-            out.println("project & RET & ARG & FLD & ALL  \\\\ \\hline");
+            out.println("\\multicolumn{1}{|c}{\\multirow{2}{*}{project}}  & \\multicolumn{4}{|c|}{main} & \\multicolumn{4}{|c|}{test} & \\multicolumn{4}{|c|}{other} \\\\ ");
+            out.println("  & RET & ARG & FLD & ALL & RET & ARG & FLD & ALL & RET & ARG & FLD & ALL  \\\\ \\hline");
 
             // start latex generation
             for (String project:projects) {
                 File projectFolder = new File(collectedIssuesFolder,project);
-                Set<Issue> collectedIssues = loadIssues(projectFolder,true,IssueFilters.THIS_PROJECT);
-                Set<Issue> collectedIssuesReturn = loadIssues(projectFolder,true,IssueFilters.THIS_PROJECT,IssueFilters.RETURN);
-                Set<Issue> collectedIssuesArg = loadIssues(projectFolder,true,IssueFilters.THIS_PROJECT,IssueFilters.ARG);
-                Set<Issue> collectedIssuesField = loadIssues(projectFolder,true,IssueFilters.THIS_PROJECT,IssueFilters.FIELD);
+                Set<Issue> collectedIssuesMain = loadIssues(projectFolder,true,IssueFilters.MAIN_SCOPE);
+                Set<Issue> collectedIssuesReturnMain = collectedIssuesMain.parallelStream().filter(IssueFilters.RETURN).collect(Collectors.toSet());
+                Set<Issue> collectedIssuesArgMain = collectedIssuesMain.parallelStream().filter(IssueFilters.ARG).collect(Collectors.toSet());
+                Set<Issue> collectedIssuesFieldMain = collectedIssuesMain.parallelStream().filter(IssueFilters.FIELD).collect(Collectors.toSet());
 
-                assert collectedIssues.size() == collectedIssuesReturn.size() + collectedIssuesArg.size() + collectedIssuesField.size();
+                Set<Issue> collectedIssuesTest = loadIssues(projectFolder,true,IssueFilters.TEST_SCOPE);
+                Set<Issue> collectedIssuesReturnTest = collectedIssuesTest.parallelStream().filter(IssueFilters.RETURN).collect(Collectors.toSet());
+                Set<Issue> collectedIssuesArgTest = collectedIssuesTest.parallelStream().filter(IssueFilters.ARG).collect(Collectors.toSet());
+                Set<Issue> collectedIssuesFieldTest = collectedIssuesTest.parallelStream().filter(IssueFilters.FIELD).collect(Collectors.toSet());
+
+                Set<Issue> collectedIssuesOther = loadIssues(projectFolder,true,IssueFilters.OTHER_SCOPE);
+                Set<Issue> collectedIssuesReturnOther = collectedIssuesOther.parallelStream().filter(IssueFilters.RETURN).collect(Collectors.toSet());
+                Set<Issue> collectedIssuesArgOther = collectedIssuesOther.parallelStream().filter(IssueFilters.ARG).collect(Collectors.toSet());
+                Set<Issue> collectedIssuesFieldOther = collectedIssuesOther.parallelStream().filter(IssueFilters.FIELD).collect(Collectors.toSet());
+
+                assert collectedIssuesMain.size() == collectedIssuesReturnMain.size() + collectedIssuesArgMain.size() + collectedIssuesFieldMain.size();
+                assert collectedIssuesTest.size() == collectedIssuesReturnTest.size() + collectedIssuesArgTest.size() + collectedIssuesFieldTest.size();
+                assert collectedIssuesOther.size() == collectedIssuesReturnOther.size() + collectedIssuesArgOther.size() + collectedIssuesFieldOther.size();
 
                 out.print(project);
                 out.print(" & ");
-                out.print(format(collectedIssuesReturn.size()));
+                out.print(format(collectedIssuesReturnMain.size()));
                 out.print(" & ");
-                out.print(format(collectedIssuesArg.size()));
+                out.print(format(collectedIssuesArgMain.size()));
                 out.print(" & ");
-                out.print(format(collectedIssuesField.size()));
+                out.print(format(collectedIssuesFieldMain.size()));
                 out.print(" & ");
-                out.print(format(collectedIssues.size()));
+                out.print(format(collectedIssuesMain.size()));
+                out.print(" & ");
+                out.print(format(collectedIssuesReturnTest.size()));
+                out.print(" & ");
+                out.print(format(collectedIssuesArgTest.size()));
+                out.print(" & ");
+                out.print(format(collectedIssuesFieldTest.size()));
+                out.print(" & ");
+                out.print(format(collectedIssuesTest.size()));
+                out.print(" & ");
+                out.print(format(collectedIssuesReturnOther.size()));
+                out.print(" & ");
+                out.print(format(collectedIssuesArgOther.size()));
+                out.print(" & ");
+                out.print(format(collectedIssuesFieldOther.size()));
+                out.print(" & ");
+                out.print(format(collectedIssuesOther.size()));
                 out.println("\\\\");
             }
             out.println("\\hline");
             out.println("\\end{tabular}");
             out.println("\\caption{" + CAPTION + "}");
             out.println("\\label{" + LABEL + "}");
-            out.println("\\end{table}");
+            out.println("\\end{table*}");
 
         }
 
