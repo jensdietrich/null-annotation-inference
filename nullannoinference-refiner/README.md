@@ -1,8 +1,15 @@
 # The Refiner Module
 
+The refined uses static analysis to improve the precision and recall of issues. 
 
-usage: `java -cp <classpath> nz.ac.wgtn.nullannoinference.refiner.Main [-a <arg>] -i <arg> [-n <arg>] -p
-<arg> [-s <arg>]`
+Issues that are observed in *negative tests*, i.e. tests triggering abnormal behaviour, are removed, while additional issues
+and inferred for sub / superclasses and added by applying Liskov's Substitution Principle.
+
+usage: `java -cp <classpath> nz.ac.wgtn.nullannoinference.refiner.Main <args>`
+
+If the project is build with `mvn package`, a jar containing all dependencies will be produced in `target/`, and the application can simply be started by executing:
+
+`java -jar target/nullannoinference-refiner.jar <args>`
 
 ## Arguments: 
 
@@ -17,9 +24,7 @@ usage: `java -cp <classpath> nz.ac.wgtn.nullannoinference.refiner.Main [-a <arg>
 | `-o`      | `--summary <arg>`         | a summary csv file with some stats about the inferences performed (optional, default is "summary.csv") |
 
 
-If the project is build with `mvn package`, a jar containing all dependencies will be produced in `target/`, and the application can simply be started by executing:
 
-`java -jar target/nullannoinference-refiner.jar <args>`
 
 
 

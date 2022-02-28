@@ -9,7 +9,6 @@ import org.apache.commons.cli.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Logger;
 import org.objectweb.asm.*;
-
 import java.io.*;
 import java.lang.reflect.Type;
 import java.text.DecimalFormat;
@@ -41,7 +40,7 @@ public class Scoper {
         Options options = new Options();
         options.addRequiredOption("i","input",true,"a folder containing json files with null issues reported by a test run instrumented with the nullannoinference agent, the folder will be checked recursively for files (required)");
         options.addRequiredOption("p","project",true,"the folder containing the Maven project (i.e. containing pom.xml) to be analysed, the project must have been built with \"mvn test\" (required)");
-        options.addOption("s","summary",true,"a summary csv file with some stats about the inferences performed (optional, default is \"summary.csv\")");
+        options.addOption("s","summary",true,"a summary csv file with some stats about the project bytecode analysed (optional, default is \"" + SUMMARY_FILE_NAME + "\")");
 
         CommandLineParser parser = new DefaultParser() {
             @Override
