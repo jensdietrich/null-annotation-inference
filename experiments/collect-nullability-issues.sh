@@ -8,6 +8,8 @@ VERSION=$2
 NAME=$3
 AGENT="nullannoinference-agent/target/nullannoinference-agent.jar"
 AGENT2="nullannoinference-agent2/target/nullannoinference-agent2.jar"
+SCOPER="nullannoinference-scoper/target/nullannoinference-scoper.jar"
+SCOPERL="nullannoinference-scoper.jar"
 ROOT="$(pwd)"
 PROJECT_FOLDER=$ROOT/projects/original/$NAME
 
@@ -33,12 +35,20 @@ if [ ! -f "$AGENT" ]; then
     echo "Agent not found - must build entire project first: $AGENT"
     exit 1
 fi
+
 cp $AGENT $PROJECT_FOLDER
 if [ ! -f "$AGENT2" ]; then
     echo "Agent not found - must build entire project first: $AGENT2"
     exit 1
 fi
 cp $AGENT2 $PROJECT_FOLDER
+
+if [ ! -f "$SCOPER" ]; then
+    echo "Scoper not found - must build entire project first: $SCOPER"
+    exit 1
+fi
+cp $SCOPER $PROJECT_FOLDER
+
 cd $ROOT
 cp instrumented-poms/$NAME.xml $PROJECT_FOLDER/pom-instrumented.xml
 
@@ -51,8 +61,12 @@ mvn clean test -f pom-instrumented.xml -Drat.skip=true
 cd $ROOT
 if [ ! -d issues-collected/$NAME ]
 then
-    mkdir issues-collected/$NAME
+    mkdir -p issues-collected/$NAME
 fi
 # cull old issues as files have timestamps and will not be overridden
 rm issues-collected/$NAME/*
 mv $PROJECT_FOLDER/null-issues-*.json issues-collected/$NAME
+
+echo "adding scope to collected issues"
+cd $PROJECT_FOLDER
+java -jar $SCOPERL -i $ROOT/issues-collected/$NAME -p $PROJECT_FOLDER

@@ -11,6 +11,7 @@ public class Issue {
 
     public enum IssueType {RETURN_VALUE, ARGUMENT,FIELD}
     public enum ProvenanceType {COLLECTED, INFERRED}
+    public enum Scope {MAIN, TEST, OTHER}
 
     private String className = null;
     private String methodName = null;
@@ -22,6 +23,8 @@ public class Issue {
     private List<String> stacktrace = null;
     private String trigger = null;  // root context , requires sanitisation of stacktrace to be meaningful
     private Issue parent = null;
+    private Scope scope = null;
+
 
     public Issue(String className, String methodName, String descriptor, String context, IssueType kind) {
         this.className = className;
@@ -89,6 +92,14 @@ public class Issue {
         return context;
     }
 
+    public Scope getScope() {
+        return scope;
+    }
+
+    public void setScope(Scope scope) {
+        this.scope = scope;
+    }
+
     public void setStacktrace(List<String> stacktrace) {
         this.stacktrace = stacktrace;
         if (this.stacktrace!=null && !this.stacktrace.isEmpty()) {
@@ -104,8 +115,11 @@ public class Issue {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Issue issue = (Issue) o;
-        return argsIndex == issue.argsIndex && Objects.equals(className, issue.className) && Objects.equals(methodName, issue.methodName) && Objects.equals(descriptor, issue.descriptor) && kind == issue.kind && provenanceType == issue.provenanceType && Objects.equals(context, issue.context) && Objects.equals(stacktrace, issue.stacktrace) && Objects.equals(trigger, issue.trigger);
+        return argsIndex == issue.argsIndex && Objects.equals(className, issue.className) && Objects.equals(methodName, issue.methodName) && Objects.equals(descriptor, issue.descriptor) && kind == issue.kind && provenanceType == issue.provenanceType && Objects.equals(context, issue.context) && Objects.equals(stacktrace, issue.stacktrace) && Objects.equals(trigger, issue.trigger) && Objects.equals(parent, issue.parent) && scope == issue.scope;
     }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(className, methodName, descriptor, kind, provenanceType, argsIndex, context, stacktrace, trigger, parent, scope);
+    }
 }
