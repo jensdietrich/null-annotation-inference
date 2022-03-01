@@ -8,10 +8,7 @@ import net.bytebuddy.matcher.ElementMatchers;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
 import nz.ac.wgtn.nullannoinference.commons.IssueStore;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Executable;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
+import java.lang.reflect.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -52,25 +49,41 @@ public abstract class NullChecks {
         }
     }
 
-    // check the state of object using reflection
+    // check the state of object using reflection, to be used at constructor exit
     public static void checkThis(Executable method, Object object){
-     //   if ((method instanceof Constructor)) { // also check synthetic methods as the target is to annotate fields, not methods
-            // todo: extend this to super classes within scope (need to match against prefix)
-            for (Field field:object.getClass().getDeclaredFields()) {
-                if (!field.getType().isPrimitive()) {
-                    try {
-                        field.setAccessible(true);
-                        Object value = field.get(object);
-                        if (value==null) {
-                            Issue issue = new Issue(field.getDeclaringClass().getName(), field.getName(), getTypeNameInByteCodeFormat(field.getType()), CONTEXT, Issue.IssueType.FIELD, -1);
-                            IssueStore.add(issue);
-                        }
-                    } catch (Exception x) {
-                        x.printStackTrace();
+        // todo: extend this to super classes within scope (need to match against prefix)
+        for (Field field:object.getClass().getDeclaredFields()) {
+            if (!field.isSynthetic() && !field.getType().isPrimitive() && !Modifier.isStatic(field.getModifiers())) {
+                try {
+                    field.setAccessible(true);
+                    Object value = field.get(object);
+                    if (value==null) {
+                        Issue issue = new Issue(field.getDeclaringClass().getName(), field.getName(), getTypeNameInByteCodeFormat(field.getType()), CONTEXT, Issue.IssueType.FIELD, -1);
+                        IssueStore.add(issue);
                     }
+                } catch (Exception x) {
+                    x.printStackTrace();
                 }
             }
-       // }
+        }
+    }
+
+    // check the state of static variables using reflection, to be used at static initialiser (<clinit>) exit
+    public static void checkClass(Class clazz){
+        for (Field field:clazz.getDeclaredFields()) {
+            if (!field.isSynthetic() && Modifier.isStatic(field.getModifiers()) && !field.getType().isPrimitive()) {
+                try {
+                    field.setAccessible(true);
+                    Object value = field.get(null);
+                    if (value==null) {
+                        Issue issue = new Issue(field.getDeclaringClass().getName(), field.getName(), getTypeNameInByteCodeFormat(field.getType()), CONTEXT, Issue.IssueType.FIELD, -1);
+                        IssueStore.add(issue);
+                    }
+                } catch (Exception x) {
+                    x.printStackTrace();
+                }
+            }
+        }
     }
 
 
@@ -174,6 +187,17 @@ public abstract class NullChecks {
         @Advice.OnMethodExit
         public static void onExit(@Advice.Origin Executable method,@Advice.This Object object)  {
             NullChecks.checkThis(method, object);
+        }
+    }
+
+    public static class StaticBlocks {
+
+        public static final AsmVisitorWrapper VISITOR = Advice.to(StaticBlocks.class).on(isTypeInitializer());
+
+        @Advice.OnMethodExit(suppress = Throwable.class)
+        public static void onExit(@Advice.Origin final Class<?> clazz)  {
+            System.out.println("foo");
+            NullChecks.checkClass(clazz);
         }
     }
 

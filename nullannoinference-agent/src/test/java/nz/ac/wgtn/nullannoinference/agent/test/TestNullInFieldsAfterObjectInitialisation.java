@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class TestNullInFieldsAfterInitialisation {
+public class TestNullInFieldsAfterObjectInitialisation {
 
     @BeforeEach
     public void setup() {
@@ -30,17 +30,10 @@ public class TestNullInFieldsAfterInitialisation {
         FooField foo = new FooField(null,"not-null","not-null",-1, new int[]{});
         List<Issue> fieldIssues = IssueStore.getIssues().stream().filter(issue -> issue.getKind()== Issue.IssueType.FIELD).collect(Collectors.toList());
 
-        assertEquals(3,fieldIssues.size());
+        assertEquals(1,fieldIssues.size());
 
-        Issue issueF1 = IssueStore.getIssues().stream().filter(issue -> issue.getMethodName().equals("F1")).findFirst().orElse(null);
-        assertNotNull(issueF1);
-
-        Issue issueF3 = IssueStore.getIssues().stream().filter(issue -> issue.getMethodName().equals("F3")).findFirst().orElse(null);
-        assertNotNull(issueF3);
-
-        Issue issuef1= IssueStore.getIssues().stream().filter(issue -> issue.getMethodName().equals("f1")).findFirst().orElse(null);
+        Issue issuef1 = IssueStore.getIssues().stream().filter(issue -> issue.getMethodName().equals("f1")).findFirst().orElse(null);
         assertNotNull(issuef1);
-
     }
 
     @Test
@@ -48,18 +41,12 @@ public class TestNullInFieldsAfterInitialisation {
         FooField foo = new FooField();
         List<Issue> fieldIssues = IssueStore.getIssues().stream().filter(issue -> issue.getKind() == Issue.IssueType.FIELD).collect(Collectors.toList());
 
-        assertEquals(4,fieldIssues.size());
+        assertEquals(2,fieldIssues.size());
 
-        Issue issueF1 = IssueStore.getIssues().stream().filter(issue -> issue.getMethodName().equals("F1")).findFirst().orElse(null);
-        assertNotNull(issueF1);
-
-        Issue issueF3 = IssueStore.getIssues().stream().filter(issue -> issue.getMethodName().equals("F3")).findFirst().orElse(null);
-        assertNotNull(issueF3);
-
-        Issue issuef1= IssueStore.getIssues().stream().filter(issue -> issue.getMethodName().equals("f1")).findFirst().orElse(null);
+        Issue issuef1 = IssueStore.getIssues().stream().filter(issue -> issue.getMethodName().equals("f1")).findFirst().orElse(null);
         assertNotNull(issuef1);
 
-        Issue issuef5= IssueStore.getIssues().stream().filter(issue -> issue.getMethodName().equals("f5")).findFirst().orElse(null);
+        Issue issuef5 = IssueStore.getIssues().stream().filter(issue -> issue.getMethodName().equals("f5")).findFirst().orElse(null);
         assertNotNull(issuef5);
     }
 
@@ -68,13 +55,7 @@ public class TestNullInFieldsAfterInitialisation {
         FooField foo = new FooField(null,null,null,-1,null);
         List<Issue> fieldIssues = IssueStore.getIssues().stream().filter(issue -> issue.getKind()== Issue.IssueType.FIELD).collect(Collectors.toList());
 
-        assertEquals(6,fieldIssues.size());
-
-        Issue issueF1 = IssueStore.getIssues().stream().filter(issue -> issue.getMethodName().equals("F1")).findFirst().orElse(null);
-        assertNotNull(issueF1);
-
-        Issue issueF3 = IssueStore.getIssues().stream().filter(issue -> issue.getMethodName().equals("F3")).findFirst().orElse(null);
-        assertNotNull(issueF3);
+        assertEquals(4,fieldIssues.size());
 
         Issue issuef1= IssueStore.getIssues().stream().filter(issue -> issue.getMethodName().equals("f1")).findFirst().orElse(null);
         assertNotNull(issuef1);
@@ -87,8 +68,5 @@ public class TestNullInFieldsAfterInitialisation {
 
         Issue issuef5= IssueStore.getIssues().stream().filter(issue -> issue.getMethodName().equals("f5")).findFirst().orElse(null);
         assertNotNull(issuef5);
-
-
     }
-
 }

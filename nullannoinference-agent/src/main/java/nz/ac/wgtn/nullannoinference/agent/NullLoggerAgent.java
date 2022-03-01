@@ -50,6 +50,7 @@ public class NullLoggerAgent {
             .transform((builder, td, cl, m) -> builder.visit(NullChecks.MethodWithoutReturnValues.VISITOR))
             .transform((builder, td, cl, m) -> builder.visit(NullChecks.MethodWithReturnValues.VISITOR))
             .transform((builder, td, cl, m) -> builder.visit(NullChecks.Constructors.VISITOR))
+            .transform((builder, td, cl, m) -> builder.visit(NullChecks.StaticBlocks.VISITOR))
             .installOn(inst);
     }
 

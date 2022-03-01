@@ -17,7 +17,7 @@ public class DebugListener implements AgentBuilder.Listener {
                          JavaModule module,
                          boolean loaded,
                          DynamicType dynamicType) {
-        System.out.println("onTransformation {" + typeDescription + '}');
+        System.out.println("instrumenting: " + typeDescription);
     }
 
     @Override

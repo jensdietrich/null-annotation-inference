@@ -20,6 +20,7 @@ public class Dynamic {
             .visit(NullChecks.MethodWithoutReturnValues.VISITOR)
             .visit(NullChecks.MethodWithReturnValues.VISITOR)
             .visit(NullChecks.Constructors.VISITOR)
+            .visit(NullChecks.StaticBlocks.VISITOR)
             .make()
             .load(clazz.getClassLoader(), classReloadingStrategy);
     }
