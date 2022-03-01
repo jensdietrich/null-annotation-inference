@@ -63,6 +63,11 @@
       <artifactId>commons-cli</artifactId>
       <version>1.5.0</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>2.17.1</version>
+    </dependency>
 
   </dependencies>
 
@@ -88,7 +93,7 @@
               <goal>single</goal>
             </goals>
             <configuration>
-              <finalName>mvn-annotator</finalName>
+              <finalName>nullannoinference-annotator</finalName>
               <archive>
                 <manifest>
                   <mainClass>
@@ -99,6 +104,7 @@
               <descriptorRefs>
                 <descriptorRef>jar-with-dependencies</descriptorRef>
               </descriptorRefs>
+              <appendAssemblyId>false</appendAssemblyId>
             </configuration>
           </execution>
         </executions>

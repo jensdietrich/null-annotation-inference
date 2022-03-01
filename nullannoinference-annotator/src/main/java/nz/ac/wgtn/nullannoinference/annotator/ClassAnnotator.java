@@ -25,6 +25,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static nz.ac.wgtn.nullannoinference.annotator.MvnProjectAnnotator.LOGGER;
+
 /**
  * Annotator for a single compilation unit (which may contain several class definitions).
  * @author jens dietrich
@@ -63,10 +65,10 @@ public class ClassAnnotator {
         int annotationsAddedCounter = 0;
         ParseResult<CompilationUnit> result = new JavaParser().parse(originalJavaFile);
         if (!result.isSuccessful()) {
-            System.err.println("Error parsing " + originalJavaFile);
+            LOGGER.error("Error parsing " + originalJavaFile);
             for (Problem problem:result.getProblems()) {
-                System.err.println("\tmessage: " + problem.getMessage());
-                System.err.println("\t\tlocation: " + (problem.getLocation().isPresent()?problem.getLocation().get():"?"));
+                LOGGER.error("\tmessage: " + problem.getMessage());
+                LOGGER.error("\t\tlocation: " + (problem.getLocation().isPresent()?problem.getLocation().get():"?"));
             }
             throw new JavaParserFailedException("Error parsing " + originalJavaFile);
         }

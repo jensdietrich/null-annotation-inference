@@ -31,7 +31,7 @@ public class Main {
     // TODO make this configurable -- only those issues will be configured
     public static final Predicate<Issue> ISSUE_FILTER = issue -> issue.getScope()== Issue.Scope.MAIN;
 
-    public static final Logger LOGGER = LogSystem.getLogger("main");
+    public static final Logger LOGGER = LogSystem.getLogger("refiner");
 
     public static void main (String[] args) throws Exception {
 

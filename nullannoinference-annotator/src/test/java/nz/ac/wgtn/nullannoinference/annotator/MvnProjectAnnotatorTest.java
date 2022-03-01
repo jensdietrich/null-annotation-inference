@@ -25,11 +25,11 @@ public class MvnProjectAnnotatorTest {
     public void test() throws Exception {
         File in = new File(MvnProjectAnnotatorTest.class.getResource("/project").getFile());
         File out = new File(TMP,"project");
-        File nullableSpec = new File(MvnProjectAnnotatorTest.class.getResource("/null-issues.json").getFile());
+        File nullableSpec = new File(MvnProjectAnnotatorTest.class.getResource("/issues").getFile());
         MvnProjectAnnotator.main(new String[] {
                 "-"+MvnProjectAnnotator.ARG_INPUT,in.getAbsolutePath(),
                 "-"+MvnProjectAnnotator.ARG_OUTPUT,out.getAbsolutePath(),
-                "-"+MvnProjectAnnotator.ARG_NULLABLE_SPECS,nullableSpec.getAbsolutePath()
+                "-"+MvnProjectAnnotator.ARG_ISSUES,nullableSpec.getAbsolutePath()
         });
 
         assertTrue(new File(TMP,"project/src/main/java/nz/ac/wgtn/ecs/semdiff/example1/upstream/Main.java").exists());

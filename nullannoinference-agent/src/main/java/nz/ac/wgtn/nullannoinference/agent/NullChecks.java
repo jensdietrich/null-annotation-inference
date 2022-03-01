@@ -196,7 +196,6 @@ public abstract class NullChecks {
 
         @Advice.OnMethodExit(suppress = Throwable.class)
         public static void onExit(@Advice.Origin final Class<?> clazz)  {
-            System.out.println("foo");
             NullChecks.checkClass(clazz);
         }
     }
