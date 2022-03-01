@@ -3,12 +3,9 @@ package nz.ac.wgtn.nullannoinference.commons;
 import nz.ac.wgtn.nullannoinference.commons.json.JSONArray;
 import nz.ac.wgtn.nullannoinference.commons.json.JSONObject;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -23,6 +20,22 @@ import java.util.stream.Stream;
 
 public class IssueStore {
 
+    static {
+        TimerTask task = new TimerTask() {
+            public void run() {
+                save();
+            }
+        };
+        Timer timer = new Timer("issue store timer");
+
+        long delay = 1000L * 60; // 1 min
+        timer.schedule(task, delay, delay);
+
+        Thread saveResult = new Thread(() -> IssueStore.save());
+        Runtime.getRuntime().addShutdownHook(saveResult);
+    }
+
+    private static final int BUFFER_SIZE = 100;
     private static final String FILE_NAME = "null-issues-observed-while-testing";
     private static final Set<Issue> issues = Collections.newSetFromMap(new ConcurrentHashMap<>());
 
@@ -32,7 +45,6 @@ public class IssueStore {
     static StackTracePruningStrategy PRUNING_STRATEGY = StackTracePruningStrategy.AGGRESSIVE;
 
     public static void add (Issue issue) {
-
         List<String> stacktrace = Stream.of(Thread.currentThread().getStackTrace())
             .map(element -> element.getClassName() + "::" + element.getMethodName() + ':' + element.getLineNumber())
             .collect(Collectors.toList());
@@ -106,8 +118,19 @@ public class IssueStore {
 
     // persistence
     public static void save () {
+
+        if (issues.isEmpty()) {
+            System.out.println("");
+        }
+        String fileName = FILE_NAME + '-' + System.currentTimeMillis() + ".json";
+        Set<Issue> issuesToBeSaved = new HashSet<>();
+        issuesToBeSaved.addAll(issues);
+        System.out.println("saving " + issuesToBeSaved.size() + " issues to " + fileName);
+
+        issues.removeAll(issuesToBeSaved);
+
         JSONArray array = new JSONArray();
-        for (Issue issue:issues) {
+        for (Issue issue:issuesToBeSaved) {
             JSONObject jobj = new JSONObject();
             jobj.put("className",issue.getClassName());
             jobj.put("methodName",issue.getMethodName());
@@ -124,11 +147,11 @@ public class IssueStore {
             }
             array.put(jobj);
         }
-        System.out.println("null issues discovered: " + array.length());
+        System.out.println("null issues serialised: " + array.length());
         String json = array.toString(3);
-        try (PrintWriter out = new PrintWriter(new FileWriter(FILE_NAME + '-' + System.currentTimeMillis() + ".json"))) {
+        try (PrintWriter out = new PrintWriter(fileName)) {
             out.println(json);
-            System.out.println("null issues observed written to " + new File(FILE_NAME).getAbsolutePath());
+            System.out.println("null issues observed written to " + new File(fileName).getAbsolutePath());
         } catch (IOException e) {
             e.printStackTrace();
         }

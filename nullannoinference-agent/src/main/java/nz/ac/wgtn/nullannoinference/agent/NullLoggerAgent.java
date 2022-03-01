@@ -17,11 +17,6 @@ import static net.bytebuddy.matcher.ElementMatchers.nameStartsWith;
  */
 public class NullLoggerAgent {
 
-    static {
-        Thread saveResult = new Thread(() -> IssueStore.save());
-        Runtime.getRuntime().addShutdownHook(saveResult);
-    }
-
     public static final String PACKAGE_PREFIX_SYS_PROPERTY = "nz.ac.wgtn.nullannoinference.includes";
 
     static void log(String msg) {

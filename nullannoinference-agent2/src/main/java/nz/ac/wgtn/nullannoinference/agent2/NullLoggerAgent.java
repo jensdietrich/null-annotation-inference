@@ -15,11 +15,6 @@ import java.security.ProtectionDomain;
  */
 public class NullLoggerAgent {
 
-    static {
-        Thread saveResult = new Thread(() -> IssueStore.save());
-        Runtime.getRuntime().addShutdownHook(saveResult);
-    }
-
     public static final String PACKAGE_PREFIX = "nz.ac.wgtn.nullannoinference.includes";
 
     static void log(String msg) {
