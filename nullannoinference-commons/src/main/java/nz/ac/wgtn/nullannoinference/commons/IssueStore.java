@@ -11,7 +11,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-
 /**
  * Simple in memory store for issues collected during a program run.
  * Includes an export/save function that can be used in a shutdown hook.
@@ -35,7 +34,6 @@ public class IssueStore {
         Runtime.getRuntime().addShutdownHook(saveResult);
     }
 
-    private static final int BUFFER_SIZE = 100;
     private static final String FILE_NAME = "null-issues-observed-while-testing";
     private static final Set<Issue> issues = Collections.newSetFromMap(new ConcurrentHashMap<>());
 
