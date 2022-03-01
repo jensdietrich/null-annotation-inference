@@ -17,7 +17,7 @@ import static nz.ac.wgtn.nullinference.experiments.Utils.*;
  */
 public class ReportInferredIssues {
 
-    public static final String CAPTION = "inferred issues by type ";
+    public static final String CAPTION = "Refined issues by type";
     public static final String LABEL = "tab:inferred";
 
     public static void main (String[] args) throws FileNotFoundException {
