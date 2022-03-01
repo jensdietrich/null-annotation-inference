@@ -583,7 +583,7 @@
   </distributionManagement>
 
   <properties>
-    <argLine>-Xmx512m -javaagent:nullannoinference-agent.jar -javaagent:nullannoinference-agent2.jar -Dnz.ac.wgtn.nullannoinference.includes=org.apache.commons -Dnz.ac.wgtn.nullannoinference.context=commons-lang3</argLine>
+    <argLine>-Xmx512m -javaagent:nullannoinference-agent.jar -javaagent:nullannoinference-agent2.jar -Dnz.ac.wgtn.nullannoinference.includes=org.apache.commons -Dnz.ac.wgtn.nullannoinference.context=commons-lang</argLine>
     <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
