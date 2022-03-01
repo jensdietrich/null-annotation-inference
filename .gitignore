@@ -1,8 +1,10 @@
-experiments/issues-collected
+experiments/issues-collected-old
 annotation-summary-project.txt
 annotation-summary-issue1.txt
 negative-tests.csv
 nullannoinference-agent2/target
 *.class
 nullannoinference-commons/target
+experiments/issues-inferred-old
+experiments/issues-collected
 experiments/issues-inferred
