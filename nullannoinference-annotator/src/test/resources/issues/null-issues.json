@@ -1,10 +1,10 @@
 [
    {
-      "method": "foo",
+      "methodName": "foo",
       "stacktrace": [],
       "kind": "RETURN_VALUE",
       "index": -1,
       "descriptor": "()Ljava/lang/Object;",
-      "class": "nz.ac.wgtn.ecs.semdiff.example1.upstream.Main"
+      "className": "nz.ac.wgtn.ecs.semdiff.example1.upstream.Main"
    }
 ]

@@ -3,7 +3,6 @@
 ## script to refine fetched nullability issues, rejecting some and inferring additional ones
 ## @author jens dietrich
 
-## TODO pass variables as parameters, using this as template for other experiments
 NAME=$1
 PREFIX=$2
 ROOT="$(pwd)"

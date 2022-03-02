@@ -21,11 +21,11 @@ public class Issue1Test {
     public void test() throws Exception {
         File in = new File(Issue1Test.class.getResource("/issue1/").getFile());
         File out = new File(TMP,"issue1/");
-        File nullableSpec = new File(Issue1Test.class.getResource("/issue1/").getFile());
+        File issueFolder = new File(Issue1Test.class.getResource("/issue1/").getFile());
         MvnProjectAnnotator.main(new String[] {
                 "-"+MvnProjectAnnotator.ARG_INPUT,in.getAbsolutePath(),
                 "-"+MvnProjectAnnotator.ARG_OUTPUT,out.getAbsolutePath(),
-                "-"+MvnProjectAnnotator.ARG_ISSUES,nullableSpec.getAbsolutePath()
+                "-"+MvnProjectAnnotator.ARG_ISSUES,issueFolder.getAbsolutePath()
         });
     }
 }

@@ -1,6 +1,7 @@
 package nz.ac.wgtn.nullannoinference.annotator;
 
 import com.github.javaparser.ast.body.MethodDeclaration;
+import nz.ac.wgtn.nullannoinference.commons.Issue;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -17,7 +18,7 @@ public class AnonInnerClassesTests extends AbstractInjectAnnotationTest {
         // files are irrelevant
         File in = new File(BasicTests.class.getResource("/Class4.java").getFile());
         File out = new File(TMP,"Class4a.java");
-        NullableSpec spec = new NullableSpec("Class4$Inner$1", "toString","()Ljava/lang/String;", NullableSpec.Kind.RETURN_VALUE, -1);
+        Issue spec = new Issue("Class4$Inner$1", "toString","()Ljava/lang/String;", null, Issue.IssueType.RETURN_VALUE);
         int count = annotator.annotateMethod(in,out,Set.of(spec));
         assertTrue(count>0);
 
@@ -35,7 +36,7 @@ public class AnonInnerClassesTests extends AbstractInjectAnnotationTest {
         // files are irrelevant
         File in = new File(BasicTests.class.getResource("/Class4.java").getFile());
         File out = new File(TMP,"Class4b.java");
-        NullableSpec spec = new NullableSpec("Class4$2", "compare","(Ljava/lang/String;Ljava/lang/String;)I", NullableSpec.Kind.ARGUMENT, 0);
+        Issue spec = new Issue("Class4$2", "compare","(Ljava/lang/String;Ljava/lang/String;)I", null, Issue.IssueType.ARGUMENT, 0);
         int count = annotator.annotateMethod(in,out,Set.of(spec));
         assertTrue(count>0);
 

@@ -2,6 +2,7 @@ package nz.ac.wgtn.nullannoinference.annotator;
 
 import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
+import nz.ac.wgtn.nullannoinference.commons.Issue;
 import org.apache.commons.cli.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Logger;
@@ -95,29 +96,28 @@ public class MvnProjectAnnotator {
         POMDependencyInjector pomDependencyInjector = new POMDependencyInjector(annotationProvider);
 
         // check nullable options
-        Collection<File> nullableSpecsFiles = FileUtils.listFiles(issueFolder,new String[]{"json"},true);
-        nullableSpecsFiles = collectSpecsRecursively(nullableSpecsFiles);
+        Collection<File> issueFiles = FileUtils.listFiles(issueFolder,new String[]{"json"},true);
         LOGGER.info("Using nullable specs from the following files:");
-        for (File spec:nullableSpecsFiles) {
+        for (File spec:issueFiles) {
             LOGGER.info("\t"+spec.getAbsolutePath());
         }
 
-        Preconditions.checkArgument(nullableSpecsFiles.size()>0,"no matching null spec definition files found");
-        nullableSpecsFiles.stream().forEach(f -> Preconditions.checkArgument(f.exists()));
+        Preconditions.checkArgument(issueFiles.size()>0,"no matching null spec definition files found");
+        issueFiles.stream().forEach(f -> Preconditions.checkArgument(f.exists()));
 
-        Set<NullableSpec> nullableSpecs = new HashSet<>();
-        nullableSpecsFiles.stream().forEach(f -> {
+        Set<Issue> issues = new HashSet<>();
+        issueFiles.stream().forEach(f -> {
             try {
-                NullableSpec[] array = new Gson().fromJson(new FileReader(f), NullableSpec[].class);
-                for (NullableSpec spec:array) {
-                    nullableSpecs.add(spec);
+                Issue[] array = new Gson().fromJson(new FileReader(f), Issue[].class);
+                for (Issue spec:array) {
+                    issues.add(spec);
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         });
 
-        LOGGER.info(nullableSpecs.size() + " nullable specs found");
+        LOGGER.info(issues.size() + " nullable specs found");
 
         listeners.forEach(l -> l.beforeAnnotationTransformation(inputProjectFolder,outputProjectFolder));
         Files.walkFileTree(inputProjectFolder.toPath(), new FileVisitor<Path>() {
@@ -155,7 +155,7 @@ public class MvnProjectAnnotator {
                 if (file.toString().endsWith(".java")) {
                     int annotationsAdded = 0;
                     try {
-                        annotationsAdded = annotationsAdded + classAnnotator.annotateMethod(file.toFile(),copy,nullableSpecs);
+                        annotationsAdded = annotationsAdded + classAnnotator.annotateMethod(file.toFile(),copy,issues);
                         transformed = annotationsAdded>0;
                     }
                     catch (AmbiguousAnonymousInnerClassResolutionException | JavaParserFailedException x) {
@@ -190,13 +190,7 @@ public class MvnProjectAnnotator {
     }
 
     private static Predicate<File> SPEC_FILE_FILTER = f -> f.exists() && !f.isDirectory() && f.getName().endsWith(".json");
-    private static List<File> collectSpecsRecursively(Collection<File> nullableSpecsFiles) {
-        List<File> files = new ArrayList<>();
-        for (File file:nullableSpecsFiles) {
-            addSpec(files,file);
-        }
-        return files;
-    }
+
     private static void addSpec(List<File> files,File specOfFolder) {
         if (SPEC_FILE_FILTER.test(specOfFolder)) {
             files.add(specOfFolder);

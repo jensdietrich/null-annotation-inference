@@ -1,6 +1,7 @@
 package nz.ac.wgtn.nullannoinference.annotator;
 
 import com.github.javaparser.ast.body.MethodDeclaration;
+import nz.ac.wgtn.nullannoinference.commons.Issue;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -17,7 +18,7 @@ public class BasicTests extends AbstractInjectAnnotationTest {
     public void testAnnotationOfReturnType() throws Exception {
         File in = new File(BasicTests.class.getResource("/Class1.java").getFile());
         File out = new File(TMP,"Class1a.java");
-        NullableSpec spec = new NullableSpec("Class1", "foo","(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;", NullableSpec.Kind.RETURN_VALUE, -1);
+        Issue spec = new Issue("Class1", "foo","(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;", null ,Issue.IssueType.RETURN_VALUE);
         int count = this.annotator.annotateMethod(in,out,Set.of(spec));
         assertEquals(1,count);
         assertTrue(out.exists());
@@ -31,7 +32,7 @@ public class BasicTests extends AbstractInjectAnnotationTest {
     public void testAnnotationOfArg0Type() throws Exception {
         File in = new File(BasicTests.class.getResource("/Class1.java").getFile());
         File out = new File(TMP,"Class1b.java");
-        NullableSpec spec = new NullableSpec("Class1", "foo","(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;", NullableSpec.Kind.ARGUMENT, 0);
+        Issue spec = new Issue("Class1", "foo","(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;", null,Issue.IssueType.ARGUMENT, 0);
         int count = annotator.annotateMethod(in,out,Set.of(spec));
         assertEquals(1,count);
         assertTrue(out.exists());
@@ -45,7 +46,7 @@ public class BasicTests extends AbstractInjectAnnotationTest {
     public void testAnnotationOfArg1Type() throws Exception {
         File in = new File(BasicTests.class.getResource("/Class1.java").getFile());
         File out = new File(TMP,"Class1c.java");
-        NullableSpec spec = new NullableSpec("Class1", "foo","(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;", NullableSpec.Kind.ARGUMENT, 1);
+        Issue spec = new Issue("Class1", "foo","(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;",null,Issue.IssueType.ARGUMENT, 1);
         int count = annotator.annotateMethod(in,out,Set.of(spec));
         assertEquals(1,count);
         assertTrue(out.exists());
@@ -59,9 +60,9 @@ public class BasicTests extends AbstractInjectAnnotationTest {
     public void testAnnotationOfAllArgAndReturnTypes() throws Exception {
         File in = new File(BasicTests.class.getResource("/Class1.java").getFile());
         File out = new File(TMP,"Class1d.java");
-        NullableSpec spec1 = new NullableSpec("Class1", "foo","(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;", NullableSpec.Kind.ARGUMENT, 0);
-        NullableSpec spec2 = new NullableSpec("Class1", "foo","(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;", NullableSpec.Kind.ARGUMENT, 1);
-        NullableSpec spec3 = new NullableSpec("Class1", "foo","(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;", NullableSpec.Kind.RETURN_VALUE, -1);
+        Issue spec1 = new Issue("Class1", "foo","(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;", null, Issue.IssueType.ARGUMENT, 0);
+        Issue spec2 = new Issue("Class1", "foo","(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;", null, Issue.IssueType.ARGUMENT, 1);
+        Issue spec3 = new Issue("Class1", "foo","(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;",null,  Issue.IssueType.RETURN_VALUE);
 
         int count = annotator.annotateMethod(in,out,Set.of(spec1,spec2,spec3));
         assertEquals(3,count);

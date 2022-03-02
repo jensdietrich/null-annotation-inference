@@ -1,6 +1,7 @@
 package nz.ac.wgtn.nullannoinference.annotator;
 
 import com.github.javaparser.ast.body.MethodDeclaration;
+import nz.ac.wgtn.nullannoinference.commons.Issue;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -15,7 +16,7 @@ public class InnerClassesTests extends AbstractInjectAnnotationTest {
     public void test1() throws Exception {
         File in = new File(BasicTests.class.getResource("/Class3.java").getFile());
         File out = new File(TMP,"Class3a.java");
-        NullableSpec spec = new NullableSpec("Class3$Inner1", "foo","()Ljava/lang/Object;", NullableSpec.Kind.RETURN_VALUE, -1);
+        Issue spec = new Issue("Class3$Inner1", "foo","()Ljava/lang/Object;", null, Issue.IssueType.RETURN_VALUE);
         int count = this.annotator.annotateMethod(in,out,Set.of(spec));
         assertEquals(1,count);
         assertTrue(out.exists());
@@ -45,7 +46,7 @@ public class InnerClassesTests extends AbstractInjectAnnotationTest {
     public void test2() throws Exception {
         File in = new File(BasicTests.class.getResource("/Class3.java").getFile());
         File out = new File(TMP,"Class3b.java");
-        NullableSpec spec = new NullableSpec("Class3$Inner2", "foo","()Ljava/lang/Object;", NullableSpec.Kind.RETURN_VALUE, -1);
+        Issue spec = new Issue("Class3$Inner2", "foo","()Ljava/lang/Object;", null, Issue.IssueType.RETURN_VALUE);
         int count = this.annotator.annotateMethod(in,out,Set.of(spec));
         assertEquals(1,count);
         assertTrue(out.exists());
@@ -75,7 +76,7 @@ public class InnerClassesTests extends AbstractInjectAnnotationTest {
     public void test3() throws Exception {
         File in = new File(BasicTests.class.getResource("/Class3.java").getFile());
         File out = new File(TMP,"Class3b.java");
-        NullableSpec spec = new NullableSpec("Class3$Inner3$Inner31", "foo","()Ljava/lang/Object;", NullableSpec.Kind.RETURN_VALUE, -1);
+        Issue spec = new Issue("Class3$Inner3$Inner31", "foo","()Ljava/lang/Object;", null, Issue.IssueType.RETURN_VALUE);
         int count = this.annotator.annotateMethod(in,out,Set.of(spec));
         assertEquals(1,count);
         assertTrue(out.exists());

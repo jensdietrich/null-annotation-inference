@@ -13,8 +13,8 @@ import com.github.javaparser.ast.expr.ObjectCreationExpr;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import com.google.common.base.Preconditions;
 import japicmp.util.MethodDescriptorParser;
+import nz.ac.wgtn.nullannoinference.commons.Issue;
 import org.apache.commons.io.FileUtils;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.File;
@@ -35,7 +35,6 @@ public class ClassAnnotator {
 
     private static Pattern NUM_REGEX = Pattern.compile("[0-9]+");
 
-
     public ClassAnnotator(@Nonnull NullableAnnotationProvider annotationSpec) {
         this.annotationSpec = annotationSpec;
     }
@@ -55,12 +54,12 @@ public class ClassAnnotator {
      *
      * @param originalJavaFile
      * @param transformedJavaFile
-     * @param transformationSpecs
+     * @param issues
      * @return the number of annotations added
      * @throws IOException
      * @throws AmbiguousAnonymousInnerClassResolutionException
      */
-    public int annotateMethod(@Nonnull  File originalJavaFile, @Nonnull File transformedJavaFile, Set<NullableSpec> transformationSpecs) throws IOException, AmbiguousAnonymousInnerClassResolutionException, JavaParserFailedException {
+    public int annotateMethod(@Nonnull  File originalJavaFile, @Nonnull File transformedJavaFile, Set<Issue> issues) throws IOException, AmbiguousAnonymousInnerClassResolutionException, JavaParserFailedException {
         Preconditions.checkArgument(originalJavaFile.exists());
         int annotationsAddedCounter = 0;
         ParseResult<CompilationUnit> result = new JavaParser().parse(originalJavaFile);
@@ -73,8 +72,8 @@ public class ClassAnnotator {
             throw new JavaParserFailedException("Error parsing " + originalJavaFile);
         }
         CompilationUnit cu = result.getResult().get();
-        for (NullableSpec tranformationSpec:transformationSpecs){
-            annotationsAddedCounter = annotationsAddedCounter + annotateMethod(cu, tranformationSpec.getClassName(), tranformationSpec.getMethodName(), tranformationSpec.getDescriptor(), tranformationSpec.getIndex()) ;
+        for (Issue issue:issues){
+            annotationsAddedCounter = annotationsAddedCounter + annotateMethod(cu, issue.getClassName(), issue.getMethodName(), issue.getDescriptor(), issue.getKind()==Issue.IssueType.RETURN_VALUE?-1:issue.getArgsIndex()) ;
         }
         if (annotationsAddedCounter>0) {
 
@@ -110,7 +109,6 @@ public class ClassAnnotator {
      * @throws AmbiguousAnonymousInnerClassResolutionException
      */
     private int annotateMethod(@Nonnull CompilationUnit cu, @Nonnull String typeName, @Nonnull String methodName, @Nonnull String descriptor, int argPosition) throws IOException, AmbiguousAnonymousInnerClassResolutionException {
-
 
         String localTypeName = typeName.contains(".")
                 ? typeName.substring(typeName.lastIndexOf(".") + 1, typeName.length())
