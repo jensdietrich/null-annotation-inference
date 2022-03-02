@@ -1,5 +1,7 @@
 package nz.ac.wgtn.nullannoinference.annotator;
 
+import nz.ac.wgtn.nullannoinference.commons.Issue;
+
 import java.io.File;
 
 /**
@@ -10,7 +12,7 @@ public interface AnnotationListener {
     void beforeAnnotationTransformation(File originalProject,File transformedProject);
     void afterAnnotationTransformation(File originalProject,File transformedProject);
     void fileCopied(File originalFile, File copy);
-    void annotationsAdded(File originalFile, File transformedFile, int annotationsAddedCount);
+    void annotationAdded(File originalFile, File transformedFile,String className, String methodOtFieldName, String descriptor, int index, Issue.IssueType kind);
     void annotationFailed(File originalFile, String reason);
     void configFileTransformed(File toFile, File copy);
 }

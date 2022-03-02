@@ -8,3 +8,5 @@ nullannoinference-commons/target
 experiments/issues-inferred-old
 experiments/issues-collected
 experiments/issues-inferred
+nullannoinference-refiner.jar
+nullannoinference-annotator.jar

@@ -155,17 +155,16 @@ public class MvnProjectAnnotator {
                 if (file.toString().endsWith(".java")) {
                     int annotationsAdded = 0;
                     try {
-                        annotationsAdded = annotationsAdded + classAnnotator.annotateMethod(file.toFile(),copy,issues);
+                        annotationsAdded = annotationsAdded + classAnnotator.annotateMethods(file.toFile(),copy,issues,listeners);
                         transformed = annotationsAdded>0;
                     }
-                    catch (AmbiguousAnonymousInnerClassResolutionException | JavaParserFailedException x) {
+                    catch (JavaParserFailedException x) {
                         listeners.forEach(l -> l.annotationFailed(file.toFile(),x.getMessage()));
                     }
 
                     if (transformed) {
                         int annotationsAdded2 = annotationsAdded; // for use in lambda
                         LOGGER.info("" + file.toString() + " has been transformed, " + annotationsAdded2 + " annotations have been added");
-                        listeners.forEach(l -> l.annotationsAdded(file.toFile(),copy,annotationsAdded2));
                     }
                 }
 

@@ -4,12 +4,10 @@ import com.github.javaparser.JavaParser;
 import com.github.javaparser.ParseResult;
 import com.github.javaparser.Problem;
 import com.github.javaparser.ast.*;
-import com.github.javaparser.ast.body.BodyDeclaration;
-import com.github.javaparser.ast.body.MethodDeclaration;
-import com.github.javaparser.ast.body.Parameter;
-import com.github.javaparser.ast.body.TypeDeclaration;
+import com.github.javaparser.ast.body.*;
 import com.github.javaparser.ast.expr.MarkerAnnotationExpr;
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
+import com.github.javaparser.ast.type.Type;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import com.google.common.base.Preconditions;
 import japicmp.util.MethodDescriptorParser;
@@ -50,16 +48,8 @@ public class ClassAnnotator {
         this.annotationSpec = annotationSpec;
     }
 
-    /**
-     *
-     * @param originalJavaFile
-     * @param transformedJavaFile
-     * @param issues
-     * @return the number of annotations added
-     * @throws IOException
-     * @throws AmbiguousAnonymousInnerClassResolutionException
-     */
-    public int annotateMethod(@Nonnull  File originalJavaFile, @Nonnull File transformedJavaFile, Set<Issue> issues) throws IOException, AmbiguousAnonymousInnerClassResolutionException, JavaParserFailedException {
+
+    public int annotateMethods(@Nonnull File originalJavaFile, @Nonnull File transformedJavaFile, Set<Issue> issues,List<AnnotationListener> listeners) throws IOException, JavaParserFailedException {
         Preconditions.checkArgument(originalJavaFile.exists());
         int annotationsAddedCounter = 0;
         ParseResult<CompilationUnit> result = new JavaParser().parse(originalJavaFile);
@@ -73,7 +63,20 @@ public class ClassAnnotator {
         }
         CompilationUnit cu = result.getResult().get();
         for (Issue issue:issues){
-            annotationsAddedCounter = annotationsAddedCounter + annotateMethod(cu, issue.getClassName(), issue.getMethodName(), issue.getDescriptor(), issue.getKind()==Issue.IssueType.RETURN_VALUE?-1:issue.getArgsIndex()) ;
+            try {
+                if (issue.getKind()==Issue.IssueType.RETURN_VALUE || issue.getKind()==Issue.IssueType.ARGUMENT) {
+                    annotationsAddedCounter = annotationsAddedCounter + annotateMethods(originalJavaFile, transformedJavaFile, cu, issue.getClassName(), issue.getMethodName(), issue.getDescriptor(), issue.getKind() == Issue.IssueType.RETURN_VALUE ? -1 : issue.getArgsIndex(), listeners);
+                }
+                else if (issue.getKind()==Issue.IssueType.RETURN_VALUE) {
+                    annotationsAddedCounter = annotationsAddedCounter + annotateFields(originalJavaFile, transformedJavaFile, cu, issue.getClassName(), issue.getMethodName(), issue.getDescriptor(), listeners);
+                }
+                else {
+                    LOGGER.warn("unknown issue type encountered: " + issue.getKind());
+                }
+            }
+            catch (AmbiguousAnonymousInnerClassResolutionException x) {
+                listeners.stream().forEach(l -> l.annotationFailed(originalJavaFile,AmbiguousAnonymousInnerClassResolutionException.class.getName()));
+            }
         }
         if (annotationsAddedCounter>0) {
 
@@ -96,37 +99,62 @@ public class ClassAnnotator {
         return annotationsAddedCounter;
     }
 
+    private String getLocalTypeName(@Nonnull String typeName) {
+        return typeName.contains(".")
+            ? typeName.substring(typeName.lastIndexOf(".") + 1, typeName.length())
+            : typeName;
+    }
 
-    /**
-     *
-     * @param cu
-     * @param typeName
-     * @param methodName
-     * @param descriptor
-     * @param argPosition
-     * @return  the number of annotations added
-     * @throws IOException
-     * @throws AmbiguousAnonymousInnerClassResolutionException
-     */
-    private int annotateMethod(@Nonnull CompilationUnit cu, @Nonnull String typeName, @Nonnull String methodName, @Nonnull String descriptor, int argPosition) throws IOException, AmbiguousAnonymousInnerClassResolutionException {
-
-        String localTypeName = typeName.contains(".")
-                ? typeName.substring(typeName.lastIndexOf(".") + 1, typeName.length())
-                : typeName;
-
-        String packageName = typeName.contains(".")
-                ? typeName.substring(0,typeName.lastIndexOf(".")) : "";
-
+    private boolean checkPackageName(@Nonnull CompilationUnit cu, @Nonnull String typeName) {
+        String packageName = typeName.contains(".") ? typeName.substring(0,typeName.lastIndexOf(".")) : "";
         Optional<PackageDeclaration> pckDecl = cu.getPackageDeclaration();
         String declaredPackageName = pckDecl.isPresent() ? pckDecl.get().getNameAsString() : "";
+        return packageName.equals(declaredPackageName);
+    }
 
-        if (!packageName.equals(declaredPackageName)) {
+    private int annotateFields(@Nonnull File originalJavaFile, @Nonnull File transformedJavaFile,@Nonnull CompilationUnit cu, @Nonnull String typeName, @Nonnull String fieldName, @Nonnull String descriptor,List<AnnotationListener> listeners) throws AmbiguousAnonymousInnerClassResolutionException {
+
+        if (!checkPackageName(cu,typeName)) {
+            return 0;
+        }
+        String localTypeName = getLocalTypeName(typeName);
+
+        boolean hasAnonymInnerClass = Stream.of(localTypeName.split("\\$")).anyMatch(name -> NUM_REGEX.matcher(name).matches());
+        int annotationAddedCount = 0;
+        FieldDeclaration field = null;
+        if (hasAnonymInnerClass) {
+            field = locateFieldInAnoInnerClass(cu,typeName, fieldName, descriptor);
+        }
+        else {
+            field = locateField(cu, localTypeName, fieldName, descriptor);
+        }
+
+        if (field==null) {
             return 0;
         }
 
-        boolean hasAnonymInnerClass = Stream.of(localTypeName.split("\\$"))
-                .anyMatch(name -> NUM_REGEX.matcher(name).matches());
+        boolean hasAnnotation = field.getAnnotations().stream()
+            .map(a -> a.getNameAsString())
+            .anyMatch(n -> n.equals(annotationSpec.getNullableAnnotationName()));
 
+        if (!hasAnnotation) {
+            field.addAnnotation(new MarkerAnnotationExpr(annotationSpec.getNullableAnnotationName()));
+            annotationAddedCount = annotationAddedCount+1;
+            listeners.stream().forEach(l -> l.annotationAdded(originalJavaFile,transformedJavaFile,typeName,fieldName,descriptor,-1, Issue.IssueType.FIELD));
+        }
+
+        return annotationAddedCount;
+    }
+
+
+    private int annotateMethods(@Nonnull File originalJavaFile, @Nonnull File transformedJavaFile,@Nonnull CompilationUnit cu, @Nonnull String typeName, @Nonnull String methodName, @Nonnull String descriptor, int argPosition,List<AnnotationListener> listeners) throws AmbiguousAnonymousInnerClassResolutionException {
+
+        if (!checkPackageName(cu,typeName)) {
+            return 0;
+        }
+        String localTypeName = getLocalTypeName(typeName);
+
+        boolean hasAnonymInnerClass = Stream.of(localTypeName.split("\\$")).anyMatch(name -> NUM_REGEX.matcher(name).matches());
         int annotationAddedCount = 0;
         MethodDeclaration method = null;
         if (hasAnonymInnerClass) {
@@ -146,24 +174,33 @@ public class ClassAnnotator {
                     if (!hasAnnotation) {
                         param.addAnnotation(new MarkerAnnotationExpr(annotationSpec.getNullableAnnotationName()));
                         annotationAddedCount = annotationAddedCount+1;
+                        listeners.stream().forEach(l -> l.annotationAdded(originalJavaFile,transformedJavaFile,typeName,methodName,descriptor,argPosition, Issue.IssueType.ARGUMENT));
                     }
                 }
             }
-
             // return type
             if (argPosition==-1) {
                 boolean hasAnnotation = method.getAnnotations().stream()
-                        .map(a -> a.getNameAsString())
-                        .anyMatch(n -> n.equals(annotationSpec.getNullableAnnotationName()));
+                    .map(a -> a.getNameAsString())
+                    .anyMatch(n -> n.equals(annotationSpec.getNullableAnnotationName()));
                 if (!hasAnnotation) {
                     method.addAnnotation(new MarkerAnnotationExpr(annotationSpec.getNullableAnnotationName()));
                     annotationAddedCount = annotationAddedCount+1;
+                    listeners.stream().forEach(l -> l.annotationAdded(originalJavaFile,transformedJavaFile,typeName,methodName,descriptor,argPosition, Issue.IssueType.RETURN_VALUE));
                 }
             }
         }
-
         return annotationAddedCount;
+    }
 
+    static @Nullable FieldDeclaration locateField(@Nonnull  CompilationUnit cu,@Nonnull  String className,@Nonnull  String fieldName,@Nonnull  String descriptor)   {
+        for (TypeDeclaration type:cu.getTypes()) {
+            FieldDeclaration field = locateField(type,className,fieldName,descriptor,new Stack<>());
+            if (field!=null) {
+                return field;
+            }
+        }
+        return null;
     }
 
     // visibility to be used by tests
@@ -176,6 +213,35 @@ public class ClassAnnotator {
         }
         return null;
     }
+
+    static @Nullable FieldDeclaration locateField(@Nonnull  TypeDeclaration type, @Nonnull  String className, @Nonnull  String fieldName, @Nonnull  String descriptor, @Nonnull  Stack<String> innerClassStack)   {
+        Stack<String> innerClassStack2 = new Stack<>();
+        innerClassStack2.addAll(innerClassStack);
+        innerClassStack2.add(type.getNameAsString());
+        String qClassName = innerClassStack2.stream().collect(Collectors.joining("$"));
+        if (className.equals(qClassName)) {
+            List<FieldDeclaration> fields = type.getFields();
+            Optional<FieldDeclaration> wrappedField = fields.stream()
+                .filter(fld -> fld.getVariables().size()==1) // annotations are attached to fields, not individual variables
+                .filter(fld -> fld.getVariables().get(0).getNameAsString().equals(fieldName))
+                .findFirst();
+            return wrappedField.get();
+        }
+        else {
+            // check inner classes
+            for (Object member:type.getMembers()) {
+                if (member instanceof TypeDeclaration) {
+                    TypeDeclaration innerClass = (TypeDeclaration)member;
+                    FieldDeclaration field = locateField(innerClass,className,fieldName,descriptor,innerClassStack2);
+                    if (field!=null) {
+                        return field;
+                    }
+                }
+            }
+            return null;
+        }
+    }
+
 
     static @Nullable MethodDeclaration locateMethod(@Nonnull  TypeDeclaration type, @Nonnull  String className, @Nonnull  String methodName, @Nonnull  String descriptor, @Nonnull  Stack<String> innerClassStack)   {
         Stack<String> innerClassStack2 = new Stack<>();
@@ -238,7 +304,45 @@ public class ClassAnnotator {
         }
     }
 
-    static boolean nonAnoTypePartMatches(@Nonnull  MethodDeclaration method, @Nonnull  String typeName)   {
+    static @Nullable FieldDeclaration locateFieldInAnoInnerClass(@Nonnull  CompilationUnit cu, @Nonnull String typeName, @Nonnull  String fieldName, @Nonnull  String descriptor) throws AmbiguousAnonymousInnerClassResolutionException {
+        final List<FieldDeclaration> matchingFields = new ArrayList<>(); // deliberate, to detect duplicates later
+        cu.accept(new VoidVisitorAdapter<Object>() {
+            @Override
+            public void visit(ObjectCreationExpr n, Object arg) {
+                super.visit(n, arg);
+                Optional<NodeList<BodyDeclaration<?>>> optClassBody = n.getAnonymousClassBody();
+                if (optClassBody.isPresent()) {
+                    List<FieldDeclaration> matchingFields = optClassBody.get().stream()
+                        .filter(bd -> bd.isFieldDeclaration())
+                        .map(bd -> bd.asFieldDeclaration())
+                        .filter(fld -> fld.getVariables().size()==1) // annotations only to be attached single variable
+                        .filter(fld -> fld.getVariables().get(0).getNameAsString().equals(fieldName))
+                        .filter(fld -> typeMatches(fld.getVariables().get(0).getType(),descriptor))
+                        .filter(fld -> nonAnoTypePartMatches(fld,typeName))
+                        .collect(Collectors.toList());
+                }
+            }
+        },null);
+
+        if (matchingFields.size()==0) {
+            return null;
+        }
+        else if (matchingFields.size()==1) {
+            return matchingFields.get(0);
+        }
+        else {
+            String qMethodName = typeName + "::" + fieldName + descriptor;
+            throw new AmbiguousAnonymousInnerClassResolutionException("Ambiguous resolution on anonymous inner class for method: " + qMethodName);
+        }
+    }
+
+    private static boolean typeMatches(Type type, String descriptor) {
+        System.out.println("TODO: ClassAnnotator::typeMatches");
+        return false;
+    }
+
+
+    static boolean nonAnoTypePartMatches(@Nonnull  Node method, @Nonnull  String typeName)   {
         List<String> types = new ArrayList<>();
         collectContext(types,method);
         String prefix = types.stream().collect(Collectors.joining("$"));
@@ -254,7 +358,6 @@ public class ClassAnnotator {
             }
         }
         String typeNameWithoutAnoParts = tokens.stream().collect(Collectors.joining("$"));
-
         return typeNameWithoutAnoParts.equals(prefix);
     }
 

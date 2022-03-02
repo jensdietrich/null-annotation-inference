@@ -5,6 +5,7 @@ import nz.ac.wgtn.nullannoinference.commons.Issue;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -19,7 +20,7 @@ public class AnonInnerClassesTests extends AbstractInjectAnnotationTest {
         File in = new File(BasicTests.class.getResource("/Class4.java").getFile());
         File out = new File(TMP,"Class4a.java");
         Issue spec = new Issue("Class4$Inner$1", "toString","()Ljava/lang/String;", null, Issue.IssueType.RETURN_VALUE);
-        int count = annotator.annotateMethod(in,out,Set.of(spec));
+        int count = annotator.annotateMethods(in,out,Set.of(spec), Collections.emptyList());
         assertTrue(count>0);
 
         List<MethodDeclaration> methods = findAnoInnerMethods(out,"Class4$Inner$1","toString","()Ljava/lang/String;");
@@ -37,7 +38,7 @@ public class AnonInnerClassesTests extends AbstractInjectAnnotationTest {
         File in = new File(BasicTests.class.getResource("/Class4.java").getFile());
         File out = new File(TMP,"Class4b.java");
         Issue spec = new Issue("Class4$2", "compare","(Ljava/lang/String;Ljava/lang/String;)I", null, Issue.IssueType.ARGUMENT, 0);
-        int count = annotator.annotateMethod(in,out,Set.of(spec));
+        int count = annotator.annotateMethods(in,out,Set.of(spec),Collections.emptyList());
         assertTrue(count>0);
 
         List<MethodDeclaration> methods = findAnoInnerMethods(out,"Class4$2","compare","(Ljava/lang/String;Ljava/lang/String;)I");

@@ -5,6 +5,7 @@ import nz.ac.wgtn.nullannoinference.commons.Issue;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -19,7 +20,7 @@ public class BasicTests extends AbstractInjectAnnotationTest {
         File in = new File(BasicTests.class.getResource("/Class1.java").getFile());
         File out = new File(TMP,"Class1a.java");
         Issue spec = new Issue("Class1", "foo","(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;", null ,Issue.IssueType.RETURN_VALUE);
-        int count = this.annotator.annotateMethod(in,out,Set.of(spec));
+        int count = this.annotator.annotateMethods(in,out,Set.of(spec), Collections.EMPTY_LIST);
         assertEquals(1,count);
         assertTrue(out.exists());
 
@@ -33,7 +34,7 @@ public class BasicTests extends AbstractInjectAnnotationTest {
         File in = new File(BasicTests.class.getResource("/Class1.java").getFile());
         File out = new File(TMP,"Class1b.java");
         Issue spec = new Issue("Class1", "foo","(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;", null,Issue.IssueType.ARGUMENT, 0);
-        int count = annotator.annotateMethod(in,out,Set.of(spec));
+        int count = annotator.annotateMethods(in,out,Set.of(spec), Collections.EMPTY_LIST);
         assertEquals(1,count);
         assertTrue(out.exists());
 
@@ -47,7 +48,7 @@ public class BasicTests extends AbstractInjectAnnotationTest {
         File in = new File(BasicTests.class.getResource("/Class1.java").getFile());
         File out = new File(TMP,"Class1c.java");
         Issue spec = new Issue("Class1", "foo","(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;",null,Issue.IssueType.ARGUMENT, 1);
-        int count = annotator.annotateMethod(in,out,Set.of(spec));
+        int count = annotator.annotateMethods(in,out,Set.of(spec), Collections.EMPTY_LIST);
         assertEquals(1,count);
         assertTrue(out.exists());
 
@@ -64,7 +65,7 @@ public class BasicTests extends AbstractInjectAnnotationTest {
         Issue spec2 = new Issue("Class1", "foo","(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;", null, Issue.IssueType.ARGUMENT, 1);
         Issue spec3 = new Issue("Class1", "foo","(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;",null,  Issue.IssueType.RETURN_VALUE);
 
-        int count = annotator.annotateMethod(in,out,Set.of(spec1,spec2,spec3));
+        int count = annotator.annotateMethods(in,out,Set.of(spec1,spec2,spec3), Collections.EMPTY_LIST);
         assertEquals(3,count);
         assertTrue(out.exists());
 
