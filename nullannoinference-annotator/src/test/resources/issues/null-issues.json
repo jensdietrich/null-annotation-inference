@@ -5,6 +5,6 @@
       "kind": "RETURN_VALUE",
       "index": -1,
       "descriptor": "()Ljava/lang/Object;",
-      "className": "nz.ac.wgtn.ecs.semdiff.example1.upstream.Main"
+      "className": "nz.ac.wgtn.nullannoinference.annotator.testdata1.Main"
    }
 ]

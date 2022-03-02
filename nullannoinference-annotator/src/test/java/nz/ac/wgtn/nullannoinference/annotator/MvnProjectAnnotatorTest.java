@@ -32,20 +32,20 @@ public class MvnProjectAnnotatorTest {
                 "-"+MvnProjectAnnotator.ARG_ISSUES,nullableSpec.getAbsolutePath()
         });
 
-        assertTrue(new File(TMP,"project/src/main/java/nz/ac/wgtn/ecs/semdiff/example1/upstream/Main.java").exists());
-        assertTrue(new File(TMP,"project/src/main/java/nz/ac/wgtn/ecs/semdiff/example1/upstream/Main2.java").exists());
+        assertTrue(new File(TMP,"project/src/main/java/nz/ac/wgtn/nullannoinference/annotator/testdata1/Main.java").exists());
+        assertTrue(new File(TMP,"project/src/main/java/nz/ac/wgtn/nullannoinference/annotator/testdata1/Main2.java").exists());
         assertTrue(new File(TMP,"project/pom.xml").exists());
         assertTrue(new File(TMP,"project/src/main/resources/test.txt").exists());
 
         // compare content
-        String mainOld = IOUtils.toString(new FileReader(new File(in,"src/main/java/nz/ac/wgtn/ecs/semdiff/example1/upstream/Main.java")));
-        String main2Old = IOUtils.toString(new FileReader(new File(in,"src/main/java/nz/ac/wgtn/ecs/semdiff/example1/upstream/Main2.java")));
+        String mainOld = IOUtils.toString(new FileReader(new File(in,"src/main/java/nz/ac/wgtn/nullannoinference/annotator/testdata1/Main.java")));
+        String main2Old = IOUtils.toString(new FileReader(new File(in,"src/main/java/nz/ac/wgtn/nullannoinference/annotator/testdata1/Main2.java")));
         String pomOld = IOUtils.toString(new FileReader(new File(in,"pom.xml")));
         String resourceOld = IOUtils.toString(new FileReader(new File(in,"src/main/resources/test.txt")));
 
         // compare content
-        String mainNew = IOUtils.toString(new FileReader(new File(TMP,"project/src/main/java/nz/ac/wgtn/ecs/semdiff/example1/upstream/Main.java")));
-        String main2New = IOUtils.toString(new FileReader(new File(TMP,"project/src/main/java/nz/ac/wgtn/ecs/semdiff/example1/upstream/Main2.java")));
+        String mainNew = IOUtils.toString(new FileReader(new File(TMP,"project/src/main/java/nz/ac/wgtn/nullannoinference/annotator/testdata1/Main.java")));
+        String main2New = IOUtils.toString(new FileReader(new File(TMP,"project/src/main/java/nz/ac/wgtn/nullannoinference/annotator/testdata1/Main2.java")));
         String pomNew = IOUtils.toString(new FileReader(new File(TMP,"project/pom.xml")));
         String resourceNew= IOUtils.toString(new FileReader(new File(TMP,"project/src/main/resources/test.txt")));
 
