@@ -21,7 +21,7 @@ public class ImportTests extends AbstractInjectAnnotationTest {
         File in = new File(ImportTests.class.getResource("/Class2a.java").getFile());
         File out = new File(TMP,"Class2a.java");
         Issue spec = new Issue("Class2a", "foo","()Ljava/lang/Object;", null, Issue.IssueType.RETURN_VALUE);
-        int count = this.annotator.annotateMethods(in,out, Set.of(spec), Collections.emptyList());
+        int count = this.annotator.annotateMembers(in,out, Set.of(spec), Collections.emptyList());
         assertEquals(1,count);
         assertTrue(out.exists());
 
@@ -43,7 +43,7 @@ public class ImportTests extends AbstractInjectAnnotationTest {
         File in = new File(ImportTests.class.getResource("/Class2b.java").getFile());
         File out = new File(TMP,"Class2b.java");
         Issue spec = new Issue("Class2b", "foo","()Ljava/lang/Object;", null,Issue.IssueType.RETURN_VALUE);
-        int count = this.annotator.annotateMethods(in,out,Set.of(spec),Collections.emptyList());
+        int count = this.annotator.annotateMembers(in,out,Set.of(spec),Collections.emptyList());
         assertEquals(1,count);
         assertTrue(out.exists());
 
@@ -64,7 +64,7 @@ public class ImportTests extends AbstractInjectAnnotationTest {
         File in = new File(ImportTests.class.getResource("/Class2c.java").getFile());
         File out = new File(TMP,"Class2c.java");
         Issue spec = new Issue("Class2c", "foo","()Ljava/lang/Object;", null,Issue.IssueType.RETURN_VALUE);
-        int count = this.annotator.annotateMethods(in,out,Set.of(spec),Collections.emptyList());
+        int count = this.annotator.annotateMembers(in,out,Set.of(spec),Collections.emptyList());
         assertEquals(1,count);
         assertTrue(out.exists());
 

@@ -49,7 +49,7 @@ public class ClassAnnotator {
     }
 
 
-    public int annotateMethods(@Nonnull File originalJavaFile, @Nonnull File transformedJavaFile, Set<Issue> issues,List<AnnotationListener> listeners) throws IOException, JavaParserFailedException {
+    public int annotateMembers(@Nonnull File originalJavaFile, @Nonnull File transformedJavaFile, Set<Issue> issues, List<AnnotationListener> listeners) throws IOException, JavaParserFailedException {
         Preconditions.checkArgument(originalJavaFile.exists());
         int annotationsAddedCounter = 0;
         ParseResult<CompilationUnit> result = new JavaParser().parse(originalJavaFile);
@@ -65,9 +65,9 @@ public class ClassAnnotator {
         for (Issue issue:issues){
             try {
                 if (issue.getKind()==Issue.IssueType.RETURN_VALUE || issue.getKind()==Issue.IssueType.ARGUMENT) {
-                    annotationsAddedCounter = annotationsAddedCounter + annotateMethods(originalJavaFile, transformedJavaFile, cu, issue.getClassName(), issue.getMethodName(), issue.getDescriptor(), issue.getKind() == Issue.IssueType.RETURN_VALUE ? -1 : issue.getArgsIndex(), listeners);
+                    annotationsAddedCounter = annotationsAddedCounter + annotateMembers(originalJavaFile, transformedJavaFile, cu, issue.getClassName(), issue.getMethodName(), issue.getDescriptor(), issue.getKind() == Issue.IssueType.RETURN_VALUE ? -1 : issue.getArgsIndex(), listeners);
                 }
-                else if (issue.getKind()==Issue.IssueType.RETURN_VALUE) {
+                else if (issue.getKind()==Issue.IssueType.FIELD) {
                     annotationsAddedCounter = annotationsAddedCounter + annotateFields(originalJavaFile, transformedJavaFile, cu, issue.getClassName(), issue.getMethodName(), issue.getDescriptor(), listeners);
                 }
                 else {
@@ -99,7 +99,7 @@ public class ClassAnnotator {
         return annotationsAddedCounter;
     }
 
-    private String getLocalTypeName(@Nonnull String typeName) {
+    static String getLocalTypeName(@Nonnull String typeName) {
         return typeName.contains(".")
             ? typeName.substring(typeName.lastIndexOf(".") + 1, typeName.length())
             : typeName;
@@ -147,7 +147,7 @@ public class ClassAnnotator {
     }
 
 
-    private int annotateMethods(@Nonnull File originalJavaFile, @Nonnull File transformedJavaFile,@Nonnull CompilationUnit cu, @Nonnull String typeName, @Nonnull String methodName, @Nonnull String descriptor, int argPosition,List<AnnotationListener> listeners) throws AmbiguousAnonymousInnerClassResolutionException {
+    private int annotateMembers(@Nonnull File originalJavaFile, @Nonnull File transformedJavaFile, @Nonnull CompilationUnit cu, @Nonnull String typeName, @Nonnull String methodName, @Nonnull String descriptor, int argPosition, List<AnnotationListener> listeners) throws AmbiguousAnonymousInnerClassResolutionException {
 
         if (!checkPackageName(cu,typeName)) {
             return 0;

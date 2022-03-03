@@ -5,6 +5,7 @@ import com.github.javaparser.ParseResult;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.BodyDeclaration;
+import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
@@ -54,9 +55,21 @@ public abstract class AbstractInjectAnnotationTest {
         assertTrue(result.isSuccessful());
         CompilationUnit cu = result.getResult().get();
         assertNotNull(cu);
-        MethodDeclaration method = ClassAnnotator.locateMethod(cu,className,methodName,descriptor);
+        String localTypeName = ClassAnnotator.getLocalTypeName(className);
+        MethodDeclaration method = ClassAnnotator.locateMethod(cu,localTypeName,methodName,descriptor);
         assertNotNull(method);
         return method;
+    }
+
+    protected FieldDeclaration findField(File src, String className, String fieldName, String descriptor) throws FileNotFoundException {
+        ParseResult<CompilationUnit> result = new JavaParser().parse(src);
+        assertTrue(result.isSuccessful());
+        CompilationUnit cu = result.getResult().get();
+        assertNotNull(cu);
+        String localTypeName = ClassAnnotator.getLocalTypeName(className);
+        FieldDeclaration field = ClassAnnotator.locateField(cu,localTypeName,fieldName,descriptor);
+        assertNotNull(field);
+        return field;
     }
 
     protected List<MethodDeclaration> findAnoInnerMethods(File src,String className,String methodName,String descriptor) throws FileNotFoundException {

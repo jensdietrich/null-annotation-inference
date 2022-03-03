@@ -6,5 +6,21 @@
       "index": -1,
       "descriptor": "()Ljava/lang/Object;",
       "className": "nz.ac.wgtn.nullannoinference.annotator.testdata1.Main"
+   },
+   {
+      "methodName": "F1",
+      "stacktrace": [],
+      "kind": "FIELD",
+      "index": -1,
+      "descriptor": "Ljava/lang/String;",
+      "className": "nz.ac.wgtn.nullannoinference.annotator.testdata1.ClassWithFields"
+   },
+   {
+      "methodName": "f1",
+      "stacktrace": [],
+      "kind": "FIELD",
+      "index": -1,
+      "descriptor": "Ljava/lang/String;",
+      "className": "nz.ac.wgtn.nullannoinference.annotator.testdata1.ClassWithFields"
    }
 ]
