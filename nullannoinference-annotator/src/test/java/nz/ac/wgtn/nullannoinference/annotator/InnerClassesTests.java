@@ -3,12 +3,10 @@ package nz.ac.wgtn.nullannoinference.annotator;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
 import org.junit.jupiter.api.Test;
-
 import java.io.File;
 import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class InnerClassesTests extends AbstractInjectAnnotationTest {

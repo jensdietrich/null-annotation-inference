@@ -2,7 +2,6 @@ package nz.ac.wgtn.nullannoinference.annotator;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import java.io.File;
 
 // issue encountered during development (not mapped to issue tracker)

@@ -3,10 +3,8 @@ package nz.ac.wgtn.nullannoinference.annotator;
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import java.io.File;
 import java.io.FileReader;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MvnProjectAnnotatorTest {

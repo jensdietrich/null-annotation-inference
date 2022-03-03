@@ -6,11 +6,9 @@ import com.github.javaparser.ParseResult;
 import com.github.javaparser.ast.CompilationUnit;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
 import org.junit.jupiter.api.Test;
-
 import java.io.File;
 import java.util.Collections;
 import java.util.Set;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
