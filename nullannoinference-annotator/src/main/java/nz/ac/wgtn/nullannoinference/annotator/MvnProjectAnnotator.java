@@ -40,7 +40,7 @@ public class MvnProjectAnnotator {
         Options options = new Options();
         options.addRequiredOption("p",ARG_INPUT, true, "the input mvn project folder");
         options.addRequiredOption("o",ARG_OUTPUT, true, "the output mvn project folder (files will be override / emptied)");
-        options.addOption("a",ARG_NULLABLE_ANNOTATION_PROVIDER,true,"the name of an annotation provider (pluggable, default is JSR305)");
+        options.addOption("a",ARG_NULLABLE_ANNOTATION_PROVIDER,true,"the name of an annotation provider (optional, default is JSR305)");
         options.addRequiredOption("i",ARG_ISSUES,true,"a folder containing nullable issues (collected and refined)");
 
         CommandLineParser parser = new DefaultParser() {
