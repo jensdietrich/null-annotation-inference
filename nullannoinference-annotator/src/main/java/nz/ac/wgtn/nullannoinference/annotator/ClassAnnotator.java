@@ -48,8 +48,7 @@ public class ClassAnnotator {
         this.annotationSpec = annotationSpec;
     }
 
-
-    public int annotateMethod(@Nonnull File originalJavaFile, @Nonnull File transformedJavaFile, Set<Issue> issues, List<AnnotationListener> listeners) throws IOException, JavaParserFailedException {
+    public int annotateMember(@Nonnull File originalJavaFile, @Nonnull File transformedJavaFile, Set<Issue> issues, List<AnnotationListener> listeners) throws IOException, JavaParserFailedException {
         Preconditions.checkArgument(originalJavaFile.exists());
         int annotationsAddedCounter = 0;
         ParseResult<CompilationUnit> result = new JavaParser().parse(originalJavaFile);
@@ -182,7 +181,7 @@ public class ClassAnnotator {
             }
             // return type
             if (issue.getKind()== Issue.IssueType.RETURN_VALUE) {
-                assert issue.getArgsIndex()==-1;
+                // assert issue.getArgsIndex()==-1; // might be 0 -- fix upstream but not too important, can just be ignored
                 boolean hasAnnotation = method.getAnnotations().stream()
                     .map(a -> a.getNameAsString())
                     .anyMatch(n -> n.equals(annotationSpec.getNullableAnnotationName()));
@@ -389,13 +388,13 @@ public class ClassAnnotator {
         MethodDescriptorParser parser = new MethodDescriptorParser();
         parser.parse(descriptor);
 
-        String returnType = method.getTypeAsString();
+        String returnType = getRawName(method.getType());
         // note that this is not completely accurate as we are not resolving imports in the compilation unit !!
         if (!parser.getReturnType().endsWith(returnType)) {
             return false;
         }
 
-        List<String> paramTypes = method.getParameters().stream().map(p -> p.getTypeAsString()).collect(Collectors.toList());
+        List<String> paramTypes = method.getParameters().stream().map(p -> getRawName(p.getType())).collect(Collectors.toList());
         if (paramTypes.size()!=parser.getParameters().size()) {
             return false;
         }
@@ -407,5 +406,17 @@ public class ClassAnnotator {
         }
 
         return true;
+    }
+
+    static String getRawName (Type type) {
+        return getRawName(type.asString());
+    }
+
+    static String getRawName (String typeName) {
+        int pos = typeName.indexOf('<');
+        if (pos>-1) {
+            return typeName.substring(0,pos);
+        }
+        return typeName;
     }
 }

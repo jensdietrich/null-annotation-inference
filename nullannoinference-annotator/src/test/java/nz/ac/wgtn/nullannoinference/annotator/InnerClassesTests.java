@@ -16,7 +16,7 @@ public class InnerClassesTests extends AbstractInjectAnnotationTest {
         File in = new File(BasicTests.class.getResource("/Class3.java").getFile());
         File out = new File(TMP,"Class3a.java");
         Issue spec = new Issue("Class3$Inner1", "foo","()Ljava/lang/Object;", null, Issue.IssueType.RETURN_VALUE);
-        int count = this.annotator.annotateMethod(in,out,Set.of(spec), Collections.emptyList());
+        int count = this.annotator.annotateMember(in,out,Set.of(spec), Collections.emptyList());
         assertEquals(1,count);
         assertTrue(out.exists());
 
@@ -46,7 +46,7 @@ public class InnerClassesTests extends AbstractInjectAnnotationTest {
         File in = new File(BasicTests.class.getResource("/Class3.java").getFile());
         File out = new File(TMP,"Class3b.java");
         Issue spec = new Issue("Class3$Inner2", "foo","()Ljava/lang/Object;", null, Issue.IssueType.RETURN_VALUE);
-        int count = this.annotator.annotateMethod(in,out,Set.of(spec),Collections.emptyList());
+        int count = this.annotator.annotateMember(in,out,Set.of(spec),Collections.emptyList());
         assertEquals(1,count);
         assertTrue(out.exists());
 
@@ -76,7 +76,7 @@ public class InnerClassesTests extends AbstractInjectAnnotationTest {
         File in = new File(BasicTests.class.getResource("/Class3.java").getFile());
         File out = new File(TMP,"Class3b.java");
         Issue spec = new Issue("Class3$Inner3$Inner31", "foo","()Ljava/lang/Object;", null, Issue.IssueType.RETURN_VALUE);
-        int count = this.annotator.annotateMethod(in,out,Set.of(spec),Collections.emptyList());
+        int count = this.annotator.annotateMember(in,out,Set.of(spec),Collections.emptyList());
         assertEquals(1,count);
         assertTrue(out.exists());
 

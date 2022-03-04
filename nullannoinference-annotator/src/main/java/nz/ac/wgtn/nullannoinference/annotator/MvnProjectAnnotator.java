@@ -3,6 +3,7 @@ package nz.ac.wgtn.nullannoinference.annotator;
 import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
+import nz.ac.wgtn.nullannoinference.commons.IssueAggregator;
 import org.apache.commons.cli.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Logger;
@@ -117,7 +118,9 @@ public class MvnProjectAnnotator {
             }
         });
 
-        LOGGER.info(issues.size() + " nullable specs found");
+        LOGGER.info(issues.size() + " nullability issues to be processed imported");
+        Set<Issue> aggregatedIssues = IssueAggregator.aggregate(issues);
+        LOGGER.info(aggregatedIssues.size() + " aggregated nullability issues to be processed");
 
         listeners.forEach(l -> l.beforeAnnotationTransformation(inputProjectFolder,outputProjectFolder));
         Files.walkFileTree(inputProjectFolder.toPath(), new FileVisitor<Path>() {
@@ -155,7 +158,7 @@ public class MvnProjectAnnotator {
                 if (file.toString().endsWith(".java")) {
                     int annotationsAdded = 0;
                     try {
-                        annotationsAdded = annotationsAdded + classAnnotator.annotateMethod(file.toFile(),copy,issues,listeners);
+                        annotationsAdded = annotationsAdded + classAnnotator.annotateMember(file.toFile(),copy,aggregatedIssues,listeners);
                         transformed = annotationsAdded>0;
                     }
                     catch (JavaParserFailedException x) {
