@@ -395,6 +395,14 @@ public class ClassAnnotator {
         }
 
         List<String> paramTypes = method.getParameters().stream().map(p -> getRawName(p.getType())).collect(Collectors.toList());
+
+        // vararg are different in source code, but just arrays in bytecode -- must account for this
+        for (int i=0;i<method.getParameters().size();i++) {
+            if (method.getParameters().get(i).isVarArgs()) {
+                paramTypes.set(i,paramTypes.get(i)+"[]");
+            }
+        }
+
         if (paramTypes.size()!=parser.getParameters().size()) {
             return false;
         }

@@ -35,7 +35,8 @@ public class MvnProjectAnnotator {
 
     public static final Logger LOGGER = LogSystem.getLogger("annnotator");
 
-    private static List<AnnotationListener> listeners = List.of(new LoggingAnnotationListener());
+    private static LoggingAnnotationListener LOGGING_LISTENER = new LoggingAnnotationListener();
+    private static List<AnnotationListener> listeners = List.of(LOGGING_LISTENER);
 
     public static void main(String[] args) throws ParseException, IOException {
         Options options = new Options();
@@ -121,7 +122,7 @@ public class MvnProjectAnnotator {
         LOGGER.info(issues.size() + " nullability issues to be processed imported");
         Set<Issue> aggregatedIssues = IssueAggregator.aggregate(issues);
         LOGGER.info(aggregatedIssues.size() + " aggregated nullability issues to be processed");
-
+        listeners.forEach(l -> l.issuesLoaded(aggregatedIssues));
         listeners.forEach(l -> l.beforeAnnotationTransformation(inputProjectFolder,outputProjectFolder));
         Files.walkFileTree(inputProjectFolder.toPath(), new FileVisitor<Path>() {
             @Override

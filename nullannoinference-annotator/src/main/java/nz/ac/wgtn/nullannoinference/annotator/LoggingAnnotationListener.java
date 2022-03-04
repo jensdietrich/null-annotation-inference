@@ -41,9 +41,8 @@ public class LoggingAnnotationListener implements AnnotationListener {
     private Set<String> annotatedArgs = new HashSet<>();
     private Multimap<File,String> annotationFailed = HashMultimap.create();
     private List<File> otherwiseTransformedFiles = new ArrayList<>();
-
-    // for debugging
-    private Set<Issue> issuesClosed = new HashSet<>();
+    private Set<Issue> issuesLoaded = null;
+    private Set<Issue> openIssues = null;
 
     private File ANNOTATION_REPORT_FOLDER = new File(".annotation-results");
 
@@ -51,23 +50,25 @@ public class LoggingAnnotationListener implements AnnotationListener {
     public void annotationAdded(File originalFile, File transformedFile, Issue issue) {
         this.annotatedJavaFiles.add(originalFile);
         this.annotatedClasses.add(issue.getClassName());
-        this.issuesClosed.add(issue);
+        boolean added = false;
         if (issue.getKind()==Issue.IssueType.FIELD) {
-            boolean added = this.annotatedFields.add(issue.getClassName()+"::"+issue.getMethodName());
-            assert added; // should not override
+            added = this.annotatedFields.add(issue.getClassName()+"::"+issue.getMethodName());
         }
         else if (issue.getKind()==Issue.IssueType.ARGUMENT) {
             this.annotatedMethods.add(issue.getClassName()+"::"+issue.getMethodName());
-            boolean added = this.annotatedArgs.add(issue.getClassName()+"::"+issue.getMethodName()+issue.getDescriptor()+"@"+issue.getArgsIndex());
-            assert added; // should not override
+            added = this.annotatedArgs.add(issue.getClassName()+"::"+issue.getMethodName()+issue.getDescriptor()+"@"+issue.getArgsIndex());
         }
         else if (issue.getKind()==Issue.IssueType.RETURN_VALUE) {
             this.annotatedMethods.add(issue.getClassName()+"::"+issue.getMethodName());
-            boolean added = this.annotatedReturns.add(issue.getClassName()+"::"+issue.getMethodName()+issue.getDescriptor());
-            assert added; // should not override
+            added = this.annotatedReturns.add(issue.getClassName()+"::"+issue.getMethodName()+issue.getDescriptor());
         }
         else {
             LOGGER.warn("unknown issue type encountered: " + issue.getKind());
+        }
+        assert added;
+        assert openIssues!=null;
+        if (added) {
+            openIssues.remove(issue);
         }
     }
 
@@ -124,7 +125,6 @@ public class LoggingAnnotationListener implements AnnotationListener {
         // dont log here
     }
 
-
     @Override
     public void configFileTransformed(File toFile, File copy) {
         otherwiseTransformedFiles.add(copy);
@@ -135,4 +135,11 @@ public class LoggingAnnotationListener implements AnnotationListener {
         annotationFailed.put(originalFile,reason);
     }
 
+    @Override
+    public void issuesLoaded(Set<Issue> issues) {
+        this.issuesLoaded = new HashSet<>();
+        this.issuesLoaded.addAll(issues);
+        this.openIssues = new HashSet<>();
+        this.openIssues.addAll(issues);
+    }
 }
