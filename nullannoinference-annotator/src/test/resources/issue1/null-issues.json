@@ -7,7 +7,7 @@
          "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput_CODEC229:151"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "([BLjava/nio/charset/Charset;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.binary.StringUtils"
    },
@@ -20,7 +20,7 @@
          "org.apache.commons.codec.binary.Base64Test::testEmptyBase64:402"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([BZZ)[B",
       "className": "org.apache.commons.codec.binary.Base64"
    },
@@ -31,7 +31,7 @@
          "org.apache.commons.codec.binary.BinaryCodecTest::testDecodeObject:165"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "([BLjava/lang/String;)V",
       "className": "org.apache.commons.codec.binary.BinaryCodecTest"
    },
@@ -43,7 +43,7 @@
          "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.Nysiis"
    },
@@ -54,7 +54,7 @@
          "org.apache.commons.codec.net.QCodecTest::testNullInput:62"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.net.QCodec"
    },
@@ -65,7 +65,7 @@
          "org.apache.commons.codec.binary.StringUtilsTest::testGetBytesUncheckedNullInput:125"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;Ljava/lang/String;)[B",
       "className": "org.apache.commons.codec.binary.StringUtils"
    },
@@ -76,7 +76,7 @@
          "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeNull:144"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.net.QuotedPrintableCodec"
    },
@@ -87,7 +87,7 @@
          "org.apache.commons.codec.language.SoundexTest::testSoundexUtilsNullBehaviour:334"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.SoundexUtils"
    },
@@ -98,7 +98,7 @@
          "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput_CODEC229:152"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "([B)Ljava/lang/String;",
       "className": "org.apache.commons.codec.binary.StringUtils"
    },
@@ -109,7 +109,7 @@
          "org.apache.commons.codec.binary.Base16Test::testEmptyBase16:143"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.binary.BaseNCodec"
    },
@@ -120,7 +120,7 @@
          "org.apache.commons.codec.language.MatchRatingApproachEncoderTest::testGetEncoding_Null_to_Nothing:281"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.MatchRatingApproachEncoder"
    },
@@ -131,7 +131,7 @@
          "org.apache.commons.codec.net.QCodecTest::testEncodeObjects:141"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
       "className": "org.apache.commons.codec.net.QCodec"
    },
@@ -142,7 +142,7 @@
          "org.apache.commons.codec.binary.Base32InputStreamTest::testReadNull:425"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([BII)I",
       "className": "org.apache.commons.codec.binary.BaseNCodecInputStream"
    },
@@ -155,7 +155,7 @@
          "org.apache.commons.codec.language.DoubleMetaphoneTest::testIsDoubleMetaphoneEqualBasic:1135"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;Z)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.DoubleMetaphone"
    },
@@ -166,7 +166,7 @@
          "org.apache.commons.codec.binary.BaseNCodecTest::testContainsAlphabetOrPad:187"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)Z",
       "className": "org.apache.commons.codec.binary.BaseNCodec"
    },
@@ -179,7 +179,7 @@
          "org.apache.commons.codec.language.DoubleMetaphoneTest::testEmpty:1115"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.DoubleMetaphone"
    },
@@ -190,7 +190,7 @@
          "org.apache.commons.codec.net.URLCodecTest::testDecodeWithNullArray:201"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.net.URLCodec"
    },
@@ -201,7 +201,7 @@
          "org.apache.commons.codec.net.URLCodecTest::testEncodeDecodeNull:124"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.URLCodec"
    },
@@ -212,7 +212,7 @@
          "org.apache.commons.codec.binary.Base64Test::testByteToStringVariations:1269"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "([B)Ljava/lang/String;",
       "className": "org.apache.commons.codec.binary.Base64"
    },
@@ -223,7 +223,7 @@
          "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.Nysiis"
    },
@@ -234,7 +234,7 @@
          "org.apache.commons.codec.net.URLCodecTest::testEncodeDecodeNull:126"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.URLCodec"
    },
@@ -246,7 +246,7 @@
          "org.apache.commons.codec.digest.Md5CryptTest::testMd5CryptNullData:78"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([BLjava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.digest.Md5Crypt"
    },
@@ -257,7 +257,7 @@
          "org.apache.commons.codec.digest.Md5CryptTest::testMd5CryptExplicitCallWithThreadLocalRandom:68"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "([BLjava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.digest.Md5Crypt"
    },
@@ -268,7 +268,7 @@
          "org.apache.commons.codec.binary.BinaryCodecTest::testToByteArrayFromString:378"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)[B",
       "className": "org.apache.commons.codec.binary.BinaryCodec"
    },
@@ -279,7 +279,7 @@
          "org.apache.commons.codec.net.PercentCodecTest::testEncodeNullObject:97"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
       "className": "org.apache.commons.codec.net.PercentCodec"
    },
@@ -291,7 +291,7 @@
          "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.ColognePhonetic"
    },
@@ -302,7 +302,7 @@
          "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput_CODEC229:154"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "([B)Ljava/lang/String;",
       "className": "org.apache.commons.codec.binary.StringUtils"
    },
@@ -313,7 +313,7 @@
          "org.apache.commons.codec.net.QCodecTest::testDecodeObjects:167"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
       "className": "org.apache.commons.codec.net.QCodec"
    },
@@ -324,7 +324,7 @@
          "org.apache.commons.codec.net.QCodecTest::testDecodeStringWithNull:128"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.QCodec"
    },
@@ -336,7 +336,7 @@
          "org.apache.commons.codec.digest.HmacAlgorithmsTest::testHmacHexFailInputStream:178"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "(Ljava/lang/String;[B)",
       "className": "org.apache.commons.codec.digest.HmacUtils"
    },
@@ -347,7 +347,7 @@
          "org.apache.commons.codec.net.QuotedPrintableCodecTest::testDecodeWithNullArray:165"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.net.QuotedPrintableCodec"
    },
@@ -358,7 +358,7 @@
          "org.apache.commons.codec.binary.Base64Test::testEmptyBase64:405"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([BII)[B",
       "className": "org.apache.commons.codec.binary.BaseNCodec"
    },
@@ -369,7 +369,7 @@
          "org.apache.commons.codec.binary.Base64Test::testIsStringBase64:94"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Z",
       "className": "org.apache.commons.codec.binary.Base64"
    },
@@ -381,7 +381,7 @@
          "org.apache.commons.codec.digest.CryptTest::testDefaultCryptVariant:35"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.digest.Crypt"
    },
@@ -392,7 +392,7 @@
          "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput_CODEC229:151"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)Ljava/lang/String;",
       "className": "org.apache.commons.codec.binary.StringUtils"
    },
@@ -403,7 +403,7 @@
          "org.apache.commons.codec.net.QCodecTest::testDecodeObjects:167"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
       "className": "org.apache.commons.codec.net.QCodec"
    },
@@ -414,7 +414,7 @@
          "org.apache.commons.codec.net.BCodecTest::testDecodeObjects:150"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
       "className": "org.apache.commons.codec.net.BCodec"
    },
@@ -425,7 +425,7 @@
          "org.apache.commons.codec.digest.Sha256CryptTest::testSha256CryptNullData:78"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)Ljava/lang/String;",
       "className": "org.apache.commons.codec.digest.Sha2Crypt"
    },
@@ -436,7 +436,7 @@
          "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput_CODEC229:156"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "([B)Ljava/lang/String;",
       "className": "org.apache.commons.codec.binary.StringUtils"
    },
@@ -450,7 +450,7 @@
          "org.apache.commons.codec.language.SoundexTest::testDifference:94"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.Soundex"
    },
@@ -461,7 +461,7 @@
          "org.apache.commons.codec.net.QCodecTest::testEncodeStringWithNull:120"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.QCodec"
    },
@@ -473,7 +473,7 @@
          "org.apache.commons.codec.binary.Base16Test::testStringToByteVariations:468"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.binary.BaseNCodec"
    },
@@ -485,7 +485,7 @@
          "org.apache.commons.codec.binary.Base64Test::testIsStringBase64:94"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)Z",
       "className": "org.apache.commons.codec.binary.Base64"
    },
@@ -496,7 +496,7 @@
          "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput_CODEC229:155"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)Ljava/lang/String;",
       "className": "org.apache.commons.codec.binary.StringUtils"
    },
@@ -507,7 +507,7 @@
          "org.apache.commons.codec.net.URLCodecTest::testDecodeObjects:281"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
       "className": "org.apache.commons.codec.net.URLCodec"
    },
@@ -518,7 +518,7 @@
          "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.DaitchMokotoffSoundex"
    },
@@ -529,7 +529,7 @@
          "org.apache.commons.codec.net.PercentCodecTest::testSafeCharEncodeDecodeObject:129"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([BZ)",
       "className": "org.apache.commons.codec.net.PercentCodec"
    },
@@ -542,7 +542,7 @@
          "org.apache.commons.codec.digest.CryptTest::testDefaultCryptVariant:35"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "([BLjava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.digest.Crypt"
    },
@@ -554,7 +554,7 @@
          "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeDecodeNull:113"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;Ljava/nio/charset/Charset;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.QuotedPrintableCodec"
    },
@@ -565,7 +565,7 @@
          "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.DoubleMetaphone"
    },
@@ -576,7 +576,7 @@
          "org.apache.commons.codec.binary.StringUtilsTest::testByteBufferUtf8:244"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;)Ljava/nio/ByteBuffer;",
       "className": "org.apache.commons.codec.binary.StringUtils"
    },
@@ -590,7 +590,7 @@
          "org.apache.commons.codec.language.RefinedSoundexTest::testDifference:40"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.RefinedSoundex"
    },
@@ -601,7 +601,7 @@
          "org.apache.commons.codec.language.MatchRatingApproachEncoderTest::testAccentRemoval_NullValue_ReturnNullSuccessfully:82"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.MatchRatingApproachEncoder"
    },
@@ -612,7 +612,7 @@
          "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput_CODEC229:154"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)Ljava/lang/String;",
       "className": "org.apache.commons.codec.binary.StringUtils"
    },
@@ -626,7 +626,7 @@
          "org.apache.commons.codec.binary.Base64Test::testEmptyBase64:402"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "([BZZI)[B",
       "className": "org.apache.commons.codec.binary.Base64"
    },
@@ -637,7 +637,7 @@
          "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeStringWithNull:173"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.QuotedPrintableCodec"
    },
@@ -648,7 +648,7 @@
          "org.apache.commons.codec.binary.Base32OutputStreamTest::testStrictDecoding:358"
       ],
       "kind": "ARGUMENT",
-      "index": 3,
+      "argsIndex": 3,
       "descriptor": "(Ljava/io/OutputStream;ZI[BLorg/apache/commons/codec/CodecPolicy;)",
       "className": "org.apache.commons.codec.binary.Base32OutputStream"
    },
@@ -659,7 +659,7 @@
          "org.apache.commons.codec.net.URLCodecTest::testEncodeObjects:235"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
       "className": "org.apache.commons.codec.net.URLCodec"
    },
@@ -670,7 +670,7 @@
          "org.apache.commons.codec.digest.HmacUtilsTest::testNullKey:164"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)Ljavax/crypto/Mac;",
       "className": "org.apache.commons.codec.digest.HmacUtils"
    },
@@ -681,7 +681,7 @@
          "org.apache.commons.codec.net.RFC1522CodecTest::testNullInput:55"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.RFC1522Codec"
    },
@@ -692,7 +692,7 @@
          "org.apache.commons.codec.net.BCodecTest::testNullInput:67"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.net.BCodec"
    },
@@ -703,7 +703,7 @@
          "org.apache.commons.codec.net.QuotedPrintableCodecTest::testDecodeStringWithNull:181"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.QuotedPrintableCodec"
    },
@@ -715,7 +715,7 @@
          "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeUrlWithNullBitSet:154"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/util/BitSet;[BZ)[B",
       "className": "org.apache.commons.codec.net.QuotedPrintableCodec"
    },
@@ -727,7 +727,7 @@
          "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeNull:144"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "(Ljava/util/BitSet;[BZ)[B",
       "className": "org.apache.commons.codec.net.QuotedPrintableCodec"
    },
@@ -738,7 +738,7 @@
          "org.apache.commons.codec.binary.Base64Test::testEmptyBase64:402"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.binary.Base64"
    },
@@ -749,7 +749,7 @@
          "org.apache.commons.codec.binary.Base64Test::testBase64:116"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "(I[B)",
       "className": "org.apache.commons.codec.binary.Base64"
    },
@@ -760,7 +760,7 @@
          "org.apache.commons.codec.net.PercentCodecTest::testPercentEncoderDecoderWithNullOrEmptyInput:110"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.net.PercentCodec"
    },
@@ -771,7 +771,7 @@
          "org.apache.commons.codec.binary.Base16Test::testEmptyBase16:143"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.binary.BaseNCodec"
    },
@@ -782,7 +782,7 @@
          "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput_CODEC229:152"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)Ljava/lang/String;",
       "className": "org.apache.commons.codec.binary.StringUtils"
    },
@@ -793,7 +793,7 @@
          "org.apache.commons.codec.language.MatchRatingApproachEncoderTest::testCompare_SurnameCornerCase_Nulls_NoMatch:496"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Z",
       "className": "org.apache.commons.codec.language.MatchRatingApproachEncoder"
    },
@@ -804,7 +804,7 @@
          "org.apache.commons.codec.language.MatchRatingApproachEncoderTest::testCompare_SurnameCornerCase_Nulls_NoMatch:496"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Z",
       "className": "org.apache.commons.codec.language.MatchRatingApproachEncoder"
    },
@@ -815,7 +815,7 @@
          "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeDecodeNull:111"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.QuotedPrintableCodec"
    },
@@ -826,7 +826,7 @@
          "org.apache.commons.codec.net.QCodecTest::testEncodeObjects:141"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
       "className": "org.apache.commons.codec.net.QCodec"
    },
@@ -837,7 +837,7 @@
          "org.apache.commons.codec.binary.BinaryCodecTest::testToAsciiBytes:819"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.binary.BinaryCodec"
    },
@@ -848,7 +848,7 @@
          "org.apache.commons.codec.binary.Base64Test::testStringToByteVariations:1296"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;)[B",
       "className": "org.apache.commons.codec.binary.Base64"
    },
@@ -859,7 +859,7 @@
          "org.apache.commons.codec.net.QCodecTest::testNullInput:62"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.net.QCodec"
    },
@@ -870,7 +870,7 @@
          "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.bm.BeiderMorseEncoder"
    },
@@ -881,7 +881,7 @@
          "org.apache.commons.codec.digest.DigestUtilsTest::testIsAvailable:146"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Z",
       "className": "org.apache.commons.codec.digest.DigestUtils"
    },
@@ -892,7 +892,7 @@
          "org.apache.commons.codec.binary.Base64Test::testEmptyBase64:410"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.binary.Base64"
    },
@@ -903,7 +903,7 @@
          "org.apache.commons.codec.net.QCodecTest::testNullInput:63"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.net.QCodec"
    },
@@ -914,7 +914,7 @@
          "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput:146"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "([BLjava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.binary.StringUtils"
    },
@@ -927,7 +927,7 @@
          "org.apache.commons.codec.language.RefinedSoundexTest::testDifference:40"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.RefinedSoundex"
    },
@@ -938,7 +938,7 @@
          "org.apache.commons.codec.net.BCodecTest::testEncodeObjects:126"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
       "className": "org.apache.commons.codec.net.BCodec"
    },
@@ -949,7 +949,7 @@
          "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput_CODEC229:153"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)Ljava/lang/String;",
       "className": "org.apache.commons.codec.binary.StringUtils"
    },
@@ -960,7 +960,7 @@
          "org.apache.commons.codec.binary.Base64Test::testCodeIntegerNull:262"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/math/BigInteger;)[B",
       "className": "org.apache.commons.codec.binary.Base64"
    },
@@ -972,7 +972,7 @@
          "org.apache.commons.codec.net.PercentCodecTest::testSafeCharEncodeDecodeObject:129"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)V",
       "className": "org.apache.commons.codec.net.PercentCodec"
    },
@@ -983,7 +983,7 @@
          "org.apache.commons.codec.binary.BinaryCodecTest::testFromAsciiCharArray:391"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([C)[B",
       "className": "org.apache.commons.codec.binary.BinaryCodec"
    },
@@ -994,7 +994,7 @@
          "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeDecodeNull:113"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.QuotedPrintableCodec"
    },
@@ -1005,7 +1005,7 @@
          "org.apache.commons.codec.language.RefinedSoundexTest::testDifference:40"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;Ljava/lang/String;)I",
       "className": "org.apache.commons.codec.language.RefinedSoundex"
    },
@@ -1016,7 +1016,7 @@
          "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeUrlWithNullBitSet:154"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/util/BitSet;[B)[B",
       "className": "org.apache.commons.codec.net.QuotedPrintableCodec"
    },
@@ -1027,7 +1027,7 @@
          "org.apache.commons.codec.language.RefinedSoundexTest::testDifference:40"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "(Ljava/lang/String;Ljava/lang/String;)I",
       "className": "org.apache.commons.codec.language.RefinedSoundex"
    },
@@ -1038,7 +1038,7 @@
          "org.apache.commons.codec.net.QCodecTest::testEncodeDecodeNull:111"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.QCodec"
    },
@@ -1049,7 +1049,7 @@
          "org.apache.commons.codec.net.BCodecTest::testEncodeStringWithNull:106"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.BCodec"
    },
@@ -1060,7 +1060,7 @@
          "org.apache.commons.codec.language.bm.RuleTest::testSubSequenceWorks:90"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "(Ljava/lang/CharSequence;Lorg/apache/commons/codec/language/bm/Languages$LanguageSet;)",
       "className": "org.apache.commons.codec.language.bm.Rule$Phoneme"
    },
@@ -1071,7 +1071,7 @@
          "org.apache.commons.codec.binary.BinaryCodecTest::testToAsciiChars:942"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)[C",
       "className": "org.apache.commons.codec.binary.BinaryCodec"
    },
@@ -1082,7 +1082,7 @@
          "org.apache.commons.codec.binary.Base32InputStreamTest::testCodec105:70"
       ],
       "kind": "ARGUMENT",
-      "index": 3,
+      "argsIndex": 3,
       "descriptor": "(Ljava/io/InputStream;ZI[B)",
       "className": "org.apache.commons.codec.binary.Base32InputStream"
    },
@@ -1094,7 +1094,7 @@
          "org.apache.commons.codec.digest.UnixCryptTest::testUnixCryptNullData:88"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([BLjava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.digest.UnixCrypt"
    },
@@ -1106,7 +1106,7 @@
          "org.apache.commons.codec.digest.Md5CryptTest::testMd5CryptExplicitCallWithThreadLocalRandom:68"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "([BLjava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.digest.Md5Crypt"
    },
@@ -1118,7 +1118,7 @@
          "org.apache.commons.codec.digest.UnixCryptTest::testUnixCryptExplicitCall:64"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "([BLjava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.digest.UnixCrypt"
    },
@@ -1131,7 +1131,7 @@
          "org.apache.commons.codec.digest.Md5CryptTest::testMd5CryptNullData:78"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([BLjava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.digest.Md5Crypt"
    },
@@ -1142,7 +1142,7 @@
          "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.ColognePhonetic"
    },
@@ -1153,7 +1153,7 @@
          "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput_CODEC229:151"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "([B)Ljava/lang/String;",
       "className": "org.apache.commons.codec.binary.StringUtils"
    },
@@ -1164,7 +1164,7 @@
          "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput_CODEC229:155"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "([B)Ljava/lang/String;",
       "className": "org.apache.commons.codec.binary.StringUtils"
    },
@@ -1175,7 +1175,7 @@
          "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.Metaphone"
    },
@@ -1186,7 +1186,7 @@
          "org.apache.commons.codec.digest.HmacUtilsTest::testSha512HMacFail:261"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B[B)[B",
       "className": "org.apache.commons.codec.digest.HmacUtils"
    },
@@ -1199,7 +1199,7 @@
          "org.apache.commons.codec.language.SoundexTest::testDifference:94"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.Soundex"
    },
@@ -1210,7 +1210,7 @@
          "org.apache.commons.codec.net.URLCodecTest::testEncodeObjects:235"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
       "className": "org.apache.commons.codec.net.URLCodec"
    },
@@ -1221,7 +1221,7 @@
          "org.apache.commons.codec.binary.Base64Test::testBase64ImpossibleSamples:1331"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "(I[BZLorg/apache/commons/codec/CodecPolicy;)",
       "className": "org.apache.commons.codec.binary.Base64"
    },
@@ -1236,7 +1236,7 @@
          "org.apache.commons.codec.digest.CryptTest::testDefaultCryptVariant:35"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "([BLjava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.digest.Sha2Crypt"
    },
@@ -1247,7 +1247,7 @@
          "org.apache.commons.codec.language.SoundexTest::testSoundexUtilsNullBehaviour:336"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;Ljava/lang/String;)I",
       "className": "org.apache.commons.codec.language.SoundexUtils"
    },
@@ -1258,7 +1258,7 @@
          "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeDecodeNull:113"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.QuotedPrintableCodec"
    },
@@ -1269,7 +1269,7 @@
          "org.apache.commons.codec.digest.Apr1CryptTest::testApr1CryptNullData:92"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)Ljava/lang/String;",
       "className": "org.apache.commons.codec.digest.Md5Crypt"
    },
@@ -1281,7 +1281,7 @@
          "org.apache.commons.codec.digest.Sha512CryptTest::testSha512CryptNullData:68"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([BLjava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.digest.Sha2Crypt"
    },
@@ -1292,7 +1292,7 @@
          "org.apache.commons.codec.language.SoundexTest::testSoundexUtilsNullBehaviour:337"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "(Ljava/lang/String;Ljava/lang/String;)I",
       "className": "org.apache.commons.codec.language.SoundexUtils"
    },
@@ -1305,7 +1305,7 @@
          "org.apache.commons.codec.language.SoundexTest::testDifference:94"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.Soundex"
    },
@@ -1316,7 +1316,7 @@
          "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeEmpty:56"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
       "className": "org.apache.commons.codec.language.DoubleMetaphone"
    },
@@ -1328,7 +1328,7 @@
          "org.apache.commons.codec.digest.HmacAlgorithmsTest::testHmacFailString:168"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)[B",
       "className": "org.apache.commons.codec.binary.StringUtils"
    },
@@ -1339,7 +1339,7 @@
          "org.apache.commons.codec.binary.Base64Test::testEmptyBase64:402"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.binary.Base64"
    },
@@ -1350,7 +1350,7 @@
          "org.apache.commons.codec.net.BCodecTest::testEncodeStringWithNull:106"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.BCodec"
    },
@@ -1361,7 +1361,7 @@
          "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput:146"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([BLjava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.binary.StringUtils"
    },
@@ -1372,7 +1372,7 @@
          "org.apache.commons.codec.net.URLCodecTest::testEncodeNull:180"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.net.URLCodec"
    },
@@ -1383,7 +1383,7 @@
          "org.apache.commons.codec.net.URLCodecTest::testDecodeObjects:281"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
       "className": "org.apache.commons.codec.net.URLCodec"
    },
@@ -1394,7 +1394,7 @@
          "org.apache.commons.codec.net.QuotedPrintableCodecTest::testDecodeWithNullArray:165"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.net.QuotedPrintableCodec"
    },
@@ -1405,7 +1405,7 @@
          "org.apache.commons.codec.binary.StringUtilsTest::testByteBufferUtf8:244"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Ljava/nio/ByteBuffer;",
       "className": "org.apache.commons.codec.binary.StringUtils"
    },
@@ -1416,7 +1416,7 @@
          "org.apache.commons.codec.binary.BinaryCodecTest::testFromAsciiByteArray:487"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.binary.BinaryCodec"
    },
@@ -1429,7 +1429,7 @@
          "org.apache.commons.codec.digest.MessageDigestAlgorithmsTest::testDigestPathOpenOptionsEmpty:185"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "(Ljava/lang/String;Ljava/security/MessageDigest;)Ljava/security/MessageDigest;",
       "className": "org.apache.commons.codec.digest.DigestUtils"
    },
@@ -1441,7 +1441,7 @@
          "org.apache.commons.codec.digest.DigestUtilsTest::testIsAvailable:146"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;Ljava/security/MessageDigest;)Ljava/security/MessageDigest;",
       "className": "org.apache.commons.codec.digest.DigestUtils"
    },
@@ -1453,7 +1453,7 @@
          "org.apache.commons.codec.binary.Base16Test::testStringToByteVariations:468"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.binary.BaseNCodec"
    },
@@ -1464,7 +1464,7 @@
          "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput_CODEC229:153"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "([B)Ljava/lang/String;",
       "className": "org.apache.commons.codec.binary.StringUtils"
    },
@@ -1475,7 +1475,7 @@
          "org.apache.commons.codec.net.URLCodecTest::testEncodeStringWithNull:209"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.URLCodec"
    },
@@ -1486,7 +1486,7 @@
          "org.apache.commons.codec.net.QCodecTest::testNullInput:63"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.net.QCodec"
    },
@@ -1497,7 +1497,7 @@
          "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.bm.BeiderMorseEncoder"
    },
@@ -1510,7 +1510,7 @@
          "org.apache.commons.codec.digest.Sha256CryptTest::testSha256CryptNullData:78"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([BLjava/lang/String;Ljava/lang/String;ILjava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.digest.Sha2Crypt"
    },
@@ -1522,7 +1522,7 @@
          "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.Nysiis"
    },
@@ -1533,7 +1533,7 @@
          "org.apache.commons.codec.net.URLCodecTest::testDecodeStringWithNull:217"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.URLCodec"
    },
@@ -1544,7 +1544,7 @@
          "org.apache.commons.codec.binary.Base64Test::testEmptyBase64:410"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.binary.Base64"
    },
@@ -1555,7 +1555,7 @@
          "org.apache.commons.codec.net.URLCodecTest::testDecodeStringWithNull:217"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.URLCodec"
    },
@@ -1566,7 +1566,7 @@
          "org.apache.commons.codec.binary.Base64OutputStreamTest::testStrictDecoding:368"
       ],
       "kind": "ARGUMENT",
-      "index": 3,
+      "argsIndex": 3,
       "descriptor": "(Ljava/io/OutputStream;ZI[BLorg/apache/commons/codec/CodecPolicy;)",
       "className": "org.apache.commons.codec.binary.Base64OutputStream"
    },
@@ -1577,7 +1577,7 @@
          "org.apache.commons.codec.binary.Base64Test::testStringToByteVariations:1296"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)[B",
       "className": "org.apache.commons.codec.binary.Base64"
    },
@@ -1588,7 +1588,7 @@
          "org.apache.commons.codec.net.BCodecTest::testDecodeStringWithNull:114"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.BCodec"
    },
@@ -1599,7 +1599,7 @@
          "org.apache.commons.codec.binary.Base32InputStreamTest::testStrictDecoding:577"
       ],
       "kind": "ARGUMENT",
-      "index": 3,
+      "argsIndex": 3,
       "descriptor": "(Ljava/io/InputStream;ZI[BLorg/apache/commons/codec/CodecPolicy;)",
       "className": "org.apache.commons.codec.binary.Base32InputStream"
    },
@@ -1610,7 +1610,7 @@
          "org.apache.commons.codec.net.BCodecTest::testEncodeObjects:126"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
       "className": "org.apache.commons.codec.net.BCodec"
    },
@@ -1621,7 +1621,7 @@
          "org.apache.commons.codec.digest.HmacAlgorithmsTest::testGetHmacNullKey:153"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "(Lorg/apache/commons/codec/digest/HmacAlgorithms;[B)Ljavax/crypto/Mac;",
       "className": "org.apache.commons.codec.digest.HmacUtils"
    },
@@ -1632,7 +1632,7 @@
          "org.apache.commons.codec.CharsetsTest::testToCharset:34"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/nio/charset/Charset;)Ljava/nio/charset/Charset;",
       "className": "org.apache.commons.codec.Charsets"
    },
@@ -1644,7 +1644,7 @@
          "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.Metaphone"
    },
@@ -1656,7 +1656,7 @@
          "org.apache.commons.codec.binary.StringUtilsTest::testByteBufferUtf8:244"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;Ljava/nio/charset/Charset;)Ljava/nio/ByteBuffer;",
       "className": "org.apache.commons.codec.binary.StringUtils"
    },
@@ -1667,7 +1667,7 @@
          "org.apache.commons.codec.net.PercentCodecTest::testPercentEncoderDecoderWithNullOrEmptyInput:110"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.net.PercentCodec"
    },
@@ -1678,7 +1678,7 @@
          "org.apache.commons.codec.digest.HmacAlgorithmsTest::testHmacFailString:168"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "(Lorg/apache/commons/codec/digest/HmacAlgorithms;Ljava/lang/String;)",
       "className": "org.apache.commons.codec.digest.HmacUtils"
    },
@@ -1689,7 +1689,7 @@
          "org.apache.commons.codec.CharsetsTest::testToCharset:33"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Ljava/nio/charset/Charset;",
       "className": "org.apache.commons.codec.Charsets"
    },
@@ -1700,7 +1700,7 @@
          "org.apache.commons.codec.net.BCodecTest::testEncodeDecodeNull:98"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.BCodec"
    },
@@ -1711,7 +1711,7 @@
          "org.apache.commons.codec.net.QuotedPrintableCodecTest::testDecodeObjects:230"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
       "className": "org.apache.commons.codec.net.QuotedPrintableCodec"
    },
@@ -1722,7 +1722,7 @@
          "org.apache.commons.codec.language.SoundexTest::testDifference:94"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;Ljava/lang/String;)I",
       "className": "org.apache.commons.codec.language.Soundex"
    },
@@ -1735,7 +1735,7 @@
          "org.apache.commons.codec.language.RefinedSoundexTest::testDifference:40"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.RefinedSoundex"
    },
@@ -1746,7 +1746,7 @@
          "org.apache.commons.codec.net.RFC1522CodecTest::testNullInput:55"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.RFC1522Codec"
    },
@@ -1760,7 +1760,7 @@
          "org.apache.commons.codec.binary.Base32InputStreamTest::testStrictDecoding:571"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "(I[BZBLorg/apache/commons/codec/CodecPolicy;)",
       "className": "org.apache.commons.codec.binary.Base32"
    },
@@ -1771,7 +1771,7 @@
          "org.apache.commons.codec.net.BCodecTest::testNullInput:68"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.net.BCodec"
    },
@@ -1782,7 +1782,7 @@
          "org.apache.commons.codec.net.PercentCodecTest::testPercentEncoderDecoderWithNullOrEmptyInput:109"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.net.PercentCodec"
    },
@@ -1793,7 +1793,7 @@
          "org.apache.commons.codec.language.SoundexTest::testDifference:94"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "(Ljava/lang/String;Ljava/lang/String;)I",
       "className": "org.apache.commons.codec.language.Soundex"
    },
@@ -1804,7 +1804,7 @@
          "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeDecodeNull:111"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.QuotedPrintableCodec"
    },
@@ -1816,7 +1816,7 @@
          "org.apache.commons.codec.digest.HmacAlgorithmsTest::testHmacFailString:168"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;)[B",
       "className": "org.apache.commons.codec.binary.StringUtils"
    },
@@ -1828,7 +1828,7 @@
          "org.apache.commons.codec.binary.Base32InputStreamTest::testCodec105:70"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "(I[B)",
       "className": "org.apache.commons.codec.binary.Base32"
    },
@@ -1839,7 +1839,7 @@
          "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.ColognePhonetic"
    },
@@ -1850,7 +1850,7 @@
          "org.apache.commons.codec.binary.Base16Test::testStringToByteVariations:468"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;)[B",
       "className": "org.apache.commons.codec.binary.BaseNCodec"
    },
@@ -1861,7 +1861,7 @@
          "org.apache.commons.codec.digest.HmacUtilsTest::testMd5HMacFail:158"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B[B)[B",
       "className": "org.apache.commons.codec.digest.HmacUtils"
    },
@@ -1872,7 +1872,7 @@
          "org.apache.commons.codec.digest.Sha512CryptTest::testSha512CryptExplicitCallThreadLocalRandom:63"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "([BLjava/lang/String;Ljava/util/Random;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.digest.Sha2Crypt"
    },
@@ -1883,7 +1883,7 @@
          "org.apache.commons.codec.language.DoubleMetaphoneTest::testEmpty:1115"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.DoubleMetaphone"
    },
@@ -1895,7 +1895,7 @@
          "org.apache.commons.codec.binary.BinaryCodecTest::testDecodeObject:165"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
       "className": "org.apache.commons.codec.binary.BinaryCodec"
    },
@@ -1906,7 +1906,7 @@
          "org.apache.commons.codec.net.BCodecTest::testDecodeObjects:150"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
       "className": "org.apache.commons.codec.net.BCodec"
    },
@@ -1917,7 +1917,7 @@
          "org.apache.commons.codec.net.PercentCodecTest::testPercentEncoderDecoderWithNullOrEmptyInput:109"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.net.PercentCodec"
    },
@@ -1928,7 +1928,7 @@
          "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeObjects:199"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
       "className": "org.apache.commons.codec.net.QuotedPrintableCodec"
    },
@@ -1939,7 +1939,7 @@
          "org.apache.commons.codec.net.QCodecTest::testEncodeDecodeNull:111"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.QCodec"
    },
@@ -1950,7 +1950,7 @@
          "org.apache.commons.codec.net.URLCodecTest::testEncodeStringWithNull:209"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.URLCodec"
    },
@@ -1962,7 +1962,7 @@
          "org.apache.commons.codec.net.URLCodecTest::testEncodeNull:180"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/util/BitSet;[B)[B",
       "className": "org.apache.commons.codec.net.URLCodec"
    },
@@ -1975,7 +1975,7 @@
          "org.apache.commons.codec.language.DoubleMetaphoneTest::testIsDoubleMetaphoneEqualBasic:1135"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Z",
       "className": "org.apache.commons.codec.binary.StringUtils"
    },
@@ -1987,7 +1987,7 @@
          "org.apache.commons.codec.digest.DigestUtilsTest::testIsAvailable:145"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;Ljava/security/MessageDigest;)Ljava/security/MessageDigest;",
       "className": "org.apache.commons.codec.digest.DigestUtils"
    },
@@ -2000,7 +2000,7 @@
          "org.apache.commons.codec.language.DoubleMetaphoneTest::testIsDoubleMetaphoneEqualBasic:1135"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Z",
       "className": "org.apache.commons.codec.binary.StringUtils"
    },
@@ -2012,7 +2012,7 @@
          "org.apache.commons.codec.digest.Sha256CryptTest::testSha256CryptNullData:78"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "([BLjava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.digest.Sha2Crypt"
    },
@@ -2024,7 +2024,7 @@
          "org.apache.commons.codec.digest.Sha256CryptTest::testSha256CryptNullData:78"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([BLjava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.digest.Sha2Crypt"
    },
@@ -2036,7 +2036,7 @@
          "org.apache.commons.codec.binary.Base64Test::testBase64:116"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "(I[BZ)",
       "className": "org.apache.commons.codec.binary.Base64"
    },
@@ -2047,7 +2047,7 @@
          "org.apache.commons.codec.net.URLCodecTest::testEncodeNull:180"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.net.URLCodec"
    },
@@ -2058,7 +2058,7 @@
          "org.apache.commons.codec.binary.Base16Test::testByteToStringVariations:450"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)Ljava/lang/String;",
       "className": "org.apache.commons.codec.binary.BaseNCodec"
    },
@@ -2069,7 +2069,7 @@
          "org.apache.commons.codec.net.RFC1522CodecTest::testNullInput:56"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.RFC1522Codec"
    },
@@ -2080,7 +2080,7 @@
          "org.apache.commons.codec.net.BCodecTest::testEncodeDecodeNull:98"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.BCodec"
    },
@@ -2092,7 +2092,7 @@
          "org.apache.commons.codec.binary.StringUtilsTest::testByteBufferUtf8:244"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;Ljava/nio/charset/Charset;)Ljava/nio/ByteBuffer;",
       "className": "org.apache.commons.codec.binary.StringUtils"
    },
@@ -2103,7 +2103,7 @@
          "org.apache.commons.codec.binary.Base32OutputStreamTest::testWriteToNullCoverage:331"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([BII)V",
       "className": "org.apache.commons.codec.binary.BaseNCodecOutputStream"
    },
@@ -2116,7 +2116,7 @@
          "org.apache.commons.codec.digest.HmacAlgorithmsTest::testHmacFailString:168"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;Ljava/nio/charset/Charset;)[B",
       "className": "org.apache.commons.codec.binary.StringUtils"
    },
@@ -2130,7 +2130,7 @@
          "org.apache.commons.codec.language.DoubleMetaphoneTest::testIsDoubleMetaphoneEqualBasic:1135"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.DoubleMetaphone"
    },
@@ -2142,7 +2142,7 @@
          "org.apache.commons.codec.language.DoubleMetaphoneTest::testEmpty:1115"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;Z)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.DoubleMetaphone"
    },
@@ -2155,7 +2155,7 @@
          "org.apache.commons.codec.digest.Md5CryptTest::testMd5CryptExplicitCallWithThreadLocalRandom:68"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "([BLjava/lang/String;Ljava/lang/String;Ljava/util/Random;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.digest.Md5Crypt"
    },
@@ -2166,7 +2166,7 @@
          "org.apache.commons.codec.net.QuotedPrintableCodecTest::testDecodeStringWithNull:181"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.QuotedPrintableCodec"
    },
@@ -2177,7 +2177,7 @@
          "org.apache.commons.codec.net.BCodecTest::testNullInput:67"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.net.BCodec"
    },
@@ -2191,7 +2191,7 @@
          "org.apache.commons.codec.digest.Md5CryptTest::testMd5CryptNullData:78"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([BLjava/lang/String;Ljava/lang/String;Ljava/util/Random;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.digest.Md5Crypt"
    },
@@ -2202,7 +2202,7 @@
          "org.apache.commons.codec.net.QCodecTest::testDecodeStringWithNull:128"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.QCodec"
    },
@@ -2213,7 +2213,7 @@
          "org.apache.commons.codec.binary.StringUtilsTest::testGetBytesUncheckedNullInput:125"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;Ljava/lang/String;)[B",
       "className": "org.apache.commons.codec.binary.StringUtils"
    },
@@ -2225,7 +2225,7 @@
          "org.apache.commons.codec.binary.BinaryCodecTest::testDecodeObject:165"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.binary.BinaryCodec"
    },
@@ -2237,7 +2237,7 @@
          "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput_CODEC229:151"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([BLjava/nio/charset/Charset;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.binary.StringUtils"
    },
@@ -2248,7 +2248,7 @@
          "org.apache.commons.codec.digest.Sha512CryptTest::testSha512CryptNullData:68"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)Ljava/lang/String;",
       "className": "org.apache.commons.codec.digest.Sha2Crypt"
    },
@@ -2259,7 +2259,7 @@
          "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeNull:144"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.net.QuotedPrintableCodec"
    },
@@ -2270,7 +2270,7 @@
          "org.apache.commons.codec.language.SoundexTest::testSoundexUtilsNullBehaviour:334"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.SoundexUtils"
    },
@@ -2281,7 +2281,7 @@
          "org.apache.commons.codec.digest.HmacAlgorithmsTest::testHmacHexFailInputStream:178"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "(Lorg/apache/commons/codec/digest/HmacAlgorithms;[B)",
       "className": "org.apache.commons.codec.digest.HmacUtils"
    },
@@ -2293,7 +2293,7 @@
          "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeDecodeNull:111"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;Ljava/nio/charset/Charset;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.QuotedPrintableCodec"
    },
@@ -2304,7 +2304,7 @@
          "org.apache.commons.codec.net.BCodecTest::testDecodeStringWithNull:114"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.BCodec"
    },
@@ -2317,7 +2317,7 @@
          "org.apache.commons.codec.binary.Base64Test::testEmptyBase64:402"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "([BZZ)[B",
       "className": "org.apache.commons.codec.binary.Base64"
    },
@@ -2328,7 +2328,7 @@
          "org.apache.commons.codec.digest.UnixCryptTest::testUnixCryptNullData:88"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)Ljava/lang/String;",
       "className": "org.apache.commons.codec.digest.UnixCrypt"
    },
@@ -2340,7 +2340,7 @@
          "org.apache.commons.codec.language.SoundexTest::testDifference:94"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "(Lorg/apache/commons/codec/StringEncoder;Ljava/lang/String;Ljava/lang/String;)I",
       "className": "org.apache.commons.codec.language.SoundexUtils"
    },
@@ -2351,7 +2351,7 @@
          "org.apache.commons.codec.language.MatchRatingApproachEncoderTest::testAccentRemoval_NullValue_ReturnNullSuccessfully:82"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.MatchRatingApproachEncoder"
    },
@@ -2363,7 +2363,7 @@
          "org.apache.commons.codec.language.SoundexTest::testDifference:94"
       ],
       "kind": "ARGUMENT",
-      "index": 2,
+      "argsIndex": 2,
       "descriptor": "(Lorg/apache/commons/codec/StringEncoder;Ljava/lang/String;Ljava/lang/String;)I",
       "className": "org.apache.commons.codec.language.SoundexUtils"
    },
@@ -2375,7 +2375,7 @@
          "org.apache.commons.codec.binary.Base64Test::testEmptyBase64:402"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([BZ)[B",
       "className": "org.apache.commons.codec.binary.Base64"
    },
@@ -2386,7 +2386,7 @@
          "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.Nysiis"
    },
@@ -2397,7 +2397,7 @@
          "org.apache.commons.codec.net.PercentCodecTest::testEncodeNullObject:97"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
       "className": "org.apache.commons.codec.net.PercentCodec"
    },
@@ -2408,7 +2408,7 @@
          "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.Caverphone1"
    },
@@ -2420,7 +2420,7 @@
          "org.apache.commons.codec.digest.HmacAlgorithmsTest::data:104"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.lang3.SystemUtils"
    },
@@ -2434,7 +2434,7 @@
          "org.apache.commons.codec.language.RefinedSoundexTest::testDifference:40"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.RefinedSoundex"
    },
@@ -2445,7 +2445,7 @@
          "org.apache.commons.codec.binary.Base64InputStreamTest::testStrictDecoding:592"
       ],
       "kind": "ARGUMENT",
-      "index": 3,
+      "argsIndex": 3,
       "descriptor": "(Ljava/io/InputStream;ZI[BLorg/apache/commons/codec/CodecPolicy;)",
       "className": "org.apache.commons.codec.binary.Base64InputStream"
    },
@@ -2456,7 +2456,7 @@
          "org.apache.commons.codec.binary.Base64Test::testByteToStringVariations:1269"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)Ljava/lang/String;",
       "className": "org.apache.commons.codec.binary.Base64"
    },
@@ -2467,7 +2467,7 @@
          "org.apache.commons.codec.net.URLCodecTest::testDecodeWithNullArray:201"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.net.URLCodec"
    },
@@ -2478,7 +2478,7 @@
          "org.apache.commons.codec.net.URLCodecTest::testEncodeDecodeNull:124"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.URLCodec"
    },
@@ -2489,7 +2489,7 @@
          "org.apache.commons.codec.binary.Base64InputStreamTest::testCodec105:79"
       ],
       "kind": "ARGUMENT",
-      "index": 3,
+      "argsIndex": 3,
       "descriptor": "(Ljava/io/InputStream;ZI[B)",
       "className": "org.apache.commons.codec.binary.Base64InputStream"
    },
@@ -2500,7 +2500,7 @@
          "org.apache.commons.codec.digest.HmacUtilsTest::testSha256HMacFail:215"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B[B)[B",
       "className": "org.apache.commons.codec.digest.HmacUtils"
    },
@@ -2511,7 +2511,7 @@
          "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeObjects:199"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
       "className": "org.apache.commons.codec.net.QuotedPrintableCodec"
    },
@@ -2522,7 +2522,7 @@
          "org.apache.commons.codec.net.PercentCodecTest::testDecodeNullObject:85"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
       "className": "org.apache.commons.codec.net.PercentCodec"
    },
@@ -2533,7 +2533,7 @@
          "org.apache.commons.codec.net.PercentCodecTest::testDecodeNullObject:85"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
       "className": "org.apache.commons.codec.net.PercentCodec"
    },
@@ -2544,7 +2544,7 @@
          "org.apache.commons.codec.digest.HmacUtilsTest::testSha384HMacFail:238"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B[B)[B",
       "className": "org.apache.commons.codec.digest.HmacUtils"
    },
@@ -2555,7 +2555,7 @@
          "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.Caverphone2"
    },
@@ -2566,7 +2566,7 @@
          "org.apache.commons.codec.binary.Base16Test::testStringToByteVariations:468"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)[B",
       "className": "org.apache.commons.codec.binary.BaseNCodec"
    },
@@ -2577,7 +2577,7 @@
          "org.apache.commons.codec.language.DoubleMetaphoneTest::testEmpty:1115"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.DoubleMetaphone"
    },
@@ -2591,7 +2591,7 @@
          "org.apache.commons.codec.language.SoundexTest::testDifference:94"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.Soundex"
    },
@@ -2602,7 +2602,7 @@
          "org.apache.commons.codec.digest.HmacUtilsTest::testSha1HMacFail:192"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B[B)[B",
       "className": "org.apache.commons.codec.digest.HmacUtils"
    },
@@ -2613,7 +2613,7 @@
          "org.apache.commons.codec.binary.StringUtilsTest::testNewStringNullInput_CODEC229:156"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)Ljava/lang/String;",
       "className": "org.apache.commons.codec.binary.StringUtils"
    },
@@ -2624,7 +2624,7 @@
          "org.apache.commons.codec.net.RFC1522CodecTest::testNullInput:56"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.RFC1522Codec"
    },
@@ -2635,7 +2635,7 @@
          "org.apache.commons.codec.net.URLCodecTest::testEncodeDecodeNull:126"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.URLCodec"
    },
@@ -2649,7 +2649,7 @@
          "org.apache.commons.codec.binary.Base64Test::testEmptyBase64:402"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([BZZI)[B",
       "className": "org.apache.commons.codec.binary.Base64"
    },
@@ -2660,7 +2660,7 @@
          "org.apache.commons.codec.net.BCodecTest::testNullInput:68"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.net.BCodec"
    },
@@ -2672,7 +2672,7 @@
          "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.ColognePhonetic"
    },
@@ -2683,7 +2683,7 @@
          "org.apache.commons.codec.binary.Base64Test::testEmptyBase64:405"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "([BII)[B",
       "className": "org.apache.commons.codec.binary.BaseNCodec"
    },
@@ -2695,7 +2695,7 @@
          "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeNull:144"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/util/BitSet;[BZ)[B",
       "className": "org.apache.commons.codec.net.QuotedPrintableCodec"
    },
@@ -2706,7 +2706,7 @@
          "org.apache.commons.codec.binary.Base16Test::testByteToStringVariations:450"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "([B)Ljava/lang/String;",
       "className": "org.apache.commons.codec.binary.BaseNCodec"
    },
@@ -2717,7 +2717,7 @@
          "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.DaitchMokotoffSoundex"
    },
@@ -2728,7 +2728,7 @@
          "org.apache.commons.codec.StringEncoderAbstractTest::testEncodeNull:65"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.language.DoubleMetaphone"
    },
@@ -2739,7 +2739,7 @@
          "org.apache.commons.codec.digest.Apr1CryptTest::testApr1CryptExplicitCall:82"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "([BLjava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.digest.Md5Crypt"
    },
@@ -2751,7 +2751,7 @@
          "org.apache.commons.codec.digest.Apr1CryptTest::testApr1CryptNullData:92"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([BLjava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.digest.Md5Crypt"
    },
@@ -2763,7 +2763,7 @@
          "org.apache.commons.codec.binary.Base64Test::testEmptyBase64:402"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "([BZ)[B",
       "className": "org.apache.commons.codec.binary.Base64"
    },
@@ -2774,7 +2774,7 @@
          "org.apache.commons.codec.net.QuotedPrintableCodecTest::testDecodeObjects:230"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
       "className": "org.apache.commons.codec.net.QuotedPrintableCodec"
    },
@@ -2786,7 +2786,7 @@
          "org.apache.commons.codec.net.URLCodecTest::testEncodeNull:180"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "(Ljava/util/BitSet;[B)[B",
       "className": "org.apache.commons.codec.net.URLCodec"
    },
@@ -2797,7 +2797,7 @@
          "org.apache.commons.codec.net.URLCodecTest::testEncodeUrlWithNullBitSet:190"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/util/BitSet;[B)[B",
       "className": "org.apache.commons.codec.net.URLCodec"
    },
@@ -2808,7 +2808,7 @@
          "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeStringWithNull:173"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.QuotedPrintableCodec"
    },
@@ -2820,7 +2820,7 @@
          "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeDecodeNull:113"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;Ljava/nio/charset/Charset;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.QuotedPrintableCodec"
    },
@@ -2831,7 +2831,7 @@
          "org.apache.commons.codec.digest.HmacUtilsTest::testInitializedMacNullAlgo:126"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;[B)Ljavax/crypto/Mac;",
       "className": "org.apache.commons.codec.digest.HmacUtils"
    },
@@ -2842,7 +2842,7 @@
          "org.apache.commons.codec.binary.BinaryCodecTest::testEncodeByteArray:696"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)[B",
       "className": "org.apache.commons.codec.binary.BinaryCodec"
    },
@@ -2855,7 +2855,7 @@
          "org.apache.commons.codec.digest.HmacAlgorithmsTest::testHmacHexFailInputStream:178"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "(Ljava/lang/String;[B)Ljavax/crypto/Mac;",
       "className": "org.apache.commons.codec.digest.HmacUtils"
    },
@@ -2866,7 +2866,7 @@
          "org.apache.commons.codec.digest.Md5CryptTest::testMd5CryptNullData:78"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)Ljava/lang/String;",
       "className": "org.apache.commons.codec.digest.Md5Crypt"
    },
@@ -2879,7 +2879,7 @@
          "org.apache.commons.codec.binary.Base32InputStreamTest::testStrictDecoding:571"
       ],
       "kind": "ARGUMENT",
-      "index": 1,
+      "argsIndex": 1,
       "descriptor": "(I[BZB)",
       "className": "org.apache.commons.codec.binary.Base32"
    },
@@ -2891,7 +2891,7 @@
          "org.apache.commons.codec.binary.BinaryCodecTest::testToAsciiBytes:819"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "([B)Z",
       "className": "org.apache.commons.codec.binary.BinaryCodec"
    },
@@ -2903,7 +2903,7 @@
          "org.apache.commons.codec.net.QuotedPrintableCodecTest::testEncodeDecodeNull:111"
       ],
       "kind": "RETURN_VALUE",
-      "index": -1,
+      "argsIndex": -1,
       "descriptor": "(Ljava/lang/String;Ljava/nio/charset/Charset;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.QuotedPrintableCodec"
    },
@@ -2914,7 +2914,7 @@
          "org.apache.commons.codec.net.QCodecTest::testEncodeStringWithNull:120"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
       "className": "org.apache.commons.codec.net.QCodec"
    },
@@ -2927,7 +2927,7 @@
          "org.apache.commons.codec.digest.HmacAlgorithmsTest::testHmacFailString:168"
       ],
       "kind": "ARGUMENT",
-      "index": 0,
+      "argsIndex": 0,
       "descriptor": "(Ljava/lang/String;Ljava/nio/charset/Charset;)[B",
       "className": "org.apache.commons.codec.binary.StringUtils"
    }

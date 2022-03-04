@@ -12,7 +12,6 @@ public interface AnnotationListener {
     void beforeAnnotationTransformation(File originalProject,File transformedProject);
     void afterAnnotationTransformation(File originalProject,File transformedProject);
     void fileCopied(File originalFile, File copy);
-    void annotationAdded(File originalFile, File transformedFile,String className, String methodOtFieldName, String descriptor, int index, Issue.IssueType kind);
+    void annotationAdded(File originalFile, File transformedFile,Issue issue);
     void annotationFailed(File originalFile, String reason);
-    void configFileTransformed(File toFile, File copy);
-}
+    void configFileTransformed(File toFile, File copy);}

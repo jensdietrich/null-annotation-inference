@@ -42,25 +42,28 @@ public class LoggingAnnotationListener implements AnnotationListener {
     private Multimap<File,String> annotationFailed = HashMultimap.create();
     private List<File> otherwiseTransformedFiles = new ArrayList<>();
 
+    // for debugging
+    private Set<Issue> issuesClosed = new HashSet<>();
+
     private File ANNOTATION_REPORT_FOLDER = new File(".annotation-results");
 
     @Override
-    public void annotationAdded(File originalFile, File transformedFile, String className, String methodOrFieldName, String descriptor, int index, Issue.IssueType kind) {
+    public void annotationAdded(File originalFile, File transformedFile, Issue issue) {
         this.annotatedJavaFiles.add(originalFile);
-        this.annotatedClasses.add(className);
-        if (kind==Issue.IssueType.FIELD) {
-            this.annotatedFields.add(className+"::"+methodOrFieldName);
+        this.annotatedClasses.add(issue.getClassName());
+        if (issue.getKind()==Issue.IssueType.FIELD) {
+            this.annotatedFields.add(issue.getClassName()+"::"+issue.getMethodName());
         }
-        else if (kind==Issue.IssueType.ARGUMENT) {
-            this.annotatedMethods.add(className+"::"+methodOrFieldName);
-            this.annotatedArgs.add(className+"::"+methodOrFieldName+"@"+index);
+        else if (issue.getKind()==Issue.IssueType.ARGUMENT) {
+            this.annotatedMethods.add(issue.getClassName()+"::"+issue.getMethodName());
+            this.annotatedArgs.add(issue.getClassName()+"::"+issue.getMethodName()+"@"+issue.getArgsIndex());
         }
-        else if (kind==Issue.IssueType.RETURN_VALUE) {
-            this.annotatedMethods.add(className+"::"+methodOrFieldName);
-            this.annotatedReturns.add(className+"::"+methodOrFieldName);
+        else if (issue.getKind()==Issue.IssueType.RETURN_VALUE) {
+            this.annotatedMethods.add(issue.getClassName()+"::"+issue.getMethodName());
+            this.annotatedReturns.add(issue.getClassName()+"::"+issue.getMethodName());
         }
         else {
-            LOGGER.warn("unknown issue type encountered: " + kind);
+            LOGGER.warn("unknown issue type encountered: " + issue.getKind());
         }
     }
 
@@ -74,8 +77,6 @@ public class LoggingAnnotationListener implements AnnotationListener {
 
     @Override
     public void afterAnnotationTransformation(File originalProject, File transformedProject) {
-
-        //        TODO redo summary logging
 
         // write report
         String projectName = transformedProject.getName();
@@ -92,27 +93,21 @@ public class LoggingAnnotationListener implements AnnotationListener {
         try (PrintWriter out = new PrintWriter(new FileWriter(report))) {
             String[] keys = new String[]{ANNOTATED_JAVA_FILES,ANNOTATED_CLASSES,ANNOTATED_METHODS,ANNOTATED_ARGUMENTS,ANNOTATED_RETURNS,ANNOTATED_FIELDS,ANNOTATION_ERRORS,OTHER_MODIFIED_FILE};
             out.println(Stream.of(keys).collect(Collectors.joining("\t")));
-            for (File f:annotationFailed.keySet()) {
-                for (String reason:annotationFailed.get(f)) {
-                    out.print(this.annotatedJavaFiles.size());
-                    out.print("\t");
-                    out.print(this.annotatedClasses.size());
-                    out.print("\t");
-                    out.print(this.annotatedMethods.size());
-                    out.print("\t");
-                    out.print(this.annotatedArgs.size());
-                    out.print("\t");
-                    out.print(this.annotatedReturns.size());
-                    out.print("\t");
-                    out.print(this.annotatedFields.size());
-                    out.print("\t");
-                    out.print(this.otherwiseTransformedFiles.size());
-                    out.print("\t");
-                    out.print(annotationsFailedCount);
-
-                    out.println();
-                }
-            }
+            out.print(this.annotatedJavaFiles.size());
+            out.print("\t");
+            out.print(this.annotatedClasses.size());
+            out.print("\t");
+            out.print(this.annotatedMethods.size());
+            out.print("\t");
+            out.print(this.annotatedArgs.size());
+            out.print("\t");
+            out.print(this.annotatedReturns.size());
+            out.print("\t");
+            out.print(this.annotatedFields.size());
+            out.print("\t");
+            out.print(this.otherwiseTransformedFiles.size());
+            out.print("\t");
+            out.print(annotationsFailedCount);
             out.println();
             LOGGER.info("Annotation results written to " + report.getAbsolutePath());
         } catch (IOException e) {
@@ -135,4 +130,5 @@ public class LoggingAnnotationListener implements AnnotationListener {
     public void annotationFailed(File originalFile, String reason) {
         annotationFailed.put(originalFile,reason);
     }
+
 }

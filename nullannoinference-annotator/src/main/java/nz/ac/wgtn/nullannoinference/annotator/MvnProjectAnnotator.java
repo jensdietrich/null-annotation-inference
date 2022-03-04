@@ -155,7 +155,7 @@ public class MvnProjectAnnotator {
                 if (file.toString().endsWith(".java")) {
                     int annotationsAdded = 0;
                     try {
-                        annotationsAdded = annotationsAdded + classAnnotator.annotateMembers(file.toFile(),copy,issues,listeners);
+                        annotationsAdded = annotationsAdded + classAnnotator.annotateMethod(file.toFile(),copy,issues,listeners);
                         transformed = annotationsAdded>0;
                     }
                     catch (JavaParserFailedException x) {

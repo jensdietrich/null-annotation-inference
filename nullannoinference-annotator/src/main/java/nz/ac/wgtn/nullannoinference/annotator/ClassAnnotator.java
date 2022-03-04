@@ -49,7 +49,7 @@ public class ClassAnnotator {
     }
 
 
-    public int annotateMembers(@Nonnull File originalJavaFile, @Nonnull File transformedJavaFile, Set<Issue> issues, List<AnnotationListener> listeners) throws IOException, JavaParserFailedException {
+    public int annotateMethod(@Nonnull File originalJavaFile, @Nonnull File transformedJavaFile, Set<Issue> issues, List<AnnotationListener> listeners) throws IOException, JavaParserFailedException {
         Preconditions.checkArgument(originalJavaFile.exists());
         int annotationsAddedCounter = 0;
         ParseResult<CompilationUnit> result = new JavaParser().parse(originalJavaFile);
@@ -65,10 +65,10 @@ public class ClassAnnotator {
         for (Issue issue:issues){
             try {
                 if (issue.getKind()==Issue.IssueType.RETURN_VALUE || issue.getKind()==Issue.IssueType.ARGUMENT) {
-                    annotationsAddedCounter = annotationsAddedCounter + annotateMembers(originalJavaFile, transformedJavaFile, cu, issue.getClassName(), issue.getMethodName(), issue.getDescriptor(), issue.getKind() == Issue.IssueType.RETURN_VALUE ? -1 : issue.getArgsIndex(), listeners);
+                    annotationsAddedCounter = annotationsAddedCounter + annotateMethod(originalJavaFile, transformedJavaFile, cu, issue, listeners);
                 }
                 else if (issue.getKind()==Issue.IssueType.FIELD) {
-                    annotationsAddedCounter = annotationsAddedCounter + annotateFields(originalJavaFile, transformedJavaFile, cu, issue.getClassName(), issue.getMethodName(), issue.getDescriptor(), listeners);
+                    annotationsAddedCounter = annotationsAddedCounter + annotateField(originalJavaFile, transformedJavaFile, cu, issue, listeners);
                 }
                 else {
                     LOGGER.warn("unknown issue type encountered: " + issue.getKind());
@@ -112,21 +112,21 @@ public class ClassAnnotator {
         return packageName.equals(declaredPackageName);
     }
 
-    private int annotateFields(@Nonnull File originalJavaFile, @Nonnull File transformedJavaFile,@Nonnull CompilationUnit cu, @Nonnull String typeName, @Nonnull String fieldName, @Nonnull String descriptor,List<AnnotationListener> listeners) throws AmbiguousAnonymousInnerClassResolutionException {
+    private int annotateField(@Nonnull File originalJavaFile, @Nonnull File transformedJavaFile, @Nonnull CompilationUnit cu, @Nonnull Issue issue, List<AnnotationListener> listeners) throws AmbiguousAnonymousInnerClassResolutionException {
 
-        if (!checkPackageName(cu,typeName)) {
+        if (!checkPackageName(cu,issue.getClassName())) {
             return 0;
         }
-        String localTypeName = getLocalTypeName(typeName);
+        String localTypeName = getLocalTypeName(issue.getClassName());
 
         boolean hasAnonymInnerClass = Stream.of(localTypeName.split("\\$")).anyMatch(name -> NUM_REGEX.matcher(name).matches());
         int annotationAddedCount = 0;
         FieldDeclaration field = null;
         if (hasAnonymInnerClass) {
-            field = locateFieldInAnoInnerClass(cu,typeName, fieldName, descriptor);
+            field = locateFieldInAnoInnerClass(cu, issue.getClassName(), issue.getMethodName(), issue.getDescriptor());
         }
         else {
-            field = locateField(cu, localTypeName, fieldName, descriptor);
+            field = locateField(cu, localTypeName, issue.getMethodName(), issue.getDescriptor());
         }
 
         if (field==null) {
@@ -140,53 +140,56 @@ public class ClassAnnotator {
         if (!hasAnnotation) {
             field.addAnnotation(new MarkerAnnotationExpr(annotationSpec.getNullableAnnotationName()));
             annotationAddedCount = annotationAddedCount+1;
-            listeners.stream().forEach(l -> l.annotationAdded(originalJavaFile,transformedJavaFile,typeName,fieldName,descriptor,-1, Issue.IssueType.FIELD));
+            listeners.stream().forEach(l -> l.annotationAdded(originalJavaFile,transformedJavaFile,issue));
         }
 
         return annotationAddedCount;
     }
 
 
-    private int annotateMembers(@Nonnull File originalJavaFile, @Nonnull File transformedJavaFile, @Nonnull CompilationUnit cu, @Nonnull String typeName, @Nonnull String methodName, @Nonnull String descriptor, int argPosition, List<AnnotationListener> listeners) throws AmbiguousAnonymousInnerClassResolutionException {
+    private int annotateMethod(@Nonnull File originalJavaFile, @Nonnull File transformedJavaFile, @Nonnull CompilationUnit cu, @Nonnull Issue issue, List<AnnotationListener> listeners) throws AmbiguousAnonymousInnerClassResolutionException {
 
-        if (!checkPackageName(cu,typeName)) {
+        if (!checkPackageName(cu,issue.getClassName())) {
             return 0;
         }
-        String localTypeName = getLocalTypeName(typeName);
+        String localTypeName = getLocalTypeName(issue.getClassName());
 
         boolean hasAnonymInnerClass = Stream.of(localTypeName.split("\\$")).anyMatch(name -> NUM_REGEX.matcher(name).matches());
         int annotationAddedCount = 0;
         MethodDeclaration method = null;
         if (hasAnonymInnerClass) {
-            method = locateMethodInAnoInnerClass(cu,typeName, methodName, descriptor);
+            method = locateMethodInAnoInnerClass(cu, issue.getClassName(), issue.getMethodName(), issue.getDescriptor());
         }
         else {
-            method = locateMethod(cu, localTypeName, methodName, descriptor);
+            method = locateMethod(cu, localTypeName, issue.getMethodName(), issue.getDescriptor());
         }
         if (method != null) {
             NodeList<Parameter> params = method.getParameters();
-            for (int i = 0; i < params.size(); i++) {
-                if (argPosition==i) {
-                    Parameter param = params.get(i);
-                    boolean hasAnnotation = param.getAnnotations().stream()
-                            .map(a -> a.getNameAsString())
-                            .anyMatch(n -> n.equals(annotationSpec.getNullableAnnotationName()));
-                    if (!hasAnnotation) {
-                        param.addAnnotation(new MarkerAnnotationExpr(annotationSpec.getNullableAnnotationName()));
-                        annotationAddedCount = annotationAddedCount+1;
-                        listeners.stream().forEach(l -> l.annotationAdded(originalJavaFile,transformedJavaFile,typeName,methodName,descriptor,argPosition, Issue.IssueType.ARGUMENT));
+            if (issue.getKind()== Issue.IssueType.ARGUMENT) {
+                for (int i = 0; i < params.size(); i++) {
+                    if (issue.getArgsIndex() == i) {
+                        Parameter param = params.get(i);
+                        boolean hasAnnotation = param.getAnnotations().stream()
+                                .map(a -> a.getNameAsString())
+                                .anyMatch(n -> n.equals(annotationSpec.getNullableAnnotationName()));
+                        if (!hasAnnotation) {
+                            param.addAnnotation(new MarkerAnnotationExpr(annotationSpec.getNullableAnnotationName()));
+                            annotationAddedCount = annotationAddedCount + 1;
+                            listeners.stream().forEach(l -> l.annotationAdded(originalJavaFile, transformedJavaFile, issue));
+                        }
                     }
                 }
             }
             // return type
-            if (argPosition==-1) {
+            if (issue.getKind()== Issue.IssueType.RETURN_VALUE) {
+                assert issue.getArgsIndex()==-1;
                 boolean hasAnnotation = method.getAnnotations().stream()
                     .map(a -> a.getNameAsString())
                     .anyMatch(n -> n.equals(annotationSpec.getNullableAnnotationName()));
                 if (!hasAnnotation) {
                     method.addAnnotation(new MarkerAnnotationExpr(annotationSpec.getNullableAnnotationName()));
                     annotationAddedCount = annotationAddedCount+1;
-                    listeners.stream().forEach(l -> l.annotationAdded(originalJavaFile,transformedJavaFile,typeName,methodName,descriptor,argPosition, Issue.IssueType.RETURN_VALUE));
+                    listeners.stream().forEach(l -> l.annotationAdded(originalJavaFile,transformedJavaFile,issue));
                 }
             }
         }

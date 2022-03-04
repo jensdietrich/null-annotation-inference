@@ -7,6 +7,7 @@
 NAME=commons-lang
 ROOT="$(pwd)"
 PROJECT_FOLDER=$ROOT/projects/original/$NAME
+ANNOTATED_PROJECT_FOLDER=$ROOT/projects/annotated/$NAME
 INFERRED_ISSUES_FOLDER=$ROOT/issues-inferred/$NAME
 
 ANNOTATOR=nullannoinference-annotator.jar
@@ -42,5 +43,5 @@ cd $ROOT
 cd ..
 cp $ANNOTATOR_PATH $ROOT
 cd $ROOT
-java -jar $ANNOTATOR -i $ISSUE_FOLDER -p $PROJECT_FOLDER
+java -jar $ANNOTATOR -i $ISSUE_FOLDER -p $PROJECT_FOLDER -o ANNOTATED_PROJECT_FOLDER
 
