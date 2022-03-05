@@ -128,7 +128,7 @@ public class MvnProjectAnnotator {
             @Override
             public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) {
                 String n = dir.getName(dir.getNameCount()-1).toString();
-                boolean skip = dir.toFile().isHidden() || n.equals("target") || n.equals("pom-instrumented.xml") || n.equals("infer-out") ;
+                boolean skip = dir.toFile().isHidden() || n.equals("target") || n.equals("pom-instrumented.xml") || n.equals("infer-out")   ;
                 return skip ? FileVisitResult.SKIP_SUBTREE : FileVisitResult.CONTINUE;
             }
             @Override
@@ -156,7 +156,8 @@ public class MvnProjectAnnotator {
                         x.printStackTrace();
                     }
                 }
-                if (file.toString().endsWith(".java")) {
+                // skip tests !
+                if (file.toString().endsWith(".java") && ! file.toString().contains("src/test/java")) {
                     int annotationsAdded = 0;
                     try {
                         annotationsAdded = annotationsAdded + classAnnotator.annotateMember(file.toFile(),copy,aggregatedIssues,listeners);

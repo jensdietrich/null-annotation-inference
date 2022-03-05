@@ -246,16 +246,18 @@ public class ClassAnnotator {
         }
     }
 
-
     static @Nullable MethodDeclaration locateMethod(@Nonnull  TypeDeclaration type, @Nonnull  String className, @Nonnull  String methodName, @Nonnull  String descriptor, @Nonnull  Stack<String> innerClassStack)   {
         Stack<String> innerClassStack2 = new Stack<>();
         innerClassStack2.addAll(innerClassStack);
         innerClassStack2.add(type.getNameAsString());
+
+        Map<String,String> typeParams = getTypeParameters(type);
+
         String qClassName = innerClassStack2.stream().collect(Collectors.joining("$"));
         if (className.equals(qClassName)) {
             List<MethodDeclaration> methods = type.getMethods();
             for (MethodDeclaration method : methods) {
-                if (method.getNameAsString().equals(methodName) && descriptorMatches(method, descriptor)) {
+                if (method.getNameAsString().equals(methodName) && descriptorMatches(method, descriptor,typeParams)) {
                     return method;
                 }
             }
@@ -276,8 +278,29 @@ public class ClassAnnotator {
         }
     }
 
+    static Map<String,String> getTypeParameters(CompilationUnit cu) {
+        if (cu.getTypes().size()>0) {
+            return getTypeParameters(cu.getType(0));
+        }
+        return Collections.EMPTY_MAP;
+    }
+
+    static Map<String,String> getTypeParameters(TypeDeclaration type) {
+        Map<String,String> typeParams = new HashMap<>();
+        if (type instanceof ClassOrInterfaceDeclaration) {
+            ClassOrInterfaceDeclaration clType = (ClassOrInterfaceDeclaration)type;
+            clType.getTypeParameters().stream().forEach(
+                arg -> {
+                    typeParams.put(arg.getNameAsString(),"java.lang.Object"); // TODO type bounds
+                }
+            );
+        }
+        return typeParams;
+    }
+
     static @Nullable MethodDeclaration locateMethodInAnoInnerClass(@Nonnull  CompilationUnit cu,@Nonnull String typeName,@Nonnull  String methodName,@Nonnull  String descriptor) throws AmbiguousAnonymousInnerClassResolutionException {
         final List<MethodDeclaration> matchingMethods = new ArrayList<>(); // deliberate, to detect duplicates later
+        Map<String,String> typeParameters = getTypeParameters(cu);  // TODO inner classes might have type parameters too
         cu.accept(new VoidVisitorAdapter<Object>() {
             @Override
             public void visit(ObjectCreationExpr n, Object arg) {
@@ -288,7 +311,7 @@ public class ClassAnnotator {
                         .filter(bd -> bd.isMethodDeclaration())
                         .map(bd -> bd.asMethodDeclaration())
                         .filter(md -> md.getNameAsString().equals(methodName))
-                        .filter(md -> descriptorMatches(md,descriptor))
+                        .filter(md -> descriptorMatches(md,descriptor,typeParameters))
                         .filter(md -> nonAnoTypePartMatches(md,typeName))
                         .collect(Collectors.toList());
                     matchingMethods.addAll(matchingMethods2);
@@ -386,17 +409,25 @@ public class ClassAnnotator {
 
 
     // to be used by tests -- visibility to be used by tests
-    static boolean descriptorMatches(@Nonnull  MethodDeclaration method, @Nonnull  String descriptor)   {
+    static boolean descriptorMatches(@Nonnull  MethodDeclaration method, @Nonnull  String descriptor,Map<String,String> typeParams)   {
         MethodDescriptorParser parser = new MethodDescriptorParser();
         parser.parse(descriptor);
 
         String returnType = getRawName(method.getType());
+        String mapped = typeParams.get(returnType);
+        returnType = mapped==null?returnType:mapped;
         // note that this is not completely accurate as we are not resolving imports in the compilation unit !!
         if (!parser.getReturnType().endsWith(returnType)) {
             return false;
         }
 
-        List<String> paramTypes = method.getParameters().stream().map(p -> getRawName(p.getType())).collect(Collectors.toList());
+        List<String> paramTypes = method.getParameters().stream()
+                .map(p -> getRawName(p.getType()))
+                .map(n -> {
+                    String resolved = typeParams.get(n);
+                    return resolved==null?n:resolved;
+                })
+                .collect(Collectors.toList());
 
         // vararg are different in source code, but just arrays in bytecode -- must account for this
         for (int i=0;i<method.getParameters().size();i++) {

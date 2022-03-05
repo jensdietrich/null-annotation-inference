@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -78,6 +79,7 @@ public abstract class AbstractInjectAnnotationTest {
             ParseResult<CompilationUnit> result = javaParser.parse(src);
             assertTrue(result.isSuccessful());
             CompilationUnit cu = result.getResult().get();
+            Map<String,String> typeParams = ClassAnnotator.getTypeParameters(cu.getType(0));
             cu.accept(new VoidVisitorAdapter<Object>() {
                 @Override
                 public void visit(ObjectCreationExpr n, Object arg) {
@@ -89,7 +91,7 @@ public abstract class AbstractInjectAnnotationTest {
                             .map(bd -> bd.asMethodDeclaration())
                             .filter(md -> ClassAnnotator.nonAnoTypePartMatches(md,className))
                             .filter(md -> md.getNameAsString().equals(methodName))
-                            .filter(md -> ClassAnnotator.descriptorMatches(md,descriptor))
+                            .filter(md -> ClassAnnotator.descriptorMatches(md,descriptor,typeParams))
                             .collect(Collectors.toList());
                         matchingMethods.addAll(matchingMethods2);
                     }

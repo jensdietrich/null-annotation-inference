@@ -157,4 +157,19 @@ public class BasicTests extends AbstractInjectAnnotationTest {
         assertTrue(annotations.contains(annotator.getAnnotationSpec().getNullableAnnotationName()));
     }
 
+    @Test
+    public void testTypeParams1() throws Exception {
+        File in = new File(BasicTests.class.getResource("/Class10.java").getFile());
+        File out = new File(TMP,"Class10.java");
+        Issue spec = new Issue("foo.Class10", "foo","()Ljava/lang/Object;", null, Issue.IssueType.RETURN_VALUE);
+
+        int count = annotator.annotateMember(in,out,Set.of(spec), Collections.EMPTY_LIST);
+        assertEquals(1,count);
+        assertTrue(out.exists());
+
+        MethodDeclaration method = findMethod(out,"foo.Class10","foo","()Ljava/lang/Object;");
+        Set<String> annotations = method.getAnnotations().stream().map(a -> a.getNameAsString()).collect(Collectors.toSet());
+        assertTrue(annotations.contains(annotator.getAnnotationSpec().getNullableAnnotationName()));
+    }
+
 }
