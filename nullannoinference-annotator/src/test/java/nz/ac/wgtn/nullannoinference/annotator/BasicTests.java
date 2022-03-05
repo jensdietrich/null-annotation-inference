@@ -1,5 +1,6 @@
 package nz.ac.wgtn.nullannoinference.annotator;
 
+import com.github.javaparser.ast.body.ConstructorDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
@@ -278,17 +279,17 @@ public class BasicTests extends AbstractInjectAnnotationTest {
     }
 
     @Test
-    public void testAnnotationOfConstructorArg() {
+    public void testAnnotationOfConstructorArg() throws Exception {
         File in = new File(BasicTests.class.getResource("/Class18.java").getFile());
         File out = new File(TMP,"Class18.java");
-        Issue spec = new Issue("foo.Class18", "foo","(Ljava/util/List;)V", null, Issue.IssueType.ARGUMENT,0);
+        Issue spec = new Issue("foo.Class18", "<init>","(Ljava/lang/String;)", null, Issue.IssueType.ARGUMENT,0);
 
         int count = annotator.annotateMembers(in,out,Set.of(spec), Collections.EMPTY_LIST);
         assertEquals(1,count);
         assertTrue(out.exists());
 
-        MethodDeclaration method = findMethod(out,"foo.Class18","foo","(Ljava/util/List;)V");
-        Set<String> annotations = method.getParameters().get(0).getAnnotations().stream().map(a -> a.getNameAsString()).collect(Collectors.toSet());
+        ConstructorDeclaration constructor = findConstructor(out,"foo.Class18","(Ljava/lang/String;)");
+        Set<String> annotations = constructor.getParameters().get(0).getAnnotations().stream().map(a -> a.getNameAsString()).collect(Collectors.toSet());
         assertTrue(annotations.contains(annotator.getAnnotationSpec().getNullableAnnotationName()));
     }
 

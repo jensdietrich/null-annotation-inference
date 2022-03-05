@@ -5,6 +5,7 @@ import com.github.javaparser.ParseResult;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.BodyDeclaration;
+import com.github.javaparser.ast.body.ConstructorDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
@@ -60,6 +61,17 @@ public abstract class AbstractInjectAnnotationTest {
         MethodDeclaration method = ClassAnnotator.locateMethod(cu,localTypeName,methodName,descriptor);
         assertNotNull(method);
         return method;
+    }
+
+    protected ConstructorDeclaration findConstructor(File src, String className, String descriptor) throws FileNotFoundException {
+        ParseResult<CompilationUnit> result = new JavaParser().parse(src);
+        assertTrue(result.isSuccessful());
+        CompilationUnit cu = result.getResult().get();
+        assertNotNull(cu);
+        String localTypeName = ClassAnnotator.getLocalTypeName(className);
+        ConstructorDeclaration constructor = ClassAnnotator.locateConstructor(cu,localTypeName,descriptor);
+        assertNotNull(constructor);
+        return constructor;
     }
 
     protected FieldDeclaration findField(File src, String className, String fieldName, String descriptor) throws FileNotFoundException {

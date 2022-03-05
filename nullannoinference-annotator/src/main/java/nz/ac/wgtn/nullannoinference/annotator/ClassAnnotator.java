@@ -17,7 +17,6 @@ import com.github.javaparser.symbolsolver.JavaSymbolSolver;
 import com.github.javaparser.symbolsolver.resolution.typesolvers.CombinedTypeSolver;
 import com.github.javaparser.symbolsolver.resolution.typesolvers.ReflectionTypeSolver;
 import com.google.common.base.Preconditions;
-import japicmp.util.MethodDescriptorParser;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
 import org.apache.commons.io.FileUtils;
 import javax.annotation.Nonnull;
@@ -77,8 +76,12 @@ public class ClassAnnotator {
         CompilationUnit cu = result.getResult().get();
         for (Issue issue:issues){
             try {
-                if (issue.getKind()==Issue.IssueType.RETURN_VALUE || issue.getKind()==Issue.IssueType.ARGUMENT) {
+                boolean isConstructor = issue.getMethodName().equals("<init>");
+                if (!isConstructor && (issue.getKind()==Issue.IssueType.RETURN_VALUE || issue.getKind()==Issue.IssueType.ARGUMENT)) {
                     annotationsAddedCounter = annotationsAddedCounter + annotateMethod(originalJavaFile, transformedJavaFile, cu, issue, listeners);
+                }
+                else if (isConstructor && issue.getKind()==Issue.IssueType.ARGUMENT) {
+                    annotationsAddedCounter = annotationsAddedCounter + annotateConstructor(originalJavaFile, transformedJavaFile, cu, issue, listeners);
                 }
                 else if (issue.getKind()==Issue.IssueType.FIELD) {
                     annotationsAddedCounter = annotationsAddedCounter + annotateField(originalJavaFile, transformedJavaFile, cu, issue, listeners);
@@ -158,6 +161,41 @@ public class ClassAnnotator {
 
         return annotationAddedCount;
     }
+    private int annotateConstructor(@Nonnull File originalJavaFile, @Nonnull File transformedJavaFile, @Nonnull CompilationUnit cu, @Nonnull Issue issue, List<AnnotationListener> listeners) throws AmbiguousAnonymousInnerClassResolutionException {
+
+        if (!checkPackageName(cu,issue.getClassName())) {
+            return 0;
+        }
+        String localTypeName = getLocalTypeName(issue.getClassName());
+
+        boolean hasAnonymInnerClass = Stream.of(localTypeName.split("\\$")).anyMatch(name -> NUM_REGEX.matcher(name).matches());
+        int annotationAddedCount = 0;
+        ConstructorDeclaration constructor = null;
+        if (hasAnonymInnerClass) {
+            constructor = locateConstructorInAnoInnerClass(cu, issue.getClassName(), issue.getDescriptor());
+        }
+        else {
+            constructor = locateConstructor(cu, localTypeName, issue.getDescriptor());
+        }
+        if (constructor != null) {
+            NodeList<Parameter> params = constructor.getParameters();
+            assert issue.getKind()== Issue.IssueType.ARGUMENT;
+            for (int i = 0; i < params.size(); i++) {
+                if (issue.getArgsIndex() == i) {
+                    Parameter param = params.get(i);
+                    boolean hasAnnotation = param.getAnnotations().stream()
+                        .map(a -> a.getNameAsString())
+                        .anyMatch(n -> n.equals(annotationSpec.getNullableAnnotationName()));
+                    if (!hasAnnotation) {
+                        param.addAnnotation(new MarkerAnnotationExpr(annotationSpec.getNullableAnnotationName()));
+                        annotationAddedCount = annotationAddedCount + 1;
+                        listeners.stream().forEach(l -> l.annotationAdded(originalJavaFile, transformedJavaFile, issue));
+                    }
+                }
+            }
+        }
+        return annotationAddedCount;
+    }
 
 
     private int annotateMethod(@Nonnull File originalJavaFile, @Nonnull File transformedJavaFile, @Nonnull CompilationUnit cu, @Nonnull Issue issue, List<AnnotationListener> listeners) throws AmbiguousAnonymousInnerClassResolutionException {
@@ -230,6 +268,16 @@ public class ClassAnnotator {
         return null;
     }
 
+    static @Nullable ConstructorDeclaration locateConstructor(@Nonnull  CompilationUnit cu,@Nonnull  String className,@Nonnull  String descriptor)   {
+        for (TypeDeclaration type:cu.getTypes()) {
+            ConstructorDeclaration constructor = locateConstructor(type,className,descriptor,new Stack<>());
+            if (constructor!=null) {
+                return constructor;
+            }
+        }
+        return null;
+    }
+
     static @Nullable FieldDeclaration locateField(@Nonnull  TypeDeclaration type, @Nonnull  String className, @Nonnull  String fieldName, @Nonnull  String descriptor, @Nonnull  Stack<String> innerClassStack)   {
         Stack<String> innerClassStack2 = new Stack<>();
         innerClassStack2.addAll(innerClassStack);
@@ -290,6 +338,38 @@ public class ClassAnnotator {
         }
     }
 
+    static @Nullable ConstructorDeclaration locateConstructor(@Nonnull  TypeDeclaration type, @Nonnull  String className, @Nonnull  String descriptor, @Nonnull  Stack<String> innerClassStack)   {
+        Stack<String> innerClassStack2 = new Stack<>();
+        innerClassStack2.addAll(innerClassStack);
+        innerClassStack2.add(type.getNameAsString());
+
+        Map<String,String> typeParams = getTypeParameters(type);
+
+        String qClassName = innerClassStack2.stream().collect(Collectors.joining("$"));
+        if (className.equals(qClassName)) {
+            List<ConstructorDeclaration> constructors = type.getConstructors();
+            for (ConstructorDeclaration constructor : constructors) {
+                if (descriptorMatches(constructor, descriptor,typeParams)) {
+                    return constructor;
+                }
+            }
+            return null;
+        }
+        else {
+            // check inner classes
+            for (Object member:type.getMembers()) {
+                if (member instanceof TypeDeclaration) {
+                    TypeDeclaration innerClass = (TypeDeclaration)member;
+                    ConstructorDeclaration constructor = locateConstructor(innerClass,className,descriptor,innerClassStack2);
+                    if (constructor!=null) {
+                        return constructor;
+                    }
+                }
+            }
+            return null;
+        }
+    }
+
     static Map<String,String> getTypeParameters(CompilationUnit cu) {
         if (cu.getTypes().size()>0) {
             return getTypeParameters(cu.getType(0));
@@ -312,6 +392,38 @@ public class ClassAnnotator {
             );
         }
         return typeParams;
+    }
+
+    static @Nullable ConstructorDeclaration locateConstructorInAnoInnerClass(@Nonnull  CompilationUnit cu,@Nonnull  String typeName,@Nonnull  String descriptor) throws AmbiguousAnonymousInnerClassResolutionException {
+        final List<ConstructorDeclaration> matchingMethods = new ArrayList<>(); // deliberate, to detect duplicates later
+        Map<String,String> typeParameters = getTypeParameters(cu);  // TODO inner classes might have type parameters too
+        cu.accept(new VoidVisitorAdapter<Object>() {
+            @Override
+            public void visit(ObjectCreationExpr n, Object arg) {
+                super.visit(n, arg);
+                Optional<NodeList<BodyDeclaration<?>>> optClassBody = n.getAnonymousClassBody();
+                if (optClassBody.isPresent()) {
+                    List<ConstructorDeclaration> matchingConstructors2 = optClassBody.get().stream()
+                        .filter(bd -> bd.isConstructorDeclaration())
+                        .map(bd -> bd.asConstructorDeclaration())
+                        .filter(md -> descriptorMatches(md,descriptor,typeParameters))
+                        .filter(md -> nonAnoTypePartMatches(md,typeName))
+                        .collect(Collectors.toList());
+                    matchingMethods.addAll(matchingConstructors2);
+                }
+            }
+        },null);
+
+        if (matchingMethods.size()==0) {
+            return null;
+        }
+        else if (matchingMethods.size()==1) {
+            return matchingMethods.get(0);
+        }
+        else {
+            String qMethodName = typeName + "::<init>"  + descriptor;
+            throw new AmbiguousAnonymousInnerClassResolutionException("Ambiguous resolution on anonymous inner class for method: " + qMethodName);
+        }
     }
 
     static @Nullable MethodDeclaration locateMethodInAnoInnerClass(@Nonnull  CompilationUnit cu,@Nonnull String typeName,@Nonnull  String methodName,@Nonnull  String descriptor) throws AmbiguousAnonymousInnerClassResolutionException {
@@ -423,41 +535,57 @@ public class ClassAnnotator {
 
     }
 
-    // to be used by tests -- visibility to be used by tests
-    static boolean descriptorMatches(@Nonnull  MethodDeclaration method, @Nonnull  String descriptor,Map<String,String> typeParams)   {
+    static boolean descriptorMatches(@Nonnull  MethodDeclaration method, @Nonnull  String descriptor,Map<String,String> resolvedTypeParameters) {
+        NodeList<TypeParameter> typeParameters = method.getTypeParameters();
+        NodeList<Parameter> parameters = method.getParameters();
+        Type memberType = method.getType();
+        return descriptorMatches(typeParameters,parameters,memberType,descriptor,resolvedTypeParameters);
+    }
+
+    static boolean descriptorMatches(@Nonnull  ConstructorDeclaration constructor, @Nonnull  String descriptor,Map<String,String> resolvedTypeParameters) {
+        NodeList<TypeParameter> typeParameters = constructor.getTypeParameters();
+        NodeList<Parameter> parameters = constructor.getParameters();
+        return descriptorMatches(typeParameters, parameters, null, descriptor, resolvedTypeParameters);
+    }
+
+    // match between bytecode
+    static boolean descriptorMatches(@Nonnull  NodeList<TypeParameter> typeParameters, @Nonnull NodeList<Parameter> parameters,Type memberType, @Nonnull  String descriptor,Map<String,String> resolvedTypeParameters)   {
         MethodDescriptorParser parser = new MethodDescriptorParser();
         parser.parse(descriptor);
 
-        Map<String,String> typeParams2 = new HashMap<>();
-        typeParams2.putAll(typeParams);
-
+        // add type parameters defined in method
+        Map<String,String> resolvedTypeParameters2 = new HashMap<>();
+        resolvedTypeParameters2.putAll(resolvedTypeParameters);
 
         // add method type parameters
-        for (int i=0;i<method.getTypeParameters().size();i++) {
-            TypeParameter param = method.getTypeParameters().get(i);
+        for (int i=0;i<typeParameters.size();i++) {
+            TypeParameter param = typeParameters.get(i);
             String bond = "java.lang.Object";
             if (param.getTypeBound().size()>0) {
-                bond = getRawName(param.getTypeBound().get(0),typeParams2);
+                bond = getRawName(param.getTypeBound().get(0),resolvedTypeParameters2);
             }
             String name = param.getName().asString();
-            typeParams2.put(name,bond);
+            resolvedTypeParameters2.put(name,bond);
         }
 
-        String returnType = getRawName(method.getType(),typeParams2);
-        String mapped = typeParams2.get(returnType);
-        returnType = mapped==null?returnType:mapped;
-        // note that this is not completely accurate as we are not resolving imports in the compilation unit !!
-        if (!parser.getReturnType().endsWith(returnType)) {
-            return false;
+        if (memberType!=null) {
+            // method, otherwise this is a constructor
+            String returnType = getRawName(memberType, resolvedTypeParameters2);
+            String mapped = resolvedTypeParameters2.get(returnType);
+            returnType = mapped == null ? returnType : mapped;
+            // note that this is not completely accurate as we are not resolving imports in the compilation unit !!
+            if (!parser.getReturnType().endsWith(returnType)) {
+                return false;
+            }
         }
 
-        List<String> paramTypes = method.getParameters().stream()
-                .map(p -> getRawName(p.getType(),typeParams2))
-                .collect(Collectors.toList());
+        List<String> paramTypes = parameters.stream()
+            .map(p -> getRawName(p.getType(),resolvedTypeParameters2))
+            .collect(Collectors.toList());
 
         // vararg are different in source code, but just arrays in bytecode -- must account for this
-        for (int i=0;i<method.getParameters().size();i++) {
-            if (method.getParameters().get(i).isVarArgs()) {
+        for (int i=0;i<parameters.size();i++) {
+            if (parameters.get(i).isVarArgs()) {
                 paramTypes.set(i,paramTypes.get(i)+"[]");
             }
         }
