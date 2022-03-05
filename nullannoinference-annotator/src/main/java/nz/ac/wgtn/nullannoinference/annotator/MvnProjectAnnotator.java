@@ -194,14 +194,4 @@ public class MvnProjectAnnotator {
 
     private static Predicate<File> SPEC_FILE_FILTER = f -> f.exists() && !f.isDirectory() && f.getName().endsWith(".json");
 
-    private static void addSpec(List<File> files,File specOfFolder) {
-        if (SPEC_FILE_FILTER.test(specOfFolder)) {
-            files.add(specOfFolder);
-        }
-        else if (specOfFolder.isDirectory()) {
-            for (File f:specOfFolder.listFiles()) {
-                addSpec(files,f);
-            }
-        }
-    }
 }

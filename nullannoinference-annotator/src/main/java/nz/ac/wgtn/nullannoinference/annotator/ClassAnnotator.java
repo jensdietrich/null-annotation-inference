@@ -7,6 +7,8 @@ import com.github.javaparser.ast.*;
 import com.github.javaparser.ast.body.*;
 import com.github.javaparser.ast.expr.MarkerAnnotationExpr;
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
+import com.github.javaparser.ast.type.ArrayType;
+import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import com.github.javaparser.ast.type.Type;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import com.google.common.base.Preconditions;
@@ -148,7 +150,7 @@ public class ClassAnnotator {
 
     private int annotateMethod(@Nonnull File originalJavaFile, @Nonnull File transformedJavaFile, @Nonnull CompilationUnit cu, @Nonnull Issue issue, List<AnnotationListener> listeners) throws AmbiguousAnonymousInnerClassResolutionException {
 
-        if (!checkPackageName(cu,issue.getClassName())) {
+         if (!checkPackageName(cu,issue.getClassName())) {
             return 0;
         }
         String localTypeName = getLocalTypeName(issue.getClassName());
@@ -417,14 +419,16 @@ public class ClassAnnotator {
     }
 
     static String getRawName (Type type) {
-        return getRawName(type.asString());
+
+        if (type instanceof ArrayType) {
+            ArrayType arrType = (ArrayType) type;
+            return getRawName(arrType.getComponentType()) + "[]";
+        }
+        else if (type instanceof ClassOrInterfaceType) {
+            ClassOrInterfaceType clType = (ClassOrInterfaceType)type;
+            return clType.getNameAsString(); // should exclude type params
+        }
+        return type.asString();
     }
 
-    static String getRawName (String typeName) {
-        int pos = typeName.indexOf('<');
-        if (pos>-1) {
-            return typeName.substring(0,pos);
-        }
-        return typeName;
-    }
 }
