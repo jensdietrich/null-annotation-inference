@@ -2,6 +2,7 @@ package nz.ac.wgtn.nullannoinference.annotator;
 
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ParseResult;
+import com.github.javaparser.ParserConfiguration;
 import com.github.javaparser.Problem;
 import com.github.javaparser.ast.*;
 import com.github.javaparser.ast.body.*;
@@ -11,6 +12,9 @@ import com.github.javaparser.ast.type.ArrayType;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import com.github.javaparser.ast.type.Type;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
+import com.github.javaparser.symbolsolver.JavaSymbolSolver;
+import com.github.javaparser.symbolsolver.resolution.typesolvers.CombinedTypeSolver;
+import com.github.javaparser.symbolsolver.resolution.typesolvers.ReflectionTypeSolver;
 import com.google.common.base.Preconditions;
 import japicmp.util.MethodDescriptorParser;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
@@ -50,10 +54,17 @@ public class ClassAnnotator {
         this.annotationSpec = annotationSpec;
     }
 
-    public int annotateMember(@Nonnull File originalJavaFile, @Nonnull File transformedJavaFile, Set<Issue> issues, List<AnnotationListener> listeners) throws IOException, JavaParserFailedException {
+    public int annotateMembers(@Nonnull File originalJavaFile, @Nonnull File transformedJavaFile, Set<Issue> issues, List<AnnotationListener> listeners) throws IOException, JavaParserFailedException {
         Preconditions.checkArgument(originalJavaFile.exists());
         int annotationsAddedCounter = 0;
-        ParseResult<CompilationUnit> result = new JavaParser().parse(originalJavaFile);
+
+        CombinedTypeSolver typeSolver = new CombinedTypeSolver(new ReflectionTypeSolver(false));
+
+        ParserConfiguration config = new ParserConfiguration()
+                .setSymbolResolver(new JavaSymbolSolver(typeSolver))
+                .setLanguageLevel(ParserConfiguration.LanguageLevel.JAVA_11);
+
+        ParseResult<CompilationUnit> result = new JavaParser(config).parse(originalJavaFile);
         if (!result.isSuccessful()) {
             LOGGER.error("Error parsing " + originalJavaFile);
             for (Problem problem:result.getProblems()) {
@@ -150,7 +161,7 @@ public class ClassAnnotator {
 
     private int annotateMethod(@Nonnull File originalJavaFile, @Nonnull File transformedJavaFile, @Nonnull CompilationUnit cu, @Nonnull Issue issue, List<AnnotationListener> listeners) throws AmbiguousAnonymousInnerClassResolutionException {
 
-         if (!checkPackageName(cu,issue.getClassName())) {
+        if (!checkPackageName(cu,issue.getClassName())) {
             return 0;
         }
         String localTypeName = getLocalTypeName(issue.getClassName());
@@ -291,7 +302,11 @@ public class ClassAnnotator {
             ClassOrInterfaceDeclaration clType = (ClassOrInterfaceDeclaration)type;
             clType.getTypeParameters().stream().forEach(
                 arg -> {
-                    typeParams.put(arg.getNameAsString(),"java.lang.Object"); // TODO type bounds
+                    String bound = "java.lang.Object";
+                    if (arg.getTypeBound().size()>0) {
+                       bound = arg.getTypeBound().get(0).getNameAsString();
+                    }
+                    typeParams.put(arg.getNameAsString(),bound); // TODO type bounds
                 }
             );
         }

@@ -18,7 +18,7 @@ public class BasicTests extends AbstractInjectAnnotationTest {
         File in = new File(BasicTests.class.getResource("/Class1.java").getFile());
         File out = new File(TMP,"Class1a.java");
         Issue spec = new Issue("Class1", "foo","(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;", null ,Issue.IssueType.RETURN_VALUE);
-        int count = this.annotator.annotateMember(in,out,Set.of(spec), Collections.EMPTY_LIST);
+        int count = this.annotator.annotateMembers(in,out,Set.of(spec), Collections.EMPTY_LIST);
         assertEquals(1,count);
         assertTrue(out.exists());
 
@@ -32,7 +32,7 @@ public class BasicTests extends AbstractInjectAnnotationTest {
         File in = new File(BasicTests.class.getResource("/Class1.java").getFile());
         File out = new File(TMP,"Class1b.java");
         Issue spec = new Issue("Class1", "foo","(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;", null,Issue.IssueType.ARGUMENT, 0);
-        int count = annotator.annotateMember(in,out,Set.of(spec), Collections.EMPTY_LIST);
+        int count = annotator.annotateMembers(in,out,Set.of(spec), Collections.EMPTY_LIST);
         assertEquals(1,count);
         assertTrue(out.exists());
 
@@ -46,7 +46,7 @@ public class BasicTests extends AbstractInjectAnnotationTest {
         File in = new File(BasicTests.class.getResource("/Class1.java").getFile());
         File out = new File(TMP,"Class1c.java");
         Issue spec = new Issue("Class1", "foo","(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;",null,Issue.IssueType.ARGUMENT, 1);
-        int count = annotator.annotateMember(in,out,Set.of(spec), Collections.EMPTY_LIST);
+        int count = annotator.annotateMembers(in,out,Set.of(spec), Collections.EMPTY_LIST);
         assertEquals(1,count);
         assertTrue(out.exists());
 
@@ -63,7 +63,7 @@ public class BasicTests extends AbstractInjectAnnotationTest {
         Issue spec2 = new Issue("Class1", "foo","(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;", null, Issue.IssueType.ARGUMENT, 1);
         Issue spec3 = new Issue("Class1", "foo","(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;",null,  Issue.IssueType.RETURN_VALUE);
 
-        int count = annotator.annotateMember(in,out,Set.of(spec1,spec2,spec3), Collections.EMPTY_LIST);
+        int count = annotator.annotateMembers(in,out,Set.of(spec1,spec2,spec3), Collections.EMPTY_LIST);
         assertEquals(3,count);
         assertTrue(out.exists());
 
@@ -86,7 +86,7 @@ public class BasicTests extends AbstractInjectAnnotationTest {
         File out = new File(TMP,"Class7a.java");
         Issue spec = new Issue("Class7a", "F","Ljava/lang/String;", null, Issue.IssueType.FIELD);
 
-        int count = annotator.annotateMember(in,out,Set.of(spec), Collections.EMPTY_LIST);
+        int count = annotator.annotateMembers(in,out,Set.of(spec), Collections.EMPTY_LIST);
         assertEquals(1,count);
         assertTrue(out.exists());
 
@@ -102,7 +102,7 @@ public class BasicTests extends AbstractInjectAnnotationTest {
         File out = new File(TMP,"Class7b.java");
         Issue spec = new Issue("foo.Class7b", "F","Ljava/lang/String;", null, Issue.IssueType.FIELD);
 
-        int count = annotator.annotateMember(in,out,Set.of(spec), Collections.EMPTY_LIST);
+        int count = annotator.annotateMembers(in,out,Set.of(spec), Collections.EMPTY_LIST);
         assertEquals(1,count);
         assertTrue(out.exists());
 
@@ -117,7 +117,7 @@ public class BasicTests extends AbstractInjectAnnotationTest {
         File out = new File(TMP,"Class8a.java");
         Issue spec = new Issue("Class8a", "F","Ljava/lang/String;", null, Issue.IssueType.FIELD);
 
-        int count = annotator.annotateMember(in,out,Set.of(spec), Collections.EMPTY_LIST);
+        int count = annotator.annotateMembers(in,out,Set.of(spec), Collections.EMPTY_LIST);
         assertEquals(1,count);
         assertTrue(out.exists());
 
@@ -133,7 +133,7 @@ public class BasicTests extends AbstractInjectAnnotationTest {
         File out = new File(TMP,"Class8b.java");
         Issue spec = new Issue("foo.Class8b", "F","Ljava/lang/String;", null, Issue.IssueType.FIELD);
 
-        int count = annotator.annotateMember(in,out,Set.of(spec), Collections.EMPTY_LIST);
+        int count = annotator.annotateMembers(in,out,Set.of(spec), Collections.EMPTY_LIST);
         assertEquals(1,count);
         assertTrue(out.exists());
 
@@ -148,7 +148,7 @@ public class BasicTests extends AbstractInjectAnnotationTest {
         File out = new File(TMP,"Class9.java");
         Issue spec = new Issue("foo.Class9", "foo","([Ljava/lang/String;)V", null, Issue.IssueType.RETURN_VALUE);
 
-        int count = annotator.annotateMember(in,out,Set.of(spec), Collections.EMPTY_LIST);
+        int count = annotator.annotateMembers(in,out,Set.of(spec), Collections.EMPTY_LIST);
         assertEquals(1,count);
         assertTrue(out.exists());
 
@@ -163,12 +163,72 @@ public class BasicTests extends AbstractInjectAnnotationTest {
         File out = new File(TMP,"Class10.java");
         Issue spec = new Issue("foo.Class10", "foo","()Ljava/lang/Object;", null, Issue.IssueType.RETURN_VALUE);
 
-        int count = annotator.annotateMember(in,out,Set.of(spec), Collections.EMPTY_LIST);
+        int count = annotator.annotateMembers(in,out,Set.of(spec), Collections.EMPTY_LIST);
         assertEquals(1,count);
         assertTrue(out.exists());
 
         MethodDeclaration method = findMethod(out,"foo.Class10","foo","()Ljava/lang/Object;");
         Set<String> annotations = method.getAnnotations().stream().map(a -> a.getNameAsString()).collect(Collectors.toSet());
+        assertTrue(annotations.contains(annotator.getAnnotationSpec().getNullableAnnotationName()));
+    }
+
+    @Test
+    public void testTypeParams2() throws Exception {
+        File in = new File(BasicTests.class.getResource("/Class11.java").getFile());
+        File out = new File(TMP,"Class11.java");
+        Issue spec = new Issue("foo.Class11", "foo","()Ljava/util/Collection;", null, Issue.IssueType.RETURN_VALUE);
+
+        int count = annotator.annotateMembers(in,out,Set.of(spec), Collections.EMPTY_LIST);
+        assertEquals(1,count);
+        assertTrue(out.exists());
+
+        MethodDeclaration method = findMethod(out,"foo.Class11","foo","()Ljava/util/Collection;");
+        Set<String> annotations = method.getAnnotations().stream().map(a -> a.getNameAsString()).collect(Collectors.toSet());
+        assertTrue(annotations.contains(annotator.getAnnotationSpec().getNullableAnnotationName()));
+    }
+
+    @Test
+    public void testUnboundedWildcard() throws Exception {
+        File in = new File(BasicTests.class.getResource("/Class12.java").getFile());
+        File out = new File(TMP,"Class12.java");
+        Issue spec = new Issue("foo.Class12", "foo","(Ljava/util/List;)V", null, Issue.IssueType.ARGUMENT,0);
+
+        int count = annotator.annotateMembers(in,out,Set.of(spec), Collections.EMPTY_LIST);
+        assertEquals(1,count);
+        assertTrue(out.exists());
+
+        MethodDeclaration method = findMethod(out,"foo.Class12","foo","(Ljava/util/List;)V");
+        Set<String> annotations = method.getParameters().get(0).getAnnotations().stream().map(a -> a.getNameAsString()).collect(Collectors.toSet());
+        assertTrue(annotations.contains(annotator.getAnnotationSpec().getNullableAnnotationName()));
+    }
+
+    @Test
+    public void testLowerBoundedWildcard() throws Exception {
+        File in = new File(BasicTests.class.getResource("/Class13.java").getFile());
+        File out = new File(TMP,"Class13.java");
+        Issue spec = new Issue("foo.Class13", "foo","(Ljava/util/List;)V", null, Issue.IssueType.ARGUMENT,0);
+
+        int count = annotator.annotateMembers(in,out,Set.of(spec), Collections.EMPTY_LIST);
+        assertEquals(1,count);
+        assertTrue(out.exists());
+
+        MethodDeclaration method = findMethod(out,"foo.Class13","foo","(Ljava/util/List;)V");
+        Set<String> annotations = method.getParameters().get(0).getAnnotations().stream().map(a -> a.getNameAsString()).collect(Collectors.toSet());
+        assertTrue(annotations.contains(annotator.getAnnotationSpec().getNullableAnnotationName()));
+    }
+
+    @Test
+    public void testUpperBoundedWildcard() throws Exception {
+        File in = new File(BasicTests.class.getResource("/Class14.java").getFile());
+        File out = new File(TMP,"Class14.java");
+        Issue spec = new Issue("foo.Class14", "foo","(Ljava/util/List;)V", null, Issue.IssueType.ARGUMENT,0);
+
+        int count = annotator.annotateMembers(in,out,Set.of(spec), Collections.EMPTY_LIST);
+        assertEquals(1,count);
+        assertTrue(out.exists());
+
+        MethodDeclaration method = findMethod(out,"foo.Class14","foo","(Ljava/util/List;)V");
+        Set<String> annotations = method.getParameters().get(0).getAnnotations().stream().map(a -> a.getNameAsString()).collect(Collectors.toSet());
         assertTrue(annotations.contains(annotator.getAnnotationSpec().getNullableAnnotationName()));
     }
 
