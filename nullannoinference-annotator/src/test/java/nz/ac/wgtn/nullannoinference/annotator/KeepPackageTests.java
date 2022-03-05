@@ -17,7 +17,7 @@ public class KeepPackageTests extends AbstractInjectAnnotationTest {
         File in = new File(BasicTests.class.getResource("/Class6.java").getFile());
         File out = new File(TMP,"Class6.java");
         Issue spec = new Issue("foo.part1.Class6", "foo","()Ljava/lang/Object;", null, Issue.IssueType.RETURN_VALUE);
-        int annotationsInsertedCount = this.annotator.annotateMember(in,out,Set.of(spec), Collections.emptyList());
+        int annotationsInsertedCount = this.annotator.annotateMembers(in,out,Set.of(spec), Collections.emptyList());
         assertEquals(1,annotationsInsertedCount);
         assertTrue(out.exists());
 

@@ -7,7 +7,6 @@ import nz.ac.wgtn.nullannoinference.commons.IssueAggregator;
 import org.apache.commons.cli.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Logger;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -160,7 +159,7 @@ public class MvnProjectAnnotator {
                 if (file.toString().endsWith(".java") && ! file.toString().contains("src/test/java")) {
                     int annotationsAdded = 0;
                     try {
-                        annotationsAdded = annotationsAdded + classAnnotator.annotateMember(file.toFile(),copy,aggregatedIssues,listeners);
+                        annotationsAdded = annotationsAdded + classAnnotator.annotateMembers(file.toFile(),copy,aggregatedIssues,listeners);
                         transformed = annotationsAdded>0;
                     }
                     catch (JavaParserFailedException x) {

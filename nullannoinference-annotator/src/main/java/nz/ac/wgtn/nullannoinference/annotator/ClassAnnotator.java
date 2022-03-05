@@ -2,6 +2,7 @@ package nz.ac.wgtn.nullannoinference.annotator;
 
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ParseResult;
+import com.github.javaparser.ParserConfiguration;
 import com.github.javaparser.Problem;
 import com.github.javaparser.ast.*;
 import com.github.javaparser.ast.body.*;
@@ -10,7 +11,11 @@ import com.github.javaparser.ast.expr.ObjectCreationExpr;
 import com.github.javaparser.ast.type.ArrayType;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import com.github.javaparser.ast.type.Type;
+import com.github.javaparser.ast.type.TypeParameter;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
+import com.github.javaparser.symbolsolver.JavaSymbolSolver;
+import com.github.javaparser.symbolsolver.resolution.typesolvers.CombinedTypeSolver;
+import com.github.javaparser.symbolsolver.resolution.typesolvers.ReflectionTypeSolver;
 import com.google.common.base.Preconditions;
 import japicmp.util.MethodDescriptorParser;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
@@ -50,10 +55,17 @@ public class ClassAnnotator {
         this.annotationSpec = annotationSpec;
     }
 
-    public int annotateMember(@Nonnull File originalJavaFile, @Nonnull File transformedJavaFile, Set<Issue> issues, List<AnnotationListener> listeners) throws IOException, JavaParserFailedException {
+    public int annotateMembers(@Nonnull File originalJavaFile, @Nonnull File transformedJavaFile, Set<Issue> issues, List<AnnotationListener> listeners) throws IOException, JavaParserFailedException {
         Preconditions.checkArgument(originalJavaFile.exists());
         int annotationsAddedCounter = 0;
-        ParseResult<CompilationUnit> result = new JavaParser().parse(originalJavaFile);
+
+        CombinedTypeSolver typeSolver = new CombinedTypeSolver(new ReflectionTypeSolver(false));
+
+        ParserConfiguration config = new ParserConfiguration()
+                .setSymbolResolver(new JavaSymbolSolver(typeSolver))
+                .setLanguageLevel(ParserConfiguration.LanguageLevel.JAVA_11);
+
+        ParseResult<CompilationUnit> result = new JavaParser(config).parse(originalJavaFile);
         if (!result.isSuccessful()) {
             LOGGER.error("Error parsing " + originalJavaFile);
             for (Problem problem:result.getProblems()) {
@@ -150,7 +162,7 @@ public class ClassAnnotator {
 
     private int annotateMethod(@Nonnull File originalJavaFile, @Nonnull File transformedJavaFile, @Nonnull CompilationUnit cu, @Nonnull Issue issue, List<AnnotationListener> listeners) throws AmbiguousAnonymousInnerClassResolutionException {
 
-         if (!checkPackageName(cu,issue.getClassName())) {
+        if (!checkPackageName(cu,issue.getClassName())) {
             return 0;
         }
         String localTypeName = getLocalTypeName(issue.getClassName());
@@ -291,7 +303,11 @@ public class ClassAnnotator {
             ClassOrInterfaceDeclaration clType = (ClassOrInterfaceDeclaration)type;
             clType.getTypeParameters().stream().forEach(
                 arg -> {
-                    typeParams.put(arg.getNameAsString(),"java.lang.Object"); // TODO type bounds
+                    String bound = "java.lang.Object";
+                    if (arg.getTypeBound().size()>0) {
+                       bound = arg.getTypeBound().get(0).getNameAsString();
+                    }
+                    typeParams.put(arg.getNameAsString(),bound); // TODO type bounds
                 }
             );
         }
@@ -407,14 +423,28 @@ public class ClassAnnotator {
 
     }
 
-
     // to be used by tests -- visibility to be used by tests
     static boolean descriptorMatches(@Nonnull  MethodDeclaration method, @Nonnull  String descriptor,Map<String,String> typeParams)   {
         MethodDescriptorParser parser = new MethodDescriptorParser();
         parser.parse(descriptor);
 
-        String returnType = getRawName(method.getType());
-        String mapped = typeParams.get(returnType);
+        Map<String,String> typeParams2 = new HashMap<>();
+        typeParams2.putAll(typeParams);
+
+
+        // add method type parameters
+        for (int i=0;i<method.getTypeParameters().size();i++) {
+            TypeParameter param = method.getTypeParameters().get(i);
+            String bond = "java.lang.Object";
+            if (param.getTypeBound().size()>0) {
+                bond = getRawName(param.getTypeBound().get(0),typeParams2);
+            }
+            String name = param.getName().asString();
+            typeParams2.put(name,bond);
+        }
+
+        String returnType = getRawName(method.getType(),typeParams2);
+        String mapped = typeParams2.get(returnType);
         returnType = mapped==null?returnType:mapped;
         // note that this is not completely accurate as we are not resolving imports in the compilation unit !!
         if (!parser.getReturnType().endsWith(returnType)) {
@@ -422,11 +452,7 @@ public class ClassAnnotator {
         }
 
         List<String> paramTypes = method.getParameters().stream()
-                .map(p -> getRawName(p.getType()))
-                .map(n -> {
-                    String resolved = typeParams.get(n);
-                    return resolved==null?n:resolved;
-                })
+                .map(p -> getRawName(p.getType(),typeParams2))
                 .collect(Collectors.toList());
 
         // vararg are different in source code, but just arrays in bytecode -- must account for this
@@ -449,15 +475,17 @@ public class ClassAnnotator {
         return true;
     }
 
-    static String getRawName (Type type) {
+    static String getRawName (Type type,Map<String,String> resolvedVariables) {
 
         if (type instanceof ArrayType) {
             ArrayType arrType = (ArrayType) type;
-            return getRawName(arrType.getComponentType()) + "[]";
+            return getRawName(arrType.getComponentType(),resolvedVariables) + "[]";
         }
         else if (type instanceof ClassOrInterfaceType) {
             ClassOrInterfaceType clType = (ClassOrInterfaceType)type;
-            return clType.getNameAsString(); // should exclude type params
+            String name = clType.getNameAsString(); // should exclude type params
+            String resolved = resolvedVariables.get(name);
+            return resolved==null?name:resolved;
         }
         return type.asString();
     }
