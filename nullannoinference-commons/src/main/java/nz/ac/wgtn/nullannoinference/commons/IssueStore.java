@@ -133,6 +133,7 @@ public class IssueStore {
             jobj.put("className",issue.getClassName());
             jobj.put("methodName",issue.getMethodName());
             jobj.put("descriptor",issue.getDescriptor());
+            jobj.put("argsIndex",issue.getArgsIndex());
             jobj.put("kind",issue.getKind().name());
             jobj.put("index",issue.getArgsIndex());
             jobj.put("context",issue.getContext());
