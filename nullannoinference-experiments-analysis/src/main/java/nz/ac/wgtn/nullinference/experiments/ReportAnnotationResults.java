@@ -44,10 +44,11 @@ public class ReportAnnotationResults {
 
         try (PrintWriter out = new PrintWriter(outputFile)) {
 
+            addProvenanceToLatexOutput(out,ReportAnnotationResults.class);
             out.println("\\begin{table}[h!]");
             out.println("\\begin{tabular}{|lrrr|}");
             out.println(" \\hline");
-            out.println(" project & issues & open issues & recall  \\\\ \\hline");
+            out.println(" project & total issues & missed & recall  \\\\ \\hline");
 
             // start latex generation
             for (String project:projects) {

@@ -31,6 +31,8 @@ public class ReportCollectedIssues {
 
         try (PrintWriter out = new PrintWriter(outputFile)) {
 
+            addProvenanceToLatexOutput(out,ReportCollectedIssues.class);
+
             out.println("\\begin{table*}[h!]");
             out.println("\\begin{tabular}{|l|rrrr|rrrr|rrrr|}");
             out.println(" \\hline");

@@ -39,11 +39,13 @@ public class ReportInferredIssues {
 
         try (PrintWriter out = new PrintWriter(outputFile)) {
 
+            addProvenanceToLatexOutput(out,ReportInferredIssues.class);
+
             out.println("\\begin{table*}[h!]");
-            out.println("\\begin{tabular}{|l|rrrr|rrrr|rrr|}");
+            out.println("\\begin{tabular}{|l|rrrr|rrrr|rrr|rrrr}");
             out.println(" \\hline");
-            out.println("\\multicolumn{1}{|c}{\\multirow{2}{*}{project}}  & \\multicolumn{4}{|c|}{collected (main scope)} & \\multicolumn{4}{|c|}{neg. test santitised} & \\multicolumn{3}{|c|}{LSP inference} \\\\");
-            out.println(" & RET & ARG & FLD & ALL & -RET & -ARG & -FLD & -ALL & +RET & +ARG & +ALL \\\\ \\hline");
+            out.println("\\multicolumn{1}{|c}{\\multirow{2}{*}{project}}  & \\multicolumn{4}{|c|}{collected (main scope)} & \\multicolumn{4}{|c|}{neg. test santitised} & \\multicolumn{3}{|c|}{LSP inference} & \\multicolumn{4}{|c|}{refined issues} \\\\");
+            out.println(" & RET & ARG & FLD & ALL & -RET & -ARG & -FLD & -ALL & +RET & +ARG & +ALL & RET & ARG & FLD & ALL \\\\ \\hline");
 
             // start latex generation
             for (String project:projects) {

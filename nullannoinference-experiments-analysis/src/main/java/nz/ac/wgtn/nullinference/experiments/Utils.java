@@ -8,14 +8,13 @@ import nz.ac.wgtn.nullannoinference.commons.IssueAggregator;
 import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.FileReader;
+import java.io.PrintWriter;
 import java.io.Reader;
 import java.lang.reflect.Type;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -25,6 +24,11 @@ import java.util.stream.Stream;
  * @author jens dietrich
  */
 public class Utils {
+
+    static void addProvenanceToLatexOutput(PrintWriter out, Class source) {
+        out.println("% data produced by: " + source.getName());
+        out.println("% data produced on: " + DateFormat.getDateTimeInstance().format(new Date()));
+    }
 
     static List<String> getListOfProjects(File issuesFolder) {
         List<String> projects = Stream.of(issuesFolder.listFiles())
