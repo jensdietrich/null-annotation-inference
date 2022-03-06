@@ -81,9 +81,13 @@ public class Utils {
         return aggregate? IssueAggregator.aggregate(issues):issues;
     }
 
-    static NumberFormat INT_FORMAT = new DecimalFormat("###,###,###");
+    static final NumberFormat INT_FORMAT = new DecimalFormat("###,###,###");
     static String format (int number) {
         return INT_FORMAT.format(number);
     }
 
+    static final DecimalFormat DEC_FORMAT = new DecimalFormat("0.00");
+    static String format (double number) {
+        return DEC_FORMAT.format(number);
+    }
 }

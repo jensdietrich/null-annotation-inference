@@ -22,7 +22,7 @@ public class ReportInferredIssues {
 
     public static void main (String[] args) throws FileNotFoundException {
 
-        Preconditions.checkArgument(args.length==3,"three arguments required -- two folders containing project-specific subfolders with collected / inferred issues (json), and output file");
+        Preconditions.checkArgument(args.length==3,"three arguments required -- two folders containing project-specific subfolders with collected / inferred issues (json), and output file (.tex)");
 
         File collectedIssuesFolder = new File(args[0]);
         Preconditions.checkState(collectedIssuesFolder.exists(),"folder does not exits: " + collectedIssuesFolder.getAbsolutePath());

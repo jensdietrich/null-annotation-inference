@@ -4,6 +4,8 @@ package nz.ac.wgtn.nullannoinference.annotator;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
 import org.apache.logging.log4j.Logger;
 import java.io.File;
@@ -15,7 +17,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * Simple annotation listener producing a simple summary text file.
+ * Simple annotation listener producing a simple summary in json format.
  * @author jens dietrich
  */
 public class LoggingAnnotationListener implements AnnotationListener {
@@ -33,7 +35,6 @@ public class LoggingAnnotationListener implements AnnotationListener {
     public static final String OPEN_ISSUES = "open-issues";
 
     public static final Logger LOGGER = LogSystem.getLogger("annotator-result-export");
-
 
     private Set<File> annotatedJavaFiles = new HashSet<>();
     private Set<String> annotatedClasses = new HashSet<>();
@@ -87,7 +88,7 @@ public class LoggingAnnotationListener implements AnnotationListener {
 
         // write report
         String projectName = transformedProject.getName();
-        String reportName = "annotation-summary-" + projectName + ".csv";
+        String reportName = projectName + ".json";
         File report = new File(ANNOTATION_REPORT_FOLDER,reportName);
 
         LOGGER.info("exporting annotation summary to " + report.getAbsolutePath());
@@ -97,33 +98,39 @@ public class LoggingAnnotationListener implements AnnotationListener {
             annotationsFailedCount = annotationsFailedCount + annotationFailed.get(f).size();
         }
 
-        try (PrintWriter out = new PrintWriter(new FileWriter(report))) {
-            String[] keys = new String[]{ANNOTATED_JAVA_FILES,ANNOTATED_CLASSES,ANNOTATED_METHODS,ANNOTATED_ARGUMENTS,ANNOTATED_RETURNS,ANNOTATED_FIELDS,ANNOTATION_ERRORS,OTHER_MODIFIED_FILE,TOTAL_ISSUES,OPEN_ISSUES};
-            out.println(Stream.of(keys).collect(Collectors.joining("\t")));
-            out.print(this.annotatedJavaFiles.size());
-            out.print("\t");
-            out.print(this.annotatedClasses.size());
-            out.print("\t");
-            out.print(this.annotatedMethods.size());
-            out.print("\t");
-            out.print(this.annotatedArgs.size());
-            out.print("\t");
-            out.print(this.annotatedReturns.size());
-            out.print("\t");
-            out.print(this.annotatedFields.size());
-            out.print("\t");
-            out.print(this.otherwiseTransformedFiles.size());
-            out.print("\t");
-            out.print(annotationsFailedCount);
-            out.print("\t");
-            out.print(issuesLoaded.size());
-            out.print("\t");
-            out.print(openIssues.size());
-            out.println();
-            LOGGER.info("Annotation results written to " + report.getAbsolutePath());
+        // summarise as mao
+        Map<String,Integer> counts = new HashMap<>();
+        counts.put(ANNOTATED_JAVA_FILES,this.annotatedJavaFiles.size());
+        counts.put(ANNOTATED_CLASSES,this.annotatedClasses.size());
+        counts.put(ANNOTATED_METHODS,this.annotatedMethods.size());
+        counts.put(ANNOTATED_ARGUMENTS,this.annotatedArgs.size());
+        counts.put(ANNOTATED_RETURNS,this.annotatedReturns.size());
+        counts.put(ANNOTATED_FIELDS,this.annotatedFields.size());
+        counts.put(ANNOTATION_ERRORS,annotationsFailedCount);
+        counts.put(OTHER_MODIFIED_FILE,this.otherwiseTransformedFiles.size());
+        counts.put(TOTAL_ISSUES,this.issuesLoaded.size());
+        counts.put(OPEN_ISSUES,this.openIssues.size());
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try (FileWriter out = new FileWriter(report)) {
+            gson.toJson(counts,out);
         } catch (IOException e) {
-            LOGGER.warn("error writing annotation summary",e);
+            e.printStackTrace();
         }
+
+
+        // export open issues for inspection and manual refactoring
+        projectName = transformedProject.getName();
+        String openIssuesFileName = projectName + "-open-issues.json";
+        File openIssuesFile = new File(ANNOTATION_REPORT_FOLDER,openIssuesFileName);
+
+        try (FileWriter out = new FileWriter(openIssuesFile)) {
+            gson.toJson(this.openIssues,out);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     @Override

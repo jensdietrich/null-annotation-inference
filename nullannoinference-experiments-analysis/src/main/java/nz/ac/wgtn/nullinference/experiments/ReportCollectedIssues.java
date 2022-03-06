@@ -19,7 +19,7 @@ public class ReportCollectedIssues {
 
     public static void main (String[] args) throws FileNotFoundException {
 
-        Preconditions.checkArgument(args.length==2,"two arguments required -- a folder containing project-specific subfolders with collected issues (json), and output file");
+        Preconditions.checkArgument(args.length==2,"two arguments required -- a folder containing project-specific subfolders with collected issues (json), and output file (.tex)");
         File collectedIssuesFolder = new File(args[0]);
         Preconditions.checkState(collectedIssuesFolder.exists(),"folder does not exits: " + collectedIssuesFolder.getAbsolutePath());
         Preconditions.checkState(collectedIssuesFolder.isDirectory(),"folder must be folder: " + collectedIssuesFolder.getAbsolutePath());
