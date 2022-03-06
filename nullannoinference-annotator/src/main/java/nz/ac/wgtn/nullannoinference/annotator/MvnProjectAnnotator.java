@@ -173,6 +173,13 @@ public class MvnProjectAnnotator {
                 }
 
                 if (!transformed) {
+
+                    // filter out instrumentation-related files
+                    String name = file.toFile().getName();
+                    if (name.startsWith("nullannoinference-") || name.equals("pom-instrumented.xml")) {
+                        LOGGER.warn("ignoring " + file.toFile().getAbsolutePath());
+                    }
+
                     // copy
                     FileUtils.copyFile(file.toFile(), copy);
                     listeners.forEach(l -> l.fileCopied(file.toFile(),copy));

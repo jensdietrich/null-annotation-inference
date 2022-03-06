@@ -29,6 +29,8 @@ public class LoggingAnnotationListener implements AnnotationListener {
     public static final String ANNOTATED_RETURNS = "annotated-returns";
     public static final String ANNOTATION_ERRORS = "annotated-error";
     public static final String OTHER_MODIFIED_FILE = "other-files-modified";
+    public static final String TOTAL_ISSUES = "total-issues";
+    public static final String OPEN_ISSUES = "open-issues";
 
     public static final Logger LOGGER = LogSystem.getLogger("annotator-result-export");
 
@@ -96,7 +98,7 @@ public class LoggingAnnotationListener implements AnnotationListener {
         }
 
         try (PrintWriter out = new PrintWriter(new FileWriter(report))) {
-            String[] keys = new String[]{ANNOTATED_JAVA_FILES,ANNOTATED_CLASSES,ANNOTATED_METHODS,ANNOTATED_ARGUMENTS,ANNOTATED_RETURNS,ANNOTATED_FIELDS,ANNOTATION_ERRORS,OTHER_MODIFIED_FILE};
+            String[] keys = new String[]{ANNOTATED_JAVA_FILES,ANNOTATED_CLASSES,ANNOTATED_METHODS,ANNOTATED_ARGUMENTS,ANNOTATED_RETURNS,ANNOTATED_FIELDS,ANNOTATION_ERRORS,OTHER_MODIFIED_FILE,TOTAL_ISSUES,OPEN_ISSUES};
             out.println(Stream.of(keys).collect(Collectors.joining("\t")));
             out.print(this.annotatedJavaFiles.size());
             out.print("\t");
@@ -113,6 +115,10 @@ public class LoggingAnnotationListener implements AnnotationListener {
             out.print(this.otherwiseTransformedFiles.size());
             out.print("\t");
             out.print(annotationsFailedCount);
+            out.print("\t");
+            out.print(issuesLoaded.size());
+            out.print("\t");
+            out.print(openIssues.size());
             out.println();
             LOGGER.info("Annotation results written to " + report.getAbsolutePath());
         } catch (IOException e) {
@@ -122,7 +128,7 @@ public class LoggingAnnotationListener implements AnnotationListener {
 
     @Override
     public void fileCopied(File originalFile, File copy) {
-        // dont log here
+        // ignore
     }
 
     @Override

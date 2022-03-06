@@ -3,8 +3,7 @@
 ## use the issues collected and refined to annotate actual projects
 ## @author jens dietrich
 
-## TODO pass variables as parameters, using this as template for other experiments
-NAME=commons-lang
+NAME=$1
 ROOT="$(pwd)"
 PROJECT_FOLDER=$ROOT/projects/original/$NAME
 ANNOTATED_PROJECT_FOLDER=$ROOT/projects/annotated/$NAME
@@ -43,5 +42,5 @@ cd $ROOT
 cd ..
 cp $ANNOTATOR_PATH $ROOT
 cd $ROOT
-java -jar $ANNOTATOR -p $PROJECT_FOLDER -o ANNOTATED_PROJECT_FOLDER -i $INFERRED_ISSUES_FOLDER
+java -jar $ANNOTATOR -p $PROJECT_FOLDER -o $ANNOTATED_PROJECT_FOLDER -i $INFERRED_ISSUES_FOLDER
 

@@ -289,7 +289,7 @@ public class ClassAnnotator {
                 .filter(fld -> fld.getVariables().size()==1) // annotations are attached to fields, not individual variables
                 .filter(fld -> fld.getVariables().get(0).getNameAsString().equals(fieldName))
                 .findFirst();
-            return wrappedField.get();
+            return wrappedField.isPresent()?wrappedField.get():null;
         }
         else {
             // check inner classes
