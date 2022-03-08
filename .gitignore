@@ -10,3 +10,4 @@ experiments/issues-collected
 experiments/issues-inferred
 nullannoinference-refiner.jar
 nullannoinference-annotator.jar
+experiments/.annotation-results
