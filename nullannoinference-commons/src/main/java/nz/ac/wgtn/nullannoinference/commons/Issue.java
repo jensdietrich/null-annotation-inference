@@ -43,6 +43,10 @@ public class Issue {
         this.context = context;
     }
 
+    public IssueKernel getKernel() {
+        return new IssueKernel(this.getClassName(),this.getMethodName(),this.getDescriptor(),this.getKind(),this.getArgsIndex());
+    }
+
     public Issue getParent() {
         return parent;
     }

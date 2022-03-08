@@ -1,9 +1,12 @@
 package nz.ac.wgtn.nullannoinference.annotator;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import com.google.gson.Gson;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
 import nz.ac.wgtn.nullannoinference.commons.IssueAggregator;
+import nz.ac.wgtn.nullannoinference.commons.IssueKernel;
 import org.apache.commons.cli.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Logger;
@@ -30,6 +33,7 @@ public class MvnProjectAnnotator {
     public static final String ARG_OUTPUT = "output";
     public static final String ARG_NULLABLE_ANNOTATION_PROVIDER = "annotationprovider";
     public static final String ARG_ISSUES = "issues";
+    public static final String ARG_PROJECT_NAME = "name";
     public static final NullableAnnotationProvider DEFAULT_ANNOTATION_PROVIDER = new JSR305NullableAnnotationProvider();
 
     public static final Logger LOGGER = LogSystem.getLogger("annnotator");
@@ -37,12 +41,15 @@ public class MvnProjectAnnotator {
     private static LoggingAnnotationListener LOGGING_LISTENER = new LoggingAnnotationListener();
     private static List<AnnotationListener> listeners = List.of(LOGGING_LISTENER);
 
+    private static IssueInstanceSelector issueSelector = new DefaultIssueInstanceSelector();
+
     public static void main(String[] args) throws ParseException, IOException {
         Options options = new Options();
         options.addRequiredOption("p",ARG_INPUT, true, "the input mvn project folder");
         options.addRequiredOption("o",ARG_OUTPUT, true, "the output mvn project folder (files will be override / emptied)");
         options.addOption("a",ARG_NULLABLE_ANNOTATION_PROVIDER,true,"the name of an annotation provider (optional, default is JSR305)");
         options.addRequiredOption("i",ARG_ISSUES,true,"a folder containing nullable issues (collected and refined)");
+        options.addRequiredOption("n",ARG_PROJECT_NAME,true,"the name of the project (to be used to filter out issues in upstream libraries)");
 
         CommandLineParser parser = new DefaultParser() {
             @Override
@@ -62,6 +69,8 @@ public class MvnProjectAnnotator {
             }
         };
         CommandLine cmd = parser.parse(options, args);
+
+        String projectName = cmd.getOptionValue(ARG_PROJECT_NAME);
 
         File inputProjectFolder = new File(cmd.getOptionValue(ARG_INPUT));
         Preconditions.checkArgument(inputProjectFolder.exists());
@@ -111,7 +120,13 @@ public class MvnProjectAnnotator {
             try {
                 Issue[] array = new Gson().fromJson(new FileReader(f), Issue[].class);
                 for (Issue spec:array) {
-                    issues.add(spec);
+                    // filter by context if available
+                    if (spec.getContext()==null || spec.getContext().equals(projectName)) {
+                        issues.add(spec);
+                    }
+                    else {
+                        LOGGER.warn("Excluding issues with non matching context (issue if upstream library)");
+                    }
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -119,7 +134,7 @@ public class MvnProjectAnnotator {
         });
 
         LOGGER.info(issues.size() + " nullability issues to be processed imported");
-        Set<Issue> aggregatedIssues = IssueAggregator.aggregate(issues);
+        Set<Issue> aggregatedIssues = aggregateIssues(issues);
         LOGGER.info(aggregatedIssues.size() + " aggregated nullability issues to be processed");
         listeners.forEach(l -> l.issuesLoaded(aggregatedIssues));
         listeners.forEach(l -> l.beforeAnnotationTransformation(inputProjectFolder,outputProjectFolder));
@@ -197,6 +212,25 @@ public class MvnProjectAnnotator {
         });
         listeners.forEach(l -> l.afterAnnotationTransformation(inputProjectFolder,outputProjectFolder));
 
+    }
+
+    /*
+     * Select issues to process by picking one for each class of equivalent issues. This avoids redundancies.
+     */
+    private static Set<Issue> aggregateIssues(Set<Issue> issues) {
+        // compute equivalence classes
+        Multimap<IssueKernel,Issue> eqClasses = HashMultimap.create();
+        for (Issue issue:issues) {
+            eqClasses.put(issue.getKernel(),issue);
+        }
+
+        // pick representative
+        HashSet<Issue> selectedIssues = new HashSet<>();
+        for (IssueKernel kernel:eqClasses.keySet()) {
+            Set<Issue> instances = (Set)eqClasses.get(kernel);
+            selectedIssues.add(issueSelector.pick(kernel,instances));
+        }
+        return selectedIssues;
     }
 
     private static Predicate<File> SPEC_FILE_FILTER = f -> f.exists() && !f.isDirectory() && f.getName().endsWith(".json");

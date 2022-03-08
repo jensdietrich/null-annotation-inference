@@ -24,7 +24,8 @@ public class Issue1Test {
         MvnProjectAnnotator.main(new String[] {
                 "-"+MvnProjectAnnotator.ARG_INPUT,in.getAbsolutePath(),
                 "-"+MvnProjectAnnotator.ARG_OUTPUT,out.getAbsolutePath(),
-                "-"+MvnProjectAnnotator.ARG_ISSUES,issueFolder.getAbsolutePath()
+                "-"+MvnProjectAnnotator.ARG_ISSUES,issueFolder.getAbsolutePath(),
+                "-"+MvnProjectAnnotator.ARG_PROJECT_NAME,"mock-foo"
         });
     }
 }

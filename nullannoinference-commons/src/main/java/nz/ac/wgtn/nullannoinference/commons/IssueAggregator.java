@@ -1,6 +1,7 @@
 package nz.ac.wgtn.nullannoinference.commons;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * An utility that takes a collection of issues, and returns a new collection of issues that is a subset of the first one,
@@ -13,49 +14,10 @@ import java.util.*;
  */
 public class IssueAggregator {
 
-    public static Set<Issue> aggregate (Set<? extends Issue> issues) {
-        Map<IssueCore,Issue> index = new HashMap<>();
-        int duplicateCount = 0;
-        for (Issue issue:issues) {
-            IssueCore key = new IssueCore(issue.getClassName(),issue.getMethodName(),issue.getDescriptor(),issue.getKind(),issue.getArgsIndex());
-            Object oldValue = index.put(key,issue);
-            // for debugging only
-            if (oldValue!=null) {
-                duplicateCount = duplicateCount + 1;
-            }
-        }
-        System.out.println(duplicateCount + " duplicates detected");
-        Set<Issue> aggregatedIssues = new HashSet<>();
-        aggregatedIssues.addAll(index.values());
-        return aggregatedIssues;
+    public static Set<IssueKernel> aggregate (Set<? extends Issue> issues) {
+        return issues.parallelStream()
+            .map(issue -> issue.getKernel())
+            .collect(Collectors.toSet());
     }
 
-    static class IssueCore {
-        private String className = null;
-        private String methodName = null;
-        private String descriptor = null;
-        private Issue.IssueType kind = null;
-        private int argsIndex = -1;
-
-        public IssueCore(String className, String methodName, String descriptor, Issue.IssueType kind, int argsIndex) {
-            this.className = className;
-            this.methodName = methodName;
-            this.descriptor = descriptor;
-            this.kind = kind;
-            this.argsIndex = argsIndex;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            IssueCore issueCore = (IssueCore) o;
-            return argsIndex == issueCore.argsIndex && Objects.equals(className, issueCore.className) && Objects.equals(methodName, issueCore.methodName) && Objects.equals(descriptor, issueCore.descriptor) && kind == issueCore.kind;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(className, methodName, descriptor, kind, argsIndex);
-        }
-    }
 }

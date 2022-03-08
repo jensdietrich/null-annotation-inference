@@ -62,7 +62,7 @@ public class Utils {
         return projects1;
     }
 
-    static Set<Issue> loadIssues(File folder, boolean aggregate, Predicate<Issue>... filters) {
+    static Set<Issue> loadIssues(File folder, Predicate<Issue>... filters) {
         Set<Issue> issues = new HashSet<>();
         Predicate<Issue> filter = issue -> true;
         for (Predicate<Issue> filter2:filters) {
@@ -82,10 +82,11 @@ public class Utils {
         System.out.println("" + issues.size() + " issues imported");
 
         issues = issues.stream().filter(filter).collect(Collectors.toSet());
-        return aggregate? IssueAggregator.aggregate(issues):issues;
+        return issues;
     }
 
     static final NumberFormat INT_FORMAT = new DecimalFormat("###,###,###");
+
     static String format (int number) {
         return INT_FORMAT.format(number);
     }
@@ -93,5 +94,10 @@ public class Utils {
     static final DecimalFormat DEC_FORMAT = new DecimalFormat("0.00");
     static String format (double number) {
         return DEC_FORMAT.format(number);
+    }
+
+    static final DecimalFormat DEC_FORMAT2 = new DecimalFormat("0.0000");
+    static String format2 (double number) {
+        return DEC_FORMAT2.format(number);
     }
 }

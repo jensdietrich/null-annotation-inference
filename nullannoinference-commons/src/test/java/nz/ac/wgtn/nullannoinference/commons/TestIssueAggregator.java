@@ -27,17 +27,17 @@ public class TestIssueAggregator {
 
         Set<Issue> issues = Set.of(issue1,issue2,issue3);
 
-        Collection<Issue> aggregatedSet = IssueAggregator.aggregate(issues);
+        Collection<IssueKernel> aggregatedSet = IssueAggregator.aggregate(issues);
 
         assertEquals(2,aggregatedSet.size());
 
-        Collection<Issue> issuesInA = aggregatedSet.stream().filter(i -> i.getClassName().equals("A")).collect(Collectors.toSet());
+        Collection<IssueKernel> issuesInA = aggregatedSet.stream().filter(i -> i.getClassName().equals("A")).collect(Collectors.toSet());
         assertEquals(1,issuesInA.size());
-        assertTrue(issuesInA.contains(issue1) || issuesInA.contains(issue2));
+        assertTrue(issuesInA.contains(issue1.getKernel()) || issuesInA.contains(issue2.getKernel()));
 
-        Collection<Issue> issuesInB = aggregatedSet.stream().filter(i -> i.getClassName().equals("B")).collect(Collectors.toSet());
+        Collection<IssueKernel> issuesInB = aggregatedSet.stream().filter(i -> i.getClassName().equals("B")).collect(Collectors.toSet());
         assertEquals(1,issuesInB.size());
-        assertTrue(issuesInB.contains(issue3));
+        assertTrue(issuesInB.contains(issue3.getKernel()));
 
     }
 }

@@ -2,6 +2,8 @@ package nz.ac.wgtn.nullinference.experiments;
 
 import com.google.common.base.Preconditions;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
+import nz.ac.wgtn.nullannoinference.commons.IssueAggregator;
+
 import java.io.*;
 import java.util.List;
 import java.util.Set;
@@ -42,17 +44,17 @@ public class ReportCollectedIssues {
             // start latex generation
             for (String project:projects) {
                 File projectFolder = new File(collectedIssuesFolder,project);
-                Set<Issue> collectedIssuesMain = loadIssues(projectFolder,true,IssueFilters.MAIN_SCOPE);
+                Set<Issue> collectedIssuesMain = loadIssues(projectFolder,IssueFilters.MAIN_SCOPE);
                 Set<Issue> collectedIssuesReturnMain = collectedIssuesMain.parallelStream().filter(IssueFilters.RETURN).collect(Collectors.toSet());
                 Set<Issue> collectedIssuesArgMain = collectedIssuesMain.parallelStream().filter(IssueFilters.ARG).collect(Collectors.toSet());
                 Set<Issue> collectedIssuesFieldMain = collectedIssuesMain.parallelStream().filter(IssueFilters.FIELD).collect(Collectors.toSet());
 
-                Set<Issue> collectedIssuesTest = loadIssues(projectFolder,true,IssueFilters.TEST_SCOPE);
+                Set<Issue> collectedIssuesTest = loadIssues(projectFolder,IssueFilters.TEST_SCOPE);
                 Set<Issue> collectedIssuesReturnTest = collectedIssuesTest.parallelStream().filter(IssueFilters.RETURN).collect(Collectors.toSet());
                 Set<Issue> collectedIssuesArgTest = collectedIssuesTest.parallelStream().filter(IssueFilters.ARG).collect(Collectors.toSet());
                 Set<Issue> collectedIssuesFieldTest = collectedIssuesTest.parallelStream().filter(IssueFilters.FIELD).collect(Collectors.toSet());
 
-                Set<Issue> collectedIssuesOther = loadIssues(projectFolder,true,IssueFilters.OTHER_SCOPE);
+                Set<Issue> collectedIssuesOther = loadIssues(projectFolder,IssueFilters.OTHER_SCOPE);
                 Set<Issue> collectedIssuesReturnOther = collectedIssuesOther.parallelStream().filter(IssueFilters.RETURN).collect(Collectors.toSet());
                 Set<Issue> collectedIssuesArgOther = collectedIssuesOther.parallelStream().filter(IssueFilters.ARG).collect(Collectors.toSet());
                 Set<Issue> collectedIssuesFieldOther = collectedIssuesOther.parallelStream().filter(IssueFilters.FIELD).collect(Collectors.toSet());
@@ -63,29 +65,29 @@ public class ReportCollectedIssues {
 
                 out.print(project);
                 out.print(" & ");
-                out.print(format(collectedIssuesReturnMain.size()));
+                out.print(format(IssueAggregator.aggregate(collectedIssuesReturnMain).size()));
                 out.print(" & ");
-                out.print(format(collectedIssuesArgMain.size()));
+                out.print(format(IssueAggregator.aggregate(collectedIssuesArgMain).size()));
                 out.print(" & ");
-                out.print(format(collectedIssuesFieldMain.size()));
+                out.print(format(IssueAggregator.aggregate(collectedIssuesFieldMain).size()));
                 out.print(" & ");
-                out.print(format(collectedIssuesMain.size()));
+                out.print(format(IssueAggregator.aggregate(collectedIssuesMain).size()));
                 out.print(" & ");
-                out.print(format(collectedIssuesReturnTest.size()));
+                out.print(format(IssueAggregator.aggregate(collectedIssuesReturnTest).size()));
                 out.print(" & ");
-                out.print(format(collectedIssuesArgTest.size()));
+                out.print(format(IssueAggregator.aggregate(collectedIssuesArgTest).size()));
                 out.print(" & ");
-                out.print(format(collectedIssuesFieldTest.size()));
+                out.print(format(IssueAggregator.aggregate(collectedIssuesFieldTest).size()));
                 out.print(" & ");
-                out.print(format(collectedIssuesTest.size()));
+                out.print(format(IssueAggregator.aggregate(collectedIssuesTest).size()));
                 out.print(" & ");
-                out.print(format(collectedIssuesReturnOther.size()));
+                out.print(format(IssueAggregator.aggregate(collectedIssuesReturnOther).size()));
                 out.print(" & ");
-                out.print(format(collectedIssuesArgOther.size()));
+                out.print(format(IssueAggregator.aggregate(collectedIssuesArgOther).size()));
                 out.print(" & ");
-                out.print(format(collectedIssuesFieldOther.size()));
+                out.print(format(IssueAggregator.aggregate(collectedIssuesFieldOther).size()));
                 out.print(" & ");
-                out.print(format(collectedIssuesOther.size()));
+                out.print(format(IssueAggregator.aggregate(collectedIssuesOther).size()));
                 out.println("\\\\");
             }
             out.println("\\hline");

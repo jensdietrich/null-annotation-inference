@@ -7,6 +7,7 @@ import com.google.common.graph.Traverser;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import nz.ac.wgtn.nullannoinference.commons.IssueAggregator;
+import nz.ac.wgtn.nullannoinference.commons.IssueKernel;
 import nz.ac.wgtn.nullannoinference.refiner.LogSystem;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
 import org.apache.commons.io.FileUtils;
@@ -74,7 +75,7 @@ public class InferAdditionalIssues {
         }
         counts.put(COUNT_NULLABILITY_ISSUES_INFERRED,inferredIssues.size());
 
-        Collection<Issue> aggregatedIssues = IssueAggregator.aggregate(inferredIssues);
+        Collection<IssueKernel> aggregatedIssues = IssueAggregator.aggregate(inferredIssues);
         counts.put(COUNT_NULLABILITY_ISSUES_INFERRED_AGGREGATED,aggregatedIssues.size());
 
     }

@@ -27,7 +27,8 @@ public class MvnProjectAnnotatorTest {
         MvnProjectAnnotator.main(new String[] {
                 "-"+MvnProjectAnnotator.ARG_INPUT,in.getAbsolutePath(),
                 "-"+MvnProjectAnnotator.ARG_OUTPUT,out.getAbsolutePath(),
-                "-"+MvnProjectAnnotator.ARG_ISSUES,nullableSpec.getAbsolutePath()
+                "-"+MvnProjectAnnotator.ARG_ISSUES,nullableSpec.getAbsolutePath(),
+                "-"+MvnProjectAnnotator.ARG_PROJECT_NAME,"mock-foo"
         });
 
         assertTrue(new File(TMP,"project/src/main/java/nz/ac/wgtn/nullannoinference/annotator/testdata1/Main.java").exists());
