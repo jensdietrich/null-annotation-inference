@@ -55,7 +55,7 @@ public class IssueStore {
 
             // from instrumentation
             if (PRUNING_STRATEGY!= StackTracePruningStrategy.KEEP_FULL) {
-                while (stacktrace.get(0).startsWith(IssueStore.class.getPackageName())) {
+                while (stacktrace.get(0).startsWith(IssueStore.class.getPackage().getName())) {
                     stacktrace.remove(0);
                 }
             }

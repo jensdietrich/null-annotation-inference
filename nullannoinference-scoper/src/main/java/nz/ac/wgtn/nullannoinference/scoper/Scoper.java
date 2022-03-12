@@ -44,7 +44,7 @@ public class Scoper {
         options.addRequiredOption("i","input",true,"a folder containing json files with null issues reported by a test run instrumented with the nullannoinference agent, the folder will be checked recursively for files (required)");
         options.addRequiredOption("p","project",true,"the folder containing the Maven project (i.e. containing pom.xml) to be analysed, the project must have been built with \"mvn test\" (required)");
         options.addOption("s","summary",true,"a summary csv file with some stats about the project bytecode analysed (optional, default is \"" + SUMMARY_FILE_NAME + "\")");
-        options.addOption("g","gradle",false,"if set, gradle instead of maven conventions are used to locate compiled classes");
+        options.addOption("t","projecttype",true,"the project type, default is mvn (Maven), can be set to any of " + Project.getValidProjectTypes());
 
         CommandLineParser parser = new DefaultParser() {
             @Override
@@ -65,10 +65,7 @@ public class Scoper {
         };
         CommandLine cmd = parser.parse(options, args);
 
-        Project project = new MavenProject();
-        if (cmd.hasOption("gradle")) {
-            project = new GradleProject();
-        }
+        Project project = Project.getProject(cmd.getOptionValue("projecttype"));
         LOGGER.info("using project type: " + project.getType());
 
         // input validation
@@ -104,13 +101,13 @@ public class Scoper {
         Set<String> mainClassNames = new HashSet<>();
         Set<String> testClassNames = new HashSet<>();
 
-        File classLocation = project.getCompiledMainClassesFolder(projectFolder);
-        Collection<File> classFiles = FileUtils.listFiles(classLocation,new String[]{"class"},true);
+        Collection<File> classFiles = project.getCompiledMainClasses(projectFolder);
+        Preconditions.checkState(!classFiles.isEmpty(),"no main compiled classes found, check whether project has been built");
         for (File classFile:classFiles) {
             analyseBytecodeForFeatures(classFile, Issue.Scope.MAIN,counters,mainClassNames);
         }
-        classLocation = project.getCompiledTestClassesFolder(projectFolder);
-        classFiles = FileUtils.listFiles(classLocation,new String[]{"class"},true);
+        classFiles = project.getCompiledTestClasses(projectFolder);
+        Preconditions.checkState(!classFiles.isEmpty(),"no test compiled classes found, check whether project has been built");
         for (File classFile:classFiles) {
             analyseBytecodeForFeatures(classFile, Issue.Scope.TEST,counters,testClassNames);
         }

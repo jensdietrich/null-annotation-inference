@@ -1,6 +1,7 @@
 package nz.ac.wgtn.nullannoinference.commons;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * Maven project structure.
@@ -8,29 +9,29 @@ import java.io.File;
  */
 public class MavenProject implements Project {
 
+    static final String TYPE = "mvn";
+
     @Override
-    public File getCompiledMainClassesFolder(File projectRoot) {
-        checkFolder(projectRoot);
+    public List<File> getCompiledMainClasses(File projectRoot) {
         File folder = new File(projectRoot,"target/classes");
         if (!folder.exists() || folder.listFiles().length==0) {
             throw new IllegalStateException("Folder containing classes not found -- project must be build first with \"mvn compile\": " + folder.getAbsolutePath());
         };
-        return folder;
+        return collectClassFiles(folder);
     }
 
     @Override
-    public File getCompiledTestClassesFolder(File projectRoot) {
-        checkFolder(projectRoot);
+    public List<File> getCompiledTestClasses(File projectRoot) {
         File folder = new File(projectRoot,"target/test-classes");
         if (!folder.exists() || folder.listFiles().length==0) {
             throw new IllegalStateException("Folder containing classes not found -- project must be build first with \"mvn test-compile\": " + folder.getAbsolutePath());
         };
-        return folder;
+        return collectClassFiles(folder);
     }
 
     @Override
     public String getType() {
-        return "maven";
+        return TYPE;
     }
 
     @Override

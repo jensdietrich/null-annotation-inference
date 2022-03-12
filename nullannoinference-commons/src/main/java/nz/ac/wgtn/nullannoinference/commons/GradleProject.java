@@ -1,6 +1,7 @@
 package nz.ac.wgtn.nullannoinference.commons;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * Gradle project structure.
@@ -8,29 +9,29 @@ import java.io.File;
  */
 public class GradleProject implements Project {
 
+    static final String TYPE = "gradle";
+
     @Override
-    public File getCompiledMainClassesFolder(File projectRoot) {
-        checkFolder(projectRoot);
+    public List<File> getCompiledMainClasses(File projectRoot) {
         File folder = new File(projectRoot,"build/classes/java/main");
         if (!folder.exists() || folder.listFiles().length==0) {
             throw new IllegalStateException("Folder containing classes not found -- project must be build first: " + folder.getAbsolutePath());
         };
-        return folder;
+        return collectClassFiles(folder);
     }
 
     @Override
-    public File getCompiledTestClassesFolder(File projectRoot) {
-        checkFolder(projectRoot);
+    public List<File> getCompiledTestClasses(File projectRoot) {
         File folder = new File(projectRoot,"build/classes/java/test");
         if (!folder.exists() || folder.listFiles().length==0) {
             throw new IllegalStateException("Folder containing classes not found -- project must be build first: " + folder.getAbsolutePath());
         };
-        return folder;
+        return collectClassFiles(folder);
     }
 
     @Override
     public String getType() {
-        return "gradle";
+        return TYPE;
     }
 
     @Override
