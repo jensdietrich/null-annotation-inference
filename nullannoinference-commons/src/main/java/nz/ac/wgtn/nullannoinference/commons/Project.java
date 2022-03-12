@@ -21,5 +21,7 @@ public interface Project {
     }
     File getCompiledMainClassesFolder(File projectRoot);
     File getCompiledTestClassesFolder(File projectRoot);
+    String getType();
+    void checkProjectRootFolder(File root) throws IllegalArgumentException;
 
 }

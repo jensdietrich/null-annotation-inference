@@ -1,0 +1,15 @@
+description = "Spring Expression Language (SpEL)"
+
+apply plugin: "kotlin"
+
+dependencies {
+	compile(project(":spring-core"))
+	testCompile(testFixtures(project(":spring-core")))
+	testCompile("org.jetbrains.kotlin:kotlin-reflect")
+	testCompile("org.jetbrains.kotlin:kotlin-stdlib")
+}
+
+test {
+	// to enable instrumentation 
+    jvmArgs = ["-Xmx12g","-javaagent:nullannoinference-agent.jar","-javaagent:nullannoinference-agent2.jar","-Dnz.ac.wgtn.nullannoinference.includes=org.springframework.expression","-Dnz.ac.wgtn.nullannoinference.context=springframework-expression"]
+}

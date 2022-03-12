@@ -27,4 +27,18 @@ public class GradleProject implements Project {
         };
         return folder;
     }
+
+    @Override
+    public String getType() {
+        return "gradle";
+    }
+
+    @Override
+    public void checkProjectRootFolder(File root) throws IllegalArgumentException {
+        checkFolder(root);
+        int gradlePresent = root.listFiles(f -> f.getName().endsWith(".gradle")).length;
+        if (gradlePresent==0) {
+            throw new IllegalArgumentException("No .gradle file found -- this is not a valid gradle project");
+        }
+    }
 }

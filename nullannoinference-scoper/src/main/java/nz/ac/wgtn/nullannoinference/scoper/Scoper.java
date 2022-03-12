@@ -4,7 +4,10 @@ import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import nz.ac.wgtn.nullannoinference.commons.GradleProject;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
+import nz.ac.wgtn.nullannoinference.commons.MavenProject;
+import nz.ac.wgtn.nullannoinference.commons.Project;
 import org.apache.commons.cli.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Logger;
@@ -41,6 +44,7 @@ public class Scoper {
         options.addRequiredOption("i","input",true,"a folder containing json files with null issues reported by a test run instrumented with the nullannoinference agent, the folder will be checked recursively for files (required)");
         options.addRequiredOption("p","project",true,"the folder containing the Maven project (i.e. containing pom.xml) to be analysed, the project must have been built with \"mvn test\" (required)");
         options.addOption("s","summary",true,"a summary csv file with some stats about the project bytecode analysed (optional, default is \"" + SUMMARY_FILE_NAME + "\")");
+        options.addOption("g","gradle",false,"if set, gradle instead of maven conventions are used to locate compiled classes");
 
         CommandLineParser parser = new DefaultParser() {
             @Override
@@ -61,13 +65,17 @@ public class Scoper {
         };
         CommandLine cmd = parser.parse(options, args);
 
+        Project project = new MavenProject();
+        if (cmd.hasOption("gradle")) {
+            project = new GradleProject();
+        }
+        LOGGER.info("using project type: " + project.getType());
+
         // input validation
         File projectFolder = new File(cmd.getOptionValue("project"));
         Preconditions.checkArgument(projectFolder.exists(),"project folder does not exist: " + projectFolder.getAbsolutePath());
         Preconditions.checkArgument(projectFolder.isDirectory(),"project folder is not a folder: " + projectFolder.getAbsolutePath());
-        Preconditions.checkArgument(new File(projectFolder,"pom.xml").exists(),"project folder is not a maven project (no pom.xml found): " + projectFolder.getAbsolutePath());
-        Preconditions.checkArgument(new File(projectFolder,"target/classes").exists(),"project has not been built (no target/classes found): " + projectFolder.getAbsolutePath());
-        Preconditions.checkArgument(new File(projectFolder,"target/test-classes").exists(),"project has not been built (no target/test-classes found, must be built with \"mvn test\" or \"mvn test-compile\"): " + projectFolder.getAbsolutePath());
+        project.checkProjectRootFolder(projectFolder);
         LOGGER.info("analysing project: " + projectFolder.getAbsolutePath());
 
         File inputFolder = new File(cmd.getOptionValue("input"));
@@ -77,7 +85,6 @@ public class Scoper {
         // coarse and unsound check might be empty
         Preconditions.checkArgument(issueFiles.size()>0,"no files containing nullability issues found in folder " + inputFolder.getAbsolutePath());
         LOGGER.info("using null issues in: " + inputFolder.getAbsolutePath());
-
 
         File summaryFile = null;
         if (cmd.hasOption("summary")) {
@@ -97,12 +104,13 @@ public class Scoper {
         Set<String> mainClassNames = new HashSet<>();
         Set<String> testClassNames = new HashSet<>();
 
-        Collection<File> classFiles = FileUtils.listFiles(new File(projectFolder,"target/classes"),new String[]{"class"},true);
+        File classLocation = project.getCompiledMainClassesFolder(projectFolder);
+        Collection<File> classFiles = FileUtils.listFiles(classLocation,new String[]{"class"},true);
         for (File classFile:classFiles) {
             analyseBytecodeForFeatures(classFile, Issue.Scope.MAIN,counters,mainClassNames);
         }
-
-        classFiles = FileUtils.listFiles(new File(projectFolder,"target/test-classes"),new String[]{"class"},true);
+        classLocation = project.getCompiledTestClassesFolder(projectFolder);
+        classFiles = FileUtils.listFiles(classLocation,new String[]{"class"},true);
         for (File classFile:classFiles) {
             analyseBytecodeForFeatures(classFile, Issue.Scope.TEST,counters,testClassNames);
         }

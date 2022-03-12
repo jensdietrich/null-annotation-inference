@@ -13,7 +13,6 @@ SCOPERL="nullannoinference-scoper.jar"
 ROOT="$(pwd)"
 PROJECT_FOLDER=$ROOT/projects/original/$NAME
 
-
 if [ -d "$PROJECT_FOLDER" ]; then
     echo "Using existing project: $PROJECT_FOLDER"
 else

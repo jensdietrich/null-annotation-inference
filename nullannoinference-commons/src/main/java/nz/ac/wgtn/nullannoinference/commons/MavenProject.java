@@ -27,4 +27,17 @@ public class MavenProject implements Project {
         };
         return folder;
     }
+
+    @Override
+    public String getType() {
+        return "maven";
+    }
+
+    @Override
+    public void checkProjectRootFolder(File root) throws IllegalArgumentException {
+        checkFolder(root);
+        if (!new File(root,"pom.xml").exists()) {
+            throw new IllegalArgumentException("No pom.xml file found -- this is not a valid mvn project");
+        }
+    }
 }
