@@ -5,6 +5,7 @@ import nz.ac.wgtn.nullannoinference.commons.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Field;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
@@ -19,6 +20,8 @@ import java.util.stream.Stream;
 
 public class IssueStore {
 
+    private static final String INSTRUMENTATION_PACKAGE1 = "nz.ac.wgtn.nullannoinference.agent";
+    private static final String INSTRUMENTATION_PACKAGE2 = "nz.ac.wgtn.nullannoinference.agent2";
     static {
         TimerTask task = new TimerTask() {
             public void run() {
@@ -43,7 +46,8 @@ public class IssueStore {
     static StackTracePruningStrategy PRUNING_STRATEGY = StackTracePruningStrategy.AGGRESSIVE;
 
     public static void add (Issue issue) {
-        List<String> stacktrace = Stream.of(Thread.currentThread().getStackTrace())
+        StackTraceElement[] stack = Thread.currentThread().getStackTrace();
+        List<String> stacktrace = Stream.of(stack)
             .map(element -> element.getClassName() + "::" + element.getMethodName() + ':' + element.getLineNumber())
             .collect(Collectors.toList());
 
@@ -58,6 +62,9 @@ public class IssueStore {
                 while (stacktrace.get(0).startsWith(IssueStore.class.getPackage().getName())) {
                     stacktrace.remove(0);
                 }
+                while (stacktrace.get(0).startsWith(INSTRUMENTATION_PACKAGE1) || stacktrace.get(0).startsWith(INSTRUMENTATION_PACKAGE2)) {
+                    stacktrace.remove(0);
+                }
             }
             if (PRUNING_STRATEGY== StackTracePruningStrategy.AGGRESSIVE) {
                 removeFromEndOfStacktrace(stacktrace,IS_SUREFIRE_INVOCATION);
@@ -69,12 +76,8 @@ public class IssueStore {
                     removeFromEndOfStacktrace(stacktrace,IS_JDK_INTERNAL_INVOCATION);
                 }
             }
-
-
         }
         issue.setStacktrace(stacktrace);
-        // System.out.println("null-related issue found: " + issue);
-
         issues.add(issue);
     }
 

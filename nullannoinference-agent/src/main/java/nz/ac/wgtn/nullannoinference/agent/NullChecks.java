@@ -52,7 +52,7 @@ public abstract class NullChecks {
     // check the state of object using reflection, to be used at constructor exit
     public static void checkThis(Executable method, Object object){
         // todo: extend this to super classes within scope (need to match against prefix)
-        for (Field field:object.getClass().getDeclaredFields()) {
+        for (Field field:method.getDeclaringClass().getDeclaredFields()) {
             if (!field.isSynthetic() && !field.getType().isPrimitive() && !Modifier.isStatic(field.getModifiers())) {
                 try {
                     field.setAccessible(true);
