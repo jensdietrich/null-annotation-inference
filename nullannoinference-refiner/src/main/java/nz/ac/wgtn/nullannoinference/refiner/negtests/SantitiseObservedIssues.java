@@ -52,24 +52,24 @@ public class SantitiseObservedIssues {
 
         for (File file:FileUtils.listFiles(originalIssueFolder,new String[]{"json"},true)) {
             LOGGER.info("\t reading issues from " + file.getAbsolutePath());
+            Set<Issue> sanitisedIssues2 = new HashSet<>();
+            Set<Issue> rejectedIssues2 = new HashSet<>();
+            Set<Issue> allIssues2 = new HashSet<>();
             Gson gson = new Gson();
             try (Reader in = new FileReader(file)){
                 Issue[] issues = gson.fromJson(in,Issue[].class);
                 LOGGER.info("\t" + issues.length + " issues found");
-                allIssues.addAll(Stream.of(issues).filter(issueFilter).collect(Collectors.toSet()));
-
-                // check for any method in stacktrace -- note that this is O(n^2)
-                Stream.of(issues).filter(issueFilter).parallel().forEach(issue -> {
-                    if (isCausedByNegativeTest(issue,methods2)) {
-                        rejectedIssues.add(issue);
-                    }
-                    else {
-                        sanitisedIssues.add(issue);
-                    }
-                });
+                allIssues2 = Stream.of(issues).filter(issueFilter).collect(Collectors.toSet());
+                rejectedIssues2 = allIssues2.stream().filter(i -> isCausedByNegativeTest(i,methods2)).collect(Collectors.toSet());
+                sanitisedIssues2 = allIssues2.stream().filter(i -> !isCausedByNegativeTest(i,methods2)).collect(Collectors.toSet());
             }
+
+            allIssues.addAll(allIssues2);
+            rejectedIssues.addAll(rejectedIssues2);
+            sanitisedIssues.addAll(sanitisedIssues2);
+
             // todo write results
-            if (sanitisedIssues.size()>0) {
+            if (sanitisedIssues2.size()>0) {
                 Path rel = originalIssueFolder.toPath().relativize(file.toPath());
                 File sanitised = new File(sanitisedIssueFolder,rel.toString());
                 LOGGER.info("\twriting sanitised set to " + sanitised.getAbsolutePath());
@@ -78,7 +78,7 @@ public class SantitiseObservedIssues {
                 }
 
                 try (Writer out = new FileWriter(sanitised)) {
-                    gson.toJson(sanitisedIssues, out);
+                    gson.toJson(sanitisedIssues2, out);
                 }
             }
         }

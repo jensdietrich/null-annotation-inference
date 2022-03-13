@@ -53,5 +53,7 @@ cd $ROOT
 cd ..
 cp nullannoinference-refiner/target/$REFINER $ROOT
 cd $ROOT
-java -jar $REFINER -i $ISSUE_FOLDER -a -s $INFERRED_ISSUES_FOLDER -n $NEGATIVE_TEST_LIST -p $PROJECT_FOLDER -o $SUMMARY -x $PREFIX
+echo "name: $NAME"
+echo "prefix: $PREFIX"
+java -jar $REFINER -i $ISSUE_FOLDER -a -s $INFERRED_ISSUES_FOLDER -n $NEGATIVE_TEST_LIST -p $PROJECT_FOLDER -o $SUMMARY -x $PREFIX -t mvn
 

@@ -33,7 +33,7 @@ for module in "${modules[@]}" ;do
     SUMMARY=$ISSUE_INFERRED/$module/summary.csv
     echo "running inference for module $module"
     cd $ROOT
-    java -jar $REFINER -i $ROOT/issues-collected/$module -a -s $ISSUE_INFERRED -n $NEGATIVE_TEST_LIST -p $PROJECT_FOLDER/$module -o $SUMMARY -x prefixes[$module]
+    java -jar $REFINER -i $ROOT/issues-collected/$module -a -s $ISSUE_INFERRED/$module -n $NEGATIVE_TEST_LIST -p $PROJECT_FOLDER/$module -o $SUMMARY -x prefixes[$module] -t gradle_multilang
 done
 
 
