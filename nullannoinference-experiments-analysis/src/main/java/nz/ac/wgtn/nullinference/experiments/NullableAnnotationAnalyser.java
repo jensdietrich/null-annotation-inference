@@ -17,7 +17,7 @@ import java.util.function.Predicate;
  * @author jens dietrich
  */
 public class NullableAnnotationAnalyser {
-    
+
     // should catch all null-related annotations, and possibly more ..
     public static Predicate<String> CATCH_ANY_NULL_ANNOTATION = descriptor -> descriptor.toLowerCase().contains("null");
 
@@ -38,10 +38,6 @@ public class NullableAnnotationAnalyser {
             }
         }
         return issues;
-    }
-
-    static void increaseCount(Map<String,Integer> counts,String key) {
-        counts.compute(key,(k,v) -> v==null?1:(1+v));
     }
 
     static class AnnotationReporter extends ClassVisitor {

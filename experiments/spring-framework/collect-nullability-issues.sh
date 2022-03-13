@@ -12,8 +12,8 @@ SCOPERL="nullannoinference-scoper.jar"
 ROOT="$(pwd)"
 PROJECT_FOLDER=$ROOT/spring-framework
 ISSUES_COLLECTED=$ROOT/issues-collected
-modules=('spring-core' 'spring-beans')
-#modules=('spring-core' 'spring-beans' 'spring-expression' 'spring-jdbc')
+# modules=('spring-core' 'spring-beans')
+modules=('spring-core' 'spring-beans' 'spring-orm' 'spring-oxm' 'spring-context' 'spring-web' 'spring-webmvc')
 
 
 if [ -d "$PROJECT_FOLDER" ]; then

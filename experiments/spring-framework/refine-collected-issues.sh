@@ -3,18 +3,13 @@
 ## script to refine fetched nullability issues, rejecting some and inferring additional ones
 ## @author jens dietrich
 
-NAME=$1
-PREFIX=$2
 ROOT="$(pwd)"
 PROJECT_FOLDER=$ROOT/spring-framework
 ISSUE_INFERRED=$ROOT/issues-inferred
 ISSUES_COLLECTED=$ROOT/issues-collected
 REFINER=nullannoinference-refiner.jar
 REFINER_PATH=nullannoinference-refiner/target/$REFINER
-modules=('spring-core' 'spring-beans')
-declare -A prefixes
-prefixes[spring-core]="org.springframework"
-prefixes[spring-beans]="org.springframework.beans"
+modules=('spring-core' 'spring-beans' 'spring-orm' 'spring-oxm' 'spring-context' 'spring-web' 'spring-webmvc')
 
 # copy refiner
 cd ..
@@ -33,7 +28,23 @@ for module in "${modules[@]}" ;do
     SUMMARY=$ISSUE_INFERRED/$module/summary.csv
     echo "running inference for module $module"
     cd $ROOT
-    java -jar $REFINER -i $ROOT/issues-collected/$module -a -s $ISSUE_INFERRED/$module -n $NEGATIVE_TEST_LIST -p $PROJECT_FOLDER/$module -o $SUMMARY -x prefixes[$module] -t gradle_multilang
+
+    # pick prefix
+    prefix='org.springframework'
+    if [ "$module"  = 'spring-beans' ]; then
+       prefix='org.springframework.beans'
+    elif [ "$module"  = 'spring-orm' ]; then
+       prefix='org.springframework.orm'
+    elif [ "$module"  = 'spring-oxm' ]; then
+       prefix='org.springframework.oxm'
+    elif [ "$module"  = 'spring-web' ]; then
+       prefix='org.springframework'
+    elif [ "$module"  = 'spring-webmvc' ]; then
+         prefix='org.springframework.web'
+    fi
+    echo "module: $module"
+    echo "prefix: $prefix"
+    java -jar $REFINER -i $ROOT/issues-collected/$module -a -s $ISSUE_INFERRED/$module -n $NEGATIVE_TEST_LIST -p $PROJECT_FOLDER/$module -o $SUMMARY -x $prefix -t gradle_multilang
 done
 
 
