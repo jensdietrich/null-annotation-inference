@@ -89,6 +89,11 @@ public class IdentifyNegativeTests {
                     if ("org/junit/jupiter/api/Assertions".equals(owner) && "assertThrows".equals(name)) {
                         methods.add(new Method(currentClass,currentClassName,currentDescriptor));
                     }
+
+                    // add some third-party assertj callsites -- those are used in spring
+                    if ("org/assertj/core/api/ThrowableAssert".equals(owner) || "org/assertj/core/api/AbstractThrowableAssert".equals(owner)) {
+                        methods.add(new Method(currentClass,currentClassName,currentDescriptor));
+                    }
                 }
 
                 @Override
