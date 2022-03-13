@@ -1,7 +1,7 @@
 # The Refiner Module
 
 The refiner uses static analysis to improve the precision and recall of issues. Note that issues are expected to have a scope set (see scoper module), and only issues are processed 
-that have a main scope. In Maven projects, that corresponds to classes defined in `src/main/java` with binaries
+that have a main scope. In Maven projects, this corresponds to classes defined in `src/main/java` with binaries
 generated in `target/classes`. 
 
 Issues that are observed in *negative tests*, i.e. tests triggering abnormal behaviour, are removed, while additional issues
@@ -25,6 +25,8 @@ If the project is build with `mvn package`, a jar containing all dependencies wi
 | `-s`      | `--sanitisedissues <arg>` | a folder where the issues not removed by the negative test sanitisation will be saved (optional, default is `sanitised_nullability_issues`)                                 |
 | `-x`      | `--packagePrefix <arg>`   | the prefix of packages for which the hierachy will be analysed, such as "org.apache.commons" (required) |
 | `-o`      | `--summary <arg>`         | a summary csv file with some stats about the inferences performed (optional, default is "summary.csv") |
+| `-t`  | `--projecttype <arg>`     | the project type, default is mvn (Maven), can be set to any of mvn, gradle and gradle_multilang (optional, default is "mvn")                                                     |
+
 
 
 

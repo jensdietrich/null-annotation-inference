@@ -1,10 +1,12 @@
 package nz.ac.wgtn.nullannoinference.refiner.lsp;
 
 import com.google.common.graph.Graph;
+import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -17,7 +19,8 @@ public class TestOverrideExtractor {
         File project = new File(TestOverrideExtractor.class.getResource("/test-project").getFile());
         assumeTrue(project.exists());
         assumeTrue(new File(project, "target/classes").exists(), "project containing test data (resources/test-project) has not been built, build test projects with mvn compile");
-        Graph<OwnedMethod> graph = OverrideExtractor.extractOverrides(t -> t.startsWith("foo."),project);
+        Collection<File> classFiles = FileUtils.listFiles(new File(project, "target/classes"),new String[]{"class"},true);
+        Graph<OwnedMethod> graph = OverrideExtractor.extractOverrides(t -> t.startsWith("foo."),classFiles);
 
         String descriptor1 = "(Ljava/lang/Object;)Ljava/lang/String;";
         String descriptor2 = "(Ljava/lang/Object;I)Ljava/lang/String;";

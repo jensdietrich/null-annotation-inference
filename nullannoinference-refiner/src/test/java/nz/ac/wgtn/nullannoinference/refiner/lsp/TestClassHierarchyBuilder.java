@@ -1,10 +1,12 @@
 package nz.ac.wgtn.nullannoinference.refiner.lsp;
 
 import com.google.common.graph.Graph;
+import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -17,7 +19,8 @@ public class TestClassHierarchyBuilder {
         File project = new File(TestClassHierarchyBuilder.class.getResource("/test-project").getFile());
         assumeTrue(project.exists());
         assumeTrue(new File(project, "target/classes").exists(), "project containing test data (resources/test-project) has not been built, build test projects with mvn compile");
-        Graph<String> subtypeGraph = ClassHierarchyBuilder.buildTypeGraph(t -> t.startsWith("foo."),project);
+        Collection<File> classFiles = FileUtils.listFiles(new File(project, "target/classes"),new String[]{"class"},true);
+        Graph<String> subtypeGraph = ClassHierarchyBuilder.buildTypeGraph(t -> t.startsWith("foo."),classFiles);
 
         assertEquals(4,subtypeGraph.nodes().size());
         assertTrue(subtypeGraph.nodes().contains("foo.A"));

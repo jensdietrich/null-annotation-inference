@@ -1,6 +1,7 @@
 package nz.ac.wgtn.nullannoinference.refiner.lsp;
 
 import com.google.common.collect.Multimap;
+import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -18,7 +19,9 @@ public class TestMethodOwnershipExtractor {
         File project = new File(TestMethodOwnershipExtractor.class.getResource("/test-project").getFile());
         assumeTrue(project.exists());
         assumeTrue(new File(project, "target/classes").exists(), "project containing test data (resources/test-project) has not been built, build test projects with mvn compile");
-        Multimap<Method,String> ownership = MethodOwnershipExtractor.extractMethodOwnership(project);
+
+        Collection<File> classFiles = FileUtils.listFiles(new File(project, "target/classes"),new String[]{"class"},true);
+        Multimap<Method,String> ownership = MethodOwnershipExtractor.extractMethodOwnership(classFiles);
 
         String descriptor1 = "(Ljava/lang/Object;)Ljava/lang/String;";
         String descriptor2 = "(Ljava/lang/Object;I)Ljava/lang/String;";

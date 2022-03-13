@@ -3,6 +3,7 @@ package nz.ac.wgtn.nullannoinference.refiner.negtests;
 import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
 import nz.ac.wgtn.nullannoinference.commons.IssueAggregator;
+import nz.ac.wgtn.nullannoinference.commons.Project;
 import nz.ac.wgtn.nullannoinference.refiner.LogSystem;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
 import org.apache.commons.io.FileUtils;
@@ -26,7 +27,7 @@ public class SantitiseObservedIssues {
     public static final String COUNT_SANITISED_ISSUES = "sanitised issues";
     public static final String COUNT_SANITISED_ISSUES_AGGREGATED = "sanitised issues (aggregated)";
 
-    public static void run (File originalIssueFolder, File sanitisedIssueFolder,File negativeTestList,Map<String,Integer> counts, Predicate<Issue> issueFilter) throws Exception {
+    public static void run (Project project, File originalIssueFolder, File sanitisedIssueFolder, File negativeTestList, Map<String,Integer> counts, Predicate<Issue> issueFilter) throws Exception {
 
         Preconditions.checkArgument(originalIssueFolder.exists(), originalIssueFolder.getAbsolutePath() + " must exist");
         Preconditions.checkArgument(originalIssueFolder.isDirectory(), originalIssueFolder.getAbsolutePath() + " must be a folder");

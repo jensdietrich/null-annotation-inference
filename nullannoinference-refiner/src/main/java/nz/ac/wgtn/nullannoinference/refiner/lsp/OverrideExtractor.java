@@ -17,10 +17,10 @@ import java.util.function.Predicate;
  */
 public class OverrideExtractor {
 
-    public static Graph<OwnedMethod> extractOverrides (Predicate<String> typeFilter, File... classLocations) throws IOException {
+    public static Graph<OwnedMethod> extractOverrides (Predicate<String> typeFilter, Collection<File> classFiles) throws IOException {
         MutableGraph<OwnedMethod> graph = GraphBuilder.directed().allowsSelfLoops(false).build();
-        Graph<String> typeGraph = ClassHierarchyBuilder.buildTypeGraph(typeFilter,classLocations);
-        Multimap<Method,String> methodOwnership = MethodOwnershipExtractor.extractMethodOwnership(classLocations);
+        Graph<String> typeGraph = ClassHierarchyBuilder.buildTypeGraph(typeFilter,classFiles);
+        Multimap<Method,String> methodOwnership = MethodOwnershipExtractor.extractMethodOwnership(classFiles);
 
         for (Method method:methodOwnership.keySet()) {
             Collection<String> owners = methodOwnership.get(method);

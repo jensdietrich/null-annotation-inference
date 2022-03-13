@@ -17,24 +17,14 @@ import java.util.function.Predicate;
 
 public class ClassHierarchyBuilder {
 
-    public static Graph<String> buildTypeGraph (Predicate<String> typeFilter, File... classLocations) throws IOException {
+    public static Graph<String> buildTypeGraph (Predicate<String> typeFilter, Collection<File> classFiles) throws IOException {
         MutableGraph<String> graph = GraphBuilder.directed().allowsSelfLoops(false).build();
-        for (File projectFolder:classLocations) {
-            add(typeFilter,graph,projectFolder);
-        }
+        add(typeFilter,graph,classFiles);
         return graph;
     }
 
-    private static void add(Predicate<String> typeFilter, MutableGraph<String> graph,File project) throws IOException {
-        File compiledTestClasses = new File(project,"target/classes");
-        if (!compiledTestClasses.exists()) {
-            throw new IllegalStateException("project must be built before analysis can be found (mvn compile)");
-        }
-        Collection<File> classFiles = FileUtils.listFiles(compiledTestClasses,new String[]{"class"},true);
-        if (classFiles.isEmpty()) {
-            throw new IllegalStateException("No .class files found, make sure that the project has been built");
-        }
-        for (File classFile:FileUtils.listFiles(project,new String[]{"class"},true)) {
+    private static void add(Predicate<String> typeFilter, MutableGraph<String> graph,Collection<File> classFiles) throws IOException {
+        for (File classFile:classFiles) {
             // System.out.println("Analysing: " + classFile);
             try (InputStream in = new FileInputStream(classFile)) {
                 new ClassReader(in).accept(new SubtypeRelationshipExtractor(typeFilter,graph), 0);

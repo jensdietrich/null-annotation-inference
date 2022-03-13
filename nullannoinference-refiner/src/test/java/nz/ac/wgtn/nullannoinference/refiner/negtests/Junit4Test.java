@@ -1,5 +1,6 @@
 package nz.ac.wgtn.nullannoinference.refiner.negtests;
 
+import nz.ac.wgtn.nullannoinference.commons.MavenProject;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -17,7 +18,7 @@ public class Junit4Test {
         File project = new File(Junit4Test.class.getResource("/junit4-project").getFile());
         assumeTrue(project.exists());
         assumeTrue(new File(project,"target/test-classes").exists(),"project containing test data (resources/junit4-project) has not been built, build test projects with \"mvn test-compile\" or \"mvn test\"");
-        Set<Method> methods = IdentifyNegativeTests.findNegativeTests(project);
+        Set<Method> methods = IdentifyNegativeTests.findNegativeTests(new MavenProject(),project);
         assertEquals(2,methods.size());
         assertTrue(methods.contains(new Method("nz.ac.wgtn.ecs.semdiff.nullable.negativetestanalysis.test_junit4.AnnotationTest","testAIOBE","()V")));
         assertTrue(methods.contains(new Method("nz.ac.wgtn.ecs.semdiff.nullable.negativetestanalysis.test_junit4.AnnotationTest","testNPE","()V")));

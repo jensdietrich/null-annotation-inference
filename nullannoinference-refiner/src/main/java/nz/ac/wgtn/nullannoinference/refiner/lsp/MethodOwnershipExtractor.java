@@ -17,24 +17,14 @@ import java.util.Objects;
 
 public class MethodOwnershipExtractor {
 
-    public static Multimap<Method,String> extractMethodOwnership (File... classLocations) throws IOException {
+    public static Multimap<Method,String> extractMethodOwnership (Collection<File> classFiles) throws IOException {
         Multimap<Method,String> ownershipMap = HashMultimap.create();
-        for (File projectFolder:classLocations) {
-            add(ownershipMap,projectFolder);
-        }
+        add(ownershipMap,classFiles);
         return ownershipMap;
     }
 
-    private static void add(Multimap<Method,String> ownershipMap,File project) throws IOException {
-        File compiledTestClasses = new File(project,"target/classes");
-        if (!compiledTestClasses.exists()) {
-            throw new IllegalStateException("project must be built before analysis can be found (mvn class)");
-        }
-        Collection<File> classFiles = FileUtils.listFiles(compiledTestClasses,new String[]{"class"},true);
-        if (classFiles.isEmpty()) {
-            throw new IllegalStateException("No .class files found, make sure that the project has been built");
-        }
-        for (File classFile:FileUtils.listFiles(project,new String[]{"class"},true)) {
+    private static void add(Multimap<Method,String> ownershipMap,Collection<File> classFiles) throws IOException {
+        for (File classFile:classFiles) {
             // System.out.println("Analysing: " + classFile);
             try (InputStream in = new FileInputStream(classFile)) {
                 new ClassReader(in).accept(new MethodOwnershipVistor(ownershipMap), 0);

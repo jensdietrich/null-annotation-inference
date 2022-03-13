@@ -3,9 +3,11 @@ package nz.ac.wgtn.nullannoinference.refiner.lsp;
 import com.google.common.collect.Sets;
 import com.google.common.graph.Graph;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
+import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
@@ -19,7 +21,8 @@ public class TestIssueInference {
         File project = new File(TestOverrideExtractor.class.getResource("/test-project").getFile());
         assumeTrue(project.exists());
         assumeTrue(new File(project, "target/classes").exists(), "project containing test data (resources/test-project) has not been built, build test projects with mvn compile");
-        Graph<OwnedMethod> overrides = OverrideExtractor.extractOverrides(t -> t.startsWith("foo."),project);
+        Collection<File> classFiles = FileUtils.listFiles(new File(project, "target/classes"),new String[]{"class"},true);
+        Graph<OwnedMethod> overrides = OverrideExtractor.extractOverrides(t -> t.startsWith("foo."),classFiles);
 
         Set<Issue> newIssues = InferAdditionalIssues.inferIssuesViaLSPPropagation(Sets.newHashSet(issue),overrides,true);
 
@@ -41,7 +44,8 @@ public class TestIssueInference {
         File project = new File(TestOverrideExtractor.class.getResource("/test-project").getFile());
         assumeTrue(project.exists());
         assumeTrue(new File(project, "target/classes").exists(), "project containing test data (resources/test-project) has not been built, build test projects with mvn compile");
-        Graph<OwnedMethod> overrides = OverrideExtractor.extractOverrides(t -> t.startsWith("foo."),project);
+        Collection<File> classFiles = FileUtils.listFiles(new File(project, "target/classes"),new String[]{".class"},true);
+        Graph<OwnedMethod> overrides = OverrideExtractor.extractOverrides(t -> t.startsWith("foo."),classFiles);
 
         Set<Issue> newIssues = InferAdditionalIssues.inferIssuesViaLSPPropagation(Sets.newHashSet(issue),overrides,false);
 
@@ -55,7 +59,8 @@ public class TestIssueInference {
         File project = new File(TestOverrideExtractor.class.getResource("/test-project").getFile());
         assumeTrue(project.exists());
         assumeTrue(new File(project, "target/classes").exists(), "tested project has not been built, build test projects with mvn compile");
-        Graph<OwnedMethod> overrides = OverrideExtractor.extractOverrides(t -> t.startsWith("foo."),project);
+        Collection<File> classFiles = FileUtils.listFiles(new File(project, "target/classes"),new String[]{"class"},true);
+        Graph<OwnedMethod> overrides = OverrideExtractor.extractOverrides(t -> t.startsWith("foo."),classFiles);
 
         Set<Issue> newIssues = InferAdditionalIssues.inferIssuesViaLSPPropagation(Sets.newHashSet(issue),overrides,true);
 
@@ -77,7 +82,8 @@ public class TestIssueInference {
         File project = new File(TestOverrideExtractor.class.getResource("/test-project").getFile());
         assumeTrue(project.exists());
         assumeTrue(new File(project, "target/classes").exists(), "tested project has not been built, build test projects with mvn compile");
-        Graph<OwnedMethod> overrides = OverrideExtractor.extractOverrides(t -> t.startsWith("foo."),project);
+        Collection<File> classFiles = FileUtils.listFiles(new File(project, "target/classes"),new String[]{"class"},true);
+        Graph<OwnedMethod> overrides = OverrideExtractor.extractOverrides(t -> t.startsWith("foo."),classFiles);
 
         Set<Issue> newIssues = InferAdditionalIssues.inferIssuesViaLSPPropagation(Sets.newHashSet(issue),overrides,false);
 

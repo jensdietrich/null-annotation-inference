@@ -1,6 +1,7 @@
 package nz.ac.wgtn.nullannoinference.refiner.negtests;
 
 import com.google.common.base.Preconditions;
+import nz.ac.wgtn.nullannoinference.commons.Project;
 import org.apache.commons.io.FileUtils;
 import org.objectweb.asm.*;
 import java.io.*;
@@ -18,14 +19,14 @@ public class IdentifyNegativeTests {
     public static final String CSV_SEP = "\t";
     public static final String COUNT_NEGATIVE_TESTS = "negative tests detected";
 
-    public static void run  (File mvnProjectRootFolder, File outputFile, Map<String,Integer> counts) throws IOException {
+    public static void run  (Project project, File mvnProjectRootFolder, File outputFile, Map<String,Integer> counts) throws IOException {
         Preconditions.checkArgument(mvnProjectRootFolder.exists(),mvnProjectRootFolder.getAbsolutePath() + " must exist");
         Preconditions.checkArgument(mvnProjectRootFolder.isDirectory(),mvnProjectRootFolder.getAbsolutePath() + " must be a folder");
 
         LOGGER.info("Analysis project for negative tests " + mvnProjectRootFolder.getAbsolutePath());
 
         Set<Method> methods = new TreeSet<>();
-        methods.addAll(findNegativeTests(mvnProjectRootFolder));
+        methods.addAll(findNegativeTests(project,mvnProjectRootFolder));
         counts.put(COUNT_NEGATIVE_TESTS,methods.size());
 
         try (PrintWriter out = new PrintWriter(new FileWriter(outputFile))) {
@@ -45,17 +46,13 @@ public class IdentifyNegativeTests {
 
     }
 
-    static Set<Method> findNegativeTests(File project) throws IOException {
-        File compiledTestClasses = new File(project,"target/test-classes");
-        if (!compiledTestClasses.exists()) {
-            throw new IllegalStateException("project " + project.getAbsolutePath() + " must be built before analysis can be found (\"mvn test\", or \"mvn test-compile\")");
-        }
-        Collection<File> classFiles = FileUtils.listFiles(compiledTestClasses,new String[]{"class"},true);
+    static Set<Method> findNegativeTests(Project project,File folder) throws IOException {
+        Collection<File> classFiles = project.getCompiledTestClasses(folder);
         if (classFiles.isEmpty()) {
             throw new IllegalStateException("No .class files found, make sure that the project has been built");
         }
         Set<Method> methods = new HashSet<>();
-        for (File classFile:FileUtils.listFiles(project,new String[]{"class"},true)) {
+        for (File classFile:classFiles) {
             // System.out.println("Analysing: " + classFile);
             try (InputStream in = new FileInputStream(classFile)) {
                 new ClassReader(in).accept(new NegativeTestFinder(methods), 0);
