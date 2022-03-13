@@ -45,7 +45,7 @@ fi
 
 echo "rebuilding project in $PROJECT_FOLDER"
 cd $PROJECT_FOLDER
-mvn test-compile
+mvn clean test-compile
 
 echo "running inference"
 cd $ROOT
