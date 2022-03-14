@@ -41,11 +41,13 @@ mkdir -p $INFER_RESULTS_PROJECT_ANNOTATED
 cd $ORIGINAL_PROJECT_FOLDER
 rm -r -f $ORIGINAL_PROJECT_FOLDER/infer-out
 echo "Running infer on un-annotated project folder $ORIGINAL_PROJECT_FOLDER"
-infer run -- mvn clean compile -Drat.skip=true
+mvn clean
+infer run -- mvn compile -Drat.skip=true
 mv $ORIGINAL_PROJECT_FOLDER/infer-out $INFER_RESULTS_PROJECT_ORIGINAL
 
 cd $ANNOTATED_PROJECT_FOLDER
 rm -r -f $ANNOTATED_PROJECT_FOLDER/infer-out
 echo "Running infer on annotated project folder $ANNOTATED_PROJECT_FOLDER"
-infer run -- mvn clean compile -Drat.skip=true
+mvn clean
+infer run -- mvn compile -Drat.skip=true
 mv $ANNOTATED_PROJECT_FOLDER/infer-out $INFER_RESULTS_PROJECT_ANNOTATED

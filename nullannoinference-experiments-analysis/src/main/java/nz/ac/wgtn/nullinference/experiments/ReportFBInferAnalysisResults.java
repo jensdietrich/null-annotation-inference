@@ -70,7 +70,8 @@ public class ReportFBInferAnalysisResults {
             out.println("\\begin{tabular}{|l|r|r|}");
             out.println(" \\hline");
             out.println("project & original & annotated \\\\ ");
-
+            out.println(" \\hline");
+            
             // start latex generation
             for (String project:projects) {
                 Set<FBInferIssue> issuesInOriginal = loadInferIssues(orginalProjectFolder,project);
