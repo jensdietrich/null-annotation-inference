@@ -23,3 +23,7 @@ scripts can be found in `experiments`.
 
 All modules can be built by running `mvn clean package` in the project root folder. After succesful builds, the binaries for the respective modules can be found in 
 the `target/` folders of the modules. See readmes in the module folders for module-specific instructions. 
+
+## Experiments
+
+There is a readme in `experiments/` that describes several experiments on Apache `commons-` projects. The module `nullannoinference-experiments-analysis` contains some Java classes that summarise results in `experiments/` and produce Latex tables. 
