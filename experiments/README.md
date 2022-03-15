@@ -3,6 +3,8 @@
 This experiments run the tool(s) on a set up Apache `commons-` libraries. Analysis is performed in steps, and for each step sh scripts are provided to run the analysis 
 for a single program, or for all programs (`*-all.sh`).
 
+__The folder `cached-results/` contains copies of the several folders created by the experiments.__
+
 ## Prerequisites
 
 1. this has been tested with Java 11 (Oracle JVM 11.0.2). Other versions may also work, but it is recommended to use Java 11. Both `mvn` (tested with version 3.8.1) and `git` are required.
