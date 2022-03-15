@@ -55,7 +55,11 @@ A couple of Java classes was used for this purpose, see `nullannoinference-exper
 
 Some additional experiments are located in `spring-framework`. The purpose of these experiments is to compare the captured and refined nullability issues with actual nullability annotation found in several spring projects. 
 
-TODO add details
+In `spring-framework`, run `refine-collected-issues.sh` to fetch the project(s) and run the instrumented gradle build. A small number of tests fail with the instrumentation (reasons are discussed in the paper, check the reports on `spring-framework/<module-name>/build/reports/tests/test/index.html` for details. But the builds succeed and null issues are captured. A second script `refine-collected-issues.sh` can then be used to refine the issues captured. The captures / refined issues are stored in `issues-collected/` and `issues-restored/` , respectively. 
+
+The script to analyse the spring projects for nullable annotations and diff them with the inferred annotations is located in the `nullannoinference-experiments-analysis`, the respective class is `ReportInferredVsActualAnnotationsInSpringProjects`.
+
+
 
 
 
