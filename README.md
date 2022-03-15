@@ -1,3 +1,9 @@
+
+# <span style="color:red">NOTE: PROJECT SUBMITTED WITH DOUBLE-BLIND SUBMISSION</span>
+
+<span style="color:red">__This is a snapshot of the project repository which is set to private to comply with the requirements of the double-blind submission process.  Some refactoring was applied to remove author names from comments in code, and to rename packages and artifacts in order to avoid references to the author's organisation. The result of this refactoring has not been thouroughly tested -- its main purpose is to allow reviewers to inspect the code and results (cached in `experiments/`). A fully functional artifact and the actual repository will be made available to the artifact reviewers.__</span>
+
+
 # Tools for Inferring and Adding Nullability Annotations
 
 This is an engine to infer `@Nullable` annotations using a combination of dynamic and static analysis. Adding those annotations is 
