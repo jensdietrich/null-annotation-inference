@@ -39,14 +39,13 @@ The `refine-collected-issues-*.sh` scripts perform two static analysis which rem
 
 The `annotate-*.sh` scripts are used to annotate the original projects in `projects/original` and store the annotated copies in `projects/annotated`.
 
-## Step 4: Run Infer-Eradicate
-
-The scripts `run-infer-*.sh` are used for this purpose. We note that the infer analysis can be brittle and sensitive to the environment used. The infer builds failed with Java 11, we used the following configuration successfully:
+## Step 4: Run Infer NullCheckers
+The scripts `run-infer-*.sh` are used for this purpose. It will run both the *nullsafe* and the *eradicate* checkers. We note that the infer analysis can be brittle and sensitive to the environment used. The infer builds failed with Java 11, we used the following configuration successfully:
 
 1. infer v1.1.0-63a78acdd built from sources MacOs 12.2.1 on Apple M1 Pro
 2. Java(TM) SE Runtime Environment (build 17.0.2+8-LTS-86), Java HotSpot(TM) 64-Bit Server VM (build 17.0.2+8-LTS-86, mixed mode, sharing)
 
-Results will be stored in `infer-results/` , verify that each project-specific folder contains infer results in `report.json`. If not, the respective projects can be manually rebuild with `infer run -- mvn compile -Drat.skip=true` and the `infer-out` folder copied.
+Results will be stored in `infer-nullsafe-results/` and `infer-eradicate-results/`,  respectively. We recommend to verify that each project-specific folder contains infer results in `report.json`. If not, the respective projects can be manually rebuild with `infer --eradicate run -- mvn compile -Drat.skip=true` or `infer --pulse run -- mvn compile -Drat.skip=true`, respectively, and the respective `infer-out` folder should then be copied into the respective result folder.
 
 ## Step 5: Creating Latex Tables with Results
 

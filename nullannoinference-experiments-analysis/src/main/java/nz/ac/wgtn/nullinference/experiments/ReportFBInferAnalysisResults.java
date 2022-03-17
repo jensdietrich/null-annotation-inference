@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 
 import java.io.*;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -23,76 +24,124 @@ public class ReportFBInferAnalysisResults {
     // more advanced latex report, reporting issues found and diff to baseline
     public static final File ADVANCED_LATEX_REPORT_NAME = new File("infer-issues-diff.tex");
 
-    public static final String CAPTION = "Null dereference issues issues reported by fbinfer before and after annotations";
+    public static final String CAPTION = "Null dereference issues reported by infer eradicate (erad) and nullsafe (nullsf) before and after annotation";
     public static final String LABEL = "tab:fbinfer";
 
-    public static final Set<String> ISSUE_TYPES = Set.of("NULL_DEREFERENCE");
+    public static final Predicate<FBInferIssue> IS_NULLSAFE_ISSUE = i -> i.getBug_type().equals("NULL_DEREFERENCE") || i.getBug_type().equals("NULLPTR_DEREFERENCE");
+    public static final Predicate<FBInferIssue> IS_ERADICATE_ISSUE = i -> i.getBug_type().startsWith("ERADICATE_");
+
 
     public static void main (String[] args) throws IOException {
 
 
-        Preconditions.checkArgument(args.length==2,"two arguments required -- a folder containing issues reported by infer for original and annotated projects (json), and output file (.tex)");
-        File inferIssuesFolder = new File(args[0]);
-        Preconditions.checkState(inferIssuesFolder.exists(),"folder does not exits: " + inferIssuesFolder.getAbsolutePath());
-        Preconditions.checkState(inferIssuesFolder.isDirectory(),"folder must be folder: " + inferIssuesFolder.getAbsolutePath());
+        Preconditions.checkArgument(args.length==3,"three arguments required -- folders containing issues reported by infer for original and annotated projects, extracted with nullsafe (folder 1) and eradicate (folder 2)  (json), and output file (.tex)");
 
-        File orginalProjectFolder = new File(inferIssuesFolder,"original");
-        Preconditions.checkState(orginalProjectFolder.exists(),"folder does not exits: " + orginalProjectFolder.getAbsolutePath());
-        Preconditions.checkState(orginalProjectFolder.isDirectory(),"folder must be folder: " + orginalProjectFolder.getAbsolutePath());
+        File nullsafeIssuesFolder = new File(args[0]);
+        Preconditions.checkState(nullsafeIssuesFolder.exists(),"folder does not exits: " + nullsafeIssuesFolder.getAbsolutePath());
+        Preconditions.checkState(nullsafeIssuesFolder.isDirectory(),"folder must be folder: " + nullsafeIssuesFolder.getAbsolutePath());
 
-        File annotatedProjectFolder = new File(inferIssuesFolder,"annotated");
-        Preconditions.checkState(annotatedProjectFolder.exists(),"folder does not exits: " + annotatedProjectFolder.getAbsolutePath());
-        Preconditions.checkState(annotatedProjectFolder.isDirectory(),"folder must be folder: " + annotatedProjectFolder.getAbsolutePath());
+        File orginalNullsafeProjectFolder = new File(nullsafeIssuesFolder,"original");
+        Preconditions.checkState(orginalNullsafeProjectFolder.exists(),"folder does not exits: " + orginalNullsafeProjectFolder.getAbsolutePath());
+        Preconditions.checkState(orginalNullsafeProjectFolder.isDirectory(),"folder must be folder: " + orginalNullsafeProjectFolder.getAbsolutePath());
 
-        List<String> projects = Stream.of(orginalProjectFolder.listFiles())
+        File annotatedNullsafeProjectFolder = new File(nullsafeIssuesFolder,"annotated");
+        Preconditions.checkState(annotatedNullsafeProjectFolder.exists(),"folder does not exits: " + annotatedNullsafeProjectFolder.getAbsolutePath());
+        Preconditions.checkState(annotatedNullsafeProjectFolder.isDirectory(),"folder must be folder: " + annotatedNullsafeProjectFolder.getAbsolutePath());
+
+        File eradicateIssuesFolder = new File(args[1]);
+        Preconditions.checkState(eradicateIssuesFolder.exists(),"folder does not exits: " + eradicateIssuesFolder.getAbsolutePath());
+        Preconditions.checkState(eradicateIssuesFolder.isDirectory(),"folder must be folder: " + eradicateIssuesFolder.getAbsolutePath());
+
+        File orginalEradicateProjectFolder = new File(eradicateIssuesFolder,"original");
+        Preconditions.checkState(orginalEradicateProjectFolder.exists(),"folder does not exits: " + orginalEradicateProjectFolder.getAbsolutePath());
+        Preconditions.checkState(orginalEradicateProjectFolder.isDirectory(),"folder must be folder: " + orginalEradicateProjectFolder.getAbsolutePath());
+
+        File annotatedEradicateProjectFolder = new File(eradicateIssuesFolder,"annotated");
+        Preconditions.checkState(annotatedEradicateProjectFolder.exists(),"folder does not exits: " + annotatedEradicateProjectFolder.getAbsolutePath());
+        Preconditions.checkState(annotatedEradicateProjectFolder.isDirectory(),"folder must be folder: " + annotatedEradicateProjectFolder.getAbsolutePath());
+
+        List<String> projects = Stream.of(orginalNullsafeProjectFolder.listFiles())
             .filter(f -> f.isDirectory() && !f.isHidden())
             .map(f -> f.getName())
             .sorted()
             .collect(Collectors.toList());
 
-        List<String> projects2 = Stream.of(annotatedProjectFolder.listFiles())
+        List<String> projects2 = Stream.of(annotatedNullsafeProjectFolder.listFiles())
             .filter(f -> f.isDirectory() && !f.isHidden())
             .map(f -> f.getName())
             .sorted()
             .collect(Collectors.toList());
+
+        List<String> projects3 = Stream.of(orginalEradicateProjectFolder.listFiles())
+            .filter(f -> f.isDirectory() && !f.isHidden())
+            .map(f -> f.getName())
+            .sorted()
+            .collect(Collectors.toList());
+
+        List<String> projects4 = Stream.of(annotatedEradicateProjectFolder.listFiles())
+            .filter(f -> f.isDirectory() && !f.isHidden())
+            .map(f -> f.getName())
+            .sorted()
+            .collect(Collectors.toList());
+
 
         Preconditions.checkState(projects.equals(projects2),"original and annotated project list does not match");
-
+        Preconditions.checkState(projects2.equals(projects3),"original and annotated project list does not match");
+        Preconditions.checkState(projects3.equals(projects4),"original and annotated project list does not match");
 
         System.out.println("Results for the following projects will be analysed: " + projects.stream().collect(Collectors.joining(", ")));
 
-        File outputFile = new File(args[1]);
+        File outputFile = new File(args[2]);
         try (PrintWriter out = new PrintWriter(outputFile)) {
 
             addProvenanceToLatexOutput(out, ReportDeduplicationResults.class);
 
             out.println("\\begin{table}[h!]");
-            out.println("\\begin{tabular}{|l|r|r|}");
+            out.println("\\begin{tabular}{|l|rr|rr|}");
             out.println(" \\hline");
-            out.println("project & original & annotated \\\\ ");
+            out.println("\\multicolumn{1}{|c}{\\multirow{2}{*}{project}} & \\multicolumn{2}{|c|}{original} & \\multicolumn{2}{|c|}{annotated} \\\\ ");
+            out.println(" & erad & nullsf & erad & nullsf \\\\ ");
             out.println(" \\hline");
 
             // start latex generation
             for (String project:projects) {
-                Set<FBInferIssue> issuesInOriginal = loadInferIssues(orginalProjectFolder,project);
-                System.out.println("issues loaded for " + project + " (original): " + issuesInOriginal.size());
-                Set<FBInferIssue> nullderefIssuesInOriginal = issuesInOriginal.stream()
-                        .filter(issue -> ISSUE_TYPES.contains(issue.getBug_type()))
-                        .collect(Collectors.toSet());
-                System.out.println("\tnullderef issues: " + nullderefIssuesInOriginal.size());
+                Set<FBInferIssue> nullsafeIssuesInOriginal = loadInferIssues(orginalNullsafeProjectFolder,project);
+                System.out.println("issues loaded for " + project + " (original): " + nullsafeIssuesInOriginal.size());
+                nullsafeIssuesInOriginal = nullsafeIssuesInOriginal.stream()
+                    .filter(IS_NULLSAFE_ISSUE)
+                    .collect(Collectors.toSet());
+                System.out.println("\tnullderef nullsafe issues in original: " + nullsafeIssuesInOriginal.size());
 
-                Set<FBInferIssue> issuesInAnnotated= loadInferIssues(annotatedProjectFolder,project);
-                System.out.println("issues loaded for " + project + " (annotated): " + issuesInAnnotated.size());
-                Set<FBInferIssue> nullderefIssuesInAnnotated = issuesInAnnotated.stream()
-                        .filter(issue -> ISSUE_TYPES.contains(issue.getBug_type()))
-                        .collect(Collectors.toSet());
-                System.out.println("\tnullderef issues: " + nullderefIssuesInAnnotated.size());
+                Set<FBInferIssue> nullsafeIssuesInAnnotated= loadInferIssues(annotatedNullsafeProjectFolder,project);
+                System.out.println("issues loaded for " + project + " (annotated): " + nullsafeIssuesInAnnotated.size());
+                nullsafeIssuesInAnnotated = nullsafeIssuesInAnnotated.stream()
+                    .filter(IS_NULLSAFE_ISSUE)
+                    .collect(Collectors.toSet());
+                System.out.println("\tnullderef nullsafe issues in annotated: " + nullsafeIssuesInAnnotated.size());
+
+                Set<FBInferIssue> eradicateIssuesInOriginal = loadInferIssues(orginalEradicateProjectFolder,project);
+                System.out.println("issues loaded for " + project + " (original): " + eradicateIssuesInOriginal.size());
+                eradicateIssuesInOriginal = eradicateIssuesInOriginal.stream()
+                    .filter(IS_ERADICATE_ISSUE)
+                    .collect(Collectors.toSet());
+                System.out.println("\tnullderef eradicate issues: " + eradicateIssuesInOriginal.size());
+
+                Set<FBInferIssue> eradicateIssuesInAnnotated = loadInferIssues(annotatedEradicateProjectFolder,project);
+                System.out.println("issues loaded for " + project + " (annotated): " + eradicateIssuesInAnnotated.size());
+                eradicateIssuesInAnnotated = eradicateIssuesInAnnotated.stream()
+                    .filter(IS_ERADICATE_ISSUE)
+                    .collect(Collectors.toSet());
+                System.out.println("\tnullderef eradicate issues: " + eradicateIssuesInAnnotated.size());
 
                 out.print(project);
                 out.print(" & ");
-                out.print(format(nullderefIssuesInOriginal.size()));
+                out.print(format(eradicateIssuesInOriginal.size()));
                 out.print(" & ");
-                out.print(format(nullderefIssuesInAnnotated.size()));
+                out.print(format(nullsafeIssuesInOriginal.size()));
+                out.print(" & ");
+                out.print(format(eradicateIssuesInAnnotated.size()));
+                out.print(" & ");
+                out.print(format(nullsafeIssuesInAnnotated.size()));
 
                 out.println("\\\\");
             }
@@ -142,6 +191,7 @@ public class ReportFBInferAnalysisResults {
 
         Set<FBInferIssue> issues = new HashSet<>();
         File inferResults = new File(issueFolder, project+"/infer-out/report.json");
+        // Preconditions.checkState(inferResults.exists(),"file missing: " + inferResults.getAbsolutePath());
         try (Reader in = new FileReader(inferResults)) {
             FBInferIssue[] loaded = new Gson().fromJson(in, FBInferIssue[].class);
             // System.out.println("\t" + loaded.length + " imported");
@@ -149,7 +199,7 @@ public class ReportFBInferAnalysisResults {
                     issues.add(issue);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
         }
         return issues;
 
