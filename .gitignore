@@ -17,3 +17,6 @@ experiments/issues-inferred
 experiments/spring-framework/issues-collected
 experiments/spring-framework/issues-inferred
 experiments/infer-eradicate-results
+experiments/infer-nullsafe-results
+nullannoinference-scoper/target
+nullannoinference-annotator/.annotation-results

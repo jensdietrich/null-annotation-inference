@@ -45,7 +45,7 @@ fi
 
 echo "rebuilding project in $PROJECT_FOLDER"
 cd $PROJECT_FOLDER
-mvn clean test-compile -Drat.skip=true 
+mvn clean test-compile -Drat.skip=true
 
 echo "running inference"
 cd $ROOT
