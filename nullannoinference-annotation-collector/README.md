@@ -15,5 +15,4 @@ If the project is build with `mvn package`, a jar containing all dependencies wi
 | `-i`  | `--project <arg>`            | the project (folder) to be analysed, the project must have been built   (required) |
 | `-p`  | `--issues <arg>`             | the name of the issue file to be created   (required)                              |
 | `-o`  | `--projecttype <arg>`        | the type of the project -- mvn or gradle (required))                               |
-| `-a`  | `--annotationprovider <arg>` | the name of an annotation provider (optional, default is JSR305)                   |
 

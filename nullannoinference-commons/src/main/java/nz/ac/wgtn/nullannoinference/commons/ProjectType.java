@@ -15,7 +15,6 @@ import java.util.function.Predicate;
  */
 public interface ProjectType {
 
-
     ProjectType MVN = new MavenProject();
     ProjectType GRADLE = new GradleProject();
     ProjectType MULTI_GRADLE = new MultiLanguageGradleProject();
