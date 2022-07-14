@@ -54,7 +54,6 @@ public class CheckForNullableFieldAccess extends ClassVisitor {
             this.mv = mv;
         }
 
-
         @Override
         public void visitFieldInsn(int opcode, String owner, String name, String descriptor) {
             if (opcode==Opcodes.PUTFIELD || opcode==Opcodes.PUTSTATIC) { // writes only

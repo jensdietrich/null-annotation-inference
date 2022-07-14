@@ -15,19 +15,23 @@ import java.util.function.Predicate;
  */
 public interface Project {
 
+
+    Project MVN = new MavenProject();
+    Project GRADLE = new GradleProject();
+    Project MULTI_GRADLE = new MultiLanguageGradleProject();
+
     static String[] getValidProjectTypes() {
         return new String[]{MavenProject.TYPE,GradleProject.TYPE,MultiLanguageGradleProject.TYPE};
     }
     static Project getProject(String name) {
         if (name==null || name.equals(MavenProject.TYPE)) {
-            // default
-            return new MavenProject();
+            return MVN;
         }
         else if (name.equals(GradleProject.TYPE)) {
-            return new GradleProject();
+            return GRADLE;
         }
         else if (name.equals(MultiLanguageGradleProject.TYPE)) {
-            return new MultiLanguageGradleProject();
+            return MULTI_GRADLE;
         }
         else {
             throw new IllegalArgumentException("Not known project type: " + name);

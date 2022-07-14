@@ -15,9 +15,9 @@ If the project is build with `mvn package`, a jar containing all dependencies wi
 
 ## Arguments:
 
-| short | long                    | description                                                                                                                                                            | 
-|-------|-------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `-i`  | `--issues <arg>`        | a folder containing json files with null issues collected and refined, the folder will be checked recursively for files (required)                                     |
-| `-p`  | `--input <arg>`         | the folder containing the Maven project (i.e. containing pom.xml) to be analysed, the project must have been built with `mvn test` as the test binaries are needed (required) |
-| `-o`  | `--output <arg>`        | the output mvn project folder (files will be override / emptied) (required))                                                                                           |
-| `-a`  | `--annotationprovider <arg>` | the name of an annotation provider (optional, default is JSR305)                                                                                                       |
+| short | long                         | description                                                                                                                                                                   | 
+|-------|------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `-i`  | `--issues <arg>`             | a folder containing json files with null issues collected and refined, the folder will be checked recursively for files (required)                                            |
+| `-p`  | `--input <arg>`              | the folder containing the Maven project (i.e. containing pom.xml) to be analysed, the project must have been built with `mvn test` as the test binaries are needed (required) |
+| `-o`  | `--output <arg>`             | the output mvn project folder (files will be override / emptied) (required))                                                                                                  |
+| `-a`  | `--annotationprovider <arg>` | the name of an annotation provider (optional, default is to use a provider that scans for Nullable in annotation name)                                                        |

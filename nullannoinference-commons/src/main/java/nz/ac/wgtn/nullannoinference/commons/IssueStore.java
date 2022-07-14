@@ -100,11 +100,8 @@ public class IssueStore {
     }
 
     private static Predicate<String> IS_REFLECTION_INVOCATION =  stackTraceElement -> stackTraceElement.startsWith("java.lang.reflect.Method::invoke");
-
     private static Predicate<String> IS_SUREFIRE_INVOCATION =  stackTraceElement -> stackTraceElement.startsWith("org.apache.maven.surefire.");
-
     private static Predicate<String> IS_TEST_FRAMEWORK_INVOCATION =  stackTraceElement -> stackTraceElement.startsWith("org.junit.") || stackTraceElement.startsWith("junit.") || stackTraceElement.startsWith("org.testng.");
-
     private static Predicate<String> IS_JDK_INTERNAL_INVOCATION = stackTraceElement -> stackTraceElement.startsWith("jdk.internal.");
 
     // for testing
@@ -127,36 +124,8 @@ public class IssueStore {
         Set<Issue> issuesToBeSaved = new HashSet<>();
         issuesToBeSaved.addAll(issues);
         System.out.println("saving " + issuesToBeSaved.size() + " issues to " + fileName);
-
         issues.removeAll(issuesToBeSaved);
-
-        JSONArray array = new JSONArray();
-        for (Issue issue:issuesToBeSaved) {
-            JSONObject jobj = new JSONObject();
-            jobj.put("className",issue.getClassName());
-            jobj.put("methodName",issue.getMethodName());
-            jobj.put("descriptor",issue.getDescriptor());
-            jobj.put("argsIndex",issue.getArgsIndex());
-            jobj.put("kind",issue.getKind().name());
-            jobj.put("index",issue.getArgsIndex());
-            jobj.put("context",issue.getContext());
-            jobj.put("provenanceType",issue.getProvenanceType().name());
-            jobj.put("scope",issue.getScope().name());
-            if (issue.getStacktrace()!=null) {
-                for (String element : issue.getStacktrace()) {
-                    jobj.append("stacktrace",element);
-                }
-            }
-            array.put(jobj);
-        }
-        System.out.println("null issues serialised: " + array.length());
-        String json = array.toString(3);
-        try (PrintWriter out = new PrintWriter(fileName)) {
-            out.println(json);
-            System.out.println("null issues observed written to " + new File(fileName).getAbsolutePath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        IssuePersistency.save (issuesToBeSaved, new File(fileName));
     }
 
 }

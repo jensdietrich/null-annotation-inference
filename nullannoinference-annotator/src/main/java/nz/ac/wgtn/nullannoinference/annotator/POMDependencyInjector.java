@@ -1,6 +1,8 @@
 package nz.ac.wgtn.nullannoinference.annotator;
 
 import com.google.common.base.Preconditions;
+import nz.ac.wgtn.nullannoinference.commons.JSR305NullableAnnotationProvider;
+import nz.ac.wgtn.nullannoinference.commons.NullableAnnotationProvider;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;

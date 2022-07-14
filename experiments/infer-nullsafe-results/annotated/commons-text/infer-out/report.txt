@@ -1,0 +1,240 @@
+#0
+src/main/java/org/apache/commons/text/AlphabetConverter.java:320: error: Null Dereference
+  object `chars` could be null and is dereferenced at line 320.
+  318.               return ArrayUtils.EMPTY_INTEGER_OBJECT_ARRAY;
+  319.           }
+  320. >         final Integer[] integers = new Integer[chars.length];
+  321.           for (int i = 0; i < chars.length; i++) {
+  322.               integers[i] = (int) chars[i];
+
+#1
+src/main/java/org/apache/commons/text/CaseUtils.java:125: error: Null Dereference
+  object `delimiters` could be null and is dereferenced at line 125.
+  123.               return delimiterHashSet;
+  124.           }
+  125. >         for (int index = 0; index < delimiters.length; index++) {
+  126.               delimiterHashSet.add(Character.codePointAt(delimiters, index));
+  127.           }
+
+#2
+src/main/java/org/apache/commons/text/FormattableUtils.java:145: error: Null Dereference
+  object `formatter` could be null and is dereferenced at line 145.
+  143.               buf.insert(leftJustify ? i : 0, padChar);
+  144.           }
+  145. >         formatter.format(buf.toString());
+  146.           return formatter;
+  147.       }
+
+#3
+src/main/java/org/apache/commons/text/StrBuilder.java:1914: error: Null Dereference
+  object `insertStr` could be null and is dereferenced at line 1914.
+  1912.           }
+  1913.           if (insertLen > 0) {
+  1914. >             insertStr.getChars(0, insertLen, buffer, startIndex);
+  1915.           }
+  1916.       }
+
+#4
+src/main/java/org/apache/commons/text/StrLookup.java:210: error: Null Dereference
+  object `key` could be null and is dereferenced at line 210.
+  208.           @Override
+  209.           public String lookup(@Nullable final String key) {
+  210. >             if (key.length() > 0) {
+  211.                   try {
+  212.                       return System.getProperty(key);
+
+#5
+src/main/java/org/apache/commons/text/StrMatcher.java:186: error: Null Dereference
+  object `chars` could be null and is dereferenced at line 186.
+  184.               return NONE_MATCHER;
+  185.           }
+  186. >         if (chars.length == 1) {
+  187.               return new CharMatcher(chars[0]);
+  188.           }
+
+#6
+src/main/java/org/apache/commons/text/StrMatcher.java:386: error: Null Dereference
+  object `StrMatcher$StringMatcher.chars` last accessed on line 386 could be null and is dereferenced at line 386.
+  384.           @Override
+  385.           public int isMatch(final char[] buffer, int pos, final int bufferStart, final int bufferEnd) {
+  386. >             final int len = chars.length;
+  387.               if (pos + len > bufferEnd) {
+  388.                   return 0;
+
+#7
+src/main/java/org/apache/commons/text/StrSubstitutor.java:232: error: Null Dereference
+  object `source` could be null and is dereferenced at line 232.
+  230.       public static String replace(@Nullable final Object source, @Nullable final Properties valueProperties) {
+  231.           if (valueProperties == null) {
+  232. >             return source.toString();
+  233.           }
+  234.           final Map<String, String> valueMap = new HashMap<>();
+
+#8
+src/main/java/org/apache/commons/text/StringSubstitutor.java:351: error: Null Dereference
+  object `source` could be null and is dereferenced at line 351.
+  349.       public static String replace(@Nullable final Object source, @Nullable final Properties valueProperties) {
+  350.           if (valueProperties == null) {
+  351. >             return source.toString();
+  352.           }
+  353.           final Map<String, String> valueMap = new HashMap<>();
+
+#9
+src/main/java/org/apache/commons/text/TextStringBuilder.java:337: error: Null Dereference
+  object `initialBuffer` could be null and is dereferenced at line 337.
+  335.       public static TextStringBuilder wrap(@Nullable final char[] initialBuffer) {
+  336.           Objects.requireNonNull(initialBuffer, "initialBuffer");
+  337. >         return new TextStringBuilder(initialBuffer, initialBuffer.length);
+  338.       }
+  339.   
+
+#10
+src/main/java/org/apache/commons/text/TextStringBuilder.java:400: error: Null Dereference
+  object `initialBuffer` could be null and is dereferenced at line 400.
+  398.       private TextStringBuilder(@Nullable final char[] initialBuffer, final int length) {
+  399.           this.buffer = Objects.requireNonNull(initialBuffer, "initialBuffer");
+  400. >         if (length < 0 || length > initialBuffer.length) {
+  401.               throw new IllegalArgumentException("initialBuffer.length=" + initialBuffer.length + ", length=" + length);
+  402.           }
+
+#11
+src/main/java/org/apache/commons/text/TextStringBuilder.java:401: error: Null Dereference
+  object `initialBuffer` could be null and is dereferenced at line 401.
+  399.           this.buffer = Objects.requireNonNull(initialBuffer, "initialBuffer");
+  400.           if (length < 0 || length > initialBuffer.length) {
+  401. >             throw new IllegalArgumentException("initialBuffer.length=" + initialBuffer.length + ", length=" + length);
+  402.           }
+  403.           this.size = length;
+
+#12
+src/main/java/org/apache/commons/text/TextStringBuilder.java:2818: error: Null Dereference
+  object `insertStr` could be null and is dereferenced at line 2818.
+  2816.           }
+  2817.           if (insertLen > 0) {
+  2818. >             insertStr.getChars(0, insertLen, buffer, startIndex);
+  2819.           }
+  2820.       }
+
+#13
+src/main/java/org/apache/commons/text/lookup/InterpolatorStringLookup.java:140: error: Null Dereference
+  object `InterpolatorStringLookup.stringLookupMap` last accessed on line 140 could be null and is dereferenced at line 140.
+  138.               final String prefix = toKey(var.substring(0, prefixPos));
+  139.               final String name = var.substring(prefixPos + 1);
+  140. >             final StringLookup lookup = stringLookupMap.get(prefix);
+  141.               String value = null;
+  142.               if (lookup != null) {
+
+#14
+src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java:78: error: Resource Leak
+  resource of type `java.io.InputStreamReader` acquired by call to `InputStreamReader(...)` at line 79 is not released after line 78.
+**Note**: potential exception at line 81
+  76.               final StringWriter writer = new StringWriter(size);
+  77.               final char[] buffer = new char[size];
+  78. >             try (BufferedInputStream bis = new BufferedInputStream(url.openStream());
+  79.                   InputStreamReader reader = new InputStreamReader(bis, charsetName)) {
+  80.                   int n;
+
+#15
+src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java:86: error: Resource Leak
+  resource of type `java.io.InputStreamReader` acquired by call to `InputStreamReader(...)` at line 79 is not released after line 86.
+**Note**: potential exception at line 81
+  84.               }
+  85.               return writer.toString();
+  86. >         } catch (final Exception e) {
+  87.               throw IllegalArgumentExceptions.format(e, "Error looking up URL [%s] with Charset [%s].", urlStr, charsetName);
+  88.           }
+
+#16
+src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java:59: error: Null Dereference
+  object `AbstractStringMatcher$AndStringMatcher.stringMatchers` could be null and is dereferenced at line 59.
+  57.               int total = 0;
+  58.               int curStart = start;
+  59. >             for (final StringMatcher stringMatcher : stringMatchers) {
+  60.                   if (stringMatcher != null) {
+  61.                       final int len = stringMatcher.isMatch(buffer, curStart, bufferStart, bufferEnd);
+
+#17
+src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java:76: error: Null Dereference
+  object `AbstractStringMatcher$AndStringMatcher.stringMatchers` could be null and is dereferenced at line 76.
+  74.               int total = 0;
+  75.               int curStart = start;
+  76. >             for (final StringMatcher stringMatcher : stringMatchers) {
+  77.                   if (stringMatcher != null) {
+  78.                       final int len = stringMatcher.isMatch(buffer, curStart, bufferStart, bufferEnd);
+
+#18
+src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java:92: error: Null Dereference
+  object `AbstractStringMatcher$AndStringMatcher.stringMatchers` could be null and is dereferenced at line 92.
+  90.           public int size() {
+  91.               int total = 0;
+  92. >             for (final StringMatcher stringMatcher : stringMatchers) {
+  93.                   if (stringMatcher != null) {
+  94.                       total += stringMatcher.size();
+
+#19
+src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java:149: error: Null Dereference
+  object `AbstractStringMatcher$CharArrayMatcher.chars` last accessed on line 149 could be null and is dereferenced at line 149.
+  147.               int j = start;
+  148.               for (int i = 0; i < len; i++, j++) {
+  149. >                 if (chars[i] != buffer[j]) {
+  150.                       return 0;
+  151.                   }
+
+#20
+src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java:173: error: Null Dereference
+  object `AbstractStringMatcher$CharArrayMatcher.chars` last accessed on line 173 could be null and is dereferenced at line 173.
+  171.               int j = start;
+  172.               for (int i = 0; i < len; i++, j++) {
+  173. >                 if (chars[i] != buffer.charAt(j)) {
+  174.                       return 0;
+  175.                   }
+
+#21
+src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java:187: error: Null Dereference
+  object `AbstractStringMatcher$CharArrayMatcher.chars` last accessed on line 187 could be null and is dereferenced at line 187.
+  185.           @Override
+  186.           public int size() {
+  187. >             return chars.length;
+  188.           }
+  189.   
+
+#22
+src/main/java/org/apache/commons/text/matcher/StringMatcherFactory.java:127: error: Null Dereference
+  object `chars` could be null and is dereferenced at line 127.
+  125.           }
+  126.           if (len == 1) {
+  127. >             return new AbstractStringMatcher.CharMatcher(chars[0]);
+  128.           }
+  129.           return new AbstractStringMatcher.CharSetMatcher(chars);
+
+#23
+src/main/java/org/apache/commons/text/translate/AggregateTranslator.java:61: error: Null Dereference
+  object `AggregateTranslator.translators` last accessed on line 61 could be null and is dereferenced at line 61.
+  59.       @Override
+  60.       public int translate(final CharSequence input, final int index, final Writer out) throws IOException {
+  61. >         for (final CharSequenceTranslator translator : translators) {
+  62.               final int consumed = translator.translate(input, index, out);
+  63.               if (consumed != 0) {
+
+#24
+src/main/java/org/apache/commons/text/translate/LookupTranslator.java:96: error: Null Dereference
+  object `LookupTranslator.prefixSet` last accessed on line 96 could be null and is dereferenced at line 96.
+  94.       public int translate(final CharSequence input, final int index, final Writer out) throws IOException {
+  95.           // check if translation exists for the input at position index
+  96. >         if (prefixSet.get(input.charAt(index))) {
+  97.               int max = longest;
+  98.               if (index + longest > input.length()) {
+
+#25
+src/main/java/org/apache/commons/text/translate/NumericEntityEscaper.java:111: error: Null Dereference
+  object `NumericEntityEscaper.range` could be null and is dereferenced at line 111.
+  109.       @Override
+  110.       public boolean translate(final int codepoint, final Writer out) throws IOException {
+  111. >         if (this.between != this.range.contains(codepoint)) {
+  112.               return false;
+  113.           }
+
+Found 26 issues
+          Issue Type(ISSUED_TYPE_ID): #
+  Null Dereference(NULL_DEREFERENCE): 24
+        Resource Leak(RESOURCE_LEAK): 2

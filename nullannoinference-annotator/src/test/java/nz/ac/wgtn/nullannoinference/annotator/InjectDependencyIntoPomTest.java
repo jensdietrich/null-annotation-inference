@@ -1,5 +1,6 @@
 package nz.ac.wgtn.nullannoinference.annotator;
 
+import nz.ac.wgtn.nullannoinference.commons.JSR305NullableAnnotationProvider;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;

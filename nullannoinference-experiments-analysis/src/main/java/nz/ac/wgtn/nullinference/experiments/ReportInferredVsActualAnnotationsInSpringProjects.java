@@ -39,7 +39,7 @@ public class ReportInferredVsActualAnnotationsInSpringProjects {
         List<String> projects = getListOfProjects(inferredIssuesFolder);
         System.out.println("Results for the following projects will be analysed: " + projects.stream().collect(Collectors.joining(", ")));
 
-        Project projectType = new MultiLanguageGradleProject();
+        Project projectType = Project.MULTI_GRADLE;
 
         try (PrintWriter out = new PrintWriter(outputFile)) {
 

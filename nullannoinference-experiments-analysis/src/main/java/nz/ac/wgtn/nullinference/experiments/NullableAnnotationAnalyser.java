@@ -13,7 +13,6 @@ import java.util.function.Predicate;
 /**
  * Script to analyse the use of nullable / nonnull annotations in bytecode.
  * NOTE: this does not scan test classes.
- * Returns a string representation of null-annotated program elements.
  * @author jens dietrich
  */
 public class NullableAnnotationAnalyser {

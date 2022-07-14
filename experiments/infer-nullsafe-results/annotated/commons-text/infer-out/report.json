@@ -1,0 +1,1314 @@
+[
+  {
+    "bug_type": "NULL_DEREFERENCE",
+    "qualifier": "object `chars` could be null and is dereferenced at line 320.",
+    "severity": "ERROR",
+    "line": 320,
+    "column": -1,
+    "procedure": "org.apache.commons.text.AlphabetConverter.convertCharsToIntegers(java.lang.Character[]):java.lang.Integer[]",
+    "procedure_start_line": 316,
+    "file": "src/main/java/org/apache/commons/text/AlphabetConverter.java",
+    "bug_trace": [
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/AlphabetConverter.java",
+        "line_number": 316,
+        "column_number": -1,
+        "description": "start of procedure convertCharsToIntegers(...)"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/AlphabetConverter.java",
+        "line_number": 317,
+        "column_number": -1,
+        "description": "Taking false branch"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/AlphabetConverter.java",
+        "line_number": 320,
+        "column_number": -1,
+        "description": ""
+      }
+    ],
+    "key": "AlphabetConverter.java|convertCharsToIntegers|NULL_DEREFERENCE",
+    "node_key": "6004d9fda5af3bf13935590cccca2284",
+    "hash": "2b672192eece0ae7899bda82b016a913",
+    "bug_type_hum": "Null Dereference"
+  },
+  {
+    "bug_type": "NULL_DEREFERENCE",
+    "qualifier": "object `delimiters` could be null and is dereferenced at line 125.",
+    "severity": "ERROR",
+    "line": 125,
+    "column": -1,
+    "procedure": "org.apache.commons.text.CaseUtils.generateDelimiterSet(char[]):java.util.Set",
+    "procedure_start_line": 119,
+    "file": "src/main/java/org/apache/commons/text/CaseUtils.java",
+    "bug_trace": [
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/CaseUtils.java",
+        "line_number": 119,
+        "column_number": -1,
+        "description": "start of procedure generateDelimiterSet(...)"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/CaseUtils.java",
+        "line_number": 120,
+        "column_number": -1,
+        "description": "Skipping HashSet(): unknown method"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/CaseUtils.java",
+        "line_number": 121,
+        "column_number": -1,
+        "description": "Skipping add(...): unknown method"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/CaseUtils.java",
+        "line_number": 122,
+        "column_number": -1,
+        "description": "Taking false branch"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/CaseUtils.java",
+        "line_number": 125,
+        "column_number": -1,
+        "description": "Taking false branch"
+      }
+    ],
+    "key": "CaseUtils.java|generateDelimiterSet|NULL_DEREFERENCE",
+    "node_key": "12298d8658f4ab14bd2862bb36095ca8",
+    "hash": "be9c174aca267ed89cb3644ecbfd7c84",
+    "bug_type_hum": "Null Dereference"
+  },
+  {
+    "bug_type": "NULL_DEREFERENCE",
+    "qualifier": "object `formatter` could be null and is dereferenced at line 145.",
+    "severity": "ERROR",
+    "line": 145,
+    "column": -1,
+    "procedure": "org.apache.commons.text.FormattableUtils.append(java.lang.CharSequence,java.util.Formatter,int,int,int,char,java.lang.CharSequence):java.util.Formatter",
+    "procedure_start_line": 127,
+    "file": "src/main/java/org/apache/commons/text/FormattableUtils.java",
+    "bug_trace": [
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/FormattableUtils.java",
+        "line_number": 127,
+        "column_number": -1,
+        "description": "start of procedure append(...)"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/FormattableUtils.java",
+        "line_number": 128,
+        "column_number": -1,
+        "description": "Taking false branch"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/FormattableUtils.java",
+        "line_number": 131,
+        "column_number": -1,
+        "description": "Skipping StringBuilder(...): unknown method"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/FormattableUtils.java",
+        "line_number": 132,
+        "column_number": -1,
+        "description": "Taking false branch"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/FormattableUtils.java",
+        "line_number": 141,
+        "column_number": -1,
+        "description": "Taking false branch"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/FormattableUtils.java",
+        "line_number": 142,
+        "column_number": -1,
+        "description": "Taking false branch"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/FormattableUtils.java",
+        "line_number": 145,
+        "column_number": -1,
+        "description": ""
+      }
+    ],
+    "key": "FormattableUtils.java|append|NULL_DEREFERENCE",
+    "node_key": "5a3242bacd1fab1babe9547ed203fbbe",
+    "hash": "b1c669599707c74f1984308f4d4f313c",
+    "bug_type_hum": "Null Dereference"
+  },
+  {
+    "bug_type": "NULL_DEREFERENCE",
+    "qualifier": "object `insertStr` could be null and is dereferenced at line 1914.",
+    "severity": "ERROR",
+    "line": 1914,
+    "column": -1,
+    "procedure": "org.apache.commons.text.StrBuilder.replaceImpl(int,int,int,java.lang.String,int):void",
+    "procedure_start_line": 1906,
+    "file": "src/main/java/org/apache/commons/text/StrBuilder.java",
+    "bug_trace": [
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/StrBuilder.java",
+        "line_number": 1906,
+        "column_number": -1,
+        "description": "start of procedure replaceImpl(...)"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/StrBuilder.java",
+        "line_number": 1907,
+        "column_number": -1,
+        "description": ""
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/StrBuilder.java",
+        "line_number": 1908,
+        "column_number": -1,
+        "description": "Taking false branch"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/StrBuilder.java",
+        "line_number": 1913,
+        "column_number": -1,
+        "description": "Taking true branch"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/StrBuilder.java",
+        "line_number": 1914,
+        "column_number": -1,
+        "description": ""
+      }
+    ],
+    "key": "StrBuilder.java|replaceImpl|NULL_DEREFERENCE",
+    "node_key": "b2427a0abc21d62af0292e30c54ba581",
+    "hash": "b3ebf8ff7ca643d93e2e480da3ae3376",
+    "bug_type_hum": "Null Dereference"
+  },
+  {
+    "bug_type": "NULL_DEREFERENCE",
+    "qualifier": "object `key` could be null and is dereferenced at line 210.",
+    "severity": "ERROR",
+    "line": 210,
+    "column": -1,
+    "procedure": "org.apache.commons.text.StrLookup$SystemPropertiesStrLookup.lookup(java.lang.String):java.lang.String",
+    "procedure_start_line": 209,
+    "file": "src/main/java/org/apache/commons/text/StrLookup.java",
+    "bug_trace": [
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/StrLookup.java",
+        "line_number": 209,
+        "column_number": -1,
+        "description": "start of procedure lookup(...)"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/StrLookup.java",
+        "line_number": 210,
+        "column_number": -1,
+        "description": ""
+      }
+    ],
+    "key": "StrLookup.java|lookup|NULL_DEREFERENCE",
+    "node_key": "c4eaeb2e007194a7071520eb2d42ea33",
+    "hash": "e832d04d356214f702b69cc5fbc500f0",
+    "bug_type_hum": "Null Dereference"
+  },
+  {
+    "bug_type": "NULL_DEREFERENCE",
+    "qualifier": "object `chars` could be null and is dereferenced at line 186.",
+    "severity": "ERROR",
+    "line": 186,
+    "column": -1,
+    "procedure": "org.apache.commons.text.StrMatcher.charSetMatcher(char[]):org.apache.commons.text.StrMatcher",
+    "procedure_start_line": 182,
+    "file": "src/main/java/org/apache/commons/text/StrMatcher.java",
+    "bug_trace": [
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/StrMatcher.java",
+        "line_number": 182,
+        "column_number": -1,
+        "description": "start of procedure charSetMatcher(...)"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/StrMatcher.java",
+        "line_number": 183,
+        "column_number": -1,
+        "description": "Taking false branch"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/StrMatcher.java",
+        "line_number": 186,
+        "column_number": -1,
+        "description": "Taking false branch"
+      }
+    ],
+    "key": "StrMatcher.java|charSetMatcher|NULL_DEREFERENCE",
+    "node_key": "7237da42f45dcc96e158b1a6a1002d02",
+    "hash": "d7be56e1f2ec948cac449be5c76e36b1",
+    "bug_type_hum": "Null Dereference"
+  },
+  {
+    "bug_type": "NULL_DEREFERENCE",
+    "qualifier": "object `StrMatcher$StringMatcher.chars` last accessed on line 386 could be null and is dereferenced at line 386.",
+    "severity": "ERROR",
+    "line": 386,
+    "column": -1,
+    "procedure": "org.apache.commons.text.StrMatcher$StringMatcher.isMatch(char[],int,int,int):int",
+    "procedure_start_line": 385,
+    "file": "src/main/java/org/apache/commons/text/StrMatcher.java",
+    "bug_trace": [
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/StrMatcher.java",
+        "line_number": 385,
+        "column_number": -1,
+        "description": "start of procedure isMatch(...)"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/StrMatcher.java",
+        "line_number": 386,
+        "column_number": -1,
+        "description": ""
+      }
+    ],
+    "key": "StrMatcher.java|isMatch|NULL_DEREFERENCE",
+    "node_key": "3ea3fe5943512c62497afa15b5ccaa5b",
+    "hash": "a90fe72f6a61d22f7243958b3d3cfe6a",
+    "bug_type_hum": "Null Dereference"
+  },
+  {
+    "bug_type": "NULL_DEREFERENCE",
+    "qualifier": "object `source` could be null and is dereferenced at line 232.",
+    "severity": "ERROR",
+    "line": 232,
+    "column": -1,
+    "procedure": "org.apache.commons.text.StrSubstitutor.replace(java.lang.Object,java.util.Properties):java.lang.String",
+    "procedure_start_line": 230,
+    "file": "src/main/java/org/apache/commons/text/StrSubstitutor.java",
+    "bug_trace": [
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/StrSubstitutor.java",
+        "line_number": 230,
+        "column_number": -1,
+        "description": "start of procedure replace(...)"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/StrSubstitutor.java",
+        "line_number": 231,
+        "column_number": -1,
+        "description": "Taking true branch"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/StrSubstitutor.java",
+        "line_number": 232,
+        "column_number": -1,
+        "description": ""
+      }
+    ],
+    "key": "StrSubstitutor.java|replace|NULL_DEREFERENCE",
+    "node_key": "403b923eb008d1cc6b180a4b1bc6a1bb",
+    "hash": "93e2ea0b821c32788ecec3b7e03e0346",
+    "bug_type_hum": "Null Dereference"
+  },
+  {
+    "bug_type": "NULL_DEREFERENCE",
+    "qualifier": "object `source` could be null and is dereferenced at line 351.",
+    "severity": "ERROR",
+    "line": 351,
+    "column": -1,
+    "procedure": "org.apache.commons.text.StringSubstitutor.replace(java.lang.Object,java.util.Properties):java.lang.String",
+    "procedure_start_line": 349,
+    "file": "src/main/java/org/apache/commons/text/StringSubstitutor.java",
+    "bug_trace": [
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/StringSubstitutor.java",
+        "line_number": 349,
+        "column_number": -1,
+        "description": "start of procedure replace(...)"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/StringSubstitutor.java",
+        "line_number": 350,
+        "column_number": -1,
+        "description": "Taking true branch"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/StringSubstitutor.java",
+        "line_number": 351,
+        "column_number": -1,
+        "description": ""
+      }
+    ],
+    "key": "StringSubstitutor.java|replace|NULL_DEREFERENCE",
+    "node_key": "403b923eb008d1cc6b180a4b1bc6a1bb",
+    "hash": "aeccaca539a73d11629dd850921cbb6e",
+    "bug_type_hum": "Null Dereference"
+  },
+  {
+    "bug_type": "NULL_DEREFERENCE",
+    "qualifier": "object `initialBuffer` could be null and is dereferenced at line 337.",
+    "severity": "ERROR",
+    "line": 337,
+    "column": -1,
+    "procedure": "org.apache.commons.text.TextStringBuilder.wrap(char[]):org.apache.commons.text.TextStringBuilder",
+    "procedure_start_line": 335,
+    "file": "src/main/java/org/apache/commons/text/TextStringBuilder.java",
+    "bug_trace": [
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/TextStringBuilder.java",
+        "line_number": 335,
+        "column_number": -1,
+        "description": "start of procedure wrap(...)"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/TextStringBuilder.java",
+        "line_number": 336,
+        "column_number": -1,
+        "description": "Skipping requireNonNull(...): unknown method"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/TextStringBuilder.java",
+        "line_number": 337,
+        "column_number": -1,
+        "description": ""
+      }
+    ],
+    "key": "TextStringBuilder.java|wrap|NULL_DEREFERENCE",
+    "node_key": "11b2bc6f4065e7420855cee7f5509d3c",
+    "hash": "f017295456c32812cd0c8cb23bce8b70",
+    "bug_type_hum": "Null Dereference"
+  },
+  {
+    "bug_type": "NULL_DEREFERENCE",
+    "qualifier": "object `initialBuffer` could be null and is dereferenced at line 400.",
+    "severity": "ERROR",
+    "line": 400,
+    "column": -1,
+    "procedure": "org.apache.commons.text.TextStringBuilder.<init>(char[],int)",
+    "procedure_start_line": 398,
+    "file": "src/main/java/org/apache/commons/text/TextStringBuilder.java",
+    "bug_trace": [
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/TextStringBuilder.java",
+        "line_number": 398,
+        "column_number": -1,
+        "description": "start of procedure TextStringBuilder(...)"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/TextStringBuilder.java",
+        "line_number": 399,
+        "column_number": -1,
+        "description": ""
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/TextStringBuilder.java",
+        "line_number": 400,
+        "column_number": -1,
+        "description": "Taking true branch"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/TextStringBuilder.java",
+        "line_number": 400,
+        "column_number": -1,
+        "description": "Taking false branch"
+      }
+    ],
+    "key": "TextStringBuilder.java|<init>|NULL_DEREFERENCE",
+    "node_key": "0dea2bc29bf828e9ae90f579c445564c",
+    "hash": "d0d458ef635dbd150cd237b7f768e991",
+    "bug_type_hum": "Null Dereference"
+  },
+  {
+    "bug_type": "NULL_DEREFERENCE",
+    "qualifier": "object `initialBuffer` could be null and is dereferenced at line 401.",
+    "severity": "ERROR",
+    "line": 401,
+    "column": -1,
+    "procedure": "org.apache.commons.text.TextStringBuilder.<init>(char[],int)",
+    "procedure_start_line": 398,
+    "file": "src/main/java/org/apache/commons/text/TextStringBuilder.java",
+    "bug_trace": [
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/TextStringBuilder.java",
+        "line_number": 398,
+        "column_number": -1,
+        "description": "start of procedure TextStringBuilder(...)"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/TextStringBuilder.java",
+        "line_number": 399,
+        "column_number": -1,
+        "description": ""
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/TextStringBuilder.java",
+        "line_number": 400,
+        "column_number": -1,
+        "description": "Taking false branch"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/TextStringBuilder.java",
+        "line_number": 401,
+        "column_number": -1,
+        "description": ""
+      }
+    ],
+    "key": "TextStringBuilder.java|<init>|NULL_DEREFERENCE",
+    "node_key": "88feddfef0c7de04c0d4359228669a35",
+    "hash": "d0d458ef635dbd150cd237b7f768e991",
+    "bug_type_hum": "Null Dereference"
+  },
+  {
+    "bug_type": "NULL_DEREFERENCE",
+    "qualifier": "object `insertStr` could be null and is dereferenced at line 2818.",
+    "severity": "ERROR",
+    "line": 2818,
+    "column": -1,
+    "procedure": "org.apache.commons.text.TextStringBuilder.replaceImpl(int,int,int,java.lang.Object,int):void",
+    "procedure_start_line": 2810,
+    "file": "src/main/java/org/apache/commons/text/TextStringBuilder.java",
+    "bug_trace": [
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/TextStringBuilder.java",
+        "line_number": 2810,
+        "column_number": -1,
+        "description": "start of procedure replaceImpl(...)"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/TextStringBuilder.java",
+        "line_number": 2811,
+        "column_number": -1,
+        "description": ""
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/TextStringBuilder.java",
+        "line_number": 2812,
+        "column_number": -1,
+        "description": "Taking false branch"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/TextStringBuilder.java",
+        "line_number": 2817,
+        "column_number": -1,
+        "description": "Taking true branch"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/TextStringBuilder.java",
+        "line_number": 2818,
+        "column_number": -1,
+        "description": ""
+      }
+    ],
+    "key": "TextStringBuilder.java|replaceImpl|NULL_DEREFERENCE",
+    "node_key": "b2427a0abc21d62af0292e30c54ba581",
+    "hash": "c910bdf816c88d74c6962e3b2624c836",
+    "bug_type_hum": "Null Dereference"
+  },
+  {
+    "bug_type": "NULL_DEREFERENCE",
+    "qualifier": "object `InterpolatorStringLookup.stringLookupMap` last accessed on line 140 could be null and is dereferenced at line 140.",
+    "severity": "ERROR",
+    "line": 140,
+    "column": -1,
+    "procedure": "org.apache.commons.text.lookup.InterpolatorStringLookup.lookup(java.lang.String):java.lang.String",
+    "procedure_start_line": 132,
+    "file": "src/main/java/org/apache/commons/text/lookup/InterpolatorStringLookup.java",
+    "bug_trace": [
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/InterpolatorStringLookup.java",
+        "line_number": 132,
+        "column_number": -1,
+        "description": "start of procedure lookup(...)"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/InterpolatorStringLookup.java",
+        "line_number": 133,
+        "column_number": -1,
+        "description": "Taking false branch"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/InterpolatorStringLookup.java",
+        "line_number": 136,
+        "column_number": -1,
+        "description": "Skipping indexOf(...): unknown method"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/InterpolatorStringLookup.java",
+        "line_number": 137,
+        "column_number": -1,
+        "description": "Taking true branch"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/InterpolatorStringLookup.java",
+        "line_number": 138,
+        "column_number": -1,
+        "description": "Skipping toKey(...): empty list of specs"
+      },
+      {
+        "level": 1,
+        "filename": "src/main/java/org/apache/commons/text/lookup/InterpolatorStringLookup.java",
+        "line_number": 45,
+        "column_number": -1,
+        "description": "Definition of toKey(...)"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/InterpolatorStringLookup.java",
+        "line_number": 139,
+        "column_number": -1,
+        "description": "Skipping substring(...): unknown method"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/InterpolatorStringLookup.java",
+        "line_number": 140,
+        "column_number": -1,
+        "description": ""
+      }
+    ],
+    "key": "InterpolatorStringLookup.java|lookup|NULL_DEREFERENCE",
+    "node_key": "5899fc51b1e46cf56f0f196f6cc87778",
+    "hash": "2a58b1fc75e380a5b91eee579cbfc346",
+    "bug_type_hum": "Null Dereference"
+  },
+  {
+    "bug_type": "RESOURCE_LEAK",
+    "qualifier": "resource of type `java.io.InputStreamReader` acquired by call to `InputStreamReader(...)` at line 79 is not released after line 78.\n**Note**: potential exception at line 81",
+    "severity": "ERROR",
+    "line": 78,
+    "column": -1,
+    "procedure": "org.apache.commons.text.lookup.UrlStringLookup.lookup(java.lang.String):java.lang.String",
+    "procedure_start_line": 62,
+    "file": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+    "bug_trace": [
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 62,
+        "column_number": -1,
+        "description": "start of procedure lookup(...)"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 63,
+        "column_number": -1,
+        "description": "Taking false branch"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 66,
+        "column_number": -1,
+        "description": "Skipping split(...): unknown method"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 67,
+        "column_number": -1,
+        "description": ""
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 68,
+        "column_number": -1,
+        "description": "Taking false branch"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 71,
+        "column_number": -1,
+        "description": ""
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 72,
+        "column_number": -1,
+        "description": "Skipping substringAfter(...): unknown method"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 74,
+        "column_number": -1,
+        "description": ""
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 75,
+        "column_number": -1,
+        "description": ""
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 76,
+        "column_number": -1,
+        "description": "Skipping StringWriter(...): unknown method"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 77,
+        "column_number": -1,
+        "description": ""
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 78,
+        "column_number": -1,
+        "description": "Skipping BufferedInputStream(...): unknown method"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 79,
+        "column_number": -1,
+        "description": ""
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 81,
+        "column_number": -1,
+        "description": "exception java.io.IOException"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 78,
+        "column_number": -1,
+        "description": "Switch condition is false. Skipping switch case"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 78,
+        "column_number": -1,
+        "description": "Switch condition is true. Entering switch case"
+      }
+    ],
+    "key": "UrlStringLookup.java|lookup|RESOURCE_LEAK",
+    "node_key": "f3e7ee600e73f4849d513825027872bf",
+    "hash": "14a06b9644c7d404ff36a93cbc860ef4",
+    "bug_type_hum": "Resource Leak"
+  },
+  {
+    "bug_type": "RESOURCE_LEAK",
+    "qualifier": "resource of type `java.io.InputStreamReader` acquired by call to `InputStreamReader(...)` at line 79 is not released after line 86.\n**Note**: potential exception at line 81",
+    "severity": "ERROR",
+    "line": 86,
+    "column": -1,
+    "procedure": "org.apache.commons.text.lookup.UrlStringLookup.lookup(java.lang.String):java.lang.String",
+    "procedure_start_line": 62,
+    "file": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+    "bug_trace": [
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 62,
+        "column_number": -1,
+        "description": "start of procedure lookup(...)"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 63,
+        "column_number": -1,
+        "description": "Taking false branch"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 66,
+        "column_number": -1,
+        "description": "Skipping split(...): unknown method"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 67,
+        "column_number": -1,
+        "description": ""
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 68,
+        "column_number": -1,
+        "description": "Taking false branch"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 71,
+        "column_number": -1,
+        "description": ""
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 72,
+        "column_number": -1,
+        "description": "Skipping substringAfter(...): unknown method"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 74,
+        "column_number": -1,
+        "description": ""
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 75,
+        "column_number": -1,
+        "description": ""
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 76,
+        "column_number": -1,
+        "description": "Skipping StringWriter(...): unknown method"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 77,
+        "column_number": -1,
+        "description": ""
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 78,
+        "column_number": -1,
+        "description": "Skipping BufferedInputStream(...): unknown method"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 79,
+        "column_number": -1,
+        "description": ""
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 81,
+        "column_number": -1,
+        "description": "exception java.io.IOException"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 78,
+        "column_number": -1,
+        "description": "Switch condition is false. Skipping switch case"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 78,
+        "column_number": -1,
+        "description": "Switch condition is false. Skipping switch case"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java",
+        "line_number": 86,
+        "column_number": -1,
+        "description": "Switch condition is false. Skipping switch case"
+      }
+    ],
+    "key": "UrlStringLookup.java|lookup|RESOURCE_LEAK",
+    "node_key": "938719110654ddb2da0e23ba23928e97",
+    "hash": "14a06b9644c7d404ff36a93cbc860ef4",
+    "bug_type_hum": "Resource Leak"
+  },
+  {
+    "bug_type": "NULL_DEREFERENCE",
+    "qualifier": "object `AbstractStringMatcher$AndStringMatcher.stringMatchers` could be null and is dereferenced at line 59.",
+    "severity": "ERROR",
+    "line": 59,
+    "column": -1,
+    "procedure": "org.apache.commons.text.matcher.AbstractStringMatcher$AndStringMatcher.isMatch(char[],int,int,int):int",
+    "procedure_start_line": 56,
+    "file": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+    "bug_trace": [
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+        "line_number": 56,
+        "column_number": -1,
+        "description": "start of procedure isMatch(...)"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+        "line_number": 57,
+        "column_number": -1,
+        "description": ""
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+        "line_number": 58,
+        "column_number": -1,
+        "description": ""
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+        "line_number": 59,
+        "column_number": -1,
+        "description": ""
+      }
+    ],
+    "key": "AbstractStringMatcher.java|isMatch|NULL_DEREFERENCE",
+    "node_key": "d3e627214209f3d1d957fbbd366a7394",
+    "hash": "88e03a948658e5cb45756fe7a84fb7ae",
+    "bug_type_hum": "Null Dereference"
+  },
+  {
+    "bug_type": "NULL_DEREFERENCE",
+    "qualifier": "object `AbstractStringMatcher$AndStringMatcher.stringMatchers` could be null and is dereferenced at line 76.",
+    "severity": "ERROR",
+    "line": 76,
+    "column": -1,
+    "procedure": "org.apache.commons.text.matcher.AbstractStringMatcher$AndStringMatcher.isMatch(java.lang.CharSequence,int,int,int):int",
+    "procedure_start_line": 73,
+    "file": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+    "bug_trace": [
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+        "line_number": 73,
+        "column_number": -1,
+        "description": "start of procedure isMatch(...)"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+        "line_number": 74,
+        "column_number": -1,
+        "description": ""
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+        "line_number": 75,
+        "column_number": -1,
+        "description": ""
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+        "line_number": 76,
+        "column_number": -1,
+        "description": ""
+      }
+    ],
+    "key": "AbstractStringMatcher.java|isMatch|NULL_DEREFERENCE",
+    "node_key": "d3e627214209f3d1d957fbbd366a7394",
+    "hash": "88e03a948658e5cb45756fe7a84fb7ae",
+    "bug_type_hum": "Null Dereference"
+  },
+  {
+    "bug_type": "NULL_DEREFERENCE",
+    "qualifier": "object `AbstractStringMatcher$AndStringMatcher.stringMatchers` could be null and is dereferenced at line 92.",
+    "severity": "ERROR",
+    "line": 92,
+    "column": -1,
+    "procedure": "org.apache.commons.text.matcher.AbstractStringMatcher$AndStringMatcher.size():int",
+    "procedure_start_line": 90,
+    "file": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+    "bug_trace": [
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+        "line_number": 90,
+        "column_number": -1,
+        "description": "start of procedure size()"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+        "line_number": 91,
+        "column_number": -1,
+        "description": ""
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+        "line_number": 92,
+        "column_number": -1,
+        "description": ""
+      }
+    ],
+    "key": "AbstractStringMatcher.java|size|NULL_DEREFERENCE",
+    "node_key": "d3e627214209f3d1d957fbbd366a7394",
+    "hash": "e531531797f6f628a4f7d697a5602242",
+    "bug_type_hum": "Null Dereference"
+  },
+  {
+    "bug_type": "NULL_DEREFERENCE",
+    "qualifier": "object `AbstractStringMatcher$CharArrayMatcher.chars` last accessed on line 149 could be null and is dereferenced at line 149.",
+    "severity": "ERROR",
+    "line": 149,
+    "column": -1,
+    "procedure": "org.apache.commons.text.matcher.AbstractStringMatcher$CharArrayMatcher.isMatch(char[],int,int,int):int",
+    "procedure_start_line": 142,
+    "file": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+    "bug_trace": [
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+        "line_number": 142,
+        "column_number": -1,
+        "description": "start of procedure isMatch(...)"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+        "line_number": 143,
+        "column_number": -1,
+        "description": "Skipping size(): empty list of specs"
+      },
+      {
+        "level": 1,
+        "filename": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+        "line_number": 186,
+        "column_number": -1,
+        "description": "Definition of size()"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+        "line_number": 144,
+        "column_number": -1,
+        "description": "Taking false branch"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+        "line_number": 147,
+        "column_number": -1,
+        "description": ""
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+        "line_number": 148,
+        "column_number": -1,
+        "description": "Taking true branch"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+        "line_number": 149,
+        "column_number": -1,
+        "description": "Taking false branch"
+      }
+    ],
+    "key": "AbstractStringMatcher.java|isMatch|NULL_DEREFERENCE",
+    "node_key": "f9afb4a2bf39ed3a8ace1673d5930453",
+    "hash": "b7ee2ddce4f40accd9faa104f112c72f",
+    "bug_type_hum": "Null Dereference"
+  },
+  {
+    "bug_type": "NULL_DEREFERENCE",
+    "qualifier": "object `AbstractStringMatcher$CharArrayMatcher.chars` last accessed on line 173 could be null and is dereferenced at line 173.",
+    "severity": "ERROR",
+    "line": 173,
+    "column": -1,
+    "procedure": "org.apache.commons.text.matcher.AbstractStringMatcher$CharArrayMatcher.isMatch(java.lang.CharSequence,int,int,int):int",
+    "procedure_start_line": 166,
+    "file": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+    "bug_trace": [
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+        "line_number": 166,
+        "column_number": -1,
+        "description": "start of procedure isMatch(...)"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+        "line_number": 167,
+        "column_number": -1,
+        "description": "Skipping size(): empty list of specs"
+      },
+      {
+        "level": 1,
+        "filename": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+        "line_number": 186,
+        "column_number": -1,
+        "description": "Definition of size()"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+        "line_number": 168,
+        "column_number": -1,
+        "description": "Taking false branch"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+        "line_number": 171,
+        "column_number": -1,
+        "description": ""
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+        "line_number": 172,
+        "column_number": -1,
+        "description": "Taking true branch"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+        "line_number": 173,
+        "column_number": -1,
+        "description": ""
+      }
+    ],
+    "key": "AbstractStringMatcher.java|isMatch|NULL_DEREFERENCE",
+    "node_key": "83350a72d1ecac20a4dc0a46eb0d745b",
+    "hash": "b7ee2ddce4f40accd9faa104f112c72f",
+    "bug_type_hum": "Null Dereference"
+  },
+  {
+    "bug_type": "NULL_DEREFERENCE",
+    "qualifier": "object `AbstractStringMatcher$CharArrayMatcher.chars` last accessed on line 187 could be null and is dereferenced at line 187.",
+    "severity": "ERROR",
+    "line": 187,
+    "column": -1,
+    "procedure": "org.apache.commons.text.matcher.AbstractStringMatcher$CharArrayMatcher.size():int",
+    "procedure_start_line": 186,
+    "file": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+    "bug_trace": [
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+        "line_number": 186,
+        "column_number": -1,
+        "description": "start of procedure size()"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java",
+        "line_number": 187,
+        "column_number": -1,
+        "description": ""
+      }
+    ],
+    "key": "AbstractStringMatcher.java|size|NULL_DEREFERENCE",
+    "node_key": "8318a07684f09ee9a6ebc12c54678d81",
+    "hash": "06a660a1cdb36e5feb480521ed96fa72",
+    "bug_type_hum": "Null Dereference"
+  },
+  {
+    "bug_type": "NULL_DEREFERENCE",
+    "qualifier": "object `chars` could be null and is dereferenced at line 127.",
+    "severity": "ERROR",
+    "line": 127,
+    "column": -1,
+    "procedure": "org.apache.commons.text.matcher.StringMatcherFactory.charSetMatcher(char[]):org.apache.commons.text.matcher.StringMatcher",
+    "procedure_start_line": 121,
+    "file": "src/main/java/org/apache/commons/text/matcher/StringMatcherFactory.java",
+    "bug_trace": [
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/matcher/StringMatcherFactory.java",
+        "line_number": 121,
+        "column_number": -1,
+        "description": "start of procedure charSetMatcher(...)"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/matcher/StringMatcherFactory.java",
+        "line_number": 122,
+        "column_number": -1,
+        "description": "Skipping getLength(...): unknown method"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/matcher/StringMatcherFactory.java",
+        "line_number": 123,
+        "column_number": -1,
+        "description": "Taking false branch"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/matcher/StringMatcherFactory.java",
+        "line_number": 126,
+        "column_number": -1,
+        "description": "Taking true branch"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/matcher/StringMatcherFactory.java",
+        "line_number": 127,
+        "column_number": -1,
+        "description": ""
+      }
+    ],
+    "key": "StringMatcherFactory.java|charSetMatcher|NULL_DEREFERENCE",
+    "node_key": "26a84f805d806fe3d413bbe93928f5da",
+    "hash": "26cd4c3ac2910a2cff3845df06ff5c9d",
+    "bug_type_hum": "Null Dereference"
+  },
+  {
+    "bug_type": "NULL_DEREFERENCE",
+    "qualifier": "object `AggregateTranslator.translators` last accessed on line 61 could be null and is dereferenced at line 61.",
+    "severity": "ERROR",
+    "line": 61,
+    "column": -1,
+    "procedure": "org.apache.commons.text.translate.AggregateTranslator.translate(java.lang.CharSequence,int,java.io.Writer):int",
+    "procedure_start_line": 60,
+    "file": "src/main/java/org/apache/commons/text/translate/AggregateTranslator.java",
+    "bug_trace": [
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/translate/AggregateTranslator.java",
+        "line_number": 60,
+        "column_number": -1,
+        "description": "start of procedure translate(...)"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/translate/AggregateTranslator.java",
+        "line_number": 61,
+        "column_number": -1,
+        "description": ""
+      }
+    ],
+    "key": "AggregateTranslator.java|translate|NULL_DEREFERENCE",
+    "node_key": "f7da23dfa2474a65a60f23e324ac5ab1",
+    "hash": "48c9d7ffd46ec6afd65b550ee6e79bd9",
+    "bug_type_hum": "Null Dereference"
+  },
+  {
+    "bug_type": "NULL_DEREFERENCE",
+    "qualifier": "object `LookupTranslator.prefixSet` last accessed on line 96 could be null and is dereferenced at line 96.",
+    "severity": "ERROR",
+    "line": 96,
+    "column": -1,
+    "procedure": "org.apache.commons.text.translate.LookupTranslator.translate(java.lang.CharSequence,int,java.io.Writer):int",
+    "procedure_start_line": 94,
+    "file": "src/main/java/org/apache/commons/text/translate/LookupTranslator.java",
+    "bug_trace": [
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/translate/LookupTranslator.java",
+        "line_number": 94,
+        "column_number": -1,
+        "description": "start of procedure translate(...)"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/translate/LookupTranslator.java",
+        "line_number": 96,
+        "column_number": -1,
+        "description": ""
+      }
+    ],
+    "key": "LookupTranslator.java|translate|NULL_DEREFERENCE",
+    "node_key": "8cbdd761c01b39aa8927d0bcaf3f4b4d",
+    "hash": "e7d7d906498ee78f0a9c0e2b368f29eb",
+    "bug_type_hum": "Null Dereference"
+  },
+  {
+    "bug_type": "NULL_DEREFERENCE",
+    "qualifier": "object `NumericEntityEscaper.range` could be null and is dereferenced at line 111.",
+    "severity": "ERROR",
+    "line": 111,
+    "column": -1,
+    "procedure": "org.apache.commons.text.translate.NumericEntityEscaper.translate(int,java.io.Writer):boolean",
+    "procedure_start_line": 110,
+    "file": "src/main/java/org/apache/commons/text/translate/NumericEntityEscaper.java",
+    "bug_trace": [
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/translate/NumericEntityEscaper.java",
+        "line_number": 110,
+        "column_number": -1,
+        "description": "start of procedure translate(...)"
+      },
+      {
+        "level": 0,
+        "filename": "src/main/java/org/apache/commons/text/translate/NumericEntityEscaper.java",
+        "line_number": 111,
+        "column_number": -1,
+        "description": ""
+      }
+    ],
+    "key": "NumericEntityEscaper.java|translate|NULL_DEREFERENCE",
+    "node_key": "39f2c31e3dcdf67cbf538c860141bbd4",
+    "hash": "ec33143c5ac217a1082c286fad21d305",
+    "bug_type_hum": "Null Dereference"
+  }
+]

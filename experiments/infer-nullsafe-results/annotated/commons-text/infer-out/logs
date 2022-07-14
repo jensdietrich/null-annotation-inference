@@ -1,0 +1,350 @@
+[5182][      debug] Loading models took 18.367ms
+[5182][      debug] Sqlite write daemon: starting up
+[5182][      debug] Sqlite write daemon: set up complete, waiting for connections
+[5182][environment] CWD = /Users/jens/Development/null-annotation-inference/experiments/projects/annotated/commons-text
+[5182][environment] No .inferconfig file found
+[5182][environment] Project root = /Users/jens/Development/null-annotation-inference/experiments/projects/annotated/commons-text
+[5182][environment] INFER_ARGS =   @/var/folders/_c/jjgc2rys2ll0fj92kc6t4y9r0000gq/T/args.tmp.0e6372
+[5182][environment] command line arguments:   infer --pulse run -- mvn compile -Drat.skip=true
+[5182][environment] Could not retrieve available memory (possibly not on Linux)
+[5182][environment] Active checkers: self-in-block (C/C++/ObjC), parameter-not-null-checked (C/C++/ObjC), starvation (C/C++/ObjC, Java), siof (C/C++/ObjC), dotnet-resource-leak (C#/.Net), racerd (C/C++/ObjC, C#/.Net, Java), pulse (C/C++/ObjC, C#/.Net, Erlang, Java), liveness (C/C++/ObjC), inefficient-keyset-iterator (Java), fragment-retains-view (Java), biabduction (C/C++/ObjC, C#/.Net, Java)
+[5182][environment] Scheduler: file
+[5182][environment] Cores used: 5
+[5182][environment] Infer version v1.1.0-63a78acdd
+[5182][environment] Copyright 2009 - present Facebook. All Rights Reserved.
+[5182][environment] 
+[5182][   progress] Capturing in maven mode...
+[5182][      debug] Running maven capture:
+[5182][      debug] mvn 'compile' '-Drat.skip=true' '-P' 'infer-capture'
+
+[5212][environment] CWD = /Users/jens/Development/null-annotation-inference/experiments/projects/annotated/commons-text
+[5212][environment] No .inferconfig file found
+[5212][environment] Project root = /Users/jens/Development/null-annotation-inference/experiments/projects/annotated/commons-text
+[5212][environment] INFER_ARGS =   @/var/folders/_c/jjgc2rys2ll0fj92kc6t4y9r0000gq/T/args.tmp.3356b2
+[5212][environment] command line arguments:   /usr/local/lib/infer/infer/bin/infer
+[5212][environment]                           @/private/var/folders/_c/jjgc2rys2ll0fj92kc6t4y9r0000gq/T/org.codehaus.plexus.compiler.javac.JavacCompiler5572448155018035436arguments
+[5212][environment] Could not retrieve available memory (possibly not on Linux)
+[5212][environment] Active checkers: self-in-block (C/C++/ObjC), parameter-not-null-checked (C/C++/ObjC), starvation (C/C++/ObjC, Java), siof (C/C++/ObjC), dotnet-resource-leak (C#/.Net), racerd (C/C++/ObjC, C#/.Net, Java), pulse (C/C++/ObjC, C#/.Net, Erlang, Java), liveness (C/C++/ObjC), inefficient-keyset-iterator (Java), fragment-retains-view (Java), biabduction (C/C++/ObjC, C#/.Net, Java)
+[5212][      debug] Current working directory: '/Users/jens/Development/null-annotation-inference/experiments/projects/annotated/commons-text'
+[5212][      debug] Trying to execute: javac '-J-Duser.language=en' '@/private/var/folders/_c/jjgc2rys2ll0fj92kc6t4y9r0000gq/T/org.codehaus.plexus.compiler.javac.JavacCompiler5572448155018035436arguments' '@/Users/jens/Development/null-annotation-inference/experiments/projects/annotated/commons-text/infer-out/tmp/javac_args.tmp.d1b806' 2>'/Users/jens/Development/null-annotation-inference/experiments/projects/annotated/commons-text/infer-out/tmp/javac.tmp.d8ab4b.out'
+[5212][      debug] *** Success. Logs:
+[5212][      debug] Translating 94 source files (130 classes)
+[5212][      debug] done capturing all files
+[5212][      debug] GC stats for capture:
+[5212][      debug]   minor_words: 4.84947e+07
+[5212][      debug]   promoted_words: 3.95594e+06
+[5212][      debug]   major_words: 5.61086e+06
+[5212][      debug]   minor_collections: 101
+[5212][      debug]   major_collections: 16
+[5212][      debug]   compactions: 0
+[5212][      debug]   top_heap_words: 3545600
+[5212][      debug]   
+[5212][      debug] GC stats for main_process_full:
+[5212][      debug]   minor_words: 5.02751e+07
+[5212][      debug]   promoted_words: 4.12539e+06
+[5212][      debug]   major_words: 5.80236e+06
+[5212][      debug]   minor_collections: 112
+[5212][      debug]   major_collections: 17
+[5212][      debug]   compactions: 0
+[5212][      debug]   top_heap_words: 3545600
+[5212][      debug]   
+[5212][environment] Scheduler: file
+[5212][environment] Cores used: 5
+[5212][environment] [5182][      debug] GC stats for capture:
+[5182][      debug]   minor_words: 68565
+[5182][      debug]   promoted_words: 264364
+[5182][      debug]   major_words: 264364
+[5182][      debug]   minor_collections: 1
+[5182][      debug]   major_collections: 0
+[5182][      debug]   compactions: 0
+[5182][      debug]   top_heap_words: 1006592
+[5182][      debug]   
+[5182][environment] Parallel jobs: 5
+[5182][   progress] Found 100 source files to analyze in /Users/jens/Development/null-annotation-inference/experiments/projects/annotated/commons-text/infer-out
+[5229][   progress] src/main/java/org/apache/commons/text/translate/EntityArrays.java starting
+[5230][   progress] src/main/java/org/apache/commons/text/translate/OctalUnescaper.java starting
+[5233][   progress] src/main/java/org/apache/commons/text/similarity/EditDistance.java starting
+[5231][   progress] src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java starting
+[5232][   progress] src/main/java/org/apache/commons/text/lookup/FunctionStringLookup.java starting
+[5233][   progress] src/main/java/org/apache/commons/text/similarity/EditDistance.java DONE
+[5233][   progress] src/main/java/org/apache/commons/text/similarity/JaccardDistance.java starting
+[5232][   progress] src/main/java/org/apache/commons/text/lookup/FunctionStringLookup.java DONE
+[5232][   progress] src/main/java/org/apache/commons/text/lookup/package-info.java starting
+[5232][   progress] src/main/java/org/apache/commons/text/lookup/package-info.java DONE
+[5232][   progress] src/main/java/org/apache/commons/text/lookup/DefaultStringLookup.java starting
+[5230][   progress] src/main/java/org/apache/commons/text/translate/OctalUnescaper.java DONE
+[5230][   progress] src/main/java/org/apache/commons/text/StrLookup.java starting
+[5230][   progress] src/main/java/org/apache/commons/text/StrLookup.java DONE
+[5230][   progress] src/main/java/org/apache/commons/text/translate/UnicodeEscaper.java starting
+[5231][   progress] src/main/java/org/apache/commons/text/lookup/UrlStringLookup.java DONE
+[5231][   progress] src/main/java/org/apache/commons/text/lookup/ResourceBundleStringLookup.java starting
+[5230][   progress] src/main/java/org/apache/commons/text/translate/UnicodeEscaper.java DONE
+[5230][   progress] src/main/java/org/apache/commons/text/FormatFactory.java starting
+[5230][   progress] src/main/java/org/apache/commons/text/FormatFactory.java DONE
+[5230][   progress] src/main/java/org/apache/commons/text/diff/DeleteCommand.java starting
+[5231][   progress] src/main/java/org/apache/commons/text/lookup/ResourceBundleStringLookup.java DONE
+[5231][   progress] src/main/java/org/apache/commons/text/diff/StringsComparator.java starting
+[5230][   progress] src/main/java/org/apache/commons/text/diff/DeleteCommand.java DONE
+[5230][   progress] src/main/java/org/apache/commons/text/diff/ReplacementsFinder.java starting
+[5230][   progress] src/main/java/org/apache/commons/text/diff/ReplacementsFinder.java DONE
+[5230][   progress] src/main/java/org/apache/commons/text/similarity/JaccardSimilarity.java starting
+[5230][   progress] src/main/java/org/apache/commons/text/similarity/JaccardSimilarity.java DONE
+[5230][   progress] src/main/java/org/apache/commons/text/lookup/DateStringLookup.java starting
+[5230][   progress] src/main/java/org/apache/commons/text/lookup/DateStringLookup.java DONE
+[5230][   progress] src/main/java/org/apache/commons/text/lookup/DnsStringLookup.java starting
+[5233][   progress] src/main/java/org/apache/commons/text/similarity/JaccardDistance.java DONE
+[5233][   progress] src/main/java/org/apache/commons/text/similarity/SimilarityScore.java starting
+[5233][   progress] src/main/java/org/apache/commons/text/similarity/SimilarityScore.java DONE
+[5233][   progress] src/main/java/org/apache/commons/text/translate/NumericEntityUnescaper.java starting
+[5232][   progress] src/main/java/org/apache/commons/text/lookup/DefaultStringLookup.java DONE
+[5232][   progress] src/main/java/org/apache/commons/text/lookup/JavaPlatformStringLookup.java starting
+[5233][   progress] src/main/java/org/apache/commons/text/translate/NumericEntityUnescaper.java DONE
+[5233][   progress] src/main/java/org/apache/commons/text/AlphabetConverter.java starting
+[5230][   progress] src/main/java/org/apache/commons/text/lookup/DnsStringLookup.java DONE
+[5230][   progress] src/main/java/org/apache/commons/text/similarity/package-info.java starting
+[5230][   progress] src/main/java/org/apache/commons/text/similarity/package-info.java DONE
+[5230][   progress] src/main/java/org/apache/commons/text/diff/InsertCommand.java starting
+[5230][   progress] src/main/java/org/apache/commons/text/diff/InsertCommand.java DONE
+[5230][   progress] src/main/java/org/apache/commons/text/similarity/IntersectionResult.java starting
+[5230][   progress] src/main/java/org/apache/commons/text/similarity/IntersectionResult.java DONE
+[5230][   progress] src/main/java/org/apache/commons/text/lookup/IllegalArgumentExceptions.java starting
+[5230][   progress] src/main/java/org/apache/commons/text/lookup/IllegalArgumentExceptions.java DONE
+[5230][   progress] src/main/java/org/apache/commons/text/lookup/StringLookupFactory.java starting
+[5232][   progress] src/main/java/org/apache/commons/text/lookup/JavaPlatformStringLookup.java DONE
+[5232][   progress] src/main/java/org/apache/commons/text/translate/AggregateTranslator.java starting
+[5232][   progress] src/main/java/org/apache/commons/text/translate/AggregateTranslator.java DONE
+[5232][   progress] src/main/java/org/apache/commons/text/translate/CharSequenceTranslator.java starting
+[5230][   progress] src/main/java/org/apache/commons/text/lookup/StringLookupFactory.java DONE
+[5230][   progress] src/main/java/org/apache/commons/text/diff/EditScript.java starting
+[5230][   progress] src/main/java/org/apache/commons/text/diff/EditScript.java DONE
+[5230][   progress] src/main/java/org/apache/commons/text/similarity/SimilarityScoreFrom.java starting
+[5230][   progress] src/main/java/org/apache/commons/text/similarity/SimilarityScoreFrom.java DONE
+[5230][   progress] src/main/java/org/apache/commons/text/lookup/ScriptStringLookup.java starting
+[5230][   progress] src/main/java/org/apache/commons/text/lookup/ScriptStringLookup.java DONE
+[5230][   progress] src/main/java/org/apache/commons/text/lookup/BiFunctionStringLookup.java starting
+[5230][   progress] src/main/java/org/apache/commons/text/lookup/BiFunctionStringLookup.java DONE
+[5230][   progress] src/main/java/org/apache/commons/text/lookup/XmlStringLookup.java starting
+[5230][   progress] src/main/java/org/apache/commons/text/lookup/XmlStringLookup.java DONE
+[5230][   progress] src/main/java/org/apache/commons/text/similarity/FuzzyScore.java starting
+[5232][   progress] src/main/java/org/apache/commons/text/translate/CharSequenceTranslator.java DONE
+[5232][   progress] src/main/java/org/apache/commons/text/diff/KeepCommand.java starting
+[5232][   progress] src/main/java/org/apache/commons/text/diff/KeepCommand.java DONE
+[5232][   progress] src/main/java/org/apache/commons/text/translate/LookupTranslator.java starting
+[5231][   progress] src/main/java/org/apache/commons/text/diff/StringsComparator.java DONE
+[5231][   progress] src/main/java/org/apache/commons/text/TextStringBuilder.java starting
+[5230][   progress] src/main/java/org/apache/commons/text/similarity/FuzzyScore.java DONE
+[5230][   progress] src/main/java/org/apache/commons/text/translate/UnicodeUnescaper.java starting
+[5230][   progress] src/main/java/org/apache/commons/text/translate/UnicodeUnescaper.java DONE
+[5230][   progress] src/main/java/org/apache/commons/text/lookup/AbstractStringLookup.java starting
+[5230][   progress] src/main/java/org/apache/commons/text/lookup/AbstractStringLookup.java DONE
+[5230][   progress] src/main/java/org/apache/commons/text/diff/CommandVisitor.java starting
+[5230][   progress] src/main/java/org/apache/commons/text/diff/CommandVisitor.java DONE
+[5230][   progress] src/main/java/org/apache/commons/text/package-info.java starting
+[5230][   progress] src/main/java/org/apache/commons/text/package-info.java DONE
+[5230][   progress] src/main/java/org/apache/commons/text/similarity/CosineSimilarity.java starting
+[5232][   progress] src/main/java/org/apache/commons/text/translate/LookupTranslator.java DONE
+[5232][   progress] src/main/java/org/apache/commons/text/translate/package-info.java starting
+[5232][   progress] src/main/java/org/apache/commons/text/translate/package-info.java DONE
+[5232][   progress] src/main/java/org/apache/commons/text/similarity/Tokenizer.java starting
+[5232][   progress] src/main/java/org/apache/commons/text/similarity/Tokenizer.java DONE
+[5232][   progress] src/main/java/org/apache/commons/text/WordUtils.java starting
+[5230][   progress] src/main/java/org/apache/commons/text/similarity/CosineSimilarity.java DONE
+[5230][   progress] src/main/java/org/apache/commons/text/translate/JavaUnicodeEscaper.java starting
+[5230][   progress] src/main/java/org/apache/commons/text/translate/JavaUnicodeEscaper.java DONE
+[5230][   progress] src/main/java/org/apache/commons/text/lookup/InterpolatorStringLookup.java starting
+[5230][   progress] src/main/java/org/apache/commons/text/lookup/InterpolatorStringLookup.java DONE
+[5230][   progress] src/main/java/org/apache/commons/text/lookup/StringLookup.java starting
+[5230][   progress] src/main/java/org/apache/commons/text/lookup/StringLookup.java DONE
+[5230][   progress] src/main/java/org/apache/commons/text/StrBuilder.java starting
+[5229][   progress] src/main/java/org/apache/commons/text/translate/EntityArrays.java DONE
+[5229][   progress] src/main/java/org/apache/commons/text/translate/SinglePassTranslator.java starting
+[5229][   progress] src/main/java/org/apache/commons/text/translate/SinglePassTranslator.java DONE
+[5229][   progress] src/main/java/org/apache/commons/text/similarity/LongestCommonSubsequence.java starting
+[5233][   progress] src/main/java/org/apache/commons/text/AlphabetConverter.java DONE
+[5233][   progress] src/main/java/org/apache/commons/text/lookup/InetAddressKeys.java starting
+[5233][   progress] src/main/java/org/apache/commons/text/lookup/InetAddressKeys.java DONE
+[5233][   progress] src/main/java/org/apache/commons/text/similarity/IntersectionSimilarity.java starting
+[5233][   progress] src/main/java/org/apache/commons/text/similarity/IntersectionSimilarity.java DONE
+[5233][   progress] src/main/java/org/apache/commons/text/lookup/PropertiesStringLookup.java starting
+[5229][   progress] src/main/java/org/apache/commons/text/similarity/LongestCommonSubsequence.java DONE
+[5229][   progress] src/main/java/org/apache/commons/text/translate/CodePointTranslator.java starting
+[5229][   progress] src/main/java/org/apache/commons/text/translate/CodePointTranslator.java DONE
+[5229][   progress] src/main/java/org/apache/commons/text/Builder.java starting
+[5229][   progress] src/main/java/org/apache/commons/text/Builder.java DONE
+[5229][   progress] src/main/java/org/apache/commons/text/lookup/BiStringLookup.java starting
+[5229][   progress] src/main/java/org/apache/commons/text/lookup/BiStringLookup.java DONE
+[5229][   progress] src/main/java/org/apache/commons/text/matcher/StringMatcherFactory.java starting
+[5233][   progress] src/main/java/org/apache/commons/text/lookup/PropertiesStringLookup.java DONE
+[5233][   progress] src/main/java/org/apache/commons/text/RandomStringGenerator.java starting
+[5229][   progress] src/main/java/org/apache/commons/text/matcher/StringMatcherFactory.java DONE
+[5229][   progress] src/main/java/org/apache/commons/text/StrTokenizer.java starting
+[5232][   progress] src/main/java/org/apache/commons/text/WordUtils.java DONE
+[5232][   progress] src/main/java/org/apache/commons/text/lookup/ConstantStringLookup.java starting
+[5232][   progress] src/main/java/org/apache/commons/text/lookup/ConstantStringLookup.java DONE
+[5232][   progress] src/main/java/org/apache/commons/text/similarity/HammingDistance.java starting
+[5232][   progress] src/main/java/org/apache/commons/text/similarity/HammingDistance.java DONE
+[5232][   progress] src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java starting
+[5233][   progress] src/main/java/org/apache/commons/text/RandomStringGenerator.java DONE
+[5233][   progress] src/main/java/org/apache/commons/text/similarity/JaroWinklerSimilarity.java starting
+[5232][   progress] src/main/java/org/apache/commons/text/matcher/AbstractStringMatcher.java DONE
+[5232][   progress] src/main/java/org/apache/commons/text/StringSubstitutor.java starting
+[5233][   progress] src/main/java/org/apache/commons/text/similarity/JaroWinklerSimilarity.java DONE
+[5233][   progress] src/main/java/org/apache/commons/text/translate/UnicodeUnpairedSurrogateRemover.java starting
+[5233][   progress] src/main/java/org/apache/commons/text/translate/UnicodeUnpairedSurrogateRemover.java DONE
+[5233][   progress] src/main/java/org/apache/commons/text/similarity/RegexTokenizer.java starting
+[5233][   progress] src/main/java/org/apache/commons/text/similarity/RegexTokenizer.java DONE
+[5233][   progress] src/main/java/org/apache/commons/text/lookup/LocalHostStringLookup.java starting
+[5233][   progress] src/main/java/org/apache/commons/text/lookup/LocalHostStringLookup.java DONE
+[5233][   progress] src/main/java/org/apache/commons/text/lookup/FileStringLookup.java starting
+[5233][   progress] src/main/java/org/apache/commons/text/lookup/FileStringLookup.java DONE
+[5233][   progress] src/main/java/org/apache/commons/text/similarity/LevenshteinDetailedDistance.java starting
+[5233][   progress] src/main/java/org/apache/commons/text/similarity/LevenshteinDetailedDistance.java DONE
+[5233][   progress] src/main/java/org/apache/commons/text/translate/NumericEntityEscaper.java starting
+[5233][   progress] src/main/java/org/apache/commons/text/translate/NumericEntityEscaper.java DONE
+[5233][   progress] src/main/java/org/apache/commons/text/CompositeFormat.java starting
+[5233][   progress] src/main/java/org/apache/commons/text/CompositeFormat.java DONE
+[5233][   progress] src/main/java/org/apache/commons/text/matcher/package-info.java starting
+[5233][   progress] src/main/java/org/apache/commons/text/matcher/package-info.java DONE
+[5233][   progress] src/main/java/org/apache/commons/text/lookup/UrlEncoderStringLookup.java starting
+[5233][   progress] src/main/java/org/apache/commons/text/lookup/UrlEncoderStringLookup.java DONE
+[5233][   progress] src/main/java/org/apache/commons/text/similarity/CosineDistance.java starting
+[5233][   progress] src/main/java/org/apache/commons/text/similarity/CosineDistance.java DONE
+[5233][   progress] src/main/java/org/apache/commons/text/diff/EditCommand.java starting
+[5233][   progress] src/main/java/org/apache/commons/text/diff/EditCommand.java DONE
+[5233][   progress] src/main/java/org/apache/commons/text/similarity/LevenshteinDistance.java starting
+[5233][   progress] src/main/java/org/apache/commons/text/similarity/LevenshteinDistance.java DONE
+[5233][   progress] src/main/java/org/apache/commons/text/io/StringSubstitutorReader.java starting
+[5229][   progress] src/main/java/org/apache/commons/text/StrTokenizer.java DONE
+[5229][   progress] src/main/java/org/apache/commons/text/similarity/LevenshteinResults.java starting
+[5229][   progress] src/main/java/org/apache/commons/text/similarity/LevenshteinResults.java DONE
+[5229][   progress] src/main/java/org/apache/commons/text/similarity/LongestCommonSubsequenceDistance.java starting
+[5229][   progress] src/main/java/org/apache/commons/text/similarity/LongestCommonSubsequenceDistance.java DONE
+[5229][   progress] src/main/java/org/apache/commons/text/similarity/EditDistanceFrom.java starting
+[5229][   progress] src/main/java/org/apache/commons/text/similarity/EditDistanceFrom.java DONE
+[5229][   progress] src/main/java/org/apache/commons/text/TextRandomProvider.java starting
+[5229][   progress] src/main/java/org/apache/commons/text/TextRandomProvider.java DONE
+[5229][   progress] src/main/java/org/apache/commons/text/io/package-info.java starting
+[5229][   progress] src/main/java/org/apache/commons/text/io/package-info.java DONE
+[5229][   progress] src/main/java/org/apache/commons/text/CharacterPredicate.java starting
+[5229][   progress] src/main/java/org/apache/commons/text/CharacterPredicate.java DONE
+[5229][   progress] src/main/java/org/apache/commons/text/StrSubstitutor.java starting
+[5233][   progress] src/main/java/org/apache/commons/text/io/StringSubstitutorReader.java DONE
+[5233][   progress] src/main/java/org/apache/commons/text/similarity/JaroWinklerDistance.java starting
+[5233][   progress] src/main/java/org/apache/commons/text/similarity/JaroWinklerDistance.java DONE
+[5233][   progress] src/main/java/org/apache/commons/text/ExtendedMessageFormat.java starting
+[5232][   progress] src/main/java/org/apache/commons/text/StringSubstitutor.java DONE
+[5232][   progress] src/main/java/org/apache/commons/text/similarity/Counter.java starting
+[5232][   progress] src/main/java/org/apache/commons/text/similarity/Counter.java DONE
+[5232][   progress] src/main/java/org/apache/commons/text/diff/ReplacementsHandler.java starting
+[5232][   progress] src/main/java/org/apache/commons/text/diff/ReplacementsHandler.java DONE
+[5232][   progress] src/main/java/org/apache/commons/text/translate/CsvTranslators.java starting
+[5232][   progress] src/main/java/org/apache/commons/text/translate/CsvTranslators.java DONE
+[5232][   progress] src/main/java/org/apache/commons/text/CaseUtils.java starting
+[5232][   progress] src/main/java/org/apache/commons/text/CaseUtils.java DONE
+[5232][   progress] src/main/java/org/apache/commons/text/StringTokenizer.java starting
+[5233][   progress] src/main/java/org/apache/commons/text/ExtendedMessageFormat.java DONE
+[5233][   progress] src/main/java/org/apache/commons/text/StrMatcher.java starting
+[5233][   progress] src/main/java/org/apache/commons/text/StrMatcher.java DONE
+[5233][   progress] src/main/java/org/apache/commons/text/FormattableUtils.java starting
+[5233][   progress] src/main/java/org/apache/commons/text/FormattableUtils.java DONE
+[5233][   progress] src/main/java/org/apache/commons/text/matcher/StringMatcher.java starting
+[5233][   progress] src/main/java/org/apache/commons/text/matcher/StringMatcher.java DONE
+[5233][   progress] src/main/java/org/apache/commons/text/CharacterPredicates.java starting
+[5233][   progress] src/main/java/org/apache/commons/text/CharacterPredicates.java DONE
+[5233][   progress] src/main/java/org/apache/commons/text/diff/package-info.java starting
+[5233][   progress] src/main/java/org/apache/commons/text/diff/package-info.java DONE
+[5233][   progress] src/main/java/org/apache/commons/text/StringEscapeUtils.java starting
+[5232][   progress] src/main/java/org/apache/commons/text/StringTokenizer.java DONE
+[5232][   progress] src/main/java/org/apache/commons/text/lookup/UrlDecoderStringLookup.java starting
+[5232][   progress] src/main/java/org/apache/commons/text/lookup/UrlDecoderStringLookup.java DONE
+[5229][   progress] src/main/java/org/apache/commons/text/StrSubstitutor.java DONE
+[5233][   progress] src/main/java/org/apache/commons/text/StringEscapeUtils.java DONE
+[5230][   progress] src/main/java/org/apache/commons/text/StrBuilder.java DONE
+[5231][   progress] src/main/java/org/apache/commons/text/TextStringBuilder.java DONE
+[5182][      debug] Backend stats:
+[5182][      debug]   longest_proc_duration_heap= [String StrSubstitutor.replace(Object,Map,String,String) -> 3625ms, void EntityArrays.<clinit>() -> 2222ms, StrSubstitutor.<init>(Map,String,String) -> 2133ms, List TextStringBuilder$TextStringBuilderTokenizer.tokenize(char[],int,int) -> 2120ms, int StrTokenizer.readNextToken(char[],int,int,StrBuilder,List) -> 2103ms, List StringTokenizer.tokenize(char[],int,int) -> 2079ms, StrSubstitutor.<init>(StrLookup,String,String,char) -> 2026ms, boolean ExtendedMessageFormat.containsElements(Collection) -> 1875ms, ExtendedMessageFormat.<init>(String) -> 1860ms, ExtendedMessageFormat.<init>(String,Locale) -> 1857ms]
+[5182][      debug]   summary_file_try_load= 2358
+[5182][      debug]   summary_read_from_disk= 246
+[5182][      debug]   summary_cache_hits= 4044 (63%)
+[5182][      debug]   summary_cache_misses= 2358
+[5182][      debug]   ondemand_procs_analyzed= 1275
+[5182][      debug]   ondemand_local_cache_hits= 43993 (95%)
+[5182][      debug]   ondemand_local_cache_misses= 2278
+[5182][      debug]   proc_locker_lock_time_user= 0.00000000
+[5182][      debug]   proc_locker_lock_time_sys= 0.00000000
+[5182][      debug]   proc_locker_lock_time_wall= 0.00000000
+[5182][      debug]   proc_locker_unlock_time_user= 0.00000000
+[5182][      debug]   proc_locker_unlock_time_sys= 0.00000000
+[5182][      debug]   proc_locker_unlock_time_wall= 0.00000000
+[5182][      debug]   restart_scheduler_useful_time_user= 0.00000000
+[5182][      debug]   restart_scheduler_useful_time_sys= 0.00000000
+[5182][      debug]   restart_scheduler_useful_time_wall= 0.00000000
+[5182][      debug]   restart_scheduler_total_time_user= 0.00000000
+[5182][      debug]   restart_scheduler_total_time_sys= 0.00000000
+[5182][      debug]   restart_scheduler_total_time_wall= 0.00000000
+[5182][      debug]   pulse_aliasing_contradictions= 0
+[5182][      debug]   pulse_args_length_contradictions= 0
+[5182][      debug]   pulse_captured_vars_length_contradictions= 0
+[5182][      debug]   pulse_summaries_count= [0 -> 15, 1 -> 490, 2 -> 118, 3 -> 62, 4 -> 46, 5 -> 28, 6 -> 12, 7 -> 16, 8 -> 37, 9 -> 44, 10 -> 13, 11 -> 21, 12 -> 13, 13 -> 3, 14 -> 4, 15 -> 12, 16 -> 15, 17 -> 5, 18 -> 13, 19 -> 17, 20 -> 224]
+[5182][      debug]   
+[5182][      debug] GC stats for backend_stats.gc_stats_add.:
+[5182][      debug]   minor_words: 3.90544e+10
+[5182][      debug]   promoted_words: 2.32087e+08
+[5182][      debug]   major_words: 2.58753e+08
+[5182][      debug]   minor_collections: 37359
+[5182][      debug]   major_collections: 233
+[5182][      debug]   compactions: 1
+[5182][      debug]   top_heap_words: 69630976
+[5182][      debug]   
+[5182][      debug] GC stats for backend_stats.gc_stats_max.:
+[5182][      debug]   minor_words: 9.22274e+09
+[5182][      debug]   promoted_words: 6.46693e+07
+[5182][      debug]   major_words: 6.85255e+07
+[5182][      debug]   minor_collections: 8818
+[5182][      debug]   major_collections: 55
+[5182][      debug]   compactions: 1
+[5182][      debug]   top_heap_words: 28857856
+[5182][      debug]   
+[5182][      debug] Average over 5 processes
+[5182][      debug] GC stats for backend_stats.gc_stats_average.:
+[5182][      debug]   minor_words: 7.81089e+09
+[5182][      debug]   promoted_words: 4.64173e+07
+[5182][      debug]   major_words: 5.17507e+07
+[5182][      debug]   minor_collections: 7471
+[5182][      debug]   major_collections: 46
+[5182][      debug]   compactions: 0
+[5182][      debug]   top_heap_words: 13926195
+[5182][      debug]   
+[5182][      debug] Analysis phase finished in 13.886s
+[5182][      debug] backend_stats.scheduler_process_analysis_time_user= 0.16452500
+[5182][      debug] backend_stats.scheduler_process_analysis_time_sys= 0.11544000
+[5182][      debug] backend_stats.scheduler_process_analysis_time_wall= 13.88645821
+[5182][      debug] GC stats for analysis_scheduler:
+[5182][      debug]   minor_words: 3.93948e+07
+[5182][      debug]   promoted_words: 19852
+[5182][      debug]   major_words: 30063
+[5182][      debug]   minor_collections: 42
+[5182][      debug]   major_collections: 8
+[5182][      debug]   compactions: 1
+[5182][      debug]   top_heap_words: 1006592
+[5182][      debug]   
+[5182][      debug] GC stats for report:
+[5182][      debug]   minor_words: 889930
+[5182][      debug]   promoted_words: 0
+[5182][      debug]   major_words: 19597
+[5182][      debug]   minor_collections: 0
+[5182][      debug]   major_collections: 0
+[5182][      debug]   compactions: 0
+[5182][      debug]   top_heap_words: 1006592
+[5182][      debug]   
+[5182][      debug] GC stats for main_process_full:
+[5182][      debug]   minor_words: 4.24205e+07
+[5182][      debug]   promoted_words: 466832
+[5182][      debug]   major_words: 1.06478e+06
+[5182][      debug]   minor_collections: 55
+[5182][      debug]   major_collections: 9
+[5182][      debug]   compactions: 1
+[5182][      debug]   top_heap_words: 1006592
+[5182][      debug]   
+[5185][      debug] Detected 10 spec overwrittes.
+[5185][      debug] Sqlite write daemon: terminating

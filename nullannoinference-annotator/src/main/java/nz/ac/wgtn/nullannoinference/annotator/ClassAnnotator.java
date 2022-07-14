@@ -18,6 +18,8 @@ import com.github.javaparser.symbolsolver.resolution.typesolvers.CombinedTypeSol
 import com.github.javaparser.symbolsolver.resolution.typesolvers.ReflectionTypeSolver;
 import com.google.common.base.Preconditions;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
+import nz.ac.wgtn.nullannoinference.commons.JSR305NullableAnnotationProvider;
+import nz.ac.wgtn.nullannoinference.commons.NullableAnnotationProvider;
 import org.apache.commons.io.FileUtils;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

@@ -8,7 +8,7 @@ import java.util.List;
  * Note that some spring projects (spring-beans 5.3.9) might place compiled java classes in build/classes/groovy
  * @author jens dietrich
  */
-public class MultiLanguageGradleProject implements Project {
+class MultiLanguageGradleProject implements Project {
 
     static final String TYPE = "gradle_multilang";
 
