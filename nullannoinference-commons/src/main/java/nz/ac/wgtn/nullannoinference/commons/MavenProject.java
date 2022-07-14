@@ -7,7 +7,7 @@ import java.util.List;
  * Maven project structure.
  * @author jens dietrich
  */
-class MavenProject implements Project {
+class MavenProject implements ProjectType {
 
     static final String TYPE = "mvn";
 

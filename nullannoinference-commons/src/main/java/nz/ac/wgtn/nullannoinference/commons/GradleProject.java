@@ -7,7 +7,7 @@ import java.util.List;
  * Gradle project structure.
  * @author jens dietrich
  */
-class GradleProject implements Project {
+class GradleProject implements ProjectType {
 
     static final String TYPE = "gradle";
 

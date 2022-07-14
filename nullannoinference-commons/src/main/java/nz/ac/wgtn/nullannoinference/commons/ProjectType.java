@@ -13,17 +13,17 @@ import java.util.function.Predicate;
  * This does currently not support projects with several modules.
  * @author jens dietrich
  */
-public interface Project {
+public interface ProjectType {
 
 
-    Project MVN = new MavenProject();
-    Project GRADLE = new GradleProject();
-    Project MULTI_GRADLE = new MultiLanguageGradleProject();
+    ProjectType MVN = new MavenProject();
+    ProjectType GRADLE = new GradleProject();
+    ProjectType MULTI_GRADLE = new MultiLanguageGradleProject();
 
     static String[] getValidProjectTypes() {
         return new String[]{MavenProject.TYPE,GradleProject.TYPE,MultiLanguageGradleProject.TYPE};
     }
-    static Project getProject(String name) {
+    static ProjectType getProject(String name) {
         if (name==null || name.equals(MavenProject.TYPE)) {
             return MVN;
         }

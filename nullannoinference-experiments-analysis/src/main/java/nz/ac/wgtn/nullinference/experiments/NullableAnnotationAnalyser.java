@@ -2,7 +2,7 @@ package nz.ac.wgtn.nullinference.experiments;
 
 import com.google.common.base.Preconditions;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
-import nz.ac.wgtn.nullannoinference.commons.Project;
+import nz.ac.wgtn.nullannoinference.commons.ProjectType;
 import org.objectweb.asm.*;
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,7 +20,7 @@ public class NullableAnnotationAnalyser {
     // should catch all null-related annotations, and possibly more ..
     public static Predicate<String> CATCH_ANY_NULL_ANNOTATION = descriptor -> descriptor.toLowerCase().contains("null");
 
-    public static Set<Issue> findNullAnnotated(Project project, File projectFolder, Predicate<String> isDescriptorForNullAnnotation) {
+    public static Set<Issue> findNullAnnotated(ProjectType project, File projectFolder, Predicate<String> isDescriptorForNullAnnotation) {
 
         Preconditions.checkArgument(projectFolder.exists(),projectFolder.getAbsolutePath() + " must exist");
         Preconditions.checkArgument(projectFolder.isDirectory(),projectFolder.getAbsolutePath() + " must be a folder");

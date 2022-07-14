@@ -1,16 +1,14 @@
 package nz.ac.wgtn.nullinference.experiments;
 
 import com.google.common.base.Preconditions;
-import nz.ac.wgtn.nullannoinference.commons.Project;
+import nz.ac.wgtn.nullannoinference.commons.ProjectType;
 import org.objectweb.asm.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
-import java.util.function.Predicate;
 
 /**
  * Script to collect methods (as strings -- classname::methodName descriptor) if they contain a certain callsite.
@@ -22,7 +20,7 @@ public class CollectMethodsByCallsite {
         boolean test(String klass, String method, String descriptor);
     }
 
-    public static Set<String> findMethodsWithCallsites(Project project, File projectFolder, CallsitePredicate filter) {
+    public static Set<String> findMethodsWithCallsites(ProjectType project, File projectFolder, CallsitePredicate filter) {
 
         Preconditions.checkArgument(projectFolder.exists(),projectFolder.getAbsolutePath() + " must exist");
         Preconditions.checkArgument(projectFolder.isDirectory(),projectFolder.getAbsolutePath() + " must be a folder");

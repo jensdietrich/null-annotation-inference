@@ -1,7 +1,7 @@
 package nz.ac.wgtn.nullinference.annotationcollector;
 
 import nz.ac.wgtn.nullannoinference.commons.Issue;
-import nz.ac.wgtn.nullannoinference.commons.Project;
+import nz.ac.wgtn.nullannoinference.commons.ProjectType;
 import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ public class CollectJSP305NullableAnnotationsTest {
 
     @Test
     public void testMethodArg() {
-        Set<Issue> issues = CollectNullableAnnotations.findNullAnnotated(Project.MVN,project);
+        Set<Issue> issues = CollectNullableAnnotations.findNullAnnotated(ProjectType.MVN,project);
         assertEquals(3,issues.size());
         assertEquals(
 1,
@@ -37,7 +37,7 @@ public class CollectJSP305NullableAnnotationsTest {
 
     @Test
     public void testMethodReturn() {
-        Set<Issue> issues = CollectNullableAnnotations.findNullAnnotated(Project.MVN,project);
+        Set<Issue> issues = CollectNullableAnnotations.findNullAnnotated(ProjectType.MVN,project);
         assertEquals(3,issues.size());
         assertEquals(
     1,
@@ -53,7 +53,7 @@ public class CollectJSP305NullableAnnotationsTest {
 
     @Test
     public void testField() {
-        Set<Issue> issues = CollectNullableAnnotations.findNullAnnotated(Project.MVN,project);
+        Set<Issue> issues = CollectNullableAnnotations.findNullAnnotated(ProjectType.MVN,project);
         assertEquals(3,issues.size());
         assertEquals(
     1,

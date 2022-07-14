@@ -1,8 +1,7 @@
 package nz.ac.wgtn.nullannoinference.refiner.negtests;
 
 import com.google.common.base.Preconditions;
-import nz.ac.wgtn.nullannoinference.commons.Project;
-import org.apache.commons.io.FileUtils;
+import nz.ac.wgtn.nullannoinference.commons.ProjectType;
 import org.objectweb.asm.*;
 import java.io.*;
 import java.util.*;
@@ -19,7 +18,7 @@ public class IdentifyNegativeTests {
     public static final String CSV_SEP = "\t";
     public static final String COUNT_NEGATIVE_TESTS = "negative tests detected";
 
-    public static void run  (Project project, File mvnProjectRootFolder, File outputFile, Map<String,Integer> counts) throws IOException {
+    public static void run  (ProjectType project, File mvnProjectRootFolder, File outputFile, Map<String,Integer> counts) throws IOException {
         Preconditions.checkArgument(mvnProjectRootFolder.exists(),mvnProjectRootFolder.getAbsolutePath() + " must exist");
         Preconditions.checkArgument(mvnProjectRootFolder.isDirectory(),mvnProjectRootFolder.getAbsolutePath() + " must be a folder");
 
@@ -46,7 +45,7 @@ public class IdentifyNegativeTests {
 
     }
 
-    static Set<Method> findNegativeTests(Project project,File folder) throws IOException {
+    static Set<Method> findNegativeTests(ProjectType project, File folder) throws IOException {
         Collection<File> classFiles = project.getCompiledTestClasses(folder);
         if (classFiles.isEmpty()) {
             throw new IllegalStateException("No .class files found, make sure that the project has been built");

@@ -8,7 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import nz.ac.wgtn.nullannoinference.commons.IssueAggregator;
 import nz.ac.wgtn.nullannoinference.commons.IssueKernel;
-import nz.ac.wgtn.nullannoinference.commons.Project;
+import nz.ac.wgtn.nullannoinference.commons.ProjectType;
 import nz.ac.wgtn.nullannoinference.refiner.LogSystem;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
 import org.apache.commons.io.FileUtils;
@@ -31,7 +31,7 @@ public class InferAdditionalIssues {
     public static final String COUNT_NULLABILITY_ISSUES_INFERRED = "additional issues inferred";
     public static final String COUNT_NULLABILITY_ISSUES_INFERRED_AGGREGATED = "additional issues inferred (aggregated)";
 
-    public static void run (Project project, File issueInputFolder, File projectFolder, File outputFile, String prefix, boolean propagateNullabilityInArguments, Map<String,Integer> counts, Predicate<Issue> issueFilter) throws Exception {
+    public static void run (ProjectType project, File issueInputFolder, File projectFolder, File outputFile, String prefix, boolean propagateNullabilityInArguments, Map<String,Integer> counts, Predicate<Issue> issueFilter) throws Exception {
 
         Preconditions.checkArgument(issueInputFolder.exists(), issueInputFolder.getAbsolutePath() + " must exist");
         Preconditions.checkArgument(issueInputFolder.isDirectory(), issueInputFolder.getAbsolutePath() + " must be a folder");

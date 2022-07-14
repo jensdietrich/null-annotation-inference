@@ -4,10 +4,8 @@ import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import nz.ac.wgtn.nullannoinference.commons.GradleProject;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
-import nz.ac.wgtn.nullannoinference.commons.MavenProject;
-import nz.ac.wgtn.nullannoinference.commons.Project;
+import nz.ac.wgtn.nullannoinference.commons.ProjectType;
 import org.apache.commons.cli.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Logger;
@@ -44,7 +42,7 @@ public class Scoper {
         options.addRequiredOption("i","input",true,"a folder containing json files with null issues reported by a test run instrumented with the nullannoinference agent, the folder will be checked recursively for files (required)");
         options.addRequiredOption("p","project",true,"the folder containing the Maven project (i.e. containing pom.xml) to be analysed, the project must have been built with \"mvn test\" (required)");
         options.addOption("s","summary",true,"a summary csv file with some stats about the project bytecode analysed (optional, default is \"" + SUMMARY_FILE_NAME + "\")");
-        options.addOption("t","projecttype",true,"the project type, default is mvn (Maven), can be set to any of " + Project.getValidProjectTypes());
+        options.addOption("t","projecttype",true,"the project type, default is mvn (Maven), can be set to any of " + ProjectType.getValidProjectTypes());
 
         CommandLineParser parser = new DefaultParser() {
             @Override
@@ -65,7 +63,7 @@ public class Scoper {
         };
         CommandLine cmd = parser.parse(options, args);
 
-        Project project = Project.getProject(cmd.getOptionValue("projecttype"));
+        ProjectType project = ProjectType.getProject(cmd.getOptionValue("projecttype"));
         LOGGER.info("using project type: " + project.getType());
 
         // input validation

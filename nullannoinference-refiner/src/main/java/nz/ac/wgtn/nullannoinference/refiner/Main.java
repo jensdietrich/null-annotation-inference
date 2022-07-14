@@ -2,7 +2,7 @@ package nz.ac.wgtn.nullannoinference.refiner;
 
 import com.google.common.base.Preconditions;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
-import nz.ac.wgtn.nullannoinference.commons.Project;
+import nz.ac.wgtn.nullannoinference.commons.ProjectType;
 import nz.ac.wgtn.nullannoinference.refiner.lsp.InferAdditionalIssues;
 import nz.ac.wgtn.nullannoinference.refiner.negtests.IdentifyNegativeTests;
 import nz.ac.wgtn.nullannoinference.refiner.negtests.SantitiseObservedIssues;
@@ -44,7 +44,7 @@ public class Main {
         options.addOption("a","propagate4args",false,"whether to propagate nullability for arguments to subtypes (optional, default is " + PROPAGATE_NULLABILITY_FOR_ARGUMENTS + ")");
         options.addRequiredOption("x","packagePrefix",true,"the prefix of packages for which the hierachy will be analysed, such as \"org.apache.commons\" (required)");
         options.addRequiredOption("o","summary",true,"a summary csv file with some stats about the inferences performed (optional, default is \"summary.csv\")");
-        options.addOption("t","projecttype",true,"the project type, default is mvn (Maven), can be set to any of " + Project.getValidProjectTypes());
+        options.addOption("t","projecttype",true,"the project type, default is mvn (Maven), can be set to any of " + ProjectType.getValidProjectTypes());
 
         CommandLineParser parser = new DefaultParser() {
             @Override
@@ -71,7 +71,7 @@ public class Main {
         Preconditions.checkArgument(projectFolder.isDirectory(),"project folder is not a folder: " + projectFolder.getAbsolutePath());
         LOGGER.info("analysing project: " + projectFolder.getAbsolutePath());
 
-        Project project = Project.getProject(cmd.getOptionValue("projecttype"));
+        ProjectType project = ProjectType.getProject(cmd.getOptionValue("projecttype"));
         LOGGER.info("using project type: " + project.getType());
         project.checkProjectRootFolder(projectFolder);
 

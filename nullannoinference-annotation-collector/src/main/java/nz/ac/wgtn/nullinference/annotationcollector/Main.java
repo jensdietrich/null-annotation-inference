@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
-import nz.ac.wgtn.nullannoinference.commons.Project;
+import nz.ac.wgtn.nullannoinference.commons.ProjectType;
 import org.apache.commons.cli.*;
 import org.apache.logging.log4j.Logger;
 import java.io.File;
@@ -61,7 +61,7 @@ public class Main {
         Preconditions.checkArgument(projectFolder.isDirectory(),"project folder is not a folder: " + projectFolder.getAbsolutePath());
 
         String projectType = cmd.getOptionValue(ARG_PROJECT_TYPPE);
-        Project project = Project.getProject(projectType);
+        ProjectType project = ProjectType.getProject(projectType);
         project.checkProjectRootFolder(projectFolder);
         Preconditions.checkState(!project.getCompiledTestClasses(projectFolder).isEmpty(),"no compiled classes found in project, check whether project has been built: " + projectFolder.getAbsolutePath() );
 
