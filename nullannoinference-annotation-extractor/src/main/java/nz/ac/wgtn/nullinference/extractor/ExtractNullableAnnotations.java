@@ -73,6 +73,8 @@ public class ExtractNullableAnnotations {
                 public AnnotationVisitor visitAnnotation(String descriptor, boolean visible) {
                     if (isNullAnnotation.test(descriptor)) {
                         Issue issue = new Issue(currentClassName, currentMethodName, currentMethodDescriptor,null, Issue.IssueType.RETURN_VALUE);
+                        issue.setProvenanceType(Issue.ProvenanceType.EXTRACTED);
+                        issue.setOrginalAnnotation(convertReftypeBytecode2Sourcecoderepresentation(descriptor));
                         issues.add(issue);
                     }
                     return super.visitAnnotation(descriptor, visible);
@@ -82,6 +84,8 @@ public class ExtractNullableAnnotations {
                 public AnnotationVisitor visitParameterAnnotation(int parameter, String descriptor, boolean visible) {
                     if (isNullAnnotation.test(descriptor)) {
                         Issue issue = new Issue(currentClassName, currentMethodName, currentMethodDescriptor,null, Issue.IssueType.ARGUMENT,parameter);
+                        issue.setProvenanceType(Issue.ProvenanceType.EXTRACTED);
+                        issue.setOrginalAnnotation(convertReftypeBytecode2Sourcecoderepresentation(descriptor));
                         issues.add(issue);
                     }
                     return super.visitAnnotation(descriptor, visible);                }
@@ -97,11 +101,20 @@ public class ExtractNullableAnnotations {
                 public AnnotationVisitor visitAnnotation(String descriptor, boolean visible) {
                     if (isNullAnnotation.test(descriptor)) {
                         Issue issue = new Issue(currentClassName, currentFieldName, currentFieldDescriptor,null, Issue.IssueType.FIELD);
+                        issue.setProvenanceType(Issue.ProvenanceType.EXTRACTED);
+                        issue.setOrginalAnnotation(convertReftypeBytecode2Sourcecoderepresentation(descriptor));
                         issues.add(issue);
                     }
                     return super.visitAnnotation(descriptor, visible);
                 }
             };
+        }
+
+        private String convertReftypeBytecode2Sourcecoderepresentation(String s) {
+            assert s.startsWith("L");
+            assert s.endsWith(";");
+            return s.substring(1,s.length()-1).replace('/','.');
+
         }
     }
 

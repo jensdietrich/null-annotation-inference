@@ -31,6 +31,8 @@ public class ExtractJSP305NullableAnnotationsTest {
             .filter(issue -> issue.getDescriptor().equals("(Ljava/lang/String;)Ljava/lang/String;"))
             .filter(issue -> issue.getKind() == Issue.IssueType.ARGUMENT)
             .filter(issue -> issue.getArgsIndex() == 0)
+            .filter(issue -> issue.getProvenanceType()== Issue.ProvenanceType.EXTRACTED)
+            .filter(issue -> issue.getOrginalAnnotation().equals("javax.annotation.Nullable"))
             .count()
         );
     }
@@ -47,6 +49,8 @@ public class ExtractJSP305NullableAnnotationsTest {
                 .filter(issue -> issue.getDescriptor().equals("(Ljava/lang/String;)Ljava/lang/String;"))
                 .filter(issue -> issue.getKind() == Issue.IssueType.RETURN_VALUE)
                 .filter(issue -> issue.getArgsIndex() == -1)
+                .filter(issue -> issue.getProvenanceType()== Issue.ProvenanceType.EXTRACTED)
+                .filter(issue -> issue.getOrginalAnnotation().equals("javax.annotation.Nullable"))
                 .count()
         );
     }
@@ -63,6 +67,8 @@ public class ExtractJSP305NullableAnnotationsTest {
                 .filter(issue -> issue.getDescriptor().equals("Ljava/lang/String;"))
                 .filter(issue -> issue.getKind() == Issue.IssueType.FIELD)
                 .filter(issue -> issue.getArgsIndex() == -1)
+                .filter(issue -> issue.getProvenanceType()== Issue.ProvenanceType.EXTRACTED)
+                .filter(issue -> issue.getOrginalAnnotation().equals("javax.annotation.Nullable"))
                 .count()
         );
     }

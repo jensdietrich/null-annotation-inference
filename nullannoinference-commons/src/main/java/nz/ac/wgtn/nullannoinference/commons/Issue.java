@@ -10,20 +10,27 @@ import java.util.Objects;
 public class Issue {
 
     public enum IssueType {RETURN_VALUE, ARGUMENT,FIELD}
-    public enum ProvenanceType {COLLECTED, INFERRED}
+    public enum ProvenanceType {
+        OBSERVED,  // observed during dynamic analysis
+        EXTRACTED, // from existing code, by means of static analysis
+        INFERRED // inferred from other issues
+    }
     public enum Scope {MAIN, TEST, OTHER, UNKNOWN}
 
     private String className = null;
     private String methodName = null;
     private String descriptor = null;
     private IssueType kind = null;
-    private ProvenanceType provenanceType = ProvenanceType.COLLECTED;
+    private ProvenanceType provenanceType = ProvenanceType.OBSERVED;
     private int argsIndex = -1;
     private String context = null;
     private List<String> stacktrace = null;
     private String trigger = null;  // root context , requires sanitisation of stacktrace to be meaningful
     private Issue parent = null;
     private Scope scope = Scope.UNKNOWN;
+
+    // this is only for extracted annotations
+    private String orginalAnnotation = null;
 
 
     public Issue(String className, String methodName, String descriptor, String context, IssueType kind) {
@@ -114,16 +121,24 @@ public class Issue {
         }
     }
 
+    public String getOrginalAnnotation() {
+        return orginalAnnotation;
+    }
+
+    public void setOrginalAnnotation(String orginalAnnotation) {
+        this.orginalAnnotation = orginalAnnotation;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Issue issue = (Issue) o;
-        return argsIndex == issue.argsIndex && Objects.equals(className, issue.className) && Objects.equals(methodName, issue.methodName) && Objects.equals(descriptor, issue.descriptor) && kind == issue.kind && provenanceType == issue.provenanceType && Objects.equals(context, issue.context) && Objects.equals(stacktrace, issue.stacktrace) && Objects.equals(trigger, issue.trigger) && Objects.equals(parent, issue.parent) && scope == issue.scope;
+        return argsIndex == issue.argsIndex && Objects.equals(className, issue.className) && Objects.equals(methodName, issue.methodName) && Objects.equals(descriptor, issue.descriptor) && kind == issue.kind && provenanceType == issue.provenanceType && Objects.equals(context, issue.context) && Objects.equals(stacktrace, issue.stacktrace) && Objects.equals(trigger, issue.trigger) && Objects.equals(parent, issue.parent) && scope == issue.scope && Objects.equals(orginalAnnotation, issue.orginalAnnotation);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(className, methodName, descriptor, kind, provenanceType, argsIndex, context, stacktrace, trigger, parent, scope);
+        return Objects.hash(className, methodName, descriptor, kind, provenanceType, argsIndex, context, stacktrace, trigger, parent, scope, orginalAnnotation);
     }
 }

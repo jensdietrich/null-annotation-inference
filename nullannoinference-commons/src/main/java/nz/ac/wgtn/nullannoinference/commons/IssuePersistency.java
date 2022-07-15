@@ -10,7 +10,8 @@ import java.util.Set;
 
 /**
  * Utility to load / save issues from / to files.
- * As this is also used by agents, doe not use existing data binding. Instead, use shaded low level json library
+ * As this is also used by agents, it does not use existing data binding.
+ * Instead, use shaded low level json library
  * to avoid conflicts with program under analysis.
  * @author jens dietrich
  */

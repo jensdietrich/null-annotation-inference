@@ -41,8 +41,8 @@ public class IssueFilters {
     public static final Predicate<Issue> TEST_SCOPE = issue -> issue.getScope() == Issue.Scope.TEST;
     public static final Predicate<Issue> OTHER_SCOPE = issue -> issue.getScope() == Issue.Scope.OTHER;
 
-    // note that COLLECTED is default TODO can drop null check once data is re-collected
-    public static final Predicate<Issue> COLLECTED = issue -> issue.getProvenanceType() == Issue.ProvenanceType.COLLECTED || issue.getProvenanceType() == null;
+    // note that OBSERVED is default TODO can drop null check once data is re-collected
+    public static final Predicate<Issue> COLLECTED = issue -> issue.getProvenanceType() == Issue.ProvenanceType.OBSERVED || issue.getProvenanceType() == null;
 
     // whether an issue has been detected by executinbg a test for which the issue was reported
     public static final Predicate<Issue> THIS_PROJECT = issue -> {
