@@ -20,6 +20,10 @@ public class ExtractNullableAnnotations {
     // should catch all null-related annotations, and possibly more ..
     public static Predicate<String> CATCH_ANY_NULL_ANNOTATION = descriptor -> descriptor.toLowerCase().contains("null");
 
+    // additional property keys for the issues extracted
+    public static final String PROPERTY_NULLABLE_ANNOTATION_TYPE = "nullable-annotation-type";
+    public static final String PROPERTY_ANNOTATED_CODE_LANGUAGE = "annotated-code-implementation-language";
+
     public static Set<Issue> findNullAnnotated(ProjectType project, File projectFolder) {
         // default filter -- look for all annotations containing "Nullable"
         Predicate<String> filter = n -> n.toLowerCase().contains("nullable");
@@ -34,8 +38,9 @@ public class ExtractNullableAnnotations {
         Collection<File> classFiles = project.getCompiledMainClasses(projectFolder);
         Set<Issue> issues = new HashSet<>();
         for (File classFile:classFiles) {
+            String implementationLanguage = project.getImplementationLanguage(classFile);
             try (InputStream in = new FileInputStream(classFile)) {
-                new ClassReader(in).accept(new AnnotationReporter(issues,isDescriptorForNullAnnotation), 0);
+                new ClassReader(in).accept(new AnnotationReporter(issues,isDescriptorForNullAnnotation,implementationLanguage), 0);
             }
             catch (Exception x) {
                 x.printStackTrace();
@@ -52,10 +57,13 @@ public class ExtractNullableAnnotations {
         String currentFieldName = null;
         String currentFieldDescriptor = null;
         Predicate<String> isNullAnnotation = null;
-        public AnnotationReporter(Set<Issue> issues,Predicate<String> isNullAnnotation) {
+        String implementationLanguage = null;
+
+        public AnnotationReporter(Set<Issue> issues,Predicate<String> isNullAnnotation,String implementationLanguage) {
             super(Opcodes.ASM9);
             this.issues = issues;
             this.isNullAnnotation = isNullAnnotation;
+            this.implementationLanguage = implementationLanguage;
         }
 
         @Override
@@ -74,7 +82,8 @@ public class ExtractNullableAnnotations {
                     if (isNullAnnotation.test(descriptor)) {
                         Issue issue = new Issue(currentClassName, currentMethodName, currentMethodDescriptor,null, Issue.IssueType.RETURN_VALUE);
                         issue.setProvenanceType(Issue.ProvenanceType.EXTRACTED);
-                        issue.setOrginalAnnotation(convertReftypeBytecode2Sourcecoderepresentation(descriptor));
+                        issue.setProperty(PROPERTY_NULLABLE_ANNOTATION_TYPE,convertReftypeBytecode2Sourcecoderepresentation(descriptor));
+                        issue.setProperty(PROPERTY_ANNOTATED_CODE_LANGUAGE,implementationLanguage);
                         issues.add(issue);
                     }
                     return super.visitAnnotation(descriptor, visible);
@@ -85,7 +94,8 @@ public class ExtractNullableAnnotations {
                     if (isNullAnnotation.test(descriptor)) {
                         Issue issue = new Issue(currentClassName, currentMethodName, currentMethodDescriptor,null, Issue.IssueType.ARGUMENT,parameter);
                         issue.setProvenanceType(Issue.ProvenanceType.EXTRACTED);
-                        issue.setOrginalAnnotation(convertReftypeBytecode2Sourcecoderepresentation(descriptor));
+                        issue.setProperty(PROPERTY_NULLABLE_ANNOTATION_TYPE,convertReftypeBytecode2Sourcecoderepresentation(descriptor));
+                        issue.setProperty(PROPERTY_ANNOTATED_CODE_LANGUAGE,implementationLanguage);
                         issues.add(issue);
                     }
                     return super.visitAnnotation(descriptor, visible);                }
@@ -102,7 +112,8 @@ public class ExtractNullableAnnotations {
                     if (isNullAnnotation.test(descriptor)) {
                         Issue issue = new Issue(currentClassName, currentFieldName, currentFieldDescriptor,null, Issue.IssueType.FIELD);
                         issue.setProvenanceType(Issue.ProvenanceType.EXTRACTED);
-                        issue.setOrginalAnnotation(convertReftypeBytecode2Sourcecoderepresentation(descriptor));
+                        issue.setProperty(PROPERTY_NULLABLE_ANNOTATION_TYPE,convertReftypeBytecode2Sourcecoderepresentation(descriptor));
+                        issue.setProperty(PROPERTY_ANNOTATED_CODE_LANGUAGE,implementationLanguage);
                         issues.add(issue);
                     }
                     return super.visitAnnotation(descriptor, visible);
@@ -114,7 +125,6 @@ public class ExtractNullableAnnotations {
             assert s.startsWith("L");
             assert s.endsWith(";");
             return s.substring(1,s.length()-1).replace('/','.');
-
         }
     }
 

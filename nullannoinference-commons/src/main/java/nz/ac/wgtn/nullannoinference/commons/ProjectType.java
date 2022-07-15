@@ -19,6 +19,11 @@ public interface ProjectType {
     ProjectType GRADLE = new GradleProject();
     ProjectType MULTI_GRADLE = new MultiLanguageGradleProject();
 
+    // implementation languages
+    String LANG_JAVA = "java";
+    String LANG_KOTLIN= "kotlin";
+    String LANG_GROOVY = "groovy";
+
     static String[] getValidProjectTypes() {
         return new String[]{MavenProject.TYPE,GradleProject.TYPE,MultiLanguageGradleProject.TYPE};
     }
@@ -84,5 +89,10 @@ public interface ProjectType {
     String getType();
 
     void checkProjectRootFolder(File root) throws IllegalArgumentException;
+
+    default String getImplementationLanguage(File classFile) {
+        assert classFile.getAbsolutePath().endsWith(".class");
+        return LANG_JAVA;
+    }
 
 }

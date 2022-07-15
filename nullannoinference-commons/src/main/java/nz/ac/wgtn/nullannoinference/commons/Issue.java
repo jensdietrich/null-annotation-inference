@@ -1,7 +1,6 @@
 package nz.ac.wgtn.nullannoinference.commons;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Nullable issue encountered.
@@ -29,8 +28,8 @@ public class Issue {
     private Issue parent = null;
     private Scope scope = Scope.UNKNOWN;
 
-    // this is only for extracted annotations
-    private String orginalAnnotation = null;
+    // additional pluggable properties
+    private Properties additionalProperties = new Properties();
 
 
     public Issue(String className, String methodName, String descriptor, String context, IssueType kind) {
@@ -121,12 +120,20 @@ public class Issue {
         }
     }
 
-    public String getOrginalAnnotation() {
-        return orginalAnnotation;
+    public String setProperty (String key,String value) {
+        return (String) this.additionalProperties.put(key,value);
     }
 
-    public void setOrginalAnnotation(String orginalAnnotation) {
-        this.orginalAnnotation = orginalAnnotation;
+    public String unsetProperty (String key) {
+        return (String) this.additionalProperties.remove(key);
+    }
+
+    public String getProperty(String key) {
+        return additionalProperties.getProperty(key);
+    }
+
+    public Set<Object> getPropertyNames() {
+        return Collections.unmodifiableSet(additionalProperties.keySet());
     }
 
     @Override
@@ -134,11 +141,11 @@ public class Issue {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Issue issue = (Issue) o;
-        return argsIndex == issue.argsIndex && Objects.equals(className, issue.className) && Objects.equals(methodName, issue.methodName) && Objects.equals(descriptor, issue.descriptor) && kind == issue.kind && provenanceType == issue.provenanceType && Objects.equals(context, issue.context) && Objects.equals(stacktrace, issue.stacktrace) && Objects.equals(trigger, issue.trigger) && Objects.equals(parent, issue.parent) && scope == issue.scope && Objects.equals(orginalAnnotation, issue.orginalAnnotation);
+        return argsIndex == issue.argsIndex && Objects.equals(className, issue.className) && Objects.equals(methodName, issue.methodName) && Objects.equals(descriptor, issue.descriptor) && kind == issue.kind && provenanceType == issue.provenanceType && Objects.equals(context, issue.context) && Objects.equals(stacktrace, issue.stacktrace) && Objects.equals(trigger, issue.trigger) && Objects.equals(parent, issue.parent) && scope == issue.scope && Objects.equals(additionalProperties, issue.additionalProperties);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(className, methodName, descriptor, kind, provenanceType, argsIndex, context, stacktrace, trigger, parent, scope, orginalAnnotation);
+        return Objects.hash(className, methodName, descriptor, kind, provenanceType, argsIndex, context, stacktrace, trigger, parent, scope, additionalProperties);
     }
 }

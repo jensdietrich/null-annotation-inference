@@ -29,6 +29,19 @@ class MultiLanguageGradleProject implements ProjectType {
     }
 
     @Override
+    public String getImplementationLanguage(File classFile) {
+        if (classFile.getAbsolutePath().contains("build/classes/groovy/")) {
+            return ProjectType.LANG_GROOVY;
+        }
+        else if (classFile.getAbsolutePath().contains("build/classes/kotlin/")) {
+            return ProjectType.LANG_KOTLIN;
+        }
+        else {
+            return ProjectType.super.getImplementationLanguage(classFile);
+        }
+    }
+
+    @Override
     public String getType() {
         return TYPE;
     }
