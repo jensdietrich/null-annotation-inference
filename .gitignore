@@ -20,3 +20,6 @@ experiments/infer-eradicate-results
 experiments/infer-nullsafe-results
 nullannoinference-scoper/target
 nullannoinference-annotator/.annotation-results
+nullannoinference-extractor/target
+nullannoinference-propagator/target
+nullannoinference-sanitizer/target

@@ -34,14 +34,14 @@
             </plugin>
         </plugins>
     </build>
-
   <modules>
       <module>nullannoinference-agent</module>
       <module>nullannoinference-agent2</module>
       <module>nullannoinference-scoper</module>
-      <module>nullannoinference-refiner</module>
+      <module>nullannoinference-propagator</module>
+      <module>nullannoinference-sanitizer</module>
       <module>nullannoinference-annotator</module>
-      <module>nullannoinference-annotation-extractor</module>
+      <module>nullannoinference-extractor</module>
       <module>nullannoinference-commons</module>
       <module>nullannoinference-experiments-analysis</module>
   </modules>
