@@ -81,9 +81,7 @@ public class ExtractNullableAnnotations {
                 public AnnotationVisitor visitAnnotation(String descriptor, boolean visible) {
                     if (isNullAnnotation.test(descriptor)) {
                         Issue issue = new Issue(currentClassName, currentMethodName, currentMethodDescriptor,null, Issue.IssueType.RETURN_VALUE);
-                        issue.setProvenanceType(Issue.ProvenanceType.EXTRACTED);
-                        issue.setProperty(PROPERTY_NULLABLE_ANNOTATION_TYPE,convertReftypeBytecode2Sourcecoderepresentation(descriptor));
-                        issue.setProperty(PROPERTY_ANNOTATED_CODE_LANGUAGE,implementationLanguage);
+                        setupIssue(issue,descriptor);
                         issues.add(issue);
                     }
                     return super.visitAnnotation(descriptor, visible);
@@ -93,9 +91,7 @@ public class ExtractNullableAnnotations {
                 public AnnotationVisitor visitParameterAnnotation(int parameter, String descriptor, boolean visible) {
                     if (isNullAnnotation.test(descriptor)) {
                         Issue issue = new Issue(currentClassName, currentMethodName, currentMethodDescriptor,null, Issue.IssueType.ARGUMENT,parameter);
-                        issue.setProvenanceType(Issue.ProvenanceType.EXTRACTED);
-                        issue.setProperty(PROPERTY_NULLABLE_ANNOTATION_TYPE,convertReftypeBytecode2Sourcecoderepresentation(descriptor));
-                        issue.setProperty(PROPERTY_ANNOTATED_CODE_LANGUAGE,implementationLanguage);
+                        setupIssue(issue,descriptor);
                         issues.add(issue);
                     }
                     return super.visitAnnotation(descriptor, visible);                }
@@ -111,14 +107,19 @@ public class ExtractNullableAnnotations {
                 public AnnotationVisitor visitAnnotation(String descriptor, boolean visible) {
                     if (isNullAnnotation.test(descriptor)) {
                         Issue issue = new Issue(currentClassName, currentFieldName, currentFieldDescriptor,null, Issue.IssueType.FIELD);
-                        issue.setProvenanceType(Issue.ProvenanceType.EXTRACTED);
-                        issue.setProperty(PROPERTY_NULLABLE_ANNOTATION_TYPE,convertReftypeBytecode2Sourcecoderepresentation(descriptor));
-                        issue.setProperty(PROPERTY_ANNOTATED_CODE_LANGUAGE,implementationLanguage);
+                        setupIssue(issue,descriptor);
                         issues.add(issue);
                     }
                     return super.visitAnnotation(descriptor, visible);
                 }
             };
+        }
+
+        private void setupIssue(Issue issue, String descriptor) {
+            issue.setProvenanceType(Issue.ProvenanceType.EXTRACTED);
+            issue.setProperty(PROPERTY_NULLABLE_ANNOTATION_TYPE,convertReftypeBytecode2Sourcecoderepresentation(descriptor));
+            issue.setProperty(PROPERTY_ANNOTATED_CODE_LANGUAGE,implementationLanguage);
+            issue.setScope(Issue.Scope.MAIN);
         }
 
         private String convertReftypeBytecode2Sourcecoderepresentation(String s) {

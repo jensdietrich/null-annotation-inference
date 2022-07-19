@@ -33,7 +33,7 @@ public class Main {
 
         Options options = new Options();
         options.addRequiredOption("p",ARG_INPUT, true, "the input mvn project folder");
-        options.addRequiredOption("i",ARG_OUTPUT, true, "the file name containing the issues collected (.json)");
+        options.addRequiredOption("o",ARG_OUTPUT, true, "the file name containing the issues collected (.json)");
         options.addRequiredOption("t",ARG_PROJECT_TYPPE, true, "the project type (see nz.ac.wgtn.nullannoinference.commons.Project for valid types: mvn , gradle , ..)");
 
         CommandLineParser parser = new DefaultParser() {

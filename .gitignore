@@ -23,3 +23,4 @@ nullannoinference-annotator/.annotation-results
 nullannoinference-extractor/target
 nullannoinference-propagator/target
 nullannoinference-sanitizer/target
+experiments-spring/results

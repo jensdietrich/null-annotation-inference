@@ -14,11 +14,11 @@ import java.util.function.Predicate;
  */
 public class Main {
 
-    public static final boolean PROPAGATE_NULLABILITY_FOR_ARGUMENTS = false;
+    public static final boolean PROPAGATE_NULLABILITY_FOR_ARGUMENTS = true;
     public static final String SUMMARY_FILE_NAME = "summary.csv";
 
     // TODO make this configurable -- only those issues will be configured
-    public static final Predicate<Issue> ISSUE_FILTER = issue -> issue.getScope()== Issue.Scope.MAIN;
+    public static final Predicate<Issue> ISSUE_FILTER = issue -> issue.getScope() == Issue.Scope.MAIN;
 
     public static final Logger LOGGER = LogSystem.getLogger("refiner");
 
@@ -28,7 +28,7 @@ public class Main {
         options.addRequiredOption("i","input",true,"a json file with null issues (required)");
         options.addRequiredOption("p","project",true,"the folder containing the project to be analysed, the project must have been built (required)");
         options.addRequiredOption("o","output",true,"the json file where both input and inferred issues will be stored (required)");
-        options.addRequiredOption("x","packagePrefix",true,"the prefix of packages for which the hierachy will be analysed, such as \"org.apache.commons\" (required)");
+        options.addRequiredOption("x","packagePrefix",true,"the prefix of packages for which the hierarchy will be analysed, such as \"org.apache.commons\" (required)");
         options.addOption("t","projecttype",true,"the project type, default is mvn (Maven), can be set to any of " + ProjectType.getValidProjectTypes());
         options.addOption("a","propagate4args",false,"whether to propagate nullability for arguments to subtypes (optional, default is " + PROPAGATE_NULLABILITY_FOR_ARGUMENTS + ")");
 
@@ -66,7 +66,6 @@ public class Main {
         LOGGER.info("reading issues in: " + input.getAbsolutePath());
 
         File output= new File(cmd.getOptionValue("output"));
-        Preconditions.checkArgument(output.exists(),"output folder does not exist: " + output.getAbsolutePath());
         LOGGER.info("existing and inferred issues will be saved in: " + output.getAbsolutePath());
 
         String packagePrefix = null;

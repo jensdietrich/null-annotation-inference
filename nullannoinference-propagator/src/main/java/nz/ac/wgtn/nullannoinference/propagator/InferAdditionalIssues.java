@@ -62,14 +62,16 @@ public class InferAdditionalIssues {
         catch (Exception x) {
             LOGGER.error("error reading issues from " + issueInputFile.getAbsolutePath(),x);
         }
-        LOGGER.info("" + issues.size() + " issues imported");
+        LOGGER.info("Imported issues: " + issues.size());
 
         Set<Issue> inferredIssues = inferIssuesViaLSPPropagation(issues,overrides,propagateNullabilityInArguments);
-        LOGGER.info("writing issues to " + outputFile.getAbsolutePath());
+        LOGGER.info("Inferred issues: " + inferredIssues.size());
 
         // merge old and new issues (can still be separated using meta data , see Issue::provenanceType)
         Set<Issue> allIssues = Sets.union(issues,inferredIssues);
+        LOGGER.info("Combined issues: " + allIssues.size());
 
+        LOGGER.info("Writing issues to " + outputFile.getAbsolutePath());
         gson = new Gson();
         try (Writer out = new FileWriter(outputFile)) {
             gson.toJson(allIssues,out);
