@@ -1,26 +1,24 @@
 description = "Spring Object/Relational Mapping"
 
 dependencies {
-	compile(project(":spring-beans"))
-	compile(project(":spring-core"))
-	compile(project(":spring-jdbc"))
-	compile(project(":spring-tx"))
+	api(project(":spring-beans"))
+	api(project(":spring-core"))
+	api(project(":spring-jdbc"))
+	api(project(":spring-tx"))
 	optional(project(":spring-aop"))
 	optional(project(":spring-context"))
 	optional(project(":spring-web"))
 	optional("org.eclipse.persistence:org.eclipse.persistence.jpa")
 	optional("org.hibernate:hibernate-core")
-	optional("javax.servlet:javax.servlet-api:3.1.0")
-	testCompile(testFixtures(project(":spring-beans")))
-	testCompile(testFixtures(project(":spring-context")))
-	testCompile(testFixtures(project(":spring-core")))
-	testCompile(testFixtures(project(":spring-web")))
-	testCompile("org.aspectj:aspectjweaver")
-	testCompile("org.hsqldb:hsqldb")
-	testRuntime("javax.xml.bind:jaxb-api")
+	optional("javax.servlet:javax.servlet-api")
+	testImplementation(testFixtures(project(":spring-beans")))
+	testImplementation(testFixtures(project(":spring-context")))
+	testImplementation(testFixtures(project(":spring-core")))
+	testImplementation(testFixtures(project(":spring-web")))
+	testImplementation("org.aspectj:aspectjweaver")
+	testImplementation("org.hsqldb:hsqldb")
+	testRuntimeOnly("javax.xml.bind:jaxb-api")
 }
-
-
 test {
 	// to enable instrumentation
 	jvmArgs = ["-Xmx12g","-javaagent:nullannoinference-agent.jar","-javaagent:nullannoinference-agent2.jar","-Dnz.ac.wgtn.nullannoinference.includes=org.springframework.orm","-Dnz.ac.wgtn.nullannoinference.context=springframework-orm"]
