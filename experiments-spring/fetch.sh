@@ -11,8 +11,7 @@ else
     git clone $REPO $PROJECT_FOLDER
     cd $PROJECT_FOLDER
     git checkout tags/$VERSION
-    # build
-    ./gradlew build
+    echo "Project fetch complete -- project now needs to be build, see README for details"
     cd ..
 fi
 

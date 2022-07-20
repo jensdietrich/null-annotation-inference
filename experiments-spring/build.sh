@@ -18,6 +18,8 @@ cp nullannoinference-propagator/target/propagator.jar $PROPAGATOR
 cp nullannoinference-sanitizer/target/sanitizer.jar $SANITIZER
 cp nullannoinference-scoper/target/scoper.jar $SCOPER
 cp nullannoinference-extractor/target/extractor.jar $EXTRACTOR
-
+cp nullannoinference-merger/target/merger.jar $MERGER
+cp nullannoinference-agent/target/nullannoinference-agent.jar $AGENT
+cp nullannoinference-agent2/target/nullannoinference-agent2.jar $AGENT2
 
 
