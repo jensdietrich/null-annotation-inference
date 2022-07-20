@@ -24,3 +24,4 @@ nullannoinference-extractor/target
 nullannoinference-propagator/target
 nullannoinference-sanitizer/target
 experiments-spring/results
+nullannoinference-merger/target
