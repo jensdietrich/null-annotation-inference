@@ -12,7 +12,6 @@ import nz.ac.wgtn.nullannoinference.commons.IssueAggregator;
 import nz.ac.wgtn.nullannoinference.commons.IssueKernel;
 import nz.ac.wgtn.nullannoinference.commons.ProjectType;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
-import org.apache.logging.log4j.Logger;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.*;
@@ -20,6 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import static nz.ac.wgtn.nullannoinference.propagator.Main.LOGGER;
 
 /**
  * Infer additional issues by applying LSP.
@@ -27,7 +27,7 @@ import java.util.stream.Stream;
  */
 public class InferAdditionalIssues {
 
-    public static final Logger LOGGER = LogSystem.getLogger("infer-additional-issues");
+
     private static final Type ISSUE_SET_TYPE = new TypeToken<Set<Issue>>() {}.getType();
 
     public static void run (ProjectType projectType, File issueInputFile, File projectFolder, File outputFile, String prefix, boolean propagateNullabilityInArguments, Predicate<Issue> issueFilter) throws Exception {
@@ -44,7 +44,6 @@ public class InferAdditionalIssues {
         LOGGER.info("analysing project" + projectFolder.getAbsolutePath());
         LOGGER.info("additional inferred issues will be written to  " + outputFile.getAbsolutePath());
         LOGGER.info("only classes starting with the following name will be considered  " + prefix);
-
 
         // extract overrides
         Collection<File> classFiles = projectType.getCompiledMainClasses(projectFolder);
@@ -66,10 +65,17 @@ public class InferAdditionalIssues {
         LOGGER.info("Imported issues: " + issues.size());
 
         Set<Issue> inferredIssues = inferIssuesViaLSPPropagation(issues,overrides,propagateNullabilityInArguments);
-        LOGGER.info("Inferred issues: " + inferredIssues.size());
+        LOGGER.info("Inferred issues (before deduplication): " + inferredIssues.size());
+
+        LOGGER.info("Checking for inferred issues that duplicate existing issues");
+        Set<IssueKernel> aggregatedIssues = IssueAggregator.aggregate(issues);
+        Set<Issue> inferredIssues2 = inferredIssues.stream()
+            .filter(i -> !aggregatedIssues.contains(i.getKernel()))
+            .collect(Collectors.toSet());
+        LOGGER.info("Inferred issues (after deduplication): " + inferredIssues2.size());
 
         // merge old and new issues (can still be separated using meta data , see Issue::provenanceType)
-        Set<Issue> allIssues = Sets.union(issues,inferredIssues);
+        Set<Issue> allIssues = Sets.union(issues,inferredIssues2);
         LOGGER.info("Combined issues: " + allIssues.size());
 
         LOGGER.info("Writing issues to " + outputFile.getAbsolutePath());

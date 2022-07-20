@@ -1,14 +1,11 @@
 package nz.ac.wgtn.nullannoinference.propagator;
 
 import com.google.common.base.Preconditions;
-import com.google.gson.reflect.TypeToken;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
 import nz.ac.wgtn.nullannoinference.commons.ProjectType;
 import org.apache.commons.cli.*;
 import org.apache.logging.log4j.Logger;
 import java.io.File;
-import java.lang.reflect.Type;
-import java.util.Set;
 import java.util.function.Predicate;
 
 /**
@@ -21,7 +18,7 @@ public class Main {
 
     // TODO make this configurable -- only those issues will be configured
     public static final Predicate<Issue> ISSUE_FILTER = issue -> issue.getScope() == Issue.Scope.MAIN;
-    public static final Logger LOGGER = LogSystem.getLogger("refiner");
+    public static final Logger LOGGER = LogSystem.getLogger("infer-additional-issues");
 
     public static void main (String[] args) throws Exception {
 
