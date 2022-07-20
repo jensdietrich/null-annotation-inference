@@ -2,6 +2,7 @@ package nz.ac.wgtn.nullannoinference.sanitizer;
 
 import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
 import org.apache.logging.log4j.Logger;
 import java.io.*;
@@ -59,7 +60,7 @@ public class SantitiseObservedIssues {
         rejectedIssues.addAll(rejectedIssues2);
         sanitisedIssues.addAll(sanitisedIssues2);
 
-        // todo write results
+        gson = new GsonBuilder().setPrettyPrinting().create();
         if (sanitisedIssues2.size()>0) {
             LOGGER.info("\twriting sanitised set to " + sanitisedIssuesFile.getAbsolutePath());
             if (!sanitisedIssuesFile.getParentFile().exists()) {

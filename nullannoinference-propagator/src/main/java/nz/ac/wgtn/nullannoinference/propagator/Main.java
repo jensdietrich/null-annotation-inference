@@ -1,11 +1,14 @@
 package nz.ac.wgtn.nullannoinference.propagator;
 
 import com.google.common.base.Preconditions;
+import com.google.gson.reflect.TypeToken;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
 import nz.ac.wgtn.nullannoinference.commons.ProjectType;
 import org.apache.commons.cli.*;
 import org.apache.logging.log4j.Logger;
 import java.io.File;
+import java.lang.reflect.Type;
+import java.util.Set;
 import java.util.function.Predicate;
 
 /**
@@ -15,11 +18,9 @@ import java.util.function.Predicate;
 public class Main {
 
     public static final boolean PROPAGATE_NULLABILITY_FOR_ARGUMENTS = true;
-    public static final String SUMMARY_FILE_NAME = "summary.csv";
 
     // TODO make this configurable -- only those issues will be configured
     public static final Predicate<Issue> ISSUE_FILTER = issue -> issue.getScope() == Issue.Scope.MAIN;
-
     public static final Logger LOGGER = LogSystem.getLogger("refiner");
 
     public static void main (String[] args) throws Exception {
@@ -70,20 +71,10 @@ public class Main {
 
         String packagePrefix = null;
         packagePrefix = cmd.getOptionValue("packagePrefix");
-
         LOGGER.info("prefix for classes / packages for which the hierarchy will be analysed: " + packagePrefix);
 
-        File summaryFile = null;
-        if (cmd.hasOption("summary")) {
-            summaryFile = new File(cmd.getOptionValue("summary"));
-        }
-        else {
-            summaryFile = new File(SUMMARY_FILE_NAME);
-        }
-        LOGGER.info("a summary of the actions performed will be written to: " + summaryFile.getAbsolutePath());
 
         boolean propagate4args = cmd.hasOption("propagate4args");
-
 
 
         LOGGER.info("Inferring additional nullability annotations for sub and super types");

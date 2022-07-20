@@ -88,34 +88,34 @@ public class Scoper {
         }
 
         // add scope to issues
-            List<Issue> issues = null;
-            List<Issue> modifiedIssues = new ArrayList<>();
-            Gson gson = new Gson();
-            Type listType = new TypeToken<ArrayList<Issue>>() {}.getType();
-            try (Reader in = new FileReader(issueFile)) {
-                issues = gson.fromJson(in, listType);
-                for (Issue issue : issues) {
-                    String clazz = issue.getClassName();
-                    if (mainClassNames.contains(clazz)) {
-                        issue.setScope(Issue.Scope.MAIN);
-                        modifiedIssues.add(issue);
-                    } else if (testClassNames.contains(clazz)) {
-                        issue.setScope(Issue.Scope.TEST);
-                        modifiedIssues.add(issue);
-                    } else {
-                        LOGGER.debug("Unclassifiable class found (neither main nor test -- might be from different project or synthetic): " + clazz + " -- will use " + Issue.Scope.OTHER);
-                        issue.setScope(Issue.Scope.OTHER);
-                        modifiedIssues.add(issue);
-                    }
+        List<Issue> issues = null;
+        List<Issue> modifiedIssues = new ArrayList<>();
+        Gson gson = new Gson();
+        Type listType = new TypeToken<ArrayList<Issue>>() {}.getType();
+        try (Reader in = new FileReader(issueFile)) {
+            issues = gson.fromJson(in, listType);
+            for (Issue issue : issues) {
+                String clazz = issue.getClassName();
+                if (mainClassNames.contains(clazz)) {
+                    issue.setScope(Issue.Scope.MAIN);
+                    modifiedIssues.add(issue);
+                } else if (testClassNames.contains(clazz)) {
+                    issue.setScope(Issue.Scope.TEST);
+                    modifiedIssues.add(issue);
+                } else {
+                    LOGGER.debug("Unclassifiable class found (neither main nor test -- might be from different project or synthetic): " + clazz + " -- will use " + Issue.Scope.OTHER);
+                    issue.setScope(Issue.Scope.OTHER);
+                    modifiedIssues.add(issue);
                 }
             }
-            // write files back
-            gson = new GsonBuilder().setPrettyPrinting().create();
-            try (FileWriter out = new FileWriter(outputFile)) {
-                gson.toJson(modifiedIssues, listType,out);
-                LOGGER.info("Augmented issues with scope attribute written to " + outputFile.getAbsolutePath());
-            }
         }
+        // write files back
+        gson = new GsonBuilder().setPrettyPrinting().create();
+        try (FileWriter out = new FileWriter(outputFile)) {
+            gson.toJson(modifiedIssues, listType,out);
+            LOGGER.info("Augmented issues with scope attribute written to " + outputFile.getAbsolutePath());
+        }
+    }
 
 
     static void collectClassNames(File classFile, Set<String> classes)  {

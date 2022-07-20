@@ -6,6 +6,7 @@ import com.google.common.graph.Graph;
 import com.google.common.graph.Graphs;
 import com.google.common.graph.Traverser;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import nz.ac.wgtn.nullannoinference.commons.IssueAggregator;
 import nz.ac.wgtn.nullannoinference.commons.IssueKernel;
@@ -27,6 +28,7 @@ import java.util.stream.Stream;
 public class InferAdditionalIssues {
 
     public static final Logger LOGGER = LogSystem.getLogger("infer-additional-issues");
+    private static final Type ISSUE_SET_TYPE = new TypeToken<Set<Issue>>() {}.getType();
 
     public static void run (ProjectType projectType, File issueInputFile, File projectFolder, File outputFile, String prefix, boolean propagateNullabilityInArguments, Predicate<Issue> issueFilter) throws Exception {
 
@@ -55,8 +57,7 @@ public class InferAdditionalIssues {
         LOGGER.info("reading issues from " + issueInputFile.getAbsolutePath());
         Gson gson = new Gson();
         try (Reader in = new FileReader(issueInputFile)) {
-            Type listType = new TypeToken<ArrayList<Issue>>() {}.getType();
-            List<Issue> issues2 = gson.fromJson(in, listType);
+            Set<Issue> issues2 = gson.fromJson(in, ISSUE_SET_TYPE);
             issues.addAll(issues2.parallelStream().filter(issueFilter).collect(Collectors.toSet()));
         }
         catch (Exception x) {
@@ -72,9 +73,9 @@ public class InferAdditionalIssues {
         LOGGER.info("Combined issues: " + allIssues.size());
 
         LOGGER.info("Writing issues to " + outputFile.getAbsolutePath());
-        gson = new Gson();
+        gson = new GsonBuilder().setPrettyPrinting().create();
         try (Writer out = new FileWriter(outputFile)) {
-            gson.toJson(allIssues,out);
+            gson.toJson(allIssues,ISSUE_SET_TYPE,out);
             LOGGER.info("original and inferred issues written to " + outputFile.getAbsolutePath());
         }
         catch (Exception x) {

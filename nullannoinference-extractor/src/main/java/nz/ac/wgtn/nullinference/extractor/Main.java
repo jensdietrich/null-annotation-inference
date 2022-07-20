@@ -3,6 +3,7 @@ package nz.ac.wgtn.nullinference.extractor;
 import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.google.gson.GsonBuilder;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
 import nz.ac.wgtn.nullannoinference.commons.ProjectType;
 import org.apache.commons.cli.*;
@@ -65,14 +66,13 @@ public class Main {
         project.checkProjectRootFolder(projectFolder);
         Preconditions.checkState(!project.getCompiledTestClasses(projectFolder).isEmpty(),"no compiled classes found in project, check whether project has been built: " + projectFolder.getAbsolutePath() );
 
-
         LOGGER.info("analysing project: " + projectFolder.getAbsolutePath());
         Set<Issue> issues = ExtractNullableAnnotations.findNullAnnotated(project,projectFolder, d -> true);
         LOGGER.info("Existing issues found in analysed projects: " + issues.size());
 
         File issueFile = new File(cmd.getOptionValue(ARG_OUTPUT));
         Type gsonType = new TypeToken<Set<Issue>>() {}.getType();
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try (FileWriter out = new FileWriter(issueFile)) {
             gson.toJson(issues,gsonType,out);
             LOGGER.info("Issues writing issues to file " + issueFile.getAbsolutePath());

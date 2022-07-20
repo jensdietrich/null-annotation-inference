@@ -79,19 +79,11 @@ public class Main {
         }
         LOGGER.info("sanitised issues will be saved in: " + sanitisedIssues.getAbsolutePath());
 
-
-        Map<String,Integer> counts = new LinkedHashMap<>();
-
         LOGGER.info("Analysing negative tests");
         IdentifyNegativeTests.run(projectType,projectFolder,negTestFile);
 
         LOGGER.info("Removing issues caused by negative tests");
         SantitiseObservedIssues.run(inputFile,sanitisedIssues,negTestFile,ISSUE_FILTER);
-
-        LOGGER.info("Summary of actions performed:");
-        for (String key:counts.keySet()) {
-            LOGGER.info(key + " : " + counts.get(key));
-        }
 
     }
 }
