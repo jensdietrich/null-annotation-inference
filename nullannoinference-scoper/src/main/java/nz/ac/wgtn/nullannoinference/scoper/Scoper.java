@@ -15,19 +15,13 @@ import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Add the scope attribute to issues by investigating the project structure.
- * Assumes that the project has the standard Maven layout.
- * Will also produce a useful summary of the number of reference returns, method parameters and fields in main and test classes.
  * Main class, entry point for executable jar that is being built.
  * @author jens dietrich
  */
 public class Scoper {
-
-    // defaults
-    public static final String SUMMARY_FILE_NAME = "byte-code-summary.csv";
 
     public static final Logger LOGGER = LogSystem.getLogger("main");
 
@@ -39,9 +33,9 @@ public class Scoper {
     public static void main (String[] args) throws Exception {
 
         Options options = new Options();
-        options.addRequiredOption("i","input",true,"a folder containing json files with null issues reported by a test run instrumented with the nullannoinference agent, the folder will be checked recursively for files (required)");
+        options.addRequiredOption("i","input",true,"a json file containing null issues (required)");
+        options.addRequiredOption("o","output",true,"a json file where the issues with the scope attribute set will be saved (required)");
         options.addRequiredOption("p","project",true,"the folder containing the Maven project (i.e. containing pom.xml) to be analysed, the project must have been built with \"mvn test\" (required)");
-        options.addOption("s","summary",true,"a summary csv file with some stats about the project bytecode analysed (optional, default is \"" + SUMMARY_FILE_NAME + "\")");
         options.addOption("t","projecttype",true,"the project type, default is mvn (Maven), can be set to any of " + ProjectType.getValidProjectTypes());
 
         CommandLineParser parser = new DefaultParser() {
@@ -73,28 +67,11 @@ public class Scoper {
         project.checkProjectRootFolder(projectFolder);
         LOGGER.info("analysing project: " + projectFolder.getAbsolutePath());
 
-        File inputFolder = new File(cmd.getOptionValue("input"));
-        Preconditions.checkArgument(inputFolder.exists(),"input folder does not exist: " + inputFolder.getAbsolutePath());
-        Preconditions.checkArgument(inputFolder.isDirectory(),"input folder is not a folder: " + inputFolder.getAbsolutePath());
-        Collection<File> issueFiles = FileUtils.listFiles(inputFolder,new String[]{"json"},true);
-        // coarse and unsound check might be empty
-        Preconditions.checkArgument(issueFiles.size()>0,"no files containing nullability issues found in folder " + inputFolder.getAbsolutePath());
-        LOGGER.info("using null issues in: " + inputFolder.getAbsolutePath());
+        File issueFile = new File(cmd.getOptionValue("input"));
+        Preconditions.checkArgument(issueFile.exists(),"input folder does not exist: " + issueFile.getAbsolutePath());
+        LOGGER.info("processing null issues in: " + issueFile.getAbsolutePath());
 
-        File summaryFile = null;
-        if (cmd.hasOption("summary")) {
-            summaryFile = new File(cmd.getOptionValue("summary"));
-        }
-        else {
-            summaryFile = new File(inputFolder,SUMMARY_FILE_NAME);
-        }
-        // LOGGER.info("a summary of byte code features will be written to: " + summaryFile.getAbsolutePath());
-
-        // initialise counter
-        Map<KEYS,Integer> counters = new LinkedHashMap<>();
-        for (KEYS k:KEYS.values()) {
-            counters.put(k,0);
-        }
+        File outputFile = new File(cmd.getOptionValue("output"));
 
         Set<String> mainClassNames = new HashSet<>();
         Set<String> testClassNames = new HashSet<>();
@@ -102,62 +79,46 @@ public class Scoper {
         Collection<File> classFiles = project.getCompiledMainClasses(projectFolder);
         Preconditions.checkState(!classFiles.isEmpty(),"no main compiled classes found, check whether project has been built");
         for (File classFile:classFiles) {
-            analyseBytecodeForFeatures(classFile, Issue.Scope.MAIN,counters,mainClassNames);
+            collectClassNames(classFile, mainClassNames);
         }
         classFiles = project.getCompiledTestClasses(projectFolder);
         Preconditions.checkState(!classFiles.isEmpty(),"no test compiled classes found, check whether project has been built");
         for (File classFile:classFiles) {
-            analyseBytecodeForFeatures(classFile, Issue.Scope.TEST,counters,testClassNames);
+            collectClassNames(classFile, testClassNames);
         }
 
         // add scope to issues
-        for (File issueFile:issueFiles) {
             List<Issue> issues = null;
             List<Issue> modifiedIssues = new ArrayList<>();
             Gson gson = new Gson();
             Type listType = new TypeToken<ArrayList<Issue>>() {}.getType();
             try (Reader in = new FileReader(issueFile)) {
                 issues = gson.fromJson(in, listType);
-                for (Issue issue:issues) {
+                for (Issue issue : issues) {
                     String clazz = issue.getClassName();
                     if (mainClassNames.contains(clazz)) {
                         issue.setScope(Issue.Scope.MAIN);
                         modifiedIssues.add(issue);
-                    }
-                    else if (testClassNames.contains(clazz)) {
+                    } else if (testClassNames.contains(clazz)) {
                         issue.setScope(Issue.Scope.TEST);
                         modifiedIssues.add(issue);
-                    }
-                    else {
+                    } else {
                         LOGGER.debug("Unclassifiable class found (neither main nor test -- might be from different project or synthetic): " + clazz + " -- will use " + Issue.Scope.OTHER);
                         issue.setScope(Issue.Scope.OTHER);
                         modifiedIssues.add(issue);
                     }
                 }
             }
-
             // write files back
             gson = new GsonBuilder().setPrettyPrinting().create();
-            try (FileWriter out = new FileWriter(issueFile)) {
+            try (FileWriter out = new FileWriter(outputFile)) {
                 gson.toJson(modifiedIssues, listType,out);
-                LOGGER.info("Augmented issues with scope attribute written to " + issueFile.getAbsolutePath());
+                LOGGER.info("Augmented issues with scope attribute written to " + outputFile.getAbsolutePath());
             }
         }
 
-        // write summary
-        try (PrintWriter out = new PrintWriter(new FileWriter(summaryFile))) {
-            String keys = counters.keySet().stream().map(k -> k.name()).collect(Collectors.joining("\t"));
-            String values = counters.keySet().stream().map(k -> format(counters.get(k))).collect(Collectors.joining("\t"));
-            out.println(keys);
-            out.println(values);
-        }
-        LOGGER.info("a summary of byte code features written to: " + summaryFile.getAbsolutePath());
 
-
-    }
-
-
-    static void analyseBytecodeForFeatures(File classFile, Issue.Scope scope, Map<KEYS, Integer> counters,Set<String> classes)  {
+    static void collectClassNames(File classFile, Set<String> classes)  {
         try {
             ClassReader clReader = new ClassReader(new FileInputStream(classFile));
             clReader.accept(new ClassVisitor(Opcodes.ASM9) {
@@ -165,94 +126,13 @@ public class Scoper {
                 public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
                     super.visit(version, access, name, signature, superName, interfaces);
                     if ((access & Opcodes.ACC_SYNTHETIC) == 0) {
-                        if (scope == Issue.Scope.MAIN) {
-                            counters.compute(KEYS.MAIN_CLASSES, (k, v) -> v+1);
-                        } else {
-                            counters.compute(KEYS.TEST_CLASSES, (k, v) -> v+1);
-                        }
-                        if (!name.contains("$")) {
-                            if (scope == Issue.Scope.MAIN) {
-                                counters.compute(KEYS.MAIN_TOPLEVEL_CLASSES, (k, v) -> v+1);
-                            } else {
-                                counters.compute(KEYS.TEST_TOPLEVEL_CLASSES, (k, v) -> v+1);
-                            }
-                        }
                         classes.add(name.replace('/', '.'));
                     }
-
-                }
-
-                @Override
-                public FieldVisitor visitField(int access, String name, String descriptor, String signature, Object value) {
-                    super.visitField(access, name, descriptor, signature, value);
-                    if ((access & Opcodes.ACC_SYNTHETIC) == 0) {
-                        if (scope == Issue.Scope.MAIN) {
-                            counters.compute(KEYS.MAIN_FIELDS_ALL, (k, v) -> v+1);
-                        } else {
-                            counters.compute(KEYS.TEST_FIELDS_ALL, (k, v) -> v+1);
-                        }
-                        if (descriptor.startsWith("L") || descriptor.startsWith("[")) {
-                            if (scope == Issue.Scope.MAIN) {
-                                counters.compute(KEYS.MAIN_FIELDS_NULLABLE, (k, v) -> v+1);
-                            } else {
-                                counters.compute(KEYS.TEST_FIELDS_NULLABLE, (k, v) -> v+1);
-                            }
-                        }
-                    }
-                    return null;
-                }
-
-                @Override
-                public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
-                    super.visitMethod(access, name, descriptor, signature, exceptions);
-                    if ((access & Opcodes.ACC_SYNTHETIC) == 0) {
-                        if (scope == Issue.Scope.MAIN) {
-                            counters.compute(KEYS.MAIN_METHODS_ALL,(k,v) -> v+1);
-                        }
-                        else {
-                            counters.compute(KEYS.TEST_METHODS_ALL,(k,v) -> v+1);
-                        }
-
-                        ParsedDescriptor parsedDescriptor = new ParsedDescriptor();
-                        parsedDescriptor.parse(descriptor);
-                        if (parsedDescriptor.isRefReturnType()) {
-                            if (scope == Issue.Scope.MAIN) {
-                                counters.compute(KEYS.MAIN_RETURNS,(k,v) -> v+1);
-                            }
-                            else {
-                                counters.compute(KEYS.TEST_RETURNS,(k,v) -> v+1);
-                            }
-                        }
-
-                        int refParamCount = parsedDescriptor.getNumberOfRefParameters();
-                        if (scope == Issue.Scope.MAIN) {
-                            counters.compute(KEYS.MAIN_ARGUMENTS,(k,v) -> v+refParamCount);
-                        }
-                        else {
-                            counters.compute(KEYS.TEST_ARGUMENTS,(k,v) -> v+refParamCount);
-                        }
-
-                        if (parsedDescriptor.isRefReturnType() || refParamCount>0) {
-                            if (scope == Issue.Scope.MAIN) {
-                                counters.compute(KEYS.MAIN_METHODS_NULLABLE,(k,v) -> v+1);
-                            }
-                            else {
-                                counters.compute(KEYS.TEST_METHODS_NULLABLE,(k,v) -> v+1);
-                            }
-                        }
-                    }
-                    return null;
                 }
             },0);
         } catch (IOException e) {
             LOGGER.error("Cannot analyse class file: " + classFile.getAbsolutePath(),e);
         }
-
-    }
-
-    static NumberFormat INT_FORMAT = new DecimalFormat("###,###,###");
-    static String format (int number) {
-        return INT_FORMAT.format(number);
     }
 
 }
