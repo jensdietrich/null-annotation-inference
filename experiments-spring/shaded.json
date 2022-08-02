@@ -1,0 +1,17 @@
+[
+  {
+    "module": "spring-core",
+    "package": "org.springframework.cglib",
+    "original": "net.sf.cglib"
+  },
+  {
+    "module":"spring-core",
+    "package":"org.springframework.asm",
+    "original": "org.objectweb.asm"
+  },
+  {
+    "module":"spring-core",
+    "package":"org.springframework.objenesis",
+    "original": "org.objenesis"
+  }
+]
