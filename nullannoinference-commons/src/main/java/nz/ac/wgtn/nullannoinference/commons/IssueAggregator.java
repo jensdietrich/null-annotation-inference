@@ -20,4 +20,24 @@ public class IssueAggregator {
             .collect(Collectors.toSet());
     }
 
+
+    // alternative implementation of aggregate suitable for debugging (to reveal equivalence)
+    public static Set<IssueKernel> aggregateDebuggable(Set<? extends Issue> issues) {
+        Map<IssueKernel,Issue> aggregated = new HashMap<>();
+        for (Issue issue:issues) {
+            IssueKernel kernel = issue.getKernel();
+            Issue issue2 = aggregated.get(kernel);
+            if (issue2 == null) {
+                aggregated.put(kernel,issue);
+            }
+            else {
+                // put breakpoint here
+                System.out.println("equivalent issues detected: ");
+                System.out.println("\tissue1: " + issue);
+                System.out.println("\tissue2: " + issue2);
+            }
+        }
+        return aggregated.keySet();
+    }
+
 }
