@@ -28,7 +28,7 @@
           <finalName>sanitizer</finalName>
           <archive>
             <manifest>
-              <mainClass>nz.ac.wgtn.nullannoinference.propagator.Main</mainClass>
+              <mainClass>nz.ac.wgtn.nullannoinference.sanitizer.Main</mainClass>
             </manifest>
           </archive>
           <descriptorRefs>
