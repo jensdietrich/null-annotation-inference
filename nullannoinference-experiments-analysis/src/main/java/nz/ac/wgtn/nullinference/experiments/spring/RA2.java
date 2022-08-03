@@ -41,12 +41,10 @@ public class RA2 extends Experiment {
 
     public void analyse()  {
 
-
         // read shading specs
-        Set<ShadingSpec> shadingSpecs = this.readShadingSpec(SHADING_SPECS);
+        Set<ShadingSpec> shadingSpecs = this.readShadingSpecs(SHADING_SPECS);
         Predicate<? extends AbstractIssue> shaded =
             issue -> shadingSpecs.stream().anyMatch(spec -> issue.getClassName().startsWith(spec.getRenamed()));
-
 
         Column[] columns = new Column[] {
             Column.First,

@@ -10,9 +10,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -24,6 +22,9 @@ import java.util.stream.Stream;
 public abstract class Experiment {
 
     public static final Logger LOGGER = LogSystem.getLogger("experiments");
+
+    private static Map<File,Set<Issue>> ISSUE_CACHE = new HashMap<>();
+    private static Map<File,Set<ShadingSpec>> SHADING_SPEC_CACHE = new HashMap<>();
 
     public boolean aggregateIssues () {
         return true;
@@ -44,43 +45,62 @@ public abstract class Experiment {
     protected static Set<? extends AbstractIssue> readIssues(File folder, String moduleName, boolean aggregate, Predicate<? extends AbstractIssue> filter)  {
         File file = new File(folder,"nullable-"+moduleName+".json");
         Preconditions.checkState(file.exists());
-        Gson gson = new Gson();
-        try (FileReader in = new FileReader(file)) {
-            Type listType = new TypeToken<HashSet<Issue>>() {}.getType();
-            Set<Issue> issues = gson.fromJson(in, listType);
-            LOGGER.info(""+issues.size()+" issues read from " + file.getAbsolutePath() );
-
-
-            if (aggregate) {
-                Set<IssueKernel> aggregatedIssues = IssueAggregator.aggregate(issues);
-                LOGGER.info("issues aggregated to " + aggregatedIssues.size());
-                aggregatedIssues = aggregatedIssues.stream().filter((Predicate<? super IssueKernel>) filter).collect(Collectors.toSet());
-                LOGGER.info("issues filtered: " + aggregatedIssues.size());
-                return aggregatedIssues;
-            }
-            else {
-                issues = issues.stream().filter((Predicate<? super Issue>) filter).collect(Collectors.toSet());
-                LOGGER.info("issues filtered: " + issues.size());
-                return issues;
-            }
-        } catch (IOException x) {
-            LOGGER.error("error reading file " + file.getAbsolutePath(),"x");
-            throw new IllegalStateException(x);
+        Set<Issue> issues = doReadIssues(file);
+        if (aggregate) {
+            Set<IssueKernel> aggregatedIssues = IssueAggregator.aggregate(issues);
+            LOGGER.info("issues aggregated to " + aggregatedIssues.size());
+            aggregatedIssues = aggregatedIssues.stream().filter((Predicate<? super IssueKernel>) filter).collect(Collectors.toSet());
+            LOGGER.info("issues filtered: " + aggregatedIssues.size());
+            return aggregatedIssues;
+        }
+        else {
+            issues = issues.stream().filter((Predicate<? super Issue>) filter).collect(Collectors.toSet());
+            LOGGER.info("issues filtered: " + issues.size());
+            return issues;
         }
     }
 
-    protected static Set<ShadingSpec> readShadingSpec(File file)  {
-        Preconditions.checkState(file.exists());
-        Gson gson = new Gson();
-        try (FileReader in = new FileReader(file)) {
-            Type listType = new TypeToken<HashSet<ShadingSpec>>() {}.getType();
-            Set<ShadingSpec> specs = gson.fromJson(in, listType);
-            LOGGER.info(""+specs.size()+" shading specs read from " + file.getAbsolutePath() );
-            return specs;
-        } catch (IOException x) {
-            LOGGER.error("error reading file " + file.getAbsolutePath(),"x");
-            throw new IllegalStateException(x);
+    private static Set<Issue> doReadIssues(File file) {
+        Set<Issue> issues = ISSUE_CACHE.get(file);
+        if (issues==null) {
+            Gson gson = new Gson();
+            try (FileReader in = new FileReader(file)) {
+                Type listType = new TypeToken<HashSet<Issue>>() {}.getType();
+                issues = gson.fromJson(in, listType);
+                ISSUE_CACHE.put(file,issues);
+                LOGGER.info(""+issues.size()+" issues read from " + file.getAbsolutePath() );
+            } catch (IOException x) {
+                LOGGER.error("error reading file " + file.getAbsolutePath(),"x");
+                throw new IllegalStateException(x);
+            }
         }
+        else {
+            LOGGER.info("using cached issues read from: " + file.getAbsolutePath());
+        }
+        return issues;
+    }
+
+
+    protected static Set<ShadingSpec> readShadingSpecs(File file)  {
+        Set<ShadingSpec> specs = SHADING_SPEC_CACHE.get(file);
+        if (specs==null) {
+            Preconditions.checkState(file.exists());
+            Gson gson = new Gson();
+            try (FileReader in = new FileReader(file)) {
+                Type listType = new TypeToken<HashSet<ShadingSpec>>() {}.getType();
+                specs = gson.fromJson(in, listType);
+                LOGGER.info("" + specs.size() + " shading specs read from " + file.getAbsolutePath());
+                SHADING_SPEC_CACHE.put(file,specs);
+            } catch (IOException x) {
+                LOGGER.error("error reading file " + file.getAbsolutePath(), "x");
+                throw new IllegalStateException(x);
+            }
+        }
+        else {
+            LOGGER.info("using cached shading specs read from: " + file.getAbsolutePath());
+        }
+        return specs;
+
     }
 
     protected static double jaccardSimilarity(File folder1, File folder2,String moduleName,Predicate<? extends AbstractIssue> filter)  {
