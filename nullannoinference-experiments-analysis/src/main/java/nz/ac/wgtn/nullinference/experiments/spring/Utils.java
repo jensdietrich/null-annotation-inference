@@ -1,11 +1,11 @@
-package nz.ac.wgtn.nullinference.experiments;
+package nz.ac.wgtn.nullinference.experiments.spring;
 
 import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
-import nz.ac.wgtn.nullannoinference.commons.IssueAggregator;
 import org.apache.commons.io.FileUtils;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.PrintWriter;

@@ -8,7 +8,7 @@ import java.util.Objects;
  * (e.g. different stack traces, inferred vs collected).
  * @author jens dietrich
  */
-public class IssueKernel {
+public class IssueKernel extends AbstractIssue {
     private String className = null;
     private String methodName = null;
     private String descriptor = null;

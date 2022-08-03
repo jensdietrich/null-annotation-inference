@@ -6,7 +6,7 @@ import java.util.*;
  * Nullable issue encountered.
  * @author jens dietrich
  */
-public class Issue {
+public class Issue extends AbstractIssue {
 
     public enum IssueType {RETURN_VALUE, ARGUMENT,FIELD}
     public enum ProvenanceType {
