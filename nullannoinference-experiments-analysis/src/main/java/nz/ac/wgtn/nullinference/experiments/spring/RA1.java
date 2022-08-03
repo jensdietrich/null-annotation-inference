@@ -69,10 +69,10 @@ public class RA1 extends Experiment {
             },
             new Column() {
                 @Override public String name() {
-                    return "jacc-sim";
+                    return "diff-extr-obs";
                 }
                 @Override public String value(String dataName) {
-                    return Utils.format(jaccardSimilarity(EXTRACTED_ISSUES_FOLDER,OBSERVED_ISSUES_FOLDER,dataName));
+                    return diffMetrics(EXTRACTED_ISSUES_FOLDER,OBSERVED_ISSUES_FOLDER,dataName);
                 }
             }
         };

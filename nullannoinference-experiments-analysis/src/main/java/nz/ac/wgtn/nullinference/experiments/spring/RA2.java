@@ -95,17 +95,17 @@ public class RA2 extends Experiment {
 
             new Column() {
                 @Override public String name() {
-                    return "jacc-sim";
+                    return "diff-extr-obs";
                 }
                 @Override public String value(String dataName) {
-                    return Utils.format(jaccardSimilarity(EXTRACTED_ISSUES_FOLDER,OBSERVED_ISSUES_FOLDER,dataName));
+                    return diffMetrics(EXTRACTED_ISSUES_FOLDER,OBSERVED_ISSUES_FOLDER,dataName);
                 }
             },
 
             new Column() {
-                @Override public String name() {return "jacc-sim (non-shaded)";}
+                @Override public String name() {return "diff-extr-obs (non-shaded)";}
                 @Override public String value(String dataName) {
-                    return Utils.format(jaccardSimilarity(EXTRACTED_ISSUES_FOLDER,OBSERVED_ISSUES_FOLDER,dataName,shaded.negate()));
+                    return diffMetrics(EXTRACTED_ISSUES_FOLDER,OBSERVED_ISSUES_FOLDER,dataName,shaded.negate());
                 }
             }
         };

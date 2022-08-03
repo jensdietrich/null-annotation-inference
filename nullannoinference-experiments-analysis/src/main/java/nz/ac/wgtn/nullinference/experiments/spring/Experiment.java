@@ -110,6 +110,21 @@ public abstract class Experiment {
         return ((double)Sets.intersection(set1,set2).size()) / ((double)Sets.union(set1,set2).size());
     }
 
+    protected static String diffMetrics(File folder1, File folder2,String moduleName)  {
+        return diffMetrics(folder1,folder2,moduleName,issue -> true);
+    }
+
+    protected static String diffMetrics(File folder1, File folder2,String moduleName,Predicate<? extends AbstractIssue> filter)  {
+        // always work with aggregated sets !
+        Set<? extends AbstractIssue> set1 = readIssues(folder1,moduleName,true,filter);
+        Set<? extends AbstractIssue> set2 = readIssues(folder2,moduleName,true,filter);
+        double symDiff =  ((double)Sets.intersection(set1,set2).size()) / ((double)Sets.union(set1,set2).size());
+        double diffLeftMRight =  ((double)Sets.difference(set1,set2).size()) / ((double)Sets.union(set1,set2).size());
+        double diffRightMLeft =  ((double)Sets.difference(set2,set1).size()) / ((double)Sets.union(set1,set2).size());
+
+        return Utils.format(symDiff) + " (" + Utils.format(diffLeftMRight) + "," + Utils.format(diffRightMLeft) + ")" ;
+    }
+
     protected static double jaccardSimilarity(File folder1, File folder2,String moduleName)  {
         return jaccardSimilarity(folder1,folder2,moduleName,issue -> true);
     }
