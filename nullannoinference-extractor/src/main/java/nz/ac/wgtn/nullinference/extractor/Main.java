@@ -67,7 +67,7 @@ public class Main {
         Preconditions.checkState(!project.getCompiledTestClasses(projectFolder).isEmpty(),"no compiled classes found in project, check whether project has been built: " + projectFolder.getAbsolutePath() );
 
         LOGGER.info("analysing project: " + projectFolder.getAbsolutePath());
-        Set<Issue> issues = ExtractNullableAnnotations.findNullAnnotated(project,projectFolder, d -> true);
+        Set<Issue> issues = ExtractNullableAnnotations.findNullAnnotated(project,projectFolder);
         LOGGER.info("Existing issues found in analysed projects: " + issues.size());
 
         File issueFile = new File(cmd.getOptionValue(ARG_OUTPUT));
@@ -80,8 +80,6 @@ public class Main {
         catch (IOException x) {
             LOGGER.error("Error writing issues to file " + issueFile.getAbsolutePath(),x);
         }
-
-
 
     }
 }

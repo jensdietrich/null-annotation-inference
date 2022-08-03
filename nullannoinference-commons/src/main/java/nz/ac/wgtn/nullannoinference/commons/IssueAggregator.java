@@ -20,7 +20,6 @@ public class IssueAggregator {
             .collect(Collectors.toSet());
     }
 
-
     // alternative implementation of aggregate suitable for debugging (to reveal equivalence)
     public static Set<IssueKernel> aggregateDebuggable(Set<? extends Issue> issues) {
         Map<IssueKernel,Issue> aggregated = new HashMap<>();
