@@ -4,10 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import nz.ac.wgtn.nullannoinference.commons.AbstractIssue;
-import nz.ac.wgtn.nullannoinference.commons.Issue;
-import nz.ac.wgtn.nullannoinference.commons.IssueAggregator;
-import nz.ac.wgtn.nullannoinference.commons.IssueKernel;
+import nz.ac.wgtn.nullannoinference.commons.*;
 import org.apache.logging.log4j.Logger;
 import java.io.File;
 import java.io.FileReader;
@@ -16,6 +13,7 @@ import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -35,7 +33,15 @@ public abstract class Experiment {
         return readIssues(folder,moduleName,aggregate).size();
     }
 
+    protected static int countIssues(File folder, String moduleName, boolean aggregate, Predicate<? extends AbstractIssue> filter)  {
+        return readIssues(folder,moduleName,aggregate,filter).size();
+    }
+
     protected static Set<? extends AbstractIssue> readIssues(File folder, String moduleName, boolean aggregate)  {
+        return readIssues(folder,moduleName,aggregate, issue -> true);
+    }
+
+    protected static Set<? extends AbstractIssue> readIssues(File folder, String moduleName, boolean aggregate, Predicate<? extends AbstractIssue> filter)  {
         File file = new File(folder,"nullable-"+moduleName+".json");
         Preconditions.checkState(file.exists());
         Gson gson = new Gson();
@@ -44,25 +50,48 @@ public abstract class Experiment {
             Set<Issue> issues = gson.fromJson(in, listType);
             LOGGER.info(""+issues.size()+" issues read from " + file.getAbsolutePath() );
 
+
             if (aggregate) {
                 Set<IssueKernel> aggregatedIssues = IssueAggregator.aggregate(issues);
                 LOGGER.info("issues aggregated to " + aggregatedIssues.size());
+                aggregatedIssues = aggregatedIssues.stream().filter((Predicate<? super IssueKernel>) filter).collect(Collectors.toSet());
+                LOGGER.info("issues filtered: " + aggregatedIssues.size());
                 return aggregatedIssues;
             }
             else {
+                issues = issues.stream().filter((Predicate<? super Issue>) filter).collect(Collectors.toSet());
+                LOGGER.info("issues filtered: " + issues.size());
                 return issues;
             }
         } catch (IOException x) {
-            RA1.LOGGER.error("error reading file " + file.getAbsolutePath(),"x");
+            LOGGER.error("error reading file " + file.getAbsolutePath(),"x");
             throw new IllegalStateException(x);
         }
     }
 
-    protected static double jaccardSimilarity(File folder1, File folder2,String moduleName)  {
+    protected static Set<ShadingSpec> readShadingSpec(File file)  {
+        Preconditions.checkState(file.exists());
+        Gson gson = new Gson();
+        try (FileReader in = new FileReader(file)) {
+            Type listType = new TypeToken<HashSet<ShadingSpec>>() {}.getType();
+            Set<ShadingSpec> specs = gson.fromJson(in, listType);
+            LOGGER.info(""+specs.size()+" shading specs read from " + file.getAbsolutePath() );
+            return specs;
+        } catch (IOException x) {
+            LOGGER.error("error reading file " + file.getAbsolutePath(),"x");
+            throw new IllegalStateException(x);
+        }
+    }
+
+    protected static double jaccardSimilarity(File folder1, File folder2,String moduleName,Predicate<? extends AbstractIssue> filter)  {
         // always work with aggregated sets !
-        Set<? extends AbstractIssue> set1 = readIssues(folder1,moduleName,true);
-        Set<? extends AbstractIssue> set2 = readIssues(folder2,moduleName,true);
+        Set<? extends AbstractIssue> set1 = readIssues(folder1,moduleName,true,filter);
+        Set<? extends AbstractIssue> set2 = readIssues(folder2,moduleName,true,filter);
         return ((double)Sets.intersection(set1,set2).size()) / ((double)Sets.union(set1,set2).size());
+    }
+
+    protected static double jaccardSimilarity(File folder1, File folder2,String moduleName)  {
+        return jaccardSimilarity(folder1,folder2,moduleName,issue -> true);
     }
 
     protected void run(List<String> dataset, String caption, String label, Column[] columns, TableGenerator... output) {
