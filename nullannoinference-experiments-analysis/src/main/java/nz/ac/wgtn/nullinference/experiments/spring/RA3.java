@@ -13,18 +13,18 @@ import java.util.Set;
 import static nz.ac.wgtn.nullinference.experiments.spring.DataSet.SPRING_MODULES;
 
 /**
- * Script to produce data for RA2.
+ * Script to produce data for RA3.
  * @author jens dietrich
  */
-public class RA2 extends Experiment {
+public class RA3 extends Experiment {
 
     public static final File EXTRACTED_ISSUES_FOLDER = new File("experiments-spring/results/extracted");
     public static final File EXTRACTED_PLUS_ISSUES_FOLDER = new File("experiments-spring/results/extracted+");
-    public static final File OBSERVED_ISSUES_FOLDER = new File("experiments-spring/results/observed");
     public static final File OBSERVED_SANITIZED_ISSUES_FOLDER = new File("experiments-spring/results/observed3");
+    public static final File OBSERVED_PLUS_ISSUES_FOLDER = new File("experiments-spring/results/observed+");
     public static final File SHADING_SPECS = new File("experiments-spring/shaded.json");
-    public static final File OUTPUT_CSV = new File("ra2.csv");
-    public static final File OUTPUT_LATEX = new File("ra2.tex");
+    public static final File OUTPUT_CSV = new File("ra3.csv");
+    public static final File OUTPUT_LATEX = new File("ra3.tex");
 
 
     public static void main (String[] args) throws IOException {
@@ -33,13 +33,13 @@ public class RA2 extends Experiment {
         Preconditions.checkArgument(EXTRACTED_ISSUES_FOLDER.isDirectory());
         Preconditions.checkArgument(EXTRACTED_PLUS_ISSUES_FOLDER.exists());
         Preconditions.checkArgument(EXTRACTED_PLUS_ISSUES_FOLDER.isDirectory());
-        Preconditions.checkArgument(OBSERVED_ISSUES_FOLDER.exists());
-        Preconditions.checkArgument(OBSERVED_ISSUES_FOLDER.isDirectory());
+        Preconditions.checkArgument(OBSERVED_PLUS_ISSUES_FOLDER.exists());
+        Preconditions.checkArgument(OBSERVED_PLUS_ISSUES_FOLDER.isDirectory());
         Preconditions.checkArgument(OBSERVED_SANITIZED_ISSUES_FOLDER.exists());
         Preconditions.checkArgument(OBSERVED_SANITIZED_ISSUES_FOLDER.isDirectory());
         Preconditions.checkArgument(SHADING_SPECS.exists());
 
-        new RA2().analyse();
+        new RA3().analyse();
     }
 
     public void analyse()  {
@@ -59,14 +59,6 @@ public class RA2 extends Experiment {
                     return Utils.format(countIssues(EXTRACTED_ISSUES_FOLDER,dataName,false));
                 }
             },
-            new Column() {
-                @Override public String name() {
-                    return "extracted+inf";
-                }
-                @Override public String value(String dataName) {
-                    return Utils.format(countIssues(EXTRACTED_PLUS_ISSUES_FOLDER,dataName,false));
-                }
-            },
 
             new Column() {
                 @Override public String name() {
@@ -74,33 +66,6 @@ public class RA2 extends Experiment {
                 }
                 @Override public String value(String dataName) {
                     return Utils.format(countIssues(EXTRACTED_PLUS_ISSUES_FOLDER,dataName,false,shaded.negate()));
-                }
-            },
-
-            new Column() {
-                @Override public String name() {
-                    return "observed (agg)";
-                }
-                @Override public String value(String dataName) {
-                    return Utils.format(countIssues(OBSERVED_ISSUES_FOLDER,dataName,true));
-                }
-            },
-
-            new Column() {
-                @Override public String name() {
-                    return "observed (non-shaded, agg)";
-                }
-                @Override public String value(String dataName) {
-                    return Utils.format(countIssues(OBSERVED_ISSUES_FOLDER,dataName,true,shaded.negate()));
-                }
-            },
-
-            new Column() {
-                @Override public String name() {
-                    return "observed (san, agg)";
-                }
-                @Override public String value(String dataName) {
-                    return Utils.format(countIssues(OBSERVED_SANITIZED_ISSUES_FOLDER,dataName,true));
                 }
             },
 
@@ -115,31 +80,17 @@ public class RA2 extends Experiment {
 
             new Column() {
                 @Override public String name() {
-                    return "diff-extr-obs";
+                    return "observed+inf (san, agg, non-shaded)";
                 }
                 @Override public String value(String dataName) {
-                    return diffMetrics(EXTRACTED_ISSUES_FOLDER,OBSERVED_ISSUES_FOLDER,dataName);
-                }
-            },
-
-            new Column() {
-                @Override public String name() {return "diff-extr-obs (non-shaded)";}
-                @Override public String value(String dataName) {
-                    return diffMetrics(EXTRACTED_ISSUES_FOLDER,OBSERVED_ISSUES_FOLDER,dataName,shaded.negate());
+                    return Utils.format(countIssues(OBSERVED_PLUS_ISSUES_FOLDER,dataName,true,shaded.negate()));
                 }
             },
 
             new Column() {
-                @Override public String name() {return "diff-extr-obs (sanitised)";}
+                @Override public String name() {return "diff-extr-obs (inferred, sanitised, non-shaded)";}
                 @Override public String value(String dataName) {
-                    return diffMetrics(EXTRACTED_ISSUES_FOLDER,OBSERVED_SANITIZED_ISSUES_FOLDER,dataName);
-                }
-            },
-
-            new Column() {
-                @Override public String name() {return "diff-extr-obs (sanitised, non-shaded)";}
-                @Override public String value(String dataName) {
-                    return diffMetrics(EXTRACTED_ISSUES_FOLDER,OBSERVED_SANITIZED_ISSUES_FOLDER,dataName,shaded.negate());
+                    return diffMetrics(EXTRACTED_PLUS_ISSUES_FOLDER,OBSERVED_PLUS_ISSUES_FOLDER,dataName,shaded.negate());
                 }
             }
         };
