@@ -39,4 +39,14 @@ public class IssueAggregator {
         return aggregated.keySet();
     }
 
+    public static Map<IssueKernel,Set<Issue>> aggregateAsMap(Set<? extends Issue> issues) {
+        Map<IssueKernel,Set<Issue>> aggregated = new HashMap<>();
+        for (Issue issue:issues) {
+            IssueKernel kernel = issue.getKernel();
+            Set<Issue> equivalenceClass = aggregated.computeIfAbsent(kernel, k -> new HashSet<>());
+            equivalenceClass.add(issue);
+        }
+        return aggregated;
+    }
+
 }

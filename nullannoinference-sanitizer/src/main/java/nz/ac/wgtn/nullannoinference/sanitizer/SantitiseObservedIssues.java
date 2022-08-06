@@ -61,20 +61,18 @@ public class SantitiseObservedIssues {
         sanitisedIssues.addAll(sanitisedIssues2);
 
         gson = new GsonBuilder().setPrettyPrinting().create();
-        if (sanitisedIssues2.size()>0) {
-            LOGGER.info("\twriting sanitised set to " + sanitisedIssuesFile.getAbsolutePath());
-            if (!sanitisedIssuesFile.getParentFile().exists()) {
-                sanitisedIssuesFile.getParentFile().mkdirs();
-            }
-
-            try (Writer out = new FileWriter(sanitisedIssuesFile)) {
-                gson.toJson(sanitisedIssues2, out);
-            }
-            catch (Exception x) {
-                LOGGER.error("Error writing issues to " + sanitisedIssuesFile.getAbsolutePath());
-            }
+        // even if empty, write file
+        LOGGER.info("\twriting sanitised set to " + sanitisedIssuesFile.getAbsolutePath());
+        if (!sanitisedIssuesFile.getParentFile().exists()) {
+            sanitisedIssuesFile.getParentFile().mkdirs();
         }
 
+        try (Writer out = new FileWriter(sanitisedIssuesFile)) {
+            gson.toJson(sanitisedIssues2, out);
+        }
+        catch (Exception x) {
+            LOGGER.error("Error writing issues to " + sanitisedIssuesFile.getAbsolutePath());
+        }
 
     }
 

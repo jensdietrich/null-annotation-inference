@@ -41,6 +41,7 @@ public class IdentifyNegativeTests {
         }
 
         SantitiseObservedIssues.LOGGER.info("Analysis results written to " + outputFile.getAbsolutePath());
+        SantitiseObservedIssues.LOGGER.info("\t"+methods.size()+" negative tests identified");
 
 
     }
