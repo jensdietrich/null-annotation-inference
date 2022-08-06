@@ -23,8 +23,8 @@ public class RA2 extends Experiment {
     public static final File OBSERVED_ISSUES_FOLDER = new File("experiments-spring/results/observed");
     public static final File OBSERVED_SANITIZED_ISSUES_FOLDER = new File("experiments-spring/results/observed3");
     public static final File SHADING_SPECS = new File("experiments-spring/shaded.json");
-    public static final File OUTPUT_CSV = new File("ra2.csv");
-    public static final File OUTPUT_LATEX = new File("ra2.tex");
+    public static final File OUTPUT_CSV = new File("experiments-spring/results/ra/ra2.csv");
+    public static final File OUTPUT_LATEX = new File("experiments-spring/results/ra/ra2.tex");
 
 
     public static void main (String[] args) throws IOException {

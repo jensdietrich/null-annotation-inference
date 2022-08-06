@@ -25,6 +25,11 @@ public class IssuePersistency {
             return;
         }
 
+        if (!file.getParentFile().exists()) {
+            System.out.println("creating folder: " + file.getParentFile().getAbsolutePath());
+            file.getParentFile().mkdirs();
+        }
+
         System.out.println("saving " + issues.size() + " issues to " + file.getAbsolutePath());
 
         JSONArray array = new JSONArray();

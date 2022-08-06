@@ -16,8 +16,8 @@ public class RA1 extends Experiment {
     public static final File EXTRACTED_ISSUES_FOLDER = new File("experiments-spring/results/extracted");
     public static final File EXTRACTED_PLUS_ISSUES_FOLDER = new File("experiments-spring/results/extracted+");
     public static final File OBSERVED_ISSUES_FOLDER = new File("experiments-spring/results/observed");
-    public static final File OUTPUT_CSV = new File("ra1.csv");
-    public static final File OUTPUT_LATEX = new File("ra1.tex");
+    public static final File OUTPUT_CSV = new File("experiments-spring/results/ra/ra1.csv");
+    public static final File OUTPUT_LATEX = new File("experiments-spring/results/ra/ra1.tex");
 
     public static void main (String[] args) throws IOException {
 
