@@ -19,7 +19,7 @@ public class IdentifyNegativeTests {
         Preconditions.checkArgument(projectRootFolder.exists(),projectRootFolder.getAbsolutePath() + " must exist");
         Preconditions.checkArgument(projectRootFolder.isDirectory(),projectRootFolder.getAbsolutePath() + " must be a folder");
 
-        SantitiseObservedIssues.LOGGER.info("Analysis project for negative tests " + projectRootFolder.getAbsolutePath());
+        SantitiseObservedIssues.LOGGER.info("Analyse project for negative tests " + projectRootFolder.getAbsolutePath());
 
         Set<MethodInfo> methods = new TreeSet<>();
         methods.addAll(findNegativeTests(projectType,projectRootFolder));
@@ -78,7 +78,7 @@ public class IdentifyNegativeTests {
         @Override
         public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
             return new MethodVisitor(Opcodes.ASM9) {
-                private String currentClassName = name;
+                private String currentMethodName = name;
                 private String currentDescriptor = descriptor;
                 private boolean isJunit4TestAnnotated = false;
 
@@ -87,12 +87,12 @@ public class IdentifyNegativeTests {
                     super.visitMethodInsn(opcode, owner, name, descriptor, isInterface);
                     // method is overloaded -- catch all versions by ignoring descriptor
                     if ("org/junit/jupiter/api/Assertions".equals(owner) && "assertThrows".equals(name)) {
-                        methods.add(new MethodInfo(currentClass,currentClassName,currentDescriptor));
+                        methods.add(new MethodInfo(currentClass,currentMethodName,currentDescriptor));
                     }
 
                     // add some third-party assertj callsites -- those are used in spring
                     if ("org/assertj/core/api/ThrowableAssert".equals(owner) || "org/assertj/core/api/AbstractThrowableAssert".equals(owner)) {
-                        methods.add(new MethodInfo(currentClass,currentClassName,currentDescriptor));
+                        methods.add(new MethodInfo(currentClass,currentMethodName,currentDescriptor));
                     }
                 }
 
@@ -104,7 +104,7 @@ public class IdentifyNegativeTests {
                         public void visit(String name, Object value) {
                             super.visit(name, value);
                             if (isJunit4TestAnnotated && "expected".equals(name)) {
-                                methods.add(new MethodInfo(currentClass,currentClassName,currentDescriptor));
+                                methods.add(new MethodInfo(currentClass,currentMethodName,currentDescriptor));
                             }
                         }
                     };

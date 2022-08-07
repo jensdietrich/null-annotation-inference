@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collection;
 import java.util.Set;
 
 /**
@@ -18,7 +19,7 @@ import java.util.Set;
 public class IssuePersistency {
 
     // persistence
-    public static void save (Set<Issue> issues, File file) {
+    public static void save (Collection<Issue> issues, File file) {
 
         if (issues.isEmpty()) {
             System.out.println("No issues to be saved -- issue set is empty");
