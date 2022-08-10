@@ -32,7 +32,7 @@ public class NegativeTestSanitizer implements Sanitizer<Issue> {
     public boolean test(Issue issue) {
         if (issue.getStacktrace()==null || issue.getStacktrace().isEmpty()) {
             LOGGER.warn("cannot analyse issue for negative test cause, no stacktrace found, assume that it is not caused by negative test (issue provenance type is " + issue.getProvenanceType() + ")");
-            return false;
+            return true;
         }
         else {
             for (String ste : issue.getStacktrace()) {

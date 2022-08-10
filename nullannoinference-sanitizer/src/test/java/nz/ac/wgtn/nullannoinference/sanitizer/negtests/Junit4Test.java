@@ -15,7 +15,7 @@ public class Junit4Test {
     public void test () throws IOException {
         File project = new File(Junit4Test.class.getResource("/junit4-project").getFile());
         assumeTrue(project.exists());
-        assumeTrue(new File(project,"target/test-classes").exists(),"project containing test data (resources/junit4-project) has not been built, build test projects with \"mvn test-compile\" or \"mvn test\"");
+        assumeTrue(new File(project,"target/test-classes").exists(),"project containing test data (resources/junit4-project) has not been built, build test project with \"mvn test-compile\" or \"mvn test\"");
         Set<MethodInfo> methods = IdentifyNegativeTests.findNegativeTests(ProjectType.MVN,project,null);
         assertEquals(2,methods.size());
         assertTrue(methods.contains(new MethodInfo("nz.ac.wgtn.nullannoinference.sanitizer.examples.test_junit4.AnnotationTest","testAIOBE","()V")));

@@ -27,6 +27,11 @@ public class ShadingSanitizer implements Sanitizer<Issue> {
         this.shadingSpecs = readShadingSpecs(shadingSpecDefs);
     }
 
+    // for testing
+    public ShadingSanitizer(Set<ShadingSpec> shadingSpecs) throws IOException {
+        this.shadingSpecs = shadingSpecs;
+    }
+
     @Override
     public boolean test(Issue issue) {
         for (ShadingSpec spec : shadingSpecs) {

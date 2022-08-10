@@ -7,6 +7,8 @@ import java.util.Objects;
  * suitable for data binding with gson, jackson or similar.
  * @author jens dietrich
  */
+
+@Deprecated  // moved to sanitizer module
 public class ShadingSpec {
     // the name of the module (optional, for complex multi-module projects)
     private String module = null;

@@ -22,7 +22,7 @@ public class ExtractDeprecatedElementsTest {
     @BeforeEach
     public void setup() {
         Assumptions.assumeTrue(project.exists());
-        assumeTrue(new File(project,"target/classes").exists(),"project containing test data (resources/junit4-project) has not been built, build  projects with \"mvn compile\"");
+        assumeTrue(new File(project,"target/classes").exists(),"project containing test data (resources/junit4-project) has not been built, build  project with \"mvn compile\"");
     }
 
     @Test
