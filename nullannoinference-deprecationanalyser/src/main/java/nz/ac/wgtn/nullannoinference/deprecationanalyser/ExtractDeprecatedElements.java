@@ -41,25 +41,27 @@ public class ExtractDeprecatedElements {
 
     static List<String> findDeprecatedElements(ProjectType projectType, File folder) throws IOException {
         Collection<File> classFiles = projectType.getCompiledTestClasses(folder);
-        if (classFiles.isEmpty()) {
-            throw new IllegalStateException("No .class files found, make sure that the project has been built");
-        }
+        return findDeprecatedElements(classFiles);
+    }
+
+    static List<String> findDeprecatedElements(Collection<File> classFiles) throws IOException {
+        Preconditions.checkArgument(!classFiles.isEmpty(),"No .class files found, make sure that the project has been built");
         List<String> methods = new ArrayList<>();
         for (File classFile:classFiles) {
             // System.out.println("Analysing: " + classFile);
             try (InputStream in = new FileInputStream(classFile)) {
-                new ClassReader(in).accept(new NegativeTestFinder(methods), 0);
+                new ClassReader(in).accept(new DeprecatedElementFinder(methods), 0);
             }
         }
         return methods;
     }
 
-    static class NegativeTestFinder extends ClassVisitor {
+    static class DeprecatedElementFinder extends ClassVisitor {
         public static final String DEPRECATED_TYPE = "Ljava/lang/Deprecated;";
         List<String> deprecatedElements = null;
         String currentClass = null;
         String currentElement = null;
-        public NegativeTestFinder(List<String> deprecatedElements) {
+        public DeprecatedElementFinder(List<String> deprecatedElements) {
             super(Opcodes.ASM9);
             this.deprecatedElements = deprecatedElements;
         }
