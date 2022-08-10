@@ -7,7 +7,7 @@ generated in `target/classes`.
 Issues that are observed in *negative tests*, i.e. tests triggering abnormal behaviour, are removed. Negative tests are detected based on the test
 oracle -- tests that check for expected exceptions or errors are considered negative. 
 
-usage: `java -cp <classpath> nz.ac.wgtn.nullannoinference.sanitizer.Main <args>`
+usage: `java -cp <classpath> Main <args>`
 
 If the project is build with `mvn package`, a jar containing all dependencies will be produced in `target/`, and the application can simply be started by executing:
 
