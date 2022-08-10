@@ -18,21 +18,6 @@ public class IdentifyNegativeTests {
     public static final String CSV_SEP = "\t";
     public static final Logger LOGGER = LogSystem.getLogger("negative-test-analysis");
 
-    public static void run  (ProjectType projectType, File projectRootFolder, File outputFile) throws IOException {
-        Preconditions.checkArgument(projectRootFolder.exists(),projectRootFolder.getAbsolutePath() + " must exist");
-        Preconditions.checkArgument(projectRootFolder.isDirectory(),projectRootFolder.getAbsolutePath() + " must be a folder");
-
-        SantitiseObservedIssues.LOGGER.info("Analyse project for negative tests " + projectRootFolder.getAbsolutePath());
-
-        Set<MethodInfo> methods = new TreeSet<>();
-        methods.addAll(findNegativeTests(projectType,projectRootFolder));
-
-        if (!outputFile.getParentFile().exists()) {
-            outputFile.getParentFile().mkdirs();
-        }
-        dumpNegativeTests(methods,outputFile);
-    }
-
     static void dumpNegativeTests(Collection<MethodInfo> negativeTests,File outputFile) {
         try (PrintWriter out = new PrintWriter(new FileWriter(outputFile))) {
             for (MethodInfo m:negativeTests) {
@@ -52,7 +37,7 @@ public class IdentifyNegativeTests {
         SantitiseObservedIssues.LOGGER.info("\t"+negativeTests.size()+" negative tests identified");
     }
 
-    static Set<MethodInfo> findNegativeTests(ProjectType projectType, File folder) throws IOException {
+    static Set<MethodInfo> findNegativeTests(ProjectType projectType, File folder,File outputFile) throws IOException {
         Collection<File> classFiles = projectType.getCompiledTestClasses(folder);
         if (classFiles.isEmpty()) {
             throw new IllegalStateException("No .class files found, make sure that the project has been built");
@@ -63,6 +48,10 @@ public class IdentifyNegativeTests {
             try (InputStream in = new FileInputStream(classFile)) {
                 new ClassReader(in).accept(new NegativeTestFinder(methods), 0);
             }
+        }
+
+        if (outputFile!=null) {
+            dumpNegativeTests(methods,outputFile);
         }
         return methods;
     }

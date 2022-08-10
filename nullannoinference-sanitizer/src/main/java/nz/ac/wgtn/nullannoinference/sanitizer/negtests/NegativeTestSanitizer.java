@@ -5,36 +5,28 @@ import nz.ac.wgtn.nullannoinference.commons.ProjectType;
 import nz.ac.wgtn.nullannoinference.sanitizer.LogSystem;
 import nz.ac.wgtn.nullannoinference.sanitizer.Sanitizer;
 import org.apache.logging.log4j.Logger;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Sanitises negative tests.
+ * Sanitises negative tests. This includes the extraction of negative tests from the project.
  * @author jens dietrich
  */
 public class NegativeTestSanitizer implements Sanitizer<Issue> {
 
     public static final Logger LOGGER = LogSystem.getLogger("negative-test-analysis");
     private Collection<String> negativeTestMethods = null;
-    private ProjectType projectType = null;
-    private File projectRootFolder = null;
-    private File negativeTestDump = null;
 
     public NegativeTestSanitizer(ProjectType projectType, File projectRootFolder, File negativeTestDump) throws IOException {
-        this.projectType = projectType;
-        this.projectRootFolder = projectRootFolder;
-        this.negativeTestDump = negativeTestDump;
-
-        Set<MethodInfo> negativeTestMethodInfo = IdentifyNegativeTests.findNegativeTests(projectType,projectRootFolder);
+        Set<MethodInfo> negativeTestMethodInfo = IdentifyNegativeTests.findNegativeTests(projectType,projectRootFolder,negativeTestDump);
         negativeTestMethods = negativeTestMethodInfo.stream()
             .map(mi -> mi.getClassName() + "::" + mi.getName() + ":") // in stacktraces this is followed by a line number
             .collect(Collectors.toSet());
     }
+
 
     @Override
     public boolean test(Issue issue) {
