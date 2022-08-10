@@ -45,4 +45,9 @@ public class NegativeTestSanitizer implements Sanitizer<Issue> {
             return true;
         }
     }
+
+    @Override
+    public String name() {
+        return "ignore-issues-observed-in-execution-of-negative-tests";
+    }
 }

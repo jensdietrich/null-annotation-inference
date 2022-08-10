@@ -42,6 +42,11 @@ public class ShadingSanitizer implements Sanitizer<Issue> {
         return true;
     }
 
+    @Override
+    public String name() {
+        return "ignore-issues-in-shaded-classes";
+    }
+
     private Set<ShadingSpec> readShadingSpecs(File file) throws IOException {
         Preconditions.checkState(file.exists());
         Gson gson = new Gson();

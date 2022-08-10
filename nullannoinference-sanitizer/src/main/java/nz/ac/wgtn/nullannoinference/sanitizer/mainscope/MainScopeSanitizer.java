@@ -59,4 +59,9 @@ public class MainScopeSanitizer implements Sanitizer<Issue>  {
         }
     }
 
+    @Override
+    public String name() {
+        return "ignore-issues-in-not-in-main-scope";
+    }
+
 }

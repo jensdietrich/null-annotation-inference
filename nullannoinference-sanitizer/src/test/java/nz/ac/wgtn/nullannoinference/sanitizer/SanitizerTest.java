@@ -15,8 +15,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 public class SanitizerTest {
@@ -48,7 +48,7 @@ public class SanitizerTest {
     }
 
     @Test
-    public void testDeprecatedScopeSanitizer() throws IOException {
+    public void testDeprecatedElementsSanitizer() throws IOException {
         DeprecatedElementsSanitizer sanitizer = new DeprecatedElementsSanitizer(ProjectType.MVN,project,null);
         Issue issueInDeprecatedMethod1 = new Issue(
             "nz.ac.wgtn.nullannoinference.sanitizer.examples.example1.Class1",
@@ -113,6 +113,59 @@ public class SanitizerTest {
 
         assertTrue(sanitizer.test(issueNotCausedByNegativeTest));
         assertFalse(sanitizer.test(issueCausedByNegativeTest));
+    }
+
+    @Test
+    public void testCompositeSanitizer() throws IOException {
+        DeprecatedElementsSanitizer deprecatedElementsSanitizer = new DeprecatedElementsSanitizer(ProjectType.MVN,project,null);
+        MainScopeSanitizer mainScopeSanitizer = new MainScopeSanitizer(ProjectType.MVN,project);
+        Issue issueInMain = new Issue(
+                "nz.ac.wgtn.nullannoinference.sanitizer.examples.example1.Class1",
+                "m1", "()Ljava/lang/Object;", null,
+                Issue.IssueType.RETURN_VALUE);
+
+        Issue issueInTest = new Issue(
+                "nz.ac.wgtn.nullannoinference.sanitizer.examples.example1.Test",
+                "foo", "()Ljava/lang/Object;", null,
+                Issue.IssueType.RETURN_VALUE);
+
+        Assumptions.assumeTrue(mainScopeSanitizer.test(issueInMain));
+        Assumptions.assumeFalse(mainScopeSanitizer.test(issueInTest));
+
+        Assumptions.assumeFalse(deprecatedElementsSanitizer.test(issueInMain));
+        Assumptions.assumeTrue(deprecatedElementsSanitizer.test(issueInTest));
+
+        assertTrue(mainScopeSanitizer.or(deprecatedElementsSanitizer).test(issueInMain));
+        assertTrue(deprecatedElementsSanitizer.or(mainScopeSanitizer).test(issueInMain));
+
+        assertFalse(mainScopeSanitizer.and(deprecatedElementsSanitizer).test(issueInMain));
+        assertFalse(deprecatedElementsSanitizer.and(mainScopeSanitizer).test(issueInMain));
+
+    }
+
+
+    @Test
+    public void testProvenance1 () throws IOException {
+        DeprecatedElementsSanitizer deprecatedElementsSanitizer = new DeprecatedElementsSanitizer(ProjectType.MVN,project,null);
+        MainScopeSanitizer mainScopeSanitizer = new MainScopeSanitizer(ProjectType.MVN,project);
+        Issue issueInMain = new Issue(
+                "nz.ac.wgtn.nullannoinference.sanitizer.examples.example1.Class1",
+                "m1", "()Ljava/lang/Object;", null,
+                Issue.IssueType.RETURN_VALUE);
+
+        Issue issueInTest = new Issue(
+                "nz.ac.wgtn.nullannoinference.sanitizer.examples.example1.Test",
+                "foo", "()Ljava/lang/Object;", null,
+                Issue.IssueType.RETURN_VALUE);
+
+        Assumptions.assumeTrue(Sanitizer.sanitize(issueInMain,mainScopeSanitizer));
+        assertEquals("true",issueInMain.getProperty(Sanitizer.SANITIZATION_VALUE_KEY));
+        assertEquals(mainScopeSanitizer.name(),issueInMain.getProperty(Sanitizer.SANITIZATION_SANITIZER_KEY));
+
+        Assumptions.assumeFalse(Sanitizer.sanitize(issueInTest,mainScopeSanitizer));
+        assertEquals("false",issueInTest.getProperty(Sanitizer.SANITIZATION_VALUE_KEY));
+        assertEquals(mainScopeSanitizer.name(),issueInTest.getProperty(Sanitizer.SANITIZATION_SANITIZER_KEY));
+
     }
 
 }

@@ -30,5 +30,8 @@ public class DeprecatedElementsSanitizer implements Sanitizer<Issue>  {
         return true;
     }
 
-
+    @Override
+    public String name() {
+        return "ignore-issues-in-deprecated-elements";
+    }
 }

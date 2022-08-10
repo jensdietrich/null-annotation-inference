@@ -130,7 +130,7 @@ public class Main {
         }
 
 
-        Sanitizer<Issue> sanitizer = issue -> true;
+        Sanitizer<Issue> sanitizer = Sanitizer.ALL;
         if (removeIssuesNotInMain) {
             MainScopeSanitizer mainScopeSanitizer = new MainScopeSanitizer(projectType, projectFolder);
             sanitizer = sanitizer.and(mainScopeSanitizer);
@@ -152,14 +152,13 @@ public class Main {
             LOGGER.info("setting deprecated analyser to remove issues in deprecated elements");
         }
 
-        Set<Issue> rejectedIssues = issues.parallelStream().filter(sanitizer.negate()).collect(Collectors.toSet());
-        Set<Issue> sanitisedIssues = issues.parallelStream().filter(sanitizer).collect(Collectors.toSet());
+        Sanitizer<Issue> sanitizer2 = sanitizer;
+        Set<Issue> sanitisedIssues = issues.parallelStream()
+            .filter(issue -> Sanitizer.sanitize(issue,sanitizer2))
+            .collect(Collectors.toSet());
 
-        assert issues.size() == rejectedIssues.size() + sanitisedIssues.size();
-
-        LOGGER.info("Issues sanitized:");
-        LOGGER.info("\t" + sanitisedIssues + " accepted");
-        LOGGER.info("\t" + rejectedIssues + " rejected");
+        LOGGER.info("sanitizer applied: " + sanitizer2.name());
+        LOGGER.info("issues sanitized: " + sanitisedIssues + " / " + issues.size());
 
         gson = new GsonBuilder().setPrettyPrinting().create();
         // even if empty, write file
@@ -176,4 +175,5 @@ public class Main {
         }
 
     }
+
 }
