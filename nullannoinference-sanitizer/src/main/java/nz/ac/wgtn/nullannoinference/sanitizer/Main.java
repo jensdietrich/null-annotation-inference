@@ -39,7 +39,7 @@ public class Main {
         options.addOption("s","removeissuesinshadedclasses",false,"if set, perform an analysis to remove issues in shaded classes");
         options.addOption("d","removeissuesindeprecatedelements",false,"if set, perform an analysis to remove issues in deprecated elements");
         options.addOption("m","removeissuesnotinmain",false,"if set, issues in classes not in main scope are removed");
-        options.addOption("nd","negativetests",true,"the csv file where information about negative tests detected will be saved in CSV format (optional)");
+        options.addOption("nt","negativetests",true,"the csv file where information about negative tests detected will be saved in CSV format (optional)");
         options.addOption("sh","shadingspecs",true,"the json file with definitions of shaded packages, required for shading analysis");
         options.addOption("de","deprecatedelements",true,"the text file where information about deprecated elements found will be written (optional)");
 
