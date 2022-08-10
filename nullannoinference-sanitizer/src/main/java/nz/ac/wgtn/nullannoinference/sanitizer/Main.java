@@ -6,7 +6,10 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
 import nz.ac.wgtn.nullannoinference.commons.ProjectType;
+import nz.ac.wgtn.nullannoinference.sanitizer.deprecation.DeprecatedElementsSanitizer;
+import nz.ac.wgtn.nullannoinference.sanitizer.mainscope.MainScopeSanitizer;
 import nz.ac.wgtn.nullannoinference.sanitizer.negtests.NegativeTestSanitizer;
+import nz.ac.wgtn.nullannoinference.sanitizer.shaded.ShadingSanitizer;
 import org.apache.commons.cli.*;
 import org.apache.logging.log4j.Logger;
 import java.io.File;
@@ -15,7 +18,6 @@ import java.io.FileWriter;
 import java.io.Writer;
 import java.lang.reflect.Type;
 import java.util.Set;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -24,15 +26,10 @@ import java.util.stream.Collectors;
  */
 public class Main {
 
-    // TODO make this configurable -- only those issues will be configured
-    public static final Predicate<Issue> ISSUE_FILTER = issue -> issue.getScope()== Issue.Scope.MAIN;
-    public static final String NEGATIVE_TEST_SUMMARY_FILE_NAME = "negative-tests.csv";
     public static final Type ISSUE_SET_TYPE = new TypeToken<Set<Issue>>() {}.getType();
-
     public static final Logger LOGGER = LogSystem.getLogger("refiner");
 
     public static void main (String[] args) throws Exception {
-
         Options options = new Options();
         options.addRequiredOption("i","input",true,"a json file with null issues (required)");
         options.addRequiredOption("p","project",true,"the folder containing the project to be analysed, the project must have been built (required)");
@@ -41,7 +38,12 @@ public class Main {
         options.addOption("n","removeissuesfromnegativetests",false,"if set, perform an analysis to remove issues observed while executing negative tests");
         options.addOption("s","removeissuesinshadedclasses",false,"if set, perform an analysis to remove issues in shaded classes");
         options.addOption("d","removeissuesindeprecatedelements",false,"if set, perform an analysis to remove issues in deprecated elements");
-        options.addOption("nd","negativetests",true,"the csv file where information about negative tests detected will be saved in CSV format (optional, default is " + NEGATIVE_TEST_SUMMARY_FILE_NAME + ")");
+        options.addOption("m","removeissuesnotinmain",false,"if set, issues in classes not in main scope are removed");
+        options.addOption("nd","negativetests",true,"the csv file where information about negative tests detected will be saved in CSV format (optional)");
+        options.addOption("sh","shadingspecs",true,"the json file with definitions of shaded packages, required for shading analysis");
+        options.addOption("de","deprecatedelements",true,"the text file where information about deprecated elements found will be written (optional)");
+
+
 
 
 
@@ -67,7 +69,12 @@ public class Main {
         boolean removeIssuesFromNegativeTests = cmd.hasOption("removeissuesfromnegativetests");
         boolean removeIssuesInShadedclasses = cmd.hasOption("removeissuesinshadedclasses");
         boolean removeIssuesIndeprecatedElements = cmd.hasOption("removeissuesindeprecatedelements");
-        Preconditions.checkArgument(removeIssuesFromNegativeTests || removeIssuesInShadedclasses || removeIssuesIndeprecatedElements,"no sanitizer option (-remove*) set");
+        boolean removeIssuesNotInMain = cmd.hasOption("removeissuesnotinmain");
+        Preconditions.checkArgument(removeIssuesFromNegativeTests
+                || removeIssuesInShadedclasses
+                || removeIssuesIndeprecatedElements
+                || removeIssuesNotInMain
+                ,"no sanitizer option (-remove*) set");
 
         // input validation
         File projectFolder = new File(cmd.getOptionValue("project"));
@@ -83,14 +90,25 @@ public class Main {
         Preconditions.checkArgument(inputFile.exists(),"input file does not exist: " + inputFile.getAbsolutePath());
         LOGGER.info("using null issues in: " + inputFile.getAbsolutePath());
 
+        File shadingSpecs = null;
+        if (cmd.hasOption("shadingspecs")) {
+            shadingSpecs = new File(cmd.getOptionValue("shadingspecs"));
+        }
+        Preconditions.checkArgument (!removeIssuesInShadedclasses || (shadingSpecs!=null && shadingSpecs.exists()),"shading spec is required to remove issues in shaded classes");
+        LOGGER.info("using shading spec: " + shadingSpecs.getAbsolutePath());
+
         String negTestFileName = null;
         if (cmd.hasOption("negativetests")) {
             negTestFileName = cmd.getOptionValue("negativetests");
         }
-        else {
-            negTestFileName = NEGATIVE_TEST_SUMMARY_FILE_NAME;
+        File negTestFile = negTestFileName==null?null:new File(negTestFileName);
+
+
+        String deprecatedElementsFileName = null;
+        if (cmd.hasOption("deprecatedelements")) {
+            deprecatedElementsFileName = cmd.getOptionValue("deprecatedelements");
         }
-        File negTestFile = new File(negTestFileName);
+        File deprecatedElementsFile = deprecatedElementsFileName==null?null:new File(deprecatedElementsFileName);
 
         File sanitisedIssuesFile = null;
         if (cmd.hasOption("sanitisedissues")) {
@@ -113,9 +131,25 @@ public class Main {
 
 
         Sanitizer<Issue> sanitizer = issue -> true;
+        if (removeIssuesNotInMain) {
+            MainScopeSanitizer mainScopeSanitizer = new MainScopeSanitizer(projectType, projectFolder);
+            sanitizer = sanitizer.and(mainScopeSanitizer);
+            LOGGER.info("setting main scope analyser to remove issues in classes not in main scope");
+        }
         if (removeIssuesFromNegativeTests) {
             NegativeTestSanitizer negativeTestSanitizer = new NegativeTestSanitizer(projectType, projectFolder, negTestFile);
             sanitizer = sanitizer.and(negativeTestSanitizer);
+            LOGGER.info("setting remove issues from negative test analyser to remove issues observed in the execution of negative tests");
+        }
+        if (removeIssuesInShadedclasses) {
+            ShadingSanitizer shadedSanitizer = new ShadingSanitizer(shadingSpecs);
+            sanitizer = sanitizer.and(shadedSanitizer);
+            LOGGER.info("setting shaded analyser to remove issues in classes in shaded packages");
+        }
+        if (removeIssuesIndeprecatedElements) {
+            DeprecatedElementsSanitizer deprecatedSanitizer = new DeprecatedElementsSanitizer(projectType,projectFolder,deprecatedElementsFile);
+            sanitizer = sanitizer.and(deprecatedSanitizer);
+            LOGGER.info("setting deprecated analyser to remove issues in deprecated elements");
         }
 
         Set<Issue> rejectedIssues = issues.parallelStream().filter(sanitizer.negate()).collect(Collectors.toSet());

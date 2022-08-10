@@ -1,8 +1,7 @@
 # The Sanitizer Module
 
 The sanitizer uses static analysis to improve the precision of issues. Note that issues are expected to have a scope set (see scoper module), and only issues are processed 
-that have a main scope. In Maven projects, this corresponds to classes defined in `src/main/java` with binaries
-generated in `target/classes`. 
+that have a main scope. In Maven projects, this corresponds to classes defined in `src/main/java` with binaries.generated in `target/classes`. 
 
 Issues that are observed in *negative tests*, i.e. tests triggering abnormal behaviour, are removed. Negative tests are detected based on the test
 oracle -- tests that check for expected exceptions or errors are considered negative. 

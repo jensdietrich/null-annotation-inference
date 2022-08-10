@@ -20,6 +20,5 @@ public class Junit4Test {
         assertEquals(2,methods.size());
         assertTrue(methods.contains(new MethodInfo("nz.ac.wgtn.nullannoinference.sanitizer.examples.test_junit4.AnnotationTest","testAIOBE","()V")));
         assertTrue(methods.contains(new MethodInfo("nz.ac.wgtn.nullannoinference.sanitizer.examples.test_junit4.AnnotationTest","testNPE","()V")));
-
     }
 }
