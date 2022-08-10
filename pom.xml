@@ -37,13 +37,11 @@
   <modules>
       <module>nullannoinference-agent</module>
       <module>nullannoinference-agent2</module>
-      <module>nullannoinference-scoper</module>
       <module>nullannoinference-propagator</module>
       <module>nullannoinference-sanitizer</module>
       <module>nullannoinference-annotator</module>
       <module>nullannoinference-extractor</module>
       <module>nullannoinference-commons</module>
-      <module>nullannoinference-merger</module>
       <module>nullannoinference-experiments-analysis</module>
   </modules>
   <url>http://maven.apache.org</url>
