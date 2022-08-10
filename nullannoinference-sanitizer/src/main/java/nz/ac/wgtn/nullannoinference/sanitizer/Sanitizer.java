@@ -14,15 +14,25 @@ public interface Sanitizer<T extends AbstractIssue> extends Predicate<T> {
     String SANITIZATION_VALUE_KEY = "sanitization.value";
     String SANITIZATION_SANITIZER_KEY = "sanitization.sanitizer";
 
-    static Sanitizer ALL = new Sanitizer() {
+    Sanitizer ALL = new Sanitizer() {
         @Override
         public String name() {
             return "all";
         }
-
         @Override
         public boolean test(Object o) {
             return true;
+        }
+    };
+
+    Sanitizer NONE = new Sanitizer() {
+        @Override
+        public String name() {
+            return "none";
+        }
+        @Override
+        public boolean test(Object o) {
+            return false;
         }
     };
 
@@ -52,7 +62,7 @@ public interface Sanitizer<T extends AbstractIssue> extends Predicate<T> {
             }
             @Override
             public String name() {
-                if (Sanitizer.this==ALL) return ((Sanitizer)other).name();
+                if (Sanitizer.this==NONE) return ((Sanitizer)other).name();
                 return Sanitizer.this.name() + " | " + ((Sanitizer)other).name();
             }
         };

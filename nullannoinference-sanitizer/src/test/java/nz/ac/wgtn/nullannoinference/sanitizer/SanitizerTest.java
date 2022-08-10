@@ -145,7 +145,7 @@ public class SanitizerTest {
 
 
     @Test
-    public void testProvenance1 () throws IOException {
+    public void testProvenanceForSingleSanitizer () throws IOException {
         DeprecatedElementsSanitizer deprecatedElementsSanitizer = new DeprecatedElementsSanitizer(ProjectType.MVN,project,null);
         MainScopeSanitizer mainScopeSanitizer = new MainScopeSanitizer(ProjectType.MVN,project);
         Issue issueInMain = new Issue(
@@ -166,6 +166,38 @@ public class SanitizerTest {
         assertEquals("false",issueInTest.getProperty(Sanitizer.SANITIZATION_VALUE_KEY));
         assertEquals(mainScopeSanitizer.name(),issueInTest.getProperty(Sanitizer.SANITIZATION_SANITIZER_KEY));
 
+    }
+
+    @Test
+    public void testProvenanceForConjunctiveSanitizer () throws IOException {
+        DeprecatedElementsSanitizer deprecatedElementsSanitizer = new DeprecatedElementsSanitizer(ProjectType.MVN,project,null);
+        MainScopeSanitizer mainScopeSanitizer = new MainScopeSanitizer(ProjectType.MVN,project);
+        Sanitizer<Issue> sanitizer = Sanitizer.ALL.and(deprecatedElementsSanitizer).and(mainScopeSanitizer);
+        Issue issueInMain = new Issue(
+                "nz.ac.wgtn.nullannoinference.sanitizer.examples.example1.Class1",
+                "m1", "()Ljava/lang/Object;", null,
+                Issue.IssueType.RETURN_VALUE);
+
+
+        Assumptions.assumeFalse(Sanitizer.sanitize(issueInMain,sanitizer));
+        assertEquals("false",issueInMain.getProperty(Sanitizer.SANITIZATION_VALUE_KEY));
+        assertEquals(deprecatedElementsSanitizer.name() + " & " + mainScopeSanitizer.name(),issueInMain.getProperty(Sanitizer.SANITIZATION_SANITIZER_KEY));
+    }
+
+    @Test
+    public void testProvenanceForDisjunctiveSanitizer () throws IOException {
+        DeprecatedElementsSanitizer deprecatedElementsSanitizer = new DeprecatedElementsSanitizer(ProjectType.MVN,project,null);
+        MainScopeSanitizer mainScopeSanitizer = new MainScopeSanitizer(ProjectType.MVN,project);
+        Sanitizer<Issue> sanitizer = Sanitizer.NONE.or(deprecatedElementsSanitizer).or(mainScopeSanitizer);
+        Issue issueInMain = new Issue(
+                "nz.ac.wgtn.nullannoinference.sanitizer.examples.example1.Class1",
+                "m1", "()Ljava/lang/Object;", null,
+                Issue.IssueType.RETURN_VALUE);
+
+
+        Assumptions.assumeTrue(Sanitizer.sanitize(issueInMain,sanitizer));
+        assertEquals("true",issueInMain.getProperty(Sanitizer.SANITIZATION_VALUE_KEY));
+        assertEquals(deprecatedElementsSanitizer.name() + " | " + mainScopeSanitizer.name(),issueInMain.getProperty(Sanitizer.SANITIZATION_SANITIZER_KEY));
     }
 
 }
