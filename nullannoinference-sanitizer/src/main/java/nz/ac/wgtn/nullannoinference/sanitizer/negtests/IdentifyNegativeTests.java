@@ -1,6 +1,5 @@
 package nz.ac.wgtn.nullannoinference.sanitizer.negtests;
 
-import com.google.common.base.Preconditions;
 import nz.ac.wgtn.nullannoinference.commons.ProjectType;
 import nz.ac.wgtn.nullannoinference.sanitizer.LogSystem;
 import org.apache.logging.log4j.Logger;
@@ -33,8 +32,8 @@ public class IdentifyNegativeTests {
             LOGGER.error("error writting negative tests to " + outputFile.getAbsolutePath(),x);
         }
 
-        SantitiseObservedIssues.LOGGER.info("Analysis results written to " + outputFile.getAbsolutePath());
-        SantitiseObservedIssues.LOGGER.info("\t"+negativeTests.size()+" negative tests identified");
+        LOGGER.info("Analysis results written to " + outputFile.getAbsolutePath());
+        LOGGER.info("\t"+negativeTests.size()+" negative tests identified");
     }
 
     static Set<MethodInfo> findNegativeTests(ProjectType projectType, File folder,File outputFile) throws IOException {

@@ -28,7 +28,7 @@
           <finalName>deprecationanalyser</finalName>
           <archive>
             <manifest>
-              <mainClass>nz.ac.wgtn.nullannoinference.deprecationanalyser.Main</mainClass>
+              <mainClass>deprecationanalyser.Main</mainClass>
             </manifest>
           </archive>
           <descriptorRefs>

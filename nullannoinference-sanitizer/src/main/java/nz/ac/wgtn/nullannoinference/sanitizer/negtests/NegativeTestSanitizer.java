@@ -38,11 +38,11 @@ public class NegativeTestSanitizer implements Sanitizer<Issue> {
             for (String ste : issue.getStacktrace()) {
                 for (String m : negativeTestMethods) {
                     if (ste.startsWith(m)) {
-                        return true;
+                        return false;
                     }
                 }
             }
-            return false;
+            return true;
         }
     }
 }

@@ -6,9 +6,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
 import nz.ac.wgtn.nullannoinference.commons.ProjectType;
-import nz.ac.wgtn.nullannoinference.sanitizer.negtests.IdentifyNegativeTests;
 import nz.ac.wgtn.nullannoinference.sanitizer.negtests.NegativeTestSanitizer;
-import nz.ac.wgtn.nullannoinference.sanitizer.negtests.SantitiseObservedIssues;
 import org.apache.commons.cli.*;
 import org.apache.logging.log4j.Logger;
 import java.io.File;
@@ -16,8 +14,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.Writer;
 import java.lang.reflect.Type;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -122,8 +118,8 @@ public class Main {
             sanitizer = sanitizer.and(negativeTestSanitizer);
         }
 
-        Set<Issue> rejectedIssues = issues.parallelStream().filter(sanitizer).collect(Collectors.toSet());
-        Set<Issue> sanitisedIssues = issues.parallelStream().filter(sanitizer.negate()).collect(Collectors.toSet());
+        Set<Issue> rejectedIssues = issues.parallelStream().filter(sanitizer.negate()).collect(Collectors.toSet());
+        Set<Issue> sanitisedIssues = issues.parallelStream().filter(sanitizer).collect(Collectors.toSet());
 
         assert issues.size() == rejectedIssues.size() + sanitisedIssues.size();
 
