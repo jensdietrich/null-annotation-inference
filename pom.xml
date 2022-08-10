@@ -42,7 +42,6 @@
       <module>nullannoinference-sanitizer</module>
       <module>nullannoinference-annotator</module>
       <module>nullannoinference-extractor</module>
-      <module>nullannoinference-deprecationanalyser</module>
       <module>nullannoinference-commons</module>
       <module>nullannoinference-merger</module>
       <module>nullannoinference-experiments-analysis</module>
