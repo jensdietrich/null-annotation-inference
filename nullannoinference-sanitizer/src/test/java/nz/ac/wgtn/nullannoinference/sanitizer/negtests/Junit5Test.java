@@ -18,7 +18,7 @@ public class Junit5Test {
         assumeTrue(new File(project,"target/test-classes").exists(),"project containing test data (resources/junit5-project) has not been built, build test projects with \"mvn test-compile\" or \"mvn test\"");
         Set<MethodInfo> methods = IdentifyNegativeTests.findNegativeTests(ProjectType.MVN,project,null);
         assertEquals(2,methods.size());
-        assertTrue(methods.contains(new MethodInfo("nz.ac.wgtn.ecs.semdiff.nullable.negativetestanalysis.test_junit5.AnnotationTest","testAIOBE","()V")));
-        assertTrue(methods.contains(new MethodInfo("nz.ac.wgtn.ecs.semdiff.nullable.negativetestanalysis.test_junit5.AnnotationTest","testNPE","()V")));
+        assertTrue(methods.contains(new MethodInfo("nz.ac.wgtn.nullannoinference.sanitizer.examples.test_junit5.AnnotationTest","testAIOBE","()V")));
+        assertTrue(methods.contains(new MethodInfo("nz.ac.wgtn.nullannoinference.sanitizer.examples.test_junit5.AnnotationTest","testNPE","()V")));
     }
 }
