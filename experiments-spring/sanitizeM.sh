@@ -1,6 +1,6 @@
 #!/bin/bash
 
-##  sanitise issues observed during the execution of negative tests
+## sanitise issues by removing issues not in main scope (such as tests)
 ## @author jens dietrich
 
 . ./spring.env

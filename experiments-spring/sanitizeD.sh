@@ -1,6 +1,6 @@
 #!/bin/bash
 
-##  sanitise issues observed during the execution of negative tests
+## sanitise issues by removing issue in deprecated elements
 ## @author jens dietrich
 
 . ./spring.env

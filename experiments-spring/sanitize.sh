@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## sanitise issues by removing issues in shaded classes / packages
+## run all sanitization checks
 ## @author jens dietrich
 
 . ./spring.env

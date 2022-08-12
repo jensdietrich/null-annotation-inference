@@ -1,6 +1,6 @@
 #!/bin/bash
 
-##  sanitise issues observed during the execution of negative tests
+## sanitize tests applying all filters (shaded, deprecated, negative test, main scope)
 ## @author jens dietrich
 
 . ./spring.env
