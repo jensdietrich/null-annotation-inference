@@ -121,10 +121,16 @@ public class Issue extends AbstractIssue {
     }
 
     public String setProperty (String key,String value) {
+        if (this.additionalProperties==null) {
+            this.additionalProperties = new Properties();
+        }
         return (String) this.additionalProperties.put(key,value);
     }
 
     public String unsetProperty (String key) {
+        if (this.additionalProperties==null) {
+            return null;
+        }
         return (String) this.additionalProperties.remove(key);
     }
 
