@@ -7,6 +7,6 @@ public class Class2 {
     private Object f2 = null;
 
     @Deprecated
-    public Object m1() {return null;}
-    public Object m2() {return null;}
+    Object m1() {return null;}
+    private Object m2() {return null;}
 }
