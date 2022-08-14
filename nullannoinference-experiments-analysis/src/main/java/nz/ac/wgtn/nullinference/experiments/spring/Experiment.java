@@ -119,10 +119,27 @@ public abstract class Experiment {
         Set<? extends AbstractIssue> set1 = readIssues(folder1,moduleName,true,filter);
         Set<? extends AbstractIssue> set2 = readIssues(folder2,moduleName,true,filter);
         double symDiff =  ((double)Sets.intersection(set1,set2).size()) / ((double)Sets.union(set1,set2).size());
-        double diffLeftMRight =  ((double)Sets.difference(set1,set2).size()) / ((double)Sets.union(set1,set2).size());
-        double diffRightMLeft =  ((double)Sets.difference(set2,set1).size()) / ((double)Sets.union(set1,set2).size());
+        double diffLeftMRight =  ((double)Sets.difference(set1,set2).size()) / ((double)set1.size());
+        double diffRightMLeft =  ((double)Sets.difference(set2,set1).size()) / ((double)set2.size());
 
         return Utils.format(symDiff) + " (" + Utils.format(diffLeftMRight) + "," + Utils.format(diffRightMLeft) + ")" ;
+    }
+
+
+    protected static String recallPrecision(File folder1, File folder2, String moduleName)  {
+        return recallPrecision(folder1,folder2,moduleName, issue -> true);
+    }
+
+    protected static String recallPrecision(File folder1, File folder2, String moduleName, Predicate<? extends AbstractIssue> filter)  {
+        // always work with aggregated sets !
+        Set<? extends AbstractIssue> set1 = readIssues(folder1,moduleName,true,filter);
+        Set<? extends AbstractIssue> set2 = readIssues(folder2,moduleName,true,filter);
+        int TP = Sets.intersection(set1,set2).size();
+        int FP = Sets.difference(set2,set1).size();
+        int FN = Sets.difference(set1,set2).size();
+        double precision =  (double)TP / (double)(TP+FP);
+        double recall =  (double)TP / (double)(TP+FN);
+        return "" + Utils.format(recall) + "," + Utils.format(precision) ;
     }
 
     protected static double jaccardSimilarity(File folder1, File folder2,String moduleName)  {
@@ -155,6 +172,7 @@ public abstract class Experiment {
                 out.nl();
             }
             String nextLine = Stream.of(columns).map(col -> col.value(data)).collect(Collectors.joining(" , "));
+            ISSUE_CACHE.clear();
             System.out.println(nextLine);
         }
 

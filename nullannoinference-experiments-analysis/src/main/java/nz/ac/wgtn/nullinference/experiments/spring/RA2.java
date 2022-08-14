@@ -130,51 +130,51 @@ public class RA2 extends Experiment {
 
             new Column() {
                 @Override public String name() {
-                    return "diff(base)";
+                    return "recall+prec(base)";
                 }
                 @Override public String value(String dataName) {
-                    return diffMetrics(EXTRACTED_ISSUES_FOLDER,OBSERVED_ISSUES_FOLDER,dataName);
+                    return recallPrecision(EXTRACTED_ISSUES_FOLDER,OBSERVED_ISSUES_FOLDER,dataName);
                 }
             },
 
             new Column() {
                 @Override public String name() {
-                    return "diff(D)";
+                    return "recall+prec(D)";
                 }
                 @Override public String value(String dataName) {
-                    return diffMetrics(EXTRACTED_ISSUES_FOLDER,SANITIZED_ISSUES_DEPRECATED_FOLDER,dataName);
+                    return recallPrecision(EXTRACTED_ISSUES_FOLDER,SANITIZED_ISSUES_DEPRECATED_FOLDER,dataName);
                 }
             },
             new Column() {
                 @Override public String name() {
-                    return "diff(M)";
+                    return "recall+prec(M)";
                 }
                 @Override public String value(String dataName) {
-                    return diffMetrics(EXTRACTED_ISSUES_FOLDER,SANITIZED_ISSUES_MAINSCOPE_FOLDER,dataName);
+                    return recallPrecision(EXTRACTED_ISSUES_FOLDER,SANITIZED_ISSUES_MAINSCOPE_FOLDER,dataName);
                 }
             },
             new Column() {
                 @Override public String name() {
-                    return "diff(N)";
+                    return "recall+prec(N)";
                 }
                 @Override public String value(String dataName) {
-                    return diffMetrics(EXTRACTED_ISSUES_FOLDER,SANITIZED_ISSUES_NEGATIVETESTS_FOLDER,dataName);
+                    return recallPrecision(EXTRACTED_ISSUES_FOLDER,SANITIZED_ISSUES_NEGATIVETESTS_FOLDER,dataName);
                 }
             },
             new Column() {
                 @Override public String name() {
-                    return "diff(S)";
+                    return "recall+prec(S)";
                 }
                 @Override public String value(String dataName) {
-                    return diffMetrics(EXTRACTED_ISSUES_FOLDER,SANITIZED_ISSUES_SHADED_FOLDER,dataName);
+                    return recallPrecision(EXTRACTED_ISSUES_FOLDER,SANITIZED_ISSUES_SHADED_FOLDER,dataName);
                 }
             },
             new Column() {
                 @Override public String name() {
-                    return "diff(DMNS)";
+                    return "recall+prec(DMNS)";
                 }
                 @Override public String value(String dataName) {
-                    return diffMetrics(EXTRACTED_ISSUES_FOLDER,SANITIZED_ISSUES_FOLDER,dataName);
+                    return recallPrecision(EXTRACTED_ISSUES_FOLDER,SANITIZED_ISSUES_FOLDER,dataName);
                 }
             },
         };
