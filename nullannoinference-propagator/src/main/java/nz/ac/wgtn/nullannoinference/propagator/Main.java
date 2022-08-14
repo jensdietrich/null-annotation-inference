@@ -17,7 +17,6 @@ public class Main {
     public static final boolean PROPAGATE_NULLABILITY_FOR_ARGUMENTS = true;
 
     // TODO make this configurable -- only those issues will be configured
-    public static final Predicate<Issue> ISSUE_FILTER = issue -> issue.getScope() == Issue.Scope.MAIN;
     public static final Logger LOGGER = LogSystem.getLogger("infer-additional-issues");
 
     public static void main (String[] args) throws Exception {
@@ -77,7 +76,7 @@ public class Main {
         LOGGER.info("Inferring additional nullability annotations for sub and super types");
         LOGGER.info("\tpropagate nullability to return types of overridden methods in supertypes: true");
         LOGGER.info("\tpropagate nullability to arguments type of overriding methods in subtypes: " + propagate4args);
-        InferAdditionalIssues.run(projectType,input,projectFolder, output,packagePrefix, propagate4args,ISSUE_FILTER);
+        InferAdditionalIssues.run(projectType,input,projectFolder, output,packagePrefix, propagate4args,issue -> true);
 
     }
 }

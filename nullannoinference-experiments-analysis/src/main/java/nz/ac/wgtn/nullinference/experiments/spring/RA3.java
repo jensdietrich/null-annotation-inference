@@ -20,8 +20,8 @@ public class RA3 extends Experiment {
 
     public static final File EXTRACTED_ISSUES_FOLDER = new File("experiments-spring/results/extracted");
     public static final File EXTRACTED_PLUS_ISSUES_FOLDER = new File("experiments-spring/results/extracted+");
-    public static final File OBSERVED_SANITIZED_ISSUES_FOLDER = new File("experiments-spring/results/observed3");
     public static final File OBSERVED_PLUS_ISSUES_FOLDER = new File("experiments-spring/results/observed+");
+    public static final File SANITIZED_ISSUES_FOLDER = new File("experiments-spring/results/sanitized");
     public static final File SHADING_SPECS = new File("experiments-spring/shaded.json");
     public static final File OUTPUT_CSV = new File("experiments-spring/results/ra/ra3.csv");
     public static final File OUTPUT_LATEX = new File("experiments-spring/results/ra/ra3.tex");
@@ -35,8 +35,8 @@ public class RA3 extends Experiment {
         Preconditions.checkArgument(EXTRACTED_PLUS_ISSUES_FOLDER.isDirectory());
         Preconditions.checkArgument(OBSERVED_PLUS_ISSUES_FOLDER.exists());
         Preconditions.checkArgument(OBSERVED_PLUS_ISSUES_FOLDER.isDirectory());
-        Preconditions.checkArgument(OBSERVED_SANITIZED_ISSUES_FOLDER.exists());
-        Preconditions.checkArgument(OBSERVED_SANITIZED_ISSUES_FOLDER.isDirectory());
+        Preconditions.checkArgument(SANITIZED_ISSUES_FOLDER.exists());
+        Preconditions.checkArgument(SANITIZED_ISSUES_FOLDER.isDirectory());
         Preconditions.checkArgument(SHADING_SPECS.exists());
 
         new RA3().analyse();
@@ -51,56 +51,44 @@ public class RA3 extends Experiment {
 
         Column[] columns = new Column[] {
             Column.First,
-            new Column() {
-                @Override public String name() {
-                    return "extracted";
-                }
-                @Override public String value(String dataName) {
-                    return Utils.format(countIssues(EXTRACTED_ISSUES_FOLDER,dataName,false));
-                }
-            },
+                new Column() {
+                    @Override public String name() {
+                        return "san(DMNS)";
+                    }
+                    @Override public String value(String dataName) {
+                        return Utils.format(countIssues(SANITIZED_ISSUES_FOLDER,dataName,true));
+                    }
+                },
+                new Column() {
+                    @Override public String name() {
+                        return "inf";
+                    }
+                    @Override public String value(String dataName) {
+                        return Utils.format(countIssues(OBSERVED_PLUS_ISSUES_FOLDER,dataName,true));
+                    }
+                },
+                new Column() {
+                    @Override public String name() {
+                        return "recall+prec(DMNS)";
+                    }
+                    @Override public String value(String dataName) {
+                        return recallPrecision(EXTRACTED_ISSUES_FOLDER,SANITIZED_ISSUES_FOLDER,dataName);
+                    }
+                },
+                new Column() {
+                    @Override public String name() {
+                        return "recall+prec(inf)";
+                    }
+                    @Override public String value(String dataName) {
+                        return recallPrecision(EXTRACTED_PLUS_ISSUES_FOLDER,OBSERVED_PLUS_ISSUES_FOLDER,dataName);
+                    }
+                },
 
-            new Column() {
-                @Override public String name() {
-                    return "extracted+inf (non-shaded)";
-                }
-                @Override public String value(String dataName) {
-                    return Utils.format(countIssues(EXTRACTED_PLUS_ISSUES_FOLDER,dataName,false,shaded.negate()));
-                }
-            },
-
-            new Column() {
-                @Override public String name() {
-                    return "observed (san, agg, non-shaded)";
-                }
-                @Override public String value(String dataName) {
-                    return Utils.format(countIssues(OBSERVED_SANITIZED_ISSUES_FOLDER,dataName,true,shaded.negate()));
-                }
-            },
-
-            new Column() {
-                @Override public String name() {
-                    return "observed+inf (san, agg, non-shaded)";
-                }
-                @Override public String value(String dataName) {
-                    return Utils.format(countIssues(OBSERVED_PLUS_ISSUES_FOLDER,dataName,true,shaded.negate()));
-                }
-            },
-
-            new Column() {
-                @Override public String name() {return "diff-extr-obs (inferred, sanitised, non-shaded)";}
-                @Override public String value(String dataName) {
-                    return diffMetrics(EXTRACTED_PLUS_ISSUES_FOLDER,OBSERVED_PLUS_ISSUES_FOLDER,dataName,shaded.negate());
-                }
-            }
         };
-
 
         TableGenerator csvOutput = new CSVTableGenerator(OUTPUT_CSV);
 
-
-        this.run(SPRING_MODULES,"RA1","tab:ra1",columns,csvOutput);
-
+        this.run(SPRING_MODULES,"RA3","tab:ra3",columns,csvOutput);
 
     }
 

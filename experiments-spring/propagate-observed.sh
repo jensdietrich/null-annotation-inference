@@ -33,7 +33,7 @@ for module in "${MODULES[@]}" ;do
     fi
 
     echo "using package prefix: " $prefix
-    java -jar $PROPAGATOR -p ${PROJECT_FOLDER}/${module} -t gradle_multilang -i ${RESULT_FOLDER_OBSERVED3}/$NULLABLE-${module}.json -o ${RESULT_FOLDER_OBSERVED_PROPAGATED}/$NULLABLE-${module}.json -x $prefix
+    java -jar $PROPAGATOR -p ${PROJECT_FOLDER}/${module} -t gradle_multilang -i ${RESULT_FOLDER_SANITIZED}/$NULLABLE-${module}.json -o ${RESULT_FOLDER_OBSERVED_PROPAGATED}/$NULLABLE-${module}.json -x $prefix
 done
 
 
