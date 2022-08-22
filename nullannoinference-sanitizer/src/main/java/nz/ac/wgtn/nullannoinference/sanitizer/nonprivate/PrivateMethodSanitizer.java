@@ -15,19 +15,14 @@ public class PrivateMethodSanitizer implements Sanitizer<Issue>  {
 
     private Set<String> privateElements = null;
 
-    public PrivateMethodSanitizer(ProjectType projectType, File projectRootFolder, File deprecatedElementsDump) throws IOException {
-        privateElements = ExtractPrivateMethods.findPrivateMethods(projectType,projectRootFolder,deprecatedElementsDump);
+    public PrivateMethodSanitizer(ProjectType projectType, File projectRootFolder, File privateMethodsDump) throws IOException {
+        privateElements = ExtractPrivateMethods.findPrivateMethods(projectType,projectRootFolder,privateMethodsDump);
     }
 
     @Override
     public boolean test(Issue issue) {
-        String issueAsText = issue.getClassName() + "::" + issue.getMethodName() + issue.getDescriptor();
-        for (String deprecatedElement: privateElements) {
-            if (issueAsText.startsWith(deprecatedElement)) { // stars with matched entire classes marked as deprecated
-                return false;
-            }
-        }
-        return true;
+        String method = issue.getClassName() + "::" + issue.getMethodName() + issue.getDescriptor();
+        return !privateElements.contains(method);
     }
 
     @Override

@@ -21,7 +21,6 @@ public class ExtractPrivateMethodsTest {
         assumeTrue(new File(project,"target/classes").exists(),"project containing test data (resources/mvn-project) has not been built, build  project with \"mvn compile\"");
     }
 
-
     @Test
     public void testPrivateMethodDetection () throws IOException {
         Set<String> privateMethods = ExtractPrivateMethods.findPrivateMethods(ProjectType.MVN,project,null);

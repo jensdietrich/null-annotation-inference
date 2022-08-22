@@ -21,9 +21,9 @@ public class ExtractPrivateMethods {
             for (String record:privateMethods) {
                 out.println(record);
             }
-            LOGGER.info("Analysis results written to " + outputFile.getAbsolutePath());
+            LOGGER.info("analysis results written to " + outputFile.getAbsolutePath());
         } catch (IOException e) {
-            LOGGER.error("Error writing private elements to " + outputFile.getAbsolutePath(),e);
+            LOGGER.error("error writing private elements to " + outputFile.getAbsolutePath(),e);
         }
     }
 
@@ -42,9 +42,10 @@ public class ExtractPrivateMethods {
             }
         }
         if (outputFile!=null) {
+            LOGGER.info("writing private methods to " + outputFile.getAbsolutePath());
             dumpPrivateMethods(elements,outputFile);
         }
-        LOGGER.info("\t"+elements.size()+" elements identified");
+        LOGGER.info(""+elements.size()+" elements identified");
         return elements;
     }
 

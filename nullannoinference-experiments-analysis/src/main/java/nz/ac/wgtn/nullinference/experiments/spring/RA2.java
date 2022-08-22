@@ -18,6 +18,8 @@ public class RA2 extends Experiment {
     public static final File SANITIZED_ISSUES_FOLDER = new File("experiments-spring/results/sanitized");
     public static final File SANITIZED_ISSUES_DEPRECATED_FOLDER = new File("experiments-spring/results/sanitizedD");
     public static final File SANITIZED_ISSUES_MAINSCOPE_FOLDER = new File("experiments-spring/results/sanitizedM");
+
+    public static final File SANITIZED_ISSUES_NONPRIVATEMETHODS_FOLDER = new File("experiments-spring/results/sanitizedP");
     public static final File SANITIZED_ISSUES_NEGATIVETESTS_FOLDER = new File("experiments-spring/results/sanitizedN");
     public static final File SANITIZED_ISSUES_SHADED_FOLDER = new File("experiments-spring/results/sanitizedS");
 

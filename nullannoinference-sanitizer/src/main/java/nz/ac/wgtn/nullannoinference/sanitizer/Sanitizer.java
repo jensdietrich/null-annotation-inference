@@ -63,6 +63,7 @@ public interface Sanitizer<T extends AbstractIssue> extends Predicate<T> {
             @Override
             public String name() {
                 if (Sanitizer.this==NONE) return ((Sanitizer)other).name();
+                if (Sanitizer.this==NONE) return ((Sanitizer)other).name();
                 return Sanitizer.this.name() + " | " + ((Sanitizer)other).name();
             }
         };
@@ -89,7 +90,4 @@ public interface Sanitizer<T extends AbstractIssue> extends Predicate<T> {
         issue.setProperty(SANITIZATION_SANITIZER_KEY,sanitizer.name());
         return result;
     }
-
 }
-
-

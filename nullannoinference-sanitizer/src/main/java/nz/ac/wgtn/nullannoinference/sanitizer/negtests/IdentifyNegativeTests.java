@@ -85,7 +85,15 @@ public class IdentifyNegativeTests {
                     }
 
                     // add some third-party assertj callsites -- those are used in spring
-                    if ("org/assertj/core/api/ThrowableAssert".equals(owner) || "org/assertj/core/api/AbstractThrowableAssert".equals(owner)) {
+                    if ("org/assertj/core/api/Assertions".equals(owner)) {
+                        if (name.startsWith("assertThat") && name.endsWith("Exception") && !name.equals("assertThatNoException")) {
+                            methods.add(new MethodInfo(currentClass,currentMethodName,currentDescriptor));
+                        }
+                        else if (name.startsWith("assertThatThrownBy")) {
+                            methods.add(new MethodInfo(currentClass,currentMethodName,currentDescriptor));
+                        }
+                    }
+                    if (owner.startsWith("org/assertj/core/api/") && owner.contains("Throwable") && owner.contains("Assert")) {
                         methods.add(new MethodInfo(currentClass,currentMethodName,currentDescriptor));
                     }
                 }

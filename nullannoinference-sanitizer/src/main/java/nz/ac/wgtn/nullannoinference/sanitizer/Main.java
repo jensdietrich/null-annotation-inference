@@ -9,6 +9,7 @@ import nz.ac.wgtn.nullannoinference.commons.ProjectType;
 import nz.ac.wgtn.nullannoinference.sanitizer.deprecation.DeprecatedElementsSanitizer;
 import nz.ac.wgtn.nullannoinference.sanitizer.mainscope.MainScopeSanitizer;
 import nz.ac.wgtn.nullannoinference.sanitizer.negtests.NegativeTestSanitizer;
+import nz.ac.wgtn.nullannoinference.sanitizer.nonprivate.PrivateMethodSanitizer;
 import nz.ac.wgtn.nullannoinference.sanitizer.shaded.ShadingSanitizer;
 import org.apache.commons.cli.*;
 import org.apache.logging.log4j.Logger;
@@ -37,11 +38,13 @@ public class Main {
         options.addOption("t","projecttype",true,"the project type, default is mvn (Maven), can be set to any of " + ProjectType.getValidProjectTypes());
         options.addOption("n","removeissuesfromnegativetests",false,"if set, perform an analysis to remove issues observed while executing negative tests");
         options.addOption("s","removeissuesinshadedclasses",false,"if set, perform an analysis to remove issues in shaded classes");
+        options.addOption("pr","removeissuesinprivatemethods",false,"if set, perform an analysis to remove issues in private and packageprivate methods");
         options.addOption("d","removeissuesindeprecatedelements",false,"if set, perform an analysis to remove issues in deprecated elements");
         options.addOption("m","removeissuesnotinmain",false,"if set, issues in classes not in main scope are removed");
         options.addOption("nt","negativetests",true,"the csv file where information about negative tests detected will be saved in CSV format (optional)");
         options.addOption("sh","shadingspecs",true,"the json file with definitions of shaded packages, required for shading analysis");
         options.addOption("de","deprecatedelements",true,"the text file where information about deprecated elements found will be written (optional)");
+        options.addOption("pm","privatemethods",true,"the text file where private methods detected be written (optional)");
 
         CommandLineParser parser = new DefaultParser() {
             @Override
@@ -66,10 +69,12 @@ public class Main {
         boolean removeIssuesInShadedclasses = cmd.hasOption("removeissuesinshadedclasses");
         boolean removeIssuesIndeprecatedElements = cmd.hasOption("removeissuesindeprecatedelements");
         boolean removeIssuesNotInMain = cmd.hasOption("removeissuesnotinmain");
+        boolean removeIssuesInPrivateMethods = cmd.hasOption("removeissuesinprivatemethods");
         Preconditions.checkArgument(removeIssuesFromNegativeTests
                 || removeIssuesInShadedclasses
                 || removeIssuesIndeprecatedElements
                 || removeIssuesNotInMain
+                || removeIssuesInPrivateMethods
                 ,"no sanitizer option (-remove*) set");
 
         // input validation
@@ -99,6 +104,11 @@ public class Main {
         }
         File negTestFile = negTestFileName==null?null:new File(negTestFileName);
 
+        String privateMethodsFileName = null;
+        if (cmd.hasOption("privatemethods")) {
+            privateMethodsFileName = cmd.getOptionValue("privatemethods");
+        }
+        File privateMethodsFile = privateMethodsFileName==null?null:new File(privateMethodsFileName);
 
         String deprecatedElementsFileName = null;
         if (cmd.hasOption("deprecatedelements")) {
@@ -150,6 +160,12 @@ public class Main {
             LOGGER.info("adding sanitizer: " + deprecatedSanitizer.getClass().getName());
             sanitizer = sanitizer.and(deprecatedSanitizer);
             LOGGER.info("setting deprecated analyser to remove issues in deprecated elements");
+        }
+        if (removeIssuesInPrivateMethods) {
+            PrivateMethodSanitizer privateMethodSanitizer = new PrivateMethodSanitizer(projectType,projectFolder,privateMethodsFile);
+            LOGGER.info("adding sanitizer: " + privateMethodSanitizer.getClass().getName());
+            sanitizer = sanitizer.and(privateMethodSanitizer);
+            LOGGER.info("setting private method analyser to remove issues in private methods");
         }
 
         Sanitizer<Issue> sanitizer2 = sanitizer;
