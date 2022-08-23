@@ -19,5 +19,5 @@ cp nullannoinference-sanitizer/target/sanitizer.jar $SANITIZER
 cp nullannoinference-extractor/target/extractor.jar $EXTRACTOR
 cp nullannoinference-agent/target/nullannoinference-agent.jar $AGENT
 cp nullannoinference-agent2/target/nullannoinference-agent2.jar $AGENT2
-
+cp nullannoinference-merger/target/merger.jar $MERGER
 
