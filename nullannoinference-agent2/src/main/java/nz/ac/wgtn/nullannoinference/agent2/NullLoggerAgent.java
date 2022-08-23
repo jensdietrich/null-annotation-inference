@@ -37,22 +37,28 @@ public class NullLoggerAgent {
             log("class name prefix set, instrumenting only classes with names starting with any of: " + prefix);
             prefix = prefix.replace('.','/');
         }
-        final String prefix2 = prefix;
+        final String[] packagePrefixes = prefix==null?null:prefix.split(",");
         inst.addTransformer(new ClassFileTransformer() {
             @Override
             public byte[] transform(ClassLoader classLoader, String s, Class<?> aClass, ProtectionDomain protectionDomain, byte[] bytes) throws IllegalClassFormatException {
-
 
                 for (String exclude:EXCLUDES) {
                     if (s.startsWith(exclude)) {
                         return bytes;
                     }
                 }
+                boolean doInstrument = false;
+                if (packagePrefixes==null) {
+                    doInstrument = true;
+                }
+                else {
+                    for (String packagePrefix:packagePrefixes) {
+                        doInstrument = doInstrument || s.startsWith(packagePrefix);
+                    }
+                }
 
-                if (prefix2==null || s.startsWith(prefix2)) {
-
+                if (doInstrument) {
                     ClassReader reader = new ClassReader(bytes);
-
                     // this prevents some issues with the standard class writer leading to duplicate class errors
                     ClassWriter writer = new SafeClassWriter(reader,classLoader,ClassWriter.COMPUTE_FRAMES);
                     try {
