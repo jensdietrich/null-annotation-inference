@@ -94,5 +94,5 @@ dependencies {
 
 test {
 	// to enable instrumentation
-	jvmArgs = ["-Xmx12g","-javaagent:nullannoinference-agent.jar","-javaagent:nullannoinference-agent2.jar","-Dnz.ac.wgtn.nullannoinference.includes=org.springframework","-Dnz.ac.wgtn.nullannoinference.context=springframework-web"]
+	jvmArgs = ["-Xmx12g","-javaagent:nullannoinference-agent.jar","-javaagent:nullannoinference-agent2.jar","-Dnz.ac.wgtn.nullannoinference.includes=org.springframework.http,org.springframework.web,org.springframework.remoting","-Dnz.ac.wgtn.nullannoinference.context=springframework-web"]
 }
