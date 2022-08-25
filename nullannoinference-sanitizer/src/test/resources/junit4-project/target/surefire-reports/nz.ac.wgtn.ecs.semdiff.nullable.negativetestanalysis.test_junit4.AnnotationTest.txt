@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: nz.ac.wgtn.ecs.semdiff.nullable.negativetestanalysis.test_junit4.AnnotationTest
--------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.022 sec
