@@ -26,6 +26,8 @@ public class IssuePersistency {
             return;
         }
 
+
+
         if (!file.getParentFile().exists()) {
             System.out.println("creating folder: " + file.getParentFile().getAbsolutePath());
             file.getParentFile().mkdirs();

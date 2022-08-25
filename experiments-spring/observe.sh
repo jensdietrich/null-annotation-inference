@@ -32,7 +32,8 @@ for module in "${MODULES[@]}" ;do
   echo "Copying instrumented gradle build script: " $INSTRUMENTED_GRADLE_FOLDER/$module.gradle
   cp $INSTRUMENTED_GRADLE_FOLDER/$module.gradle $PROJECT_FOLDER_INSTRUMENTED/$module
   echo "Copying agent(s) into modules"
- # cp $AGENT $PROJECT_FOLDER_INSTRUMENTED/$module
+  cp $AGENT $PROJECT_FOLDER_INSTRUMENTED/$module
+  cp $AGENT2 $PROJECT_FOLDER_INSTRUMENTED/$module
 done
 
 # run tests with instrumentation

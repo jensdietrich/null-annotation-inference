@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Field;
+import java.nio.file.FileSystems;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
@@ -118,14 +119,19 @@ public class IssueStore {
     public static void save () {
 
         if (issues.isEmpty()) {
-            System.out.println("");
+            System.out.println("no issues recorded");
         }
         String fileName = FILE_NAME + '-' + System.currentTimeMillis() + ".json";
+        File workingDir = new File(System.getProperty("user.dir"));
+        File file = new File(workingDir,fileName);
+        System.out.println("issues will be save to " + file.getAbsolutePath());
+
         Set<Issue> issuesToBeSaved = new HashSet<>();
         issuesToBeSaved.addAll(issues);
-        System.out.println("saving " + issuesToBeSaved.size() + " issues to " + fileName);
+        System.out.println("saving " + issuesToBeSaved.size() + " issues");
         issues.removeAll(issuesToBeSaved);
-        IssuePersistency.save (issuesToBeSaved, new File(fileName));
+
+        IssuePersistency.save (issuesToBeSaved, file);
     }
 
 }
