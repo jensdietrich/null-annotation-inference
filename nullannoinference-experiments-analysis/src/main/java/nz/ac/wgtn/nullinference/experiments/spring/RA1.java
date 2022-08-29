@@ -1,11 +1,10 @@
 package nz.ac.wgtn.nullinference.experiments.spring;
 
-import com.google.common.base.Preconditions;
 import nz.ac.wgtn.nullinference.experiments.Utils;
 import java.io.File;
 import java.io.IOException;
-
-import static nz.ac.wgtn.nullinference.experiments.spring.DataSet.SPRING_MODULES;
+import static nz.ac.wgtn.nullinference.experiments.spring.Config.SPRING_MODULES;
+import static nz.ac.wgtn.nullinference.experiments.spring.Config.*;
 
 /**
  * Script to produce data for RA1.
@@ -13,20 +12,10 @@ import static nz.ac.wgtn.nullinference.experiments.spring.DataSet.SPRING_MODULES
  */
 public class RA1 extends Experiment {
 
-    public static final File EXTRACTED_ISSUES_FOLDER = new File("experiments-spring/results/extracted");
-    public static final File EXTRACTED_PLUS_ISSUES_FOLDER = new File("experiments-spring/results/extracted+");
-    public static final File OBSERVED_ISSUES_FOLDER = new File("experiments-spring/results/observed");
     public static final File OUTPUT_CSV = new File("experiments-spring/results/ra/ra1.csv");
     public static final File OUTPUT_LATEX = new File("experiments-spring/results/ra/ra1.tex");
 
     public static void main (String[] args) throws IOException {
-
-        Preconditions.checkArgument(EXTRACTED_ISSUES_FOLDER.exists());
-        Preconditions.checkArgument(EXTRACTED_ISSUES_FOLDER.isDirectory());
-        Preconditions.checkArgument(EXTRACTED_PLUS_ISSUES_FOLDER.exists());
-        Preconditions.checkArgument(EXTRACTED_PLUS_ISSUES_FOLDER.isDirectory());
-        Preconditions.checkArgument(OBSERVED_ISSUES_FOLDER.exists());
-        Preconditions.checkArgument(OBSERVED_ISSUES_FOLDER.isDirectory());
 
         new RA1().analyse();
     }
@@ -43,17 +32,17 @@ public class RA1 extends Experiment {
                     return Utils.format(countIssues(EXTRACTED_ISSUES_FOLDER,dataName,false));
                 }
             },
+//            new Column() {
+//                @Override public String name() {
+//                    return "extracted+";
+//                }
+//                @Override public String value(String dataName) {
+//                    return Utils.format(countIssues(EXTRACTED_PLUS_ISSUES_FOLDER,dataName,false));
+//                }
+//            },
             new Column() {
                 @Override public String name() {
-                    return "extracted+inf";
-                }
-                @Override public String value(String dataName) {
-                    return Utils.format(countIssues(EXTRACTED_PLUS_ISSUES_FOLDER,dataName,false));
-                }
-            },
-            new Column() {
-                @Override public String name() {
-                    return "observed";
+                    return "obs.(raw)";
                 }
                 @Override public String value(String dataName) {
                     return Utils.format(countIssues(OBSERVED_ISSUES_FOLDER,dataName,false));
@@ -61,7 +50,7 @@ public class RA1 extends Experiment {
             },
             new Column() {
                 @Override public String name() {
-                    return "observed (agg)";
+                    return "obs. (agg)";
                 }
                 @Override public String value(String dataName) {
                     return Utils.format(countIssues(OBSERVED_ISSUES_FOLDER,dataName,true));
@@ -69,20 +58,19 @@ public class RA1 extends Experiment {
             },
             new Column() {
                 @Override public String name() {
-                    return "diff-extr-obs";
+                    return "obs. (raw/agg)";
                 }
                 @Override public String value(String dataName) {
-                    return diffMetrics(EXTRACTED_ISSUES_FOLDER,OBSERVED_ISSUES_FOLDER,dataName);
+                    return Utils.format2(compressionRatio(OBSERVED_ISSUES_FOLDER,dataName));
                 }
             }
         };
 
 
         TableGenerator csvOutput = new CSVTableGenerator(OUTPUT_CSV);
+        TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrrr|");
 
-
-        this.run(SPRING_MODULES,"RA1","tab:ra1",columns,csvOutput);
-
+        this.run(SPRING_MODULES,"RA1 - extracted vs observed (obs). issues, also reported aggregation of (raw) observed issues and aggregation ratios","tab:ra1",columns,csvOutput,latexOutput);
 
     }
 

@@ -38,6 +38,12 @@ public abstract class Experiment {
         return readIssues(folder,moduleName,aggregate,filter).size();
     }
 
+    protected static double compressionRatio(File folder, String moduleName)  {
+        double compressedCount = readIssues(folder,moduleName,true).size();
+        double uncompressedCount = readIssues(folder,moduleName,false).size();
+        return compressedCount / uncompressedCount ;
+    }
+
     protected static Set<? extends AbstractIssue> readIssues(File folder, String moduleName, boolean aggregate)  {
         return readIssues(folder,moduleName,aggregate, issue -> true);
     }
