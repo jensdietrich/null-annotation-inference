@@ -35,7 +35,7 @@ public class RA2b extends Experiment {
 
             new Column() {
                 @Override public String name() {
-                    return "r+p(none)";
+                    return "r,p(none)";
                 }
                 @Override public String value(String dataName) {
                     return recallPrecision(EXTRACTED_ISSUES_FOLDER,OBSERVED_ISSUES_FOLDER,dataName);
@@ -44,7 +44,7 @@ public class RA2b extends Experiment {
 
             new Column() {
                 @Override public String name() {
-                    return "r+p(D)";
+                    return "r,p(D)";
                 }
                 @Override public String value(String dataName) {
                     return recallPrecision(EXTRACTED_ISSUES_FOLDER,SANITIZED_ISSUES_DEPRECATED_FOLDER,dataName);
@@ -52,7 +52,7 @@ public class RA2b extends Experiment {
             },
             new Column() {
                 @Override public String name() {
-                    return "r+p(M)";
+                    return "r,p(M)";
                 }
                 @Override public String value(String dataName) {
                     return recallPrecision(EXTRACTED_ISSUES_FOLDER,SANITIZED_ISSUES_MAINSCOPE_FOLDER,dataName);
@@ -60,7 +60,7 @@ public class RA2b extends Experiment {
             },
             new Column() {
                 @Override public String name() {
-                    return "r+p(N)";
+                    return "r,p(N)";
                 }
                 @Override public String value(String dataName) {
                     return recallPrecision(EXTRACTED_ISSUES_FOLDER,SANITIZED_ISSUES_NEGATIVETESTS_FOLDER,dataName);
@@ -68,7 +68,7 @@ public class RA2b extends Experiment {
             },
             new Column() {
                 @Override public String name() {
-                    return "r+p(S)";
+                    return "r,p(S)";
                 }
                 @Override public String value(String dataName) {
                     return recallPrecision(EXTRACTED_ISSUES_FOLDER,SANITIZED_ISSUES_SHADED_FOLDER,dataName);
@@ -76,7 +76,7 @@ public class RA2b extends Experiment {
             },
             new Column() {
                 @Override public String name() {
-                    return "r+p(all)";
+                    return "r,p(all)";
                 }
                 @Override public String value(String dataName) {
                     return recallPrecision(EXTRACTED_ISSUES_FOLDER,SANITIZED_ISSUES_FOLDER,dataName);

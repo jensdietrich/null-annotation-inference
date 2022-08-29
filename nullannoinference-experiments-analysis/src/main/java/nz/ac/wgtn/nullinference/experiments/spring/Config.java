@@ -1,8 +1,12 @@
 package nz.ac.wgtn.nullinference.experiments.spring;
 
 import com.google.common.base.Preconditions;
+import nz.ac.wgtn.nullannoinference.commons.AbstractIssue;
+import nz.ac.wgtn.nullannoinference.commons.Issue;
+
 import java.io.File;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Experiment configurations.
@@ -34,6 +38,11 @@ public class Config {
     public static final File SANITIZED_ISSUES_SHADED_FOLDER = new File("experiments-spring/results/sanitizedS");
 
     public static final String SANITIZER_NAMES = "D - deprecation, M - main scope, N - negative tests, S - shading";
+
+    public static final Predicate<? extends AbstractIssue> FIELDS_ONLY = issue -> issue.getKind()== Issue.IssueType.FIELD;
+    public static final Predicate<? extends AbstractIssue> PARAM_ONLY = issue -> issue.getKind()== Issue.IssueType.ARGUMENT;
+    public static final Predicate<? extends AbstractIssue> RETURNS_ONLY = issue -> issue.getKind()== Issue.IssueType.RETURN_VALUE;
+
 
     static {
         Preconditions.checkArgument(EXTRACTED_ISSUES_FOLDER.exists());

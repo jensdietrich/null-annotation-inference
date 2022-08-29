@@ -11,14 +11,14 @@ import static nz.ac.wgtn.nullinference.experiments.spring.Config.*;
  * Script to produce data for RA3.
  * @author jens dietrich
  */
-public class RA3 extends Experiment {
+public class RA3a extends Experiment {
 
 
-    public static final File OUTPUT_CSV = new File("experiments-spring/results/ra/ra3.csv");
-    public static final File OUTPUT_LATEX = new File("experiments-spring/results/ra/ra3.tex");
+    public static final File OUTPUT_CSV = new File("experiments-spring/results/ra/ra3a.csv");
+    public static final File OUTPUT_LATEX = new File("experiments-spring/results/ra/ra3a.tex");
 
     public static void main (String[] args) throws IOException, InterruptedException {
-        new RA3().analyse();
+        new RA3a().analyse();
     }
 
     public void analyse()  {
@@ -45,7 +45,7 @@ public class RA3 extends Experiment {
             },
             new Column() {
                 @Override public String name() {
-                    return "r+p(san-all)";
+                    return "r,p(san-all)";
                 }
                 @Override public String value(String dataName) {
                     return recallPrecision(EXTRACTED_ISSUES_FOLDER,SANITIZED_ISSUES_FOLDER,dataName);
@@ -53,7 +53,7 @@ public class RA3 extends Experiment {
             },
             new Column() {
                 @Override public String name() {
-                    return "r+p(prop)";
+                    return "r,p(prop)";
                 }
                 @Override public String value(String dataName) {
                     return recallPrecision(EXTRACTED_ISSUES_FOLDER,OBSERVED_AND_PROPAGATED_ISSUES_FOLDER,dataName);
@@ -64,7 +64,7 @@ public class RA3 extends Experiment {
         TableGenerator csvOutput = new CSVTableGenerator(OUTPUT_CSV);
         TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrrr|");
 
-        this.run(SPRING_MODULES,"RA3 -- number of propagated issues and recall / precision of propagation, compared to sanitised issues (after applying all sanitisers)","tab:ra3",columns,csvOutput,latexOutput);
+        this.run(SPRING_MODULES,"RA3a -- number of propagated issues and recall / precision of propagation, compared to sanitised issues (after applying all sanitisers)","tab:ra3",columns,csvOutput,latexOutput);
 
     }
 

@@ -26,7 +26,7 @@ public class RA1 extends Experiment {
             Column.First,
             new Column() {
                 @Override public String name() {
-                    return "extracted";
+                    return "existing";
                 }
                 @Override public String value(String dataName) {
                     return Utils.format(countIssues(EXTRACTED_ISSUES_FOLDER,dataName,false));
