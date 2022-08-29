@@ -1,12 +1,9 @@
 package nz.ac.wgtn.nullannoinference.commons;
 
-import nz.ac.wgtn.nullannoinference.commons.json.JSONArray;
-import nz.ac.wgtn.nullannoinference.commons.json.JSONObject;
+import javax.management.MBeanServer;
+import javax.management.ObjectName;
 import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.lang.reflect.Field;
-import java.nio.file.FileSystems;
+import java.lang.management.ManagementFactory;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
@@ -23,6 +20,11 @@ public class IssueStore {
 
     private static final String INSTRUMENTATION_PACKAGE1 = "nz.ac.wgtn.nullannoinference.agent";
     private static final String INSTRUMENTATION_PACKAGE2 = "nz.ac.wgtn.nullannoinference.agent2";
+
+    public static void log(String msg) {
+        System.out.println(IssueStore.class.getName() + ": " + msg);
+    }
+
     static {
         TimerTask task = new TimerTask() {
             public void run() {
@@ -32,14 +34,18 @@ public class IssueStore {
         Timer timer = new Timer("issue store timer");
 
         long delay = 1000L * 60; // 1 min
+        log("scheduling timer to make issues collected persistent, save occurs every " + delay + "ms" );
         timer.schedule(task, delay, delay);
 
+        log("scheduling shutdown hook to make remaining issues collected persistent upon shutdown");
         Thread saveResult = new Thread(() -> IssueStore.save());
         Runtime.getRuntime().addShutdownHook(saveResult);
     }
 
     private static final String FILE_NAME = "null-issues-observed-while-testing";
     private static final Set<Issue> issues = Collections.newSetFromMap(new ConcurrentHashMap<>());
+
+    private static int savedIssueCount = 0;
 
     enum StackTracePruningStrategy {KEEP_FULL,MODERATE, AGGRESSIVE};
 
@@ -118,20 +124,29 @@ public class IssueStore {
     // persistence
     public static void save () {
 
-        if (issues.isEmpty()) {
-            System.out.println("no issues recorded");
+        try {
+            Set<Issue> issuesToBeSaved = new HashSet<>();
+            issuesToBeSaved.addAll(issues);
+
+            if (issuesToBeSaved.isEmpty()) {
+                System.out.println("no issues collected to be saved");
+            }
+            else {
+                String fileName = FILE_NAME + '-' + System.currentTimeMillis() + ".json";
+                File workingDir = new File(System.getProperty("user.dir"));
+                File file = new File(workingDir, fileName);
+                System.out.println("issues will be save to " + file.getAbsolutePath());
+                System.out.println("saving " + issuesToBeSaved.size() + " issues");
+                issues.removeAll(issuesToBeSaved);
+                IssuePersistency.save(issuesToBeSaved, file);
+                savedIssueCount = savedIssueCount + issuesToBeSaved.size();
+            }
+
         }
-        String fileName = FILE_NAME + '-' + System.currentTimeMillis() + ".json";
-        File workingDir = new File(System.getProperty("user.dir"));
-        File file = new File(workingDir,fileName);
-        System.out.println("issues will be save to " + file.getAbsolutePath());
-
-        Set<Issue> issuesToBeSaved = new HashSet<>();
-        issuesToBeSaved.addAll(issues);
-        System.out.println("saving " + issuesToBeSaved.size() + " issues");
-        issues.removeAll(issuesToBeSaved);
-
-        IssuePersistency.save (issuesToBeSaved, file);
+        catch (Throwable x) {
+            System.err.println("error saving issues");
+            x.printStackTrace(System.err);
+        }
     }
 
 }

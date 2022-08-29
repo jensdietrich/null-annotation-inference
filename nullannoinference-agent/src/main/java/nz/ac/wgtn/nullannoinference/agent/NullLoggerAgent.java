@@ -20,7 +20,7 @@ public class NullLoggerAgent {
     public static final String PACKAGE_PREFIX_SYS_PROPERTY = "nz.ac.wgtn.nullannoinference.includes";
 
     static void log(String msg) {
-        System.out.println(NullLoggerAgent.class.getSimpleName() + ": " + msg);
+        System.out.println(NullLoggerAgent.class.getName() + ": " + msg);
     }
 
 

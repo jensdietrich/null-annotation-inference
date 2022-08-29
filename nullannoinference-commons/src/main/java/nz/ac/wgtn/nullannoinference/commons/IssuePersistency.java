@@ -21,13 +21,6 @@ public class IssuePersistency {
     // persistence
     public static void save (Collection<Issue> issues, File file) {
 
-        if (issues.isEmpty()) {
-            System.out.println("No issues to be saved -- issue set is empty");
-            return;
-        }
-
-
-
         if (!file.getParentFile().exists()) {
             System.out.println("creating folder: " + file.getParentFile().getAbsolutePath());
             file.getParentFile().mkdirs();
@@ -54,7 +47,7 @@ public class IssuePersistency {
             }
             array.put(jobj);
         }
-        System.out.println("null issues serialised: " + array.length());
+        System.out.println("nullable issues serialised: " + array.length());
         String json = array.toString(3);
         try (PrintWriter out = new PrintWriter(new FileWriter(file))) {
             out.println(json);

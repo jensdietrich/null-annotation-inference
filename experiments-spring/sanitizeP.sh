@@ -26,5 +26,5 @@ else
 fi
 
 for module in "${MODULES[@]}" ;do
-  java -jar $SANITIZER -pr -i ${INPUT}/$NULLABLE-${module}.json -p ${PROJECT_FOLDER}/${module} -t gradle_multilang -o ${OUTPUT}/$NULLABLE-${module}.json -pm ${OUTPUT}/private-methods-in-${module}.txt
+  java -Xmx16g -jar $SANITIZER -pr -i ${INPUT}/$NULLABLE-${module}.json -p ${PROJECT_FOLDER}/${module} -t gradle_multilang -o ${OUTPUT}/$NULLABLE-${module}.json -pm ${OUTPUT}/private-methods-in-${module}.txt
 done

@@ -26,5 +26,5 @@ else
 fi
 
 for module in "${MODULES[@]}" ;do
-  java -jar $SANITIZER -s -i ${INPUT}/$NULLABLE-${module}.json -p ${PROJECT_FOLDER}/${module} -t gradle_multilang -o ${OUTPUT}/$NULLABLE-${module}.json -sh shaded.json
+  java -Xmx16g -jar $SANITIZER -s -i ${INPUT}/$NULLABLE-${module}.json -p ${PROJECT_FOLDER}/${module} -t gradle_multilang -o ${OUTPUT}/$NULLABLE-${module}.json -sh shaded.json
 done

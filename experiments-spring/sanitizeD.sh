@@ -26,5 +26,5 @@ else
 fi
 
 for module in "${MODULES[@]}" ;do
-  java -jar $SANITIZER -d -i ${INPUT}/$NULLABLE-${module}.json -p ${PROJECT_FOLDER}/${module} -t gradle_multilang -o ${OUTPUT}/$NULLABLE-${module}.json -de ${OUTPUT}/deprecated-${module}.txt
+  java -Xmx16g -jar $SANITIZER -d -i ${INPUT}/$NULLABLE-${module}.json -p ${PROJECT_FOLDER}/${module} -t gradle_multilang -o ${OUTPUT}/$NULLABLE-${module}.json -de ${OUTPUT}/deprecated-${module}.txt
 done
