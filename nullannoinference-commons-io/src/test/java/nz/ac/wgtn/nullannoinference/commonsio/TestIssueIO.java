@@ -1,6 +1,5 @@
 package nz.ac.wgtn.nullannoinference.commonsio;
 
-import com.google.gson.stream.JsonReader;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
 import nz.ac.wgtn.nullannoinference.commons.IssueKernel;
 import org.junit.jupiter.api.Test;
@@ -18,13 +17,12 @@ public class TestIssueIO {
         File issueFile = new File(TestIssueIO.class.getResource("/issues.json").getFile());
         assumeTrue(issueFile.exists());
 
-        try (JsonReader reader = new JsonReader(new FileReader(issueFile))) {
-            List<Issue> issues = IssueIO.readIssues(reader);
-            assertEquals(3,issues.size());
-            checkFirstIssue(issues.get(0));
-            checkSecondIssue(issues.get(1));
-            checkThirdIssue(issues.get(2));
-        }
+        List<Issue> issues = IssueIO.readIssues(issueFile);
+        assertEquals(3,issues.size());
+        checkFirstIssue(issues.get(0));
+        checkSecondIssue(issues.get(1));
+        checkThirdIssue(issues.get(2));
+
     }
 
     @Test
@@ -36,26 +34,25 @@ public class TestIssueIO {
         assertEquals(2,aggregation.size());
 
         // compare classes through instances
-        try (JsonReader reader = new JsonReader(new FileReader(issueFile))) {
-            List<Issue> issues = IssueIO.readIssues(reader);
-            assertEquals(3,issues.size());
-            Issue issue1 = issues.get(0);
-            Issue issue2 = issues.get(1);
-            Issue issue3 = issues.get(2);
-            IssueKernel kernel1 = issue1.getKernel();
-            IssueKernel kernel2 = issue2.getKernel();
-            IssueKernel kernel3 = issue3.getKernel();
+        List<Issue> issues = IssueIO.readIssues(issueFile);
+        assertEquals(3,issues.size());
+        Issue issue1 = issues.get(0);
+        Issue issue2 = issues.get(1);
+        Issue issue3 = issues.get(2);
+        IssueKernel kernel1 = issue1.getKernel();
+        IssueKernel kernel2 = issue2.getKernel();
+        IssueKernel kernel3 = issue3.getKernel();
 
-            assertTrue(kernel1.equals(kernel2));
-            assertFalse(kernel1.equals(kernel3));
-            assertFalse(kernel2.equals(kernel3));
+        assertTrue(kernel1.equals(kernel2));
+        assertFalse(kernel1.equals(kernel3));
+        assertFalse(kernel2.equals(kernel3));
 
-            assertTrue(aggregation.containsKey(kernel1));
-            assertTrue(aggregation.containsKey(kernel3));
+        assertTrue(aggregation.containsKey(kernel1));
+        assertTrue(aggregation.containsKey(kernel3));
 
-            assertEquals(2,aggregation.get(kernel1));
-            assertEquals(1,aggregation.get(kernel3));
-        }
+        assertEquals(2,aggregation.get(kernel1));
+        assertEquals(1,aggregation.get(kernel3));
+
     }
 
     private void checkFirstIssue(Issue issue1) {
