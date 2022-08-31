@@ -42,6 +42,7 @@
       <module>nullannoinference-annotator</module>
       <module>nullannoinference-extractor</module>
       <module>nullannoinference-commons</module>
+      <module>nullannoinference-commons-io</module>
       <module>nullannoinference-merger</module>
       <module>nullannoinference-experiments-analysis</module>
   </modules>

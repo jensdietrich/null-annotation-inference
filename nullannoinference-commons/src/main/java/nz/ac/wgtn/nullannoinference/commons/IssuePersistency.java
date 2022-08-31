@@ -36,7 +36,6 @@ public class IssuePersistency {
             jobj.put("descriptor",issue.getDescriptor());
             jobj.put("argsIndex",issue.getArgsIndex());
             jobj.put("kind",issue.getKind().name());
-            jobj.put("index",issue.getArgsIndex());
             jobj.put("context",issue.getContext());
             jobj.put("provenanceType",issue.getProvenanceType().name());
             jobj.put("scope",issue.getScope().name());
