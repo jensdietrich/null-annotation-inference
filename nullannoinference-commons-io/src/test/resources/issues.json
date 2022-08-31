@@ -1,0 +1,47 @@
+[
+  {
+    "provenanceType": "OBSERVED",
+    "stacktrace": [
+      "Foo::m1:1",
+      "Foo::m2:2"
+    ],
+    "kind": "RETURN_VALUE",
+    "scope": "MAIN",
+    "context": "myprogram",
+    "methodName": "foo",
+    "index": -1,
+    "className": "com.myprogram.Foo",
+    "descriptor": "()Ljava/lang/Object;",
+    "argsIndex": -1
+  },
+  {
+    "provenanceType": "OBSERVED",
+    "stacktrace": [
+      "Foo::m1:1",
+      "Foo::m2:3"
+    ],
+    "kind": "RETURN_VALUE",
+    "scope": "MAIN",
+    "context": "myprogram",
+    "methodName": "foo",
+    "index": -1,
+    "className": "com.myprogram.Foo",
+    "descriptor": "()Ljava/lang/Object;",
+    "argsIndex": -1
+  },
+  {
+    "provenanceType": "OBSERVED",
+    "stacktrace": [
+      "Foo::m1:1",
+      "Foo::m2:3"
+    ],
+    "kind": "FIELD",
+    "scope": "TEST",
+    "context": "myprogram2",
+    "methodName": "bar",
+    "index": -1,
+    "className": "com.myprogram.Foo",
+    "descriptor": "Ljava/lang/Object;",
+    "argsIndex": -1
+  }
+]
