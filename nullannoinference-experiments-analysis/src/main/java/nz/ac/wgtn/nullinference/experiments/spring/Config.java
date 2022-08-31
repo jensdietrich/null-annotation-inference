@@ -16,7 +16,7 @@ import java.util.function.Predicate;
 public class Config {
      public static final List<String> SPRING_MODULES = List.of(
         "spring-beans",
-        // "spring-context",
+        "spring-context",
         "spring-core",
         "spring-orm",
         "spring-oxm",
@@ -42,6 +42,7 @@ public class Config {
     public static final Predicate<? extends AbstractIssue> FIELDS_ONLY = issue -> issue.getKind()== Issue.IssueType.FIELD;
     public static final Predicate<? extends AbstractIssue> PARAM_ONLY = issue -> issue.getKind()== Issue.IssueType.ARGUMENT;
     public static final Predicate<? extends AbstractIssue> RETURNS_ONLY = issue -> issue.getKind()== Issue.IssueType.RETURN_VALUE;
+    public static final Predicate<? extends AbstractIssue> ALL = issue -> true;
 
 
     static {
