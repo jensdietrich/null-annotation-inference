@@ -16,7 +16,7 @@ public class RA1 extends Experiment {
     public static final File OUTPUT_LATEX = new File("experiments-spring/results/ra/ra1.tex");
 
     public static void main (String[] args) throws Exception {
-        Thread.sleep(10_000);
+//        Thread.sleep(10_000);  // time to connect profiler
         new RA1().analyse();
     }
 

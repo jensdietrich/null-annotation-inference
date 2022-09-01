@@ -42,7 +42,7 @@ public abstract class Experiment {
             }
         }
         catch (IOException x) {
-            x.printStackTrace();
+            LOGGER.error("IOException",x);
             throw new RuntimeException(x);
         }
     }
@@ -61,8 +61,11 @@ public abstract class Experiment {
         return readIssues(folder,moduleName,aggregate, issue -> true);
     }
 
+    private static File getIssueFile(File folder,String moduleName) {
+        return new File(folder,"nullable-"+moduleName+".json");
+    }
     protected static Set<? extends AbstractIssue> readIssues(File folder, String moduleName, boolean aggregate, Predicate<? extends AbstractIssue> filter)  {
-        File file = new File(folder,"nullable-"+moduleName+".json");
+        File file = getIssueFile(folder,moduleName);
         Preconditions.checkState(file.exists());
         Set<Issue> issues = doReadIssues(file);
         if (aggregate) {
@@ -149,16 +152,22 @@ public abstract class Experiment {
         return recallPrecision(folder1,folder2,moduleName, issue -> true);
     }
 
-    protected static String recallPrecision(File folder1, File folder2, String moduleName, Predicate<? extends AbstractIssue> filter)  {
+    protected static String recallPrecision(File folder1, File folder2, String moduleName, Predicate<Issue> filter)  {
         // always work with aggregated sets !
-        Set<? extends AbstractIssue> set1 = readIssues(folder1,moduleName,true,filter);
-        Set<? extends AbstractIssue> set2 = readIssues(folder2,moduleName,true,filter);
-        int TP = Sets.intersection(set1,set2).size();
-        int FP = Sets.difference(set2,set1).size();
-        int FN = Sets.difference(set1,set2).size();
-        double precision =  (double)TP / (double)(TP+FP);
-        double recall =  (double)TP / (double)(TP+FN);
-        return "" + Utils.format(recall) + "," + Utils.format(precision) ;
+        try {
+            Set<IssueKernel> set1 = IssueIO.readAndAggregateIssues(getIssueFile(folder1, moduleName), filter).keySet();
+            Set<IssueKernel> set2 = IssueIO.readAndAggregateIssues(getIssueFile(folder2, moduleName), filter).keySet();
+            int TP = Sets.intersection(set1, set2).size();
+            int FP = Sets.difference(set2, set1).size();
+            int FN = Sets.difference(set1, set2).size();
+            double precision = (double) TP / (double) (TP + FP);
+            double recall = (double) TP / (double) (TP + FN);
+            return "" + Utils.format(recall) + "," + Utils.format(precision);
+        }
+        catch (IOException x) {
+            LOGGER.error("IOException",x);
+            throw new RuntimeException(x);
+        }
     }
 
     protected static double jaccardSimilarity(File folder1, File folder2,String moduleName)  {

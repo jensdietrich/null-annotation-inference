@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import nz.ac.wgtn.nullannoinference.commons.AbstractIssue;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
 import nz.ac.wgtn.nullannoinference.commons.IssueKernel;
 import java.io.*;
@@ -54,23 +55,35 @@ public class IssueIO {
      * @param input
      * @return a mapping between equivalence classes and class sizes
      */
-    public static Map<IssueKernel,Integer> readAndAggregateIssues(File input) throws IOException {
+    public static Map<IssueKernel,Integer> readAndAggregateIssues(File input ) throws IOException {
+        return readAndAggregateIssues(input,issue -> true);
+    }
+
+    public static Map<IssueKernel,Integer> readAndAggregateIssues(File input,Predicate<Issue> filter) throws IOException {
         try (JsonReader reader = new JsonReader(new FileReader(input))) {
-            return readAndAggregateIssues(reader);
+            return readAndAggregateIssues(reader,filter);
         }
     }
 
     static Map<IssueKernel,Integer> readAndAggregateIssues(JsonReader reader) throws IOException {
+        return readAndAggregateIssues(reader,issue -> true);
+    }
+
+    static Map<IssueKernel,Integer> readAndAggregateIssues(JsonReader reader,Predicate<Issue> filter) throws IOException {
         Map<IssueKernel,Integer> issues = new HashMap<>();
         reader.beginArray();
         while (reader.hasNext()) {
             Issue issue = ISSUE_TYPE_ADAPTER.read(reader);
-            IssueKernel kernel = issue.getKernel();
-            issues.compute(kernel, (k,i) -> i==null?1:i+1);
+            if (filter.test(issue)) {
+                IssueKernel kernel = issue.getKernel();
+                issues.compute(kernel, (k, i) -> i == null ? 1 : i + 1);
+            }
         }
         reader.endArray();
         return issues;
     }
+
+
     public static List<Issue> readIssues(JsonReader reader) throws IOException {
         List<Issue> issues = new ArrayList<>();
         reader.beginArray();
