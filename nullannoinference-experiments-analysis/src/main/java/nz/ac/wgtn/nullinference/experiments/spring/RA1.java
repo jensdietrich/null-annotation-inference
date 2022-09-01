@@ -15,8 +15,8 @@ public class RA1 extends Experiment {
     public static final File OUTPUT_CSV = new File("experiments-spring/results/ra/ra1.csv");
     public static final File OUTPUT_LATEX = new File("experiments-spring/results/ra/ra1.tex");
 
-    public static void main (String[] args) throws IOException {
-
+    public static void main (String[] args) throws Exception {
+        Thread.sleep(10_000);
         new RA1().analyse();
     }
 

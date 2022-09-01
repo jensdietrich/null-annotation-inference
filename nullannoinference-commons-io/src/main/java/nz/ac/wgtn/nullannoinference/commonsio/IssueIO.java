@@ -86,12 +86,27 @@ public class IssueIO {
             return readIssues(jreader);
         }
     }
-
     public static List<Issue> readIssues(File input) throws IOException {
         try (Reader reader = new FileReader(input)) {
             return readIssues(reader);
         }
     }
 
+    public static int countIssues (File input) throws IOException {
+        try (JsonReader reader = new JsonReader(new FileReader(input))) {
+            int count = 0;
+            reader.beginArray();
+            while (reader.hasNext()) {
+                ISSUE_TYPE_ADAPTER.read(reader);
+                count = count + 1;
+            }
+            reader.endArray();
+            return count;
+        }
+    }
+
+    public static int countAggregatedIssues (File input) throws IOException {
+        return readAndAggregateIssues(input).size();
+    }
 
 }

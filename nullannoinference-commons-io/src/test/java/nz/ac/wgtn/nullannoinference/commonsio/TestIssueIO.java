@@ -106,4 +106,17 @@ public class TestIssueIO {
         Issue issue = issues.get(0);
         checkThirdIssue(issue);
     }
+
+
+    @Test
+    public void testCountIssues () throws IOException {
+        File issueFile = new File(TestIssueIO.class.getResource("/issues.json").getFile());
+        assertEquals(3,IssueIO.countIssues(issueFile));
+    }
+
+    @Test
+    public void testCountAggregatedIssues () throws IOException {
+        File issueFile = new File(TestIssueIO.class.getResource("/issues.json").getFile());
+        assertEquals(2,IssueIO.countAggregatedIssues(issueFile));
+    }
 }

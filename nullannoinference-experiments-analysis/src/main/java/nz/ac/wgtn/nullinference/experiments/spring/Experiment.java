@@ -5,6 +5,7 @@ import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import nz.ac.wgtn.nullannoinference.commons.*;
+import nz.ac.wgtn.nullannoinference.commonsio.IssueIO;
 import org.apache.logging.log4j.Logger;
 import java.io.File;
 import java.io.FileReader;
@@ -31,7 +32,19 @@ public abstract class Experiment {
     }
 
     protected static int countIssues(File folder, String moduleName, boolean aggregate)  {
-        return readIssues(folder,moduleName,aggregate).size();
+        File input = new File(folder,"nullable-"+moduleName+".json");
+        try {
+            if (aggregate) {
+                return IssueIO.countAggregatedIssues(input);
+            }
+            else {
+                return IssueIO.countIssues(input);
+            }
+        }
+        catch (IOException x) {
+            x.printStackTrace();
+            throw new RuntimeException(x);
+        }
     }
 
     protected static int countIssues(File folder, String moduleName, boolean aggregate, Predicate<? extends AbstractIssue> filter)  {
@@ -39,8 +52,8 @@ public abstract class Experiment {
     }
 
     protected static double compressionRatio(File folder, String moduleName)  {
-        double compressedCount = readIssues(folder,moduleName,true).size();
-        double uncompressedCount = readIssues(folder,moduleName,false).size();
+        double compressedCount = countIssues(folder,moduleName,true);
+        double uncompressedCount = countIssues(folder,moduleName,false);
         return compressedCount / uncompressedCount ;
     }
 
