@@ -32,23 +32,23 @@ public abstract class Experiment {
     }
 
     protected static int countIssues(File folder, String moduleName, boolean aggregate)  {
+        return countIssues(folder,moduleName,aggregate,issue -> true);
+    }
+
+    protected static int countIssues(File folder, String moduleName, boolean aggregate, Predicate<Issue> filter)  {
         File input = new File(folder,"nullable-"+moduleName+".json");
         try {
             if (aggregate) {
-                return IssueIO.countAggregatedIssues(input);
+                return IssueIO.countAggregatedIssues(input,filter);
             }
             else {
-                return IssueIO.countIssues(input);
+                return IssueIO.countIssues(input,filter);
             }
         }
         catch (IOException x) {
             LOGGER.error("IOException",x);
             throw new RuntimeException(x);
         }
-    }
-
-    protected static int countIssues(File folder, String moduleName, boolean aggregate, Predicate<? extends AbstractIssue> filter)  {
-        return readIssues(folder,moduleName,aggregate,filter).size();
     }
 
     protected static double compressionRatio(File folder, String moduleName)  {

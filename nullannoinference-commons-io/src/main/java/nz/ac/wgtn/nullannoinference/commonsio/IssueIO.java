@@ -106,12 +106,18 @@ public class IssueIO {
     }
 
     public static int countIssues (File input) throws IOException {
+        return countIssues(input,issue -> true);
+    }
+
+    public static int countIssues (File input,Predicate<Issue> filter) throws IOException {
         try (JsonReader reader = new JsonReader(new FileReader(input))) {
             int count = 0;
             reader.beginArray();
             while (reader.hasNext()) {
-                ISSUE_TYPE_ADAPTER.read(reader);
-                count = count + 1;
+                Issue issue = ISSUE_TYPE_ADAPTER.read(reader);
+                if (filter.test(issue)) {
+                    count = count + 1;
+                }
             }
             reader.endArray();
             return count;
@@ -120,6 +126,10 @@ public class IssueIO {
 
     public static int countAggregatedIssues (File input) throws IOException {
         return readAndAggregateIssues(input).size();
+    }
+
+    public static int countAggregatedIssues (File input,Predicate<Issue> filter) throws IOException {
+        return readAndAggregateIssues(input,filter).size();
     }
 
 }

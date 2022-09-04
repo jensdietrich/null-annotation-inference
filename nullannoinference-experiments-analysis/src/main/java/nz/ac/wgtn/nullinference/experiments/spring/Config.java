@@ -3,6 +3,7 @@ package nz.ac.wgtn.nullinference.experiments.spring;
 import com.google.common.base.Preconditions;
 import nz.ac.wgtn.nullannoinference.commons.AbstractIssue;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
+import nz.ac.wgtn.nullannoinference.commons.IssueKernel;
 
 import java.io.File;
 import java.util.List;
@@ -42,6 +43,10 @@ public class Config {
     public static final Predicate<Issue> FIELDS_ONLY = issue -> issue.getKind()== Issue.IssueType.FIELD;
     public static final Predicate<Issue> PARAM_ONLY = issue -> issue.getKind()== Issue.IssueType.ARGUMENT;
     public static final Predicate<Issue> RETURNS_ONLY = issue -> issue.getKind()== Issue.IssueType.RETURN_VALUE;
+
+    public static final Predicate<IssueKernel> AGGR_FIELDS_ONLY = issue -> issue.getKind()== Issue.IssueType.FIELD;
+    public static final Predicate<IssueKernel> AGGR_PARAM_ONLY = issue -> issue.getKind()== Issue.IssueType.ARGUMENT;
+    public static final Predicate<IssueKernel> AGGR_RETURNS_ONLY = issue -> issue.getKind()== Issue.IssueType.RETURN_VALUE;
     public static final Predicate<Issue> ALL = issue -> true;
 
 
