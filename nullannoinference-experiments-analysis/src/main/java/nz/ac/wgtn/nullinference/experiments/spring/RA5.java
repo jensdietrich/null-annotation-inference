@@ -38,7 +38,7 @@ public class RA5 extends Experiment {
 
                 @Override
                 public String value(String dataName) {
-                    return annotationsToAdd(EXTRACTED_ISSUES_FOLDER,OBSERVED_AND_PROPAGATED_ISSUES_FOLDER,dataName,FIELDS_ONLY);
+                    return annotationsToAdd(EXTRACTED_ISSUES_FOLDER,OBSERVED_AND_PROPAGATED_ISSUES_FOLDER,dataName,AGGR_FIELDS_ONLY);
                 }
             },
             new Column() {
@@ -49,7 +49,7 @@ public class RA5 extends Experiment {
 
                 @Override
                 public String value(String dataName) {
-                    return annotationsToAdd(EXTRACTED_ISSUES_FOLDER,OBSERVED_AND_PROPAGATED_ISSUES_FOLDER,dataName,PARAM_ONLY);
+                    return annotationsToAdd(EXTRACTED_ISSUES_FOLDER,OBSERVED_AND_PROPAGATED_ISSUES_FOLDER,dataName,AGGR_PARAM_ONLY);
                 }
             },
             new Column() {
@@ -60,7 +60,7 @@ public class RA5 extends Experiment {
 
                 @Override
                 public String value(String dataName) {
-                    return annotationsToAdd(EXTRACTED_ISSUES_FOLDER,OBSERVED_AND_PROPAGATED_ISSUES_FOLDER,dataName,RETURNS_ONLY);
+                    return annotationsToAdd(EXTRACTED_ISSUES_FOLDER,OBSERVED_AND_PROPAGATED_ISSUES_FOLDER,dataName,AGGR_RETURNS_ONLY);
                 }
             },
             new Column() {
@@ -71,7 +71,7 @@ public class RA5 extends Experiment {
 
                 @Override
                 public String value(String dataName) {
-                    return annotationsToAdd(EXTRACTED_ISSUES_FOLDER,OBSERVED_AND_PROPAGATED_ISSUES_FOLDER,dataName,ALL);
+                    return annotationsToAdd(EXTRACTED_ISSUES_FOLDER,OBSERVED_AND_PROPAGATED_ISSUES_FOLDER,dataName,AGGRE_ALL);
                 }
             }
 

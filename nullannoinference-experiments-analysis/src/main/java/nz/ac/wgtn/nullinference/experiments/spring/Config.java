@@ -47,6 +47,8 @@ public class Config {
     public static final Predicate<IssueKernel> AGGR_FIELDS_ONLY = issue -> issue.getKind()== Issue.IssueType.FIELD;
     public static final Predicate<IssueKernel> AGGR_PARAM_ONLY = issue -> issue.getKind()== Issue.IssueType.ARGUMENT;
     public static final Predicate<IssueKernel> AGGR_RETURNS_ONLY = issue -> issue.getKind()== Issue.IssueType.RETURN_VALUE;
+
+    public static final Predicate<IssueKernel> AGGRE_ALL = issue -> true;
     public static final Predicate<Issue> ALL = issue -> true;
 
 
