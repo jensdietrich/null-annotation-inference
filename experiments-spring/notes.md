@@ -54,8 +54,31 @@ Similar cases:
 Note that the respective [pull request](https://github.com/spring-projects/spring-framework/pull/28852) was declined as those classes are shaded. In response to this, a [JSON file](shaded.json) containing shaded packages has been created based on a grep seach for `relocate` in gradle file.
 
 
+## Inferred Annotations must themselves be sanitized
 
+The `@Nullable` return type of `LocalVariableTableParameterNameDiscoverer$ParameterNameDiscoveringVisitor` is propagated to the overridden method `ClassVisitor::visitMethod`,
+however, this class is in a shaded package. 
 
+```
+className = "org.springframework.asm.ClassVisitor"
+methodName = "visitMethod"
+descriptor = "(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;)Lorg/springframework/asm/MethodVisitor;"
+kind = "RETURN_VALUE"
+provenanceType = "INFERRED"
+argsIndex = -1
+context = "springframework-core"
+stacktrace = null
+parent = 
+    className = "org.springframework.core.LocalVariableTableParameterNameDiscoverer$ParameterNameDiscoveringVisitor"
+    methodName = "visitMethod"
+    descriptor = "(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;)Lorg/springframework/asm/MethodVisitor;"
+    kind = "RETURN_VALUE"
+    provenanceType = "OBSERVED"
+    argsIndex = -1
+    context = "springframework-core"
+    stacktrace = ..
+    parent = null
+```  
 
 
 

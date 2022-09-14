@@ -9,20 +9,15 @@ OUTPUT=$RESULT_FOLDER_SANITIZED
 INPUT=$RESULT_FOLDER_OBSERVED
 
 if [ ! -d "$INPUT" ]; then
-    echo "Project folder does not exist, fetch projects first:" $INPUT
-    exit 1;
-fi
-
-if [ ! -d "$RESULT_FOLDER_OBSERVED" ]; then
-    echo "Input issues missing:" $RESULT_FOLDER_OBSERVED
+    echo "input folder foes not exist:" $INPUT
     exit 1;
 fi
 
 if [ ! -d "$OUTPUT" ]; then
-  echo "Result folder does not exit, creating folder:" $OUTPUT
+  echo "output folder does not exit, creating folder:" $OUTPUT
   mkdir -p $OUTPUT
 else
-  echo "Sanitized issues scoped will be saved in " $OUTPUT
+  echo "results will be saved in " $OUTPUT
 fi
 
 for module in "${MODULES[@]}" ;do
