@@ -22,8 +22,8 @@ import java.util.stream.Collectors;
  */
 public class SampleDiff extends Experiment {
 
-    public static final File EXTRACTED_FOLDER = new File("experiments-spring/results/extracted+/");
-    public static final File OBSERVED_FOLDER = new File("experiments-spring/results/sanitized/");
+    public static final File EXTRACTED_FOLDER = new File("experiments-spring/results/extracted/");
+    public static final File OBSERVED_FOLDER = new File("experiments-spring/results/observed+/");
 
     public static final String MODULE = "spring-core";
 

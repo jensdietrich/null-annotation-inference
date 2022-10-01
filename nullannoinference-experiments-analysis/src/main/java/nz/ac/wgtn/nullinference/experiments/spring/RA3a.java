@@ -64,7 +64,7 @@ public class RA3a extends Experiment {
         TableGenerator csvOutput = new CSVTableGenerator(OUTPUT_CSV);
         TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrrr|");
 
-        this.run(SPRING_MODULES,"RA3a -- number of propagated issues and recall / precision of propagation, compared to sanitised issues (after applying all sanitisers)","tab:ra3",columns,csvOutput,latexOutput);
+        this.run(SPRING_MODULES,"RA3a -- number of propagated issues and recall / precision of propagation, compared to sanitised issues (after applying all sanitisers)","tab:ra3a",columns,csvOutput,latexOutput);
 
     }
 

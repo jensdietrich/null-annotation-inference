@@ -38,7 +38,7 @@ public class RA5 extends Experiment {
 
                 @Override
                 public String value(String dataName) {
-                    return annotationsToAdd(EXTRACTED_ISSUES_FOLDER,OBSERVED_AND_PROPAGATED_ISSUES_FOLDER,dataName,AGGR_FIELDS_ONLY);
+                    return annotationsToAdd(EXTRACTED_ISSUES_FOLDER,OBSERVED_AND_PROPAGATED_SANITIZED_ISSUES_FOLDER,dataName,AGGR_FIELDS_ONLY);
                 }
             },
             new Column() {
@@ -49,7 +49,7 @@ public class RA5 extends Experiment {
 
                 @Override
                 public String value(String dataName) {
-                    return annotationsToAdd(EXTRACTED_ISSUES_FOLDER,OBSERVED_AND_PROPAGATED_ISSUES_FOLDER,dataName,AGGR_PARAM_ONLY);
+                    return annotationsToAdd(EXTRACTED_ISSUES_FOLDER,OBSERVED_AND_PROPAGATED_SANITIZED_ISSUES_FOLDER,dataName,AGGR_PARAM_ONLY);
                 }
             },
             new Column() {
@@ -60,7 +60,7 @@ public class RA5 extends Experiment {
 
                 @Override
                 public String value(String dataName) {
-                    return annotationsToAdd(EXTRACTED_ISSUES_FOLDER,OBSERVED_AND_PROPAGATED_ISSUES_FOLDER,dataName,AGGR_RETURNS_ONLY);
+                    return annotationsToAdd(EXTRACTED_ISSUES_FOLDER,OBSERVED_AND_PROPAGATED_SANITIZED_ISSUES_FOLDER,dataName,AGGR_RETURNS_ONLY);
                 }
             },
             new Column() {
@@ -71,16 +71,15 @@ public class RA5 extends Experiment {
 
                 @Override
                 public String value(String dataName) {
-                    return annotationsToAdd(EXTRACTED_ISSUES_FOLDER,OBSERVED_AND_PROPAGATED_ISSUES_FOLDER,dataName,AGGRE_ALL);
+                    return annotationsToAdd(EXTRACTED_ISSUES_FOLDER,OBSERVED_AND_PROPAGATED_SANITIZED_ISSUES_FOLDER,dataName,AGGRE_ALL);
                 }
             }
-
         };
 
         TableGenerator csvOutput = new CSVTableGenerator(OUTPUT_CSV);
         TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrrr|");
 
-        this.run(SPRING_MODULES,"RA5 -- annotations to be added by type, value in brackets are classes to be modified","tab:ra5",columns,csvOutput,latexOutput);
+        this.run(SPRING_MODULES,"RA5 -- additional annotations to be added by type, value in brackets are classes to be modified","tab:ra5",columns,csvOutput,latexOutput);
 
     }
 

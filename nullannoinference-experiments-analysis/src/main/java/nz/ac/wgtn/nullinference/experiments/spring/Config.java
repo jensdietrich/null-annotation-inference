@@ -1,7 +1,6 @@
 package nz.ac.wgtn.nullinference.experiments.spring;
 
 import com.google.common.base.Preconditions;
-import nz.ac.wgtn.nullannoinference.commons.AbstractIssue;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
 import nz.ac.wgtn.nullannoinference.commons.IssueKernel;
 
@@ -29,6 +28,9 @@ public class Config {
     public static final File EXTRACTED_PLUS_ISSUES_FOLDER = new File("experiments-spring/results/extracted+");
     public static final File OBSERVED_ISSUES_FOLDER = new File("experiments-spring/results/observed");
     public static final File OBSERVED_AND_PROPAGATED_ISSUES_FOLDER = new File("experiments-spring/results/observed+");
+
+    public static final File OBSERVED_AND_PROPAGATED_SANITIZED_ISSUES_FOLDER = new File("experiments-spring/results/observed++");
+
 
     public static final File SANITIZED_ISSUES_FOLDER = new File("experiments-spring/results/sanitized");
     public static final File SANITIZED_ISSUES_DEPRECATED_FOLDER = new File("experiments-spring/results/sanitizedD");

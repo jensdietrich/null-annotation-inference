@@ -13,7 +13,6 @@ import static nz.ac.wgtn.nullinference.experiments.spring.Config.*;
  */
 public class RA4 extends Experiment {
 
-
     public static final File OUTPUT_CSV = new File("experiments-spring/results/ra/ra4.csv");
     public static final File OUTPUT_LATEX = new File("experiments-spring/results/ra/ra4.tex");
 
