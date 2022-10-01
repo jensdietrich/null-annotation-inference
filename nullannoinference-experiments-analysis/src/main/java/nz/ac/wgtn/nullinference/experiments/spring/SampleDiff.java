@@ -25,7 +25,7 @@ public class SampleDiff extends Experiment {
     public static final File EXTRACTED_FOLDER = new File("experiments-spring/results/extracted/");
     public static final File OBSERVED_FOLDER = new File("experiments-spring/results/observed+/");
 
-    public static final String MODULE = "spring-core";
+    public static final String MODULE = "spring-beans";
 
     public static final int ISSUE_KERNEL_LIMIT = 3;
     public static final int ISSUE_INSTANCE_PER_KERNEL_LIMIT = 3;
@@ -74,9 +74,9 @@ public class SampleDiff extends Experiment {
         printDataset("observed-extracted",obsMinusXtr);
 
         System.out.println("exporting interesting diffs ");
-        writeIssues(obsMinusXtr.stream().filter(RET).filter(NOTSHADED).collect(Collectors.toList()), observedIssueAggregation,"observed-minus-extracted-return");
-        writeIssues(obsMinusXtr.stream().filter(FLD).filter(NOTSHADED).collect(Collectors.toList()), observedIssueAggregation,"observed-minus-extracted-fields");
-        writeIssues(obsMinusXtr.stream().filter(ARG).filter(NOTSHADED).collect(Collectors.toList()), observedIssueAggregation,"observed-minus-extracted-args");
+        writeIssues(obsMinusXtr.stream().filter(RET).filter(NOTSHADED).collect(Collectors.toList()), observedIssueAggregation,"observed-minus-extracted-return-"+MODULE);
+        writeIssues(obsMinusXtr.stream().filter(FLD).filter(NOTSHADED).collect(Collectors.toList()), observedIssueAggregation,"observed-minus-extracted-fields-"+MODULE);
+        writeIssues(obsMinusXtr.stream().filter(ARG).filter(NOTSHADED).collect(Collectors.toList()), observedIssueAggregation,"observed-minus-extracted-args-"+MODULE);
 
     }
 
@@ -120,7 +120,7 @@ public class SampleDiff extends Experiment {
                         pos = "argument #" + issueKernel.getArgsIndex() + " of";
                     }
 
-                    out.println("### Add `@Nullable` to " + pos + "`" + issueKernel.getClassName() + "::" + issueKernel.getMethodName() + params );
+                    out.println("### Add `@Nullable` to " + pos + "`" + issueKernel.getClassName() + "::" + issueKernel.getMethodName() + " (type signature: " + params + ")");
                     out.println("");
                     out.println("Supporting test traces illustrating the use of null in actual program behaviour (max " + ISSUE_INSTANCE_PER_KERNEL_LIMIT + " is shown): ");
                     aggregation.get(issueKernel).stream().limit(ISSUE_INSTANCE_PER_KERNEL_LIMIT).forEach(
@@ -137,7 +137,12 @@ public class SampleDiff extends Experiment {
                 );
 
             out.println();
-            out.println("A description of the analysis performed can be found here: (https://github.com/jensdietrich/null-annotation-inference)");
+            if (selected.size()==1) {
+                out.println("This issue has been detected by an automated analysis. A description of the analysis performed can be found here: (https://github.com/jensdietrich/null-annotation-inference)");
+            }
+            else if (selected.size()>1) {
+                out.println("These issues have been detected by an automated analysis. A description of the analysis performed can be found here: (https://github.com/jensdietrich/null-annotation-inference)");
+            }
             System.out.println("issues exported to " + file.getAbsolutePath());
         } catch (IOException e) {
             throw new RuntimeException(e);
