@@ -19,14 +19,19 @@ public class ExtractJSP305NullableAnnotationsTest {
         Assumptions.assumeTrue(new File(project,"target/classes").exists(),"project used for testing must be built first to generate byte code");
     }
 
+
+    @Test
+    public void testIssueCount() {
+        Set<Issue> issues = ExtractNullableAnnotations.findNullAnnotated(ProjectType.MVN,project);
+        assertEquals(4,issues.size());
+    }
     @Test
     public void testMethodArg() {
         Set<Issue> issues = ExtractNullableAnnotations.findNullAnnotated(ProjectType.MVN,project);
-        assertEquals(3,issues.size());
         assertEquals(
 1,
         issues.stream()
-            .filter(issue -> issue.getClassName().equals("nz.ac.wgtn.nullinference.annotationcollector.Foo"))
+            .filter(issue -> issue.getClassName().equals("nz.ac.wgtn.nullinference.extractor.Foo"))
             .filter(issue -> issue.getMethodName().equals("m1"))
             .filter(issue -> issue.getDescriptor().equals("(Ljava/lang/String;)Ljava/lang/String;"))
             .filter(issue -> issue.getKind() == Issue.IssueType.ARGUMENT)
@@ -40,11 +45,10 @@ public class ExtractJSP305NullableAnnotationsTest {
     @Test
     public void testMethodReturn() {
         Set<Issue> issues = ExtractNullableAnnotations.findNullAnnotated(ProjectType.MVN,project);
-        assertEquals(3,issues.size());
         assertEquals(
     1,
             issues.stream()
-                .filter(issue -> issue.getClassName().equals("nz.ac.wgtn.nullinference.annotationcollector.Foo"))
+                .filter(issue -> issue.getClassName().equals("nz.ac.wgtn.nullinference.extractor.Foo"))
                 .filter(issue -> issue.getMethodName().equals("m1"))
                 .filter(issue -> issue.getDescriptor().equals("(Ljava/lang/String;)Ljava/lang/String;"))
                 .filter(issue -> issue.getKind() == Issue.IssueType.RETURN_VALUE)
@@ -58,11 +62,10 @@ public class ExtractJSP305NullableAnnotationsTest {
     @Test
     public void testField() {
         Set<Issue> issues = ExtractNullableAnnotations.findNullAnnotated(ProjectType.MVN,project);
-        assertEquals(3,issues.size());
         assertEquals(
     1,
             issues.stream()
-                .filter(issue -> issue.getClassName().equals("nz.ac.wgtn.nullinference.annotationcollector.Foo"))
+                .filter(issue -> issue.getClassName().equals("nz.ac.wgtn.nullinference.extractor.Foo"))
                 .filter(issue -> issue.getMethodName().equals("field1"))
                 .filter(issue -> issue.getDescriptor().equals("Ljava/lang/String;"))
                 .filter(issue -> issue.getKind() == Issue.IssueType.FIELD)
@@ -70,6 +73,23 @@ public class ExtractJSP305NullableAnnotationsTest {
                 .filter(issue -> issue.getProvenanceType()== Issue.ProvenanceType.EXTRACTED)
                 .filter(issue -> issue.getProperty(ExtractNullableAnnotations.PROPERTY_NULLABLE_ANNOTATION_TYPE).equals("javax.annotation.Nullable"))
                 .count()
+        );
+    }
+
+    @Test
+    public void testConstructorArg() {
+        Set<Issue> issues = ExtractNullableAnnotations.findNullAnnotated(ProjectType.MVN,project);
+        assertEquals(
+                1,
+                issues.stream()
+                        .filter(issue -> issue.getClassName().equals("nz.ac.wgtn.nullinference.extractor.Foo"))
+                        .filter(issue -> issue.getMethodName().equals("<init>"))
+                        .filter(issue -> issue.getDescriptor().equals("(Ljava/lang/String;)"))
+                        .filter(issue -> issue.getKind() == Issue.IssueType.ARGUMENT)
+                        .filter(issue -> issue.getArgsIndex() == 0)
+                        .filter(issue -> issue.getProvenanceType()== Issue.ProvenanceType.EXTRACTED)
+                        .filter(issue -> issue.getProperty(ExtractNullableAnnotations.PROPERTY_NULLABLE_ANNOTATION_TYPE).equals("javax.annotation.Nullable"))
+                        .count()
         );
     }
 

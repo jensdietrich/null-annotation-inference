@@ -75,7 +75,13 @@ public class ExtractNullableAnnotations {
         @Override
         public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
             this.currentMethodName = name;
-            this.currentMethodDescriptor = descriptor;
+            if (name.equals("<init>")) {
+                // special rule to make this consistent with how instrumentation records constructors
+                this.currentMethodDescriptor = descriptor.replace(")V",")");
+            }
+            else {
+                this.currentMethodDescriptor = descriptor;
+            }
             return new MethodVisitor(Opcodes.ASM9) {
                 @Override
                 public AnnotationVisitor visitAnnotation(String descriptor, boolean visible) {

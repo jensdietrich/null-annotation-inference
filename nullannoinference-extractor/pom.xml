@@ -6,10 +6,10 @@
     <version>0.0.1</version>
   </parent>
   <groupId>nz.ac.wgtn.nullannoinference</groupId>
-  <artifactId>extractor</artifactId>
+  <artifactId>nullannoinference-extractor</artifactId>
   <packaging>jar</packaging>
   <version>0.0.1</version>
-  <name>annotation-extractor</name>
+  <name>nullannoinference-extractor</name>
   <build>
     <plugins>
       <plugin>

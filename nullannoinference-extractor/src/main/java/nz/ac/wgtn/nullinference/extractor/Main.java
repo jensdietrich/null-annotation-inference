@@ -23,19 +23,19 @@ public class Main {
 
     public static final String ARG_INPUT = "project";
     public static final String ARG_OUTPUT = "issues";
-    public static final String ARG_PROJECT_TYPPE = "projecttype";
+    public static final String ARG_PROJECT_TYPE = "projecttype";
 
     // TODO make this configurable -- only those issues will be configured
     public static final Predicate<Issue> ISSUE_FILTER = issue -> issue.getScope()== Issue.Scope.MAIN;
 
-    public static final Logger LOGGER = LogSystem.getLogger("annotation-collector");
+    public static final Logger LOGGER = LogSystem.getLogger("annotation-extractor");
 
     public static void main (String[] args) throws Exception {
 
         Options options = new Options();
         options.addRequiredOption("p",ARG_INPUT, true, "the input mvn project folder");
         options.addRequiredOption("o",ARG_OUTPUT, true, "the file name containing the issues collected (.json)");
-        options.addRequiredOption("t",ARG_PROJECT_TYPPE, true, "the project type (see nz.ac.wgtn.nullannoinference.commons.Project for valid types: mvn , gradle , ..)");
+        options.addRequiredOption("t", ARG_PROJECT_TYPE, true, "the project type (see nz.ac.wgtn.nullannoinference.commons.Project for valid types: mvn , gradle , ..)");
 
         CommandLineParser parser = new DefaultParser() {
             @Override
@@ -61,7 +61,7 @@ public class Main {
         Preconditions.checkArgument(projectFolder.exists(),"project folder does not exist: " + projectFolder.getAbsolutePath());
         Preconditions.checkArgument(projectFolder.isDirectory(),"project folder is not a folder: " + projectFolder.getAbsolutePath());
 
-        String projectType = cmd.getOptionValue(ARG_PROJECT_TYPPE);
+        String projectType = cmd.getOptionValue(ARG_PROJECT_TYPE);
         ProjectType project = ProjectType.getProject(projectType);
         project.checkProjectRootFolder(projectFolder);
         Preconditions.checkState(!project.getCompiledTestClasses(projectFolder).isEmpty(),"no compiled classes found in project, check whether project has been built: " + projectFolder.getAbsolutePath() );

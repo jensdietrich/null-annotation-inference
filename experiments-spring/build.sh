@@ -13,7 +13,7 @@ else
 fi
 
 cd ..
-mvn clean package
+mvn clean install
 cp nullannoinference-propagator/target/propagator.jar $PROPAGATOR
 cp nullannoinference-sanitizer/target/sanitizer.jar $SANITIZER
 cp nullannoinference-extractor/target/extractor.jar $EXTRACTOR
