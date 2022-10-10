@@ -27,7 +27,7 @@ public class RA2a extends Experiment {
                 new Column() {
                     @Override
                     public String name() {
-                        return "san(none)";
+                        return "base";
                     }
 
                     @Override
@@ -96,7 +96,7 @@ public class RA2a extends Experiment {
         TableGenerator csvOutput = new CSVTableGenerator(OUTPUT_CSV);
         TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrrrrr|");
 
-        this.run(SPRING_MODULES,"RA2a -- observed issues after applying sanitisers (" + SANITIZER_NAMES + ")","tab:ra2a",columns,csvOutput,latexOutput);
+        this.run(SPRING_MODULES,"RA2a -- observed issues after applying sanitisers (base -- no sanitisation applied, " + SANITIZER_NAMES + ")","tab:ra2a",columns,csvOutput,latexOutput);
 
 
     }

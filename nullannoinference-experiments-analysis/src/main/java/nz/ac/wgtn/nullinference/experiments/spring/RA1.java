@@ -26,7 +26,7 @@ public class RA1 extends Experiment {
             Column.First,
             new Column() {
                 @Override public String name() {
-                    return "existing";
+                    return "ex";
                 }
                 @Override public String value(String dataName) {
                     return Utils.format(countIssues(EXTRACTED_ISSUES_FOLDER,dataName,false));
@@ -42,7 +42,7 @@ public class RA1 extends Experiment {
 //            },
             new Column() {
                 @Override public String name() {
-                    return "obs.(raw)";
+                    return "obs";
                 }
                 @Override public String value(String dataName) {
                     return Utils.format(countIssues(OBSERVED_ISSUES_FOLDER,dataName,false));
@@ -50,7 +50,7 @@ public class RA1 extends Experiment {
             },
             new Column() {
                 @Override public String name() {
-                    return "obs. (agg)";
+                    return "agg";
                 }
                 @Override public String value(String dataName) {
                     return Utils.format(countIssues(OBSERVED_ISSUES_FOLDER,dataName,true));
@@ -58,19 +58,27 @@ public class RA1 extends Experiment {
             },
             new Column() {
                 @Override public String name() {
-                    return "obs. (raw/agg)";
+                    return "agg/obs";
                 }
                 @Override public String value(String dataName) {
                     return Utils.format2(compressionRatio(OBSERVED_ISSUES_FOLDER,dataName));
                 }
-            }
+            },
+            new Column() {
+                @Override public String name() {
+                    return "r,p";
+                }
+                @Override public String value(String dataName) {
+                    return recallPrecision(EXTRACTED_ISSUES_FOLDER,OBSERVED_ISSUES_FOLDER,dataName);
+                }
+            },
         };
 
 
         TableGenerator csvOutput = new CSVTableGenerator(OUTPUT_CSV);
-        TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrrr|");
+        TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrrrr|");
 
-        this.run(SPRING_MODULES,"RA1 - extracted vs observed (obs). issues, also reported aggregation of (raw) observed issues and aggregation ratios","tab:ra1",columns,csvOutput,latexOutput);
+        this.run(SPRING_MODULES,"RA1 - existing (ex) vs observed (obs) issues, also reported are the aggregation of observed issues (agg), aggregation ratios (agg/obs) and recall / precision (r,p)","tab:ra1",columns,csvOutput,latexOutput);
 
     }
 

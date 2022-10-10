@@ -42,6 +42,8 @@ public class Config {
 
     public static final String SANITIZER_NAMES = "D - deprecation, M - main scope, N - negative tests, S - shading";
 
+    public static final File PROJECTS = new File("experiments-spring/projects/original/spring-framework");
+
     public static final Predicate<Issue> FIELDS_ONLY = issue -> issue.getKind()== Issue.IssueType.FIELD;
     public static final Predicate<Issue> PARAM_ONLY = issue -> issue.getKind()== Issue.IssueType.ARGUMENT;
     public static final Predicate<Issue> RETURNS_ONLY = issue -> issue.getKind()== Issue.IssueType.RETURN_VALUE;

@@ -10,7 +10,7 @@ public interface Column {
             return "program";
         }
         public String value(String dataName) {
-            return dataName;
+            return dataName.replace("spring-","");
         }
     };
 }

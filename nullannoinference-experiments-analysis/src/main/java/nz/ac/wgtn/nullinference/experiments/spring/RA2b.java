@@ -33,14 +33,6 @@ public class RA2b extends Experiment {
 //            },
 //
 
-            new Column() {
-                @Override public String name() {
-                    return "r,p(none)";
-                }
-                @Override public String value(String dataName) {
-                    return recallPrecision(EXTRACTED_ISSUES_FOLDER,OBSERVED_ISSUES_FOLDER,dataName);
-                }
-            },
 
             new Column() {
                 @Override public String name() {
@@ -86,9 +78,11 @@ public class RA2b extends Experiment {
 
 
         TableGenerator csvOutput = new CSVTableGenerator(OUTPUT_CSV);
-        TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrrrrr|");
+        TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrrrr|");
 
-        this.run(SPRING_MODULES,"RA2b -- precision and recall w.r.t. existing annotations after applying sanitisers (" + SANITIZER_NAMES + ")","tab:ra2a",columns,csvOutput,latexOutput);
+        this.run(SPRING_MODULES,
+                "RA2b -- precision and recall w.r.t. existing annotations after applying sanitisers (" + SANITIZER_NAMES + ")",
+                "tab:ra2b",columns,csvOutput,latexOutput);
 
     }
 

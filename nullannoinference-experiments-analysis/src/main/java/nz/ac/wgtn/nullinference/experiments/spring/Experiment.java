@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -60,6 +62,31 @@ public abstract class Experiment {
     protected static Set<? extends AbstractIssue> readIssues(File folder, String moduleName, boolean aggregate)  {
         return readIssues(folder,moduleName,aggregate, issue -> true);
     }
+
+    protected static Set<File> getFiles(File folder,Predicate<File> filter) {
+
+
+        if (!folder.exists()) {
+            System.out.println("Folder does not exist: " + folder.getAbsolutePath());
+            return Collections.emptySet();
+        }
+        Set<File> result = null;
+        try (Stream<Path> walk = Files.walk(folder.toPath())) {
+            result = walk
+                .filter(Files::isRegularFile)
+                .map(p -> p.toFile())
+                .filter(filter)
+                .collect(Collectors.toSet());
+        }
+        catch (IOException x) {
+            x.printStackTrace();
+        }
+        return result;
+    }
+
+
+
+
 
     private static File getIssueFile(File folder,String moduleName) {
         return new File(folder,"nullable-"+moduleName+".json");
