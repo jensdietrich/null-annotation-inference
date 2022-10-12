@@ -80,6 +80,17 @@ parent =
     parent = null
 ```  
 
+## Measuring Coverage
+
+1. open springframework in IntelliJ
+2. IntelliJ IDEA 2022.2 (Ultimate Edition), Build #IU-222.3345.118, built on July 26, 2022
+3. navigate to `<module>/src/test`
+4. run tests in <module> with coverage
+5. when testing finishs, select option `replace active suits`
+6. inspect coverage value next to project file tree node in `<module>/src/main/java`
+
+
+
 
 
 
