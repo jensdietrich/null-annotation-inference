@@ -3,7 +3,9 @@ package nz.ac.wgtn.nullinference.experiments.spring;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
 import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 import nz.ac.wgtn.nullannoinference.commons.*;
 import nz.ac.wgtn.nullannoinference.commonsio.IssueIO;
 import org.apache.logging.log4j.Logger;
@@ -35,6 +37,29 @@ public abstract class Experiment {
 
     protected static int countIssues(File folder, String moduleName, boolean aggregate)  {
         return countIssues(folder,moduleName,aggregate,issue -> true);
+    }
+
+
+    private static TypeAdapter<Issue> ISSUE_TYPE_ADAPTER = new Gson().getAdapter(Issue.class);
+
+    static Map<IssueKernel,Integer> readAndAggregateIssuesCountMinContextDepth(File folder, String moduleName)  {
+        File file = new File(folder,"nullable-"+moduleName+".json");
+        try (JsonReader reader = new JsonReader(new FileReader(file))) {
+            Map<IssueKernel, Integer> issues = new HashMap<>();
+            reader.beginArray();
+            while (reader.hasNext()) {
+                Issue issue = ISSUE_TYPE_ADAPTER.read(reader);
+                if (issue.getStacktrace()!=null) {
+                    IssueKernel kernel = issue.getKernel();
+                    issues.compute(kernel, (k, i) -> i == null ? issue.getStacktrace().size() : Math.min(i,issue.getStacktrace().size()));
+                }
+            }
+            reader.endArray();
+            return issues;
+        }
+        catch (IOException x) {
+            throw new RuntimeException((x));
+        }
     }
 
     protected static int countIssues(File folder, String moduleName, boolean aggregate, Predicate<Issue> filter)  {
