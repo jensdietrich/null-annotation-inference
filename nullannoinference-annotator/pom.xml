@@ -68,6 +68,11 @@
       <artifactId>nullannoinference-commons</artifactId>
       <version>[0.0.1,)</version>
     </dependency>
+    <dependency>
+      <groupId>nz.ac.wgtn.nullannoinference</groupId>
+      <artifactId>nullannoinference-commons-io</artifactId>
+      <version>[0.0.1,)</version>
+    </dependency>
 
   </dependencies>
 
@@ -93,11 +98,11 @@
               <goal>single</goal>
             </goals>
             <configuration>
-              <finalName>nullannoinference-annotator</finalName>
+              <finalName>annotator</finalName>
               <archive>
                 <manifest>
                   <mainClass>
-                    nz.ac.wgtn.nullannoinference.annotator.MvnProjectAnnotator
+                    nz.ac.wgtn.nullannoinference.annotator.Main
                   </mainClass>
                 </manifest>
               </archive>

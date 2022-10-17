@@ -24,6 +24,8 @@ import java.util.function.Predicate;
  * Annotator for entire maven projects.
  * @author jens dietrich
  */
+
+@Deprecated  // use Main instead with additional -projectType option set to mvn
 public class MvnProjectAnnotator {
 
     // arg defs

@@ -2,11 +2,14 @@ package nz.ac.wgtn.nullannoinference.commons;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.StreamCorruptedException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Abstraction for (the relevant parts) of a project to be analysed.
@@ -27,6 +30,11 @@ public interface ProjectType {
     static String[] getValidProjectTypes() {
         return new String[]{MavenProject.TYPE,GradleProject.TYPE,MultiLanguageGradleProject.TYPE};
     }
+
+    static String getValidProjectTypesAsString() {
+        return Stream.of(getValidProjectTypes()).collect(Collectors.joining(","));
+    }
+
     static ProjectType getProject(String name) {
         if (name==null || name.equals(MavenProject.TYPE)) {
             return MVN;

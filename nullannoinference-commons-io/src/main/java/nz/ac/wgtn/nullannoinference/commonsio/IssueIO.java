@@ -85,23 +85,43 @@ public class IssueIO {
 
 
     public static List<Issue> readIssues(JsonReader reader) throws IOException {
+        return readIssues(reader,issue -> true);
+    }
+
+    public static List<Issue> readIssues(JsonReader reader,Predicate<Issue> filter) throws IOException {
         List<Issue> issues = new ArrayList<>();
         reader.beginArray();
         while (reader.hasNext()) {
             Issue issue = ISSUE_TYPE_ADAPTER.read(reader);
-            issues.add(issue);
+            if (filter.test(issue)) {
+                issues.add(issue);
+            }
         }
         reader.endArray();
         return issues;
     }
+
     public static List<Issue> readIssues(Reader reader) throws IOException {
         try (JsonReader jreader = new JsonReader(reader)) {
             return readIssues(jreader);
         }
     }
+
+    public static List<Issue> readIssues(Reader reader,Predicate<Issue> filter) throws IOException {
+        try (JsonReader jreader = new JsonReader(reader)) {
+            return readIssues(jreader,filter);
+        }
+    }
+
     public static List<Issue> readIssues(File input) throws IOException {
         try (Reader reader = new FileReader(input)) {
             return readIssues(reader);
+        }
+    }
+
+    public static List<Issue> readIssues(File input,Predicate<Issue> filter) throws IOException {
+        try (Reader reader = new FileReader(input)) {
+            return readIssues(reader,filter);
         }
     }
 

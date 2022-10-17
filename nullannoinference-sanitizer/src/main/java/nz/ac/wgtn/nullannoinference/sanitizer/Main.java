@@ -35,7 +35,7 @@ public class Main {
         options.addRequiredOption("i","input",true,"a json file with null issues (required)");
         options.addRequiredOption("p","project",true,"the folder containing the project to be analysed, the project must have been built (required)");
         options.addRequiredOption("o","sanitisedissues",true,"a file where the sanitized issues will be saved (required)");
-        options.addOption("t","projecttype",true,"the project type, default is mvn (Maven), can be set to any of " + ProjectType.getValidProjectTypes());
+        options.addOption("t","projecttype",true,"the project type, default is mvn (Maven), can be set to any of " + ProjectType.getValidProjectTypesAsString());
         options.addOption("n","removeissuesfromnegativetests",false,"if set, perform an analysis to remove issues observed while executing negative tests");
         options.addOption("s","removeissuesinshadedclasses",false,"if set, perform an analysis to remove issues in shaded classes");
         options.addOption("pr","removeissuesinprivatemethods",false,"if set, perform an analysis to remove issues in private and packageprivate methods");

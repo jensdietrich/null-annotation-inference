@@ -1,12 +1,10 @@
 package nz.ac.wgtn.nullannoinference.propagator;
 
 import com.google.common.base.Preconditions;
-import nz.ac.wgtn.nullannoinference.commons.Issue;
 import nz.ac.wgtn.nullannoinference.commons.ProjectType;
 import org.apache.commons.cli.*;
 import org.apache.logging.log4j.Logger;
 import java.io.File;
-import java.util.function.Predicate;
 
 /**
  * Main class, entry point for executable jar that is being built.
@@ -26,7 +24,7 @@ public class Main {
         options.addRequiredOption("p","project",true,"the folder containing the project to be analysed, the project must have been built (required)");
         options.addRequiredOption("o","output",true,"the json file where both input and inferred issues will be stored (required)");
         options.addRequiredOption("x","packagePrefix",true,"the prefix of packages for which the hierarchy will be analysed, such as \"org.apache.commons\" (required)");
-        options.addOption("t","projecttype",true,"the project type, default is mvn (Maven), can be set to any of " + ProjectType.getValidProjectTypes());
+        options.addOption("t","projecttype",true,"the project type, default is mvn (Maven), can be set to any of " + ProjectType.getValidProjectTypesAsString());
         options.addOption("a","propagate4args",false,"whether to propagate nullability for arguments to subtypes (optional, default is " + PROPAGATE_NULLABILITY_FOR_ARGUMENTS + ")");
 
         CommandLineParser parser = new DefaultParser() {
