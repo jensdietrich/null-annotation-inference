@@ -25,6 +25,7 @@ public class Config {
     );
 
     public static final File EXTRACTED_ISSUES_FOLDER = new File("experiments-spring/results/extracted");
+    public static final File EXTRACTED_FROM_REANNOTATED_ISSUES_FOLDER = new File("experiments-spring/results/extracted-reannotated");
     public static final File EXTRACTED_PLUS_ISSUES_FOLDER = new File("experiments-spring/results/extracted+");
     public static final File OBSERVED_ISSUES_FOLDER = new File("experiments-spring/results/observed");
     public static final File OBSERVED_AND_PROPAGATED_ISSUES_FOLDER = new File("experiments-spring/results/observed+");
