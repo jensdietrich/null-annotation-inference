@@ -27,3 +27,8 @@ experiments-spring/results
 nullannoinference-merger/target
 experiments/results
 experiments-spring/results-old
+experiments-spring/projects
+experiments-spring/analyses
+experiments-spring/instrumented-gradle-old
+experiments-spring/.annotation-results
+nullannoinference-commons-io/target
