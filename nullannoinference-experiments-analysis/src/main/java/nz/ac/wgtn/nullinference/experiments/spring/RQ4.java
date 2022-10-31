@@ -1,29 +1,23 @@
 package nz.ac.wgtn.nullinference.experiments.spring;
 
-import com.google.common.collect.Sets;
-import nz.ac.wgtn.nullannoinference.commons.AbstractIssue;
-import nz.ac.wgtn.nullannoinference.commons.IssueKernel;
 import nz.ac.wgtn.nullinference.experiments.Utils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Set;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import static nz.ac.wgtn.nullinference.experiments.spring.Config.*;
 
 /**
- * Script to produce data for RA6.
+ * Script to produce data for RQ4.
  * @author jens dietrich
  */
-public class RA6 extends Experiment {
+public class RQ4 extends Experiment {
 
-    public static final File OUTPUT_CSV = new File("experiments-spring/results/ra/ra6.csv");
-    public static final File OUTPUT_LATEX = new File("experiments-spring/results/ra/ra6.tex");
+    public static final File OUTPUT_CSV = new File("experiments-spring/results/rq/rq4.csv");
+    public static final File OUTPUT_LATEX = new File("experiments-spring/results/rq/rq4.tex");
 
     public static void main (String[] args) throws IOException, InterruptedException {
-        new RA6().analyse();
+        new RQ4().analyse();
     }
 
     public void analyse()  {
@@ -67,7 +61,7 @@ public class RA6 extends Experiment {
         TableGenerator csvOutput = new CSVTableGenerator(OUTPUT_CSV);
         TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrr|");
 
-        this.run(SPRING_MODULES,"RA6 -- nullable annotation extracted from original projects, re-annotated projects, and recall / precision of automatically inserted annotations with respect to original annotations","tab:ra6",columns,csvOutput,latexOutput);
+        this.run(SPRING_MODULES,"RQ4 -- nullable annotation extracted from original projects, re-annotated projects, and recall / precision of automatically inserted annotations with respect to original annotations","tab:rq4",columns,csvOutput,latexOutput);
     }
 
 }

@@ -10,6 +10,12 @@
   <packaging>jar</packaging>
   <version>0.0.1</version>
   <name>nullannoinference-agent</name>
+
+  <properties>
+    <maven.compile.source>1.7</maven.compile.source>
+    <maven.compile.target>1.7</maven.compile.target>
+  </properties>
+
   <build>
     <plugins>
       <plugin>

@@ -8,18 +8,18 @@ import java.io.IOException;
 import static nz.ac.wgtn.nullinference.experiments.spring.Config.*;
 
 /**
- * Script to produce data for RA3 (by issue type).
+ * Script to produce data for RQ3 (by issue type).
  * @author jens dietrich
  */
-public class RA3c extends Experiment {
+public class RQ3c extends Experiment {
 
 
-    public static final File OUTPUT_CSV = new File("experiments-spring/results/ra/ra3c.csv");
-    public static final File OUTPUT_LATEX = new File("experiments-spring/results/ra/ra3c.tex");
+    public static final File OUTPUT_CSV = new File("experiments-spring/results/rq/rq3c.csv");
+    public static final File OUTPUT_LATEX = new File("experiments-spring/results/rq/rq3c.tex");
 
 
     public static void main (String[] args) throws IOException, InterruptedException {
-        new RA3c().analyse();
+        new RQ3c().analyse();
     }
 
     public void analyse()  {
@@ -99,7 +99,7 @@ public class RA3c extends Experiment {
         TableGenerator csvOutput = new CSVTableGenerator(OUTPUT_CSV);
         TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrrrrr|");
 
-        this.run(SPRING_MODULES,"RA3c - number of propagated issues and recall / precision of propagated issues by type (F - field, P - method parameters, R - method return types)","RA3c", columns, csvOutput,latexOutput );
+        this.run(SPRING_MODULES,"RQ3c - number of propagated issues and recall / precision of propagated issues by type (F - field, P - method parameters, R - method return types)","tab:rq3c", columns, csvOutput,latexOutput );
 
     }
 

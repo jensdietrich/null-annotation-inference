@@ -6,18 +6,16 @@ import static nz.ac.wgtn.nullinference.experiments.spring.Config.SPRING_MODULES;
 import static nz.ac.wgtn.nullinference.experiments.spring.Config.*;
 
 /**
- * Script to produce data for RA2.
+ * Script to produce data for RQ2.
  * @author jens dietrich
  */
-public class RA2b extends Experiment {
+public class RQ2b extends Experiment {
 
-
-    public static final File OUTPUT_CSV = new File("experiments-spring/results/ra/ra2b.csv");
-    public static final File OUTPUT_LATEX = new File("experiments-spring/results/ra/ra2b.tex");
-
+    public static final File OUTPUT_CSV = new File("experiments-spring/results/rq/rq2b.csv");
+    public static final File OUTPUT_LATEX = new File("experiments-spring/results/rq/rq2b.tex");
 
     public static void main (String[] args) throws IOException, InterruptedException {
-        new RA2b().analyse();
+        new RQ2b().analyse();
     }
 
     public void analyse()  {
@@ -81,8 +79,8 @@ public class RA2b extends Experiment {
         TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrrrr|");
 
         this.run(SPRING_MODULES,
-                "RA2b -- precision and recall w.r.t. existing annotations after applying sanitisers (" + SANITIZER_NAMES + ")",
-                "tab:ra2b",columns,csvOutput,latexOutput);
+                "RQ2b -- precision and recall w.r.t. existing annotations after applying sanitisers (" + SANITIZER_NAMES + ")",
+                "tab:rq2b",columns,csvOutput,latexOutput);
 
     }
 

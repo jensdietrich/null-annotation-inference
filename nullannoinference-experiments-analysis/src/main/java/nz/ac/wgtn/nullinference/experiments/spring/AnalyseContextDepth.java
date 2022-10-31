@@ -15,8 +15,8 @@ import static nz.ac.wgtn.nullinference.experiments.spring.Config.*;
  */
 public class AnalyseContextDepth extends Experiment {
 
-    public static final File OUTPUT_CSV = new File("experiments-spring/results/ra/context-depth.csv");
-    public static final File OUTPUT_LATEX = new File("experiments-spring/results/ra/context-depth.tex");
+    public static final File OUTPUT_CSV = new File("experiments-spring/results/rq/context-depth.csv");
+    public static final File OUTPUT_LATEX = new File("experiments-spring/results/rq/context-depth.tex");
 
     public static void main (String[] args) throws Exception {
 //        Thread.sleep(10_000);  // time to connect profiler

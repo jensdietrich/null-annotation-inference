@@ -2,22 +2,21 @@ package nz.ac.wgtn.nullinference.experiments.spring;
 
 import nz.ac.wgtn.nullinference.experiments.Utils;
 import java.io.File;
-import java.io.IOException;
 import static nz.ac.wgtn.nullinference.experiments.spring.Config.SPRING_MODULES;
 import static nz.ac.wgtn.nullinference.experiments.spring.Config.*;
 
 /**
- * Script to produce data for RA1.
+ * Script to produce data for RQ1.
  * @author jens dietrich
  */
-public class RA1 extends Experiment {
+public class RQ1 extends Experiment {
 
-    public static final File OUTPUT_CSV = new File("experiments-spring/results/ra/ra1.csv");
-    public static final File OUTPUT_LATEX = new File("experiments-spring/results/ra/ra1.tex");
+    public static final File OUTPUT_CSV = new File("experiments-spring/results/rq/rq1.csv");
+    public static final File OUTPUT_LATEX = new File("experiments-spring/results/rq/rq1.tex");
 
     public static void main (String[] args) throws Exception {
 //        Thread.sleep(10_000);  // time to connect profiler
-        new RA1().analyse();
+        new RQ1().analyse();
     }
 
     public void analyse()  {
@@ -78,7 +77,7 @@ public class RA1 extends Experiment {
         TableGenerator csvOutput = new CSVTableGenerator(OUTPUT_CSV);
         TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrrrr|");
 
-        this.run(SPRING_MODULES,"RA1 - existing (ex) vs observed (obs) issues, also reported are the aggregation of observed issues (agg), aggregation ratios (agg/obs) and recall / precision (r,p)","tab:ra1",columns,csvOutput,latexOutput);
+        this.run(SPRING_MODULES,"RQ1 - existing (ex) vs observed (obs) issues, also reported are the aggregation of observed issues (agg), aggregation ratios (agg/obs) and recall / precision (r,p)","tab:rq1",columns,csvOutput,latexOutput);
 
     }
 

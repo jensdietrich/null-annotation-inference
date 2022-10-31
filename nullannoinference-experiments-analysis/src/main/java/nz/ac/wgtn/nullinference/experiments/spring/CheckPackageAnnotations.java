@@ -23,8 +23,8 @@ import static nz.ac.wgtn.nullinference.experiments.spring.Config.*;
 
 public class CheckPackageAnnotations extends Experiment {
 
-    public static final File OUTPUT_CSV = new File("experiments-spring/results/ra/package-annotations.csv");
-    public static final File OUTPUT_LATEX = new File("experiments-spring/results/ra/package-annotations.tex");
+    public static final File OUTPUT_CSV = new File("experiments-spring/results/rq/package-annotations.csv");
+    public static final File OUTPUT_LATEX = new File("experiments-spring/results/rq/package-annotations.tex");
 
     public static void main (String[] args) throws Exception {
         new CheckPackageAnnotations().analyse();

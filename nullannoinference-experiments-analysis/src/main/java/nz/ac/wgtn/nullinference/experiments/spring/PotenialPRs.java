@@ -14,17 +14,17 @@ import java.util.stream.Collectors;
 import static nz.ac.wgtn.nullinference.experiments.spring.Config.*;
 
 /**
- * Script to produce data for RA5.
+ * Script to produce data for potenial PRs.
  * @author jens dietrich
  */
-public class RA5 extends Experiment {
+public class PotenialPRs extends Experiment {
 
 
-    public static final File OUTPUT_CSV = new File("experiments-spring/results/ra/ra5.csv");
-    public static final File OUTPUT_LATEX = new File("experiments-spring/results/ra/ra5.tex");
+    public static final File OUTPUT_CSV = new File("experiments-spring/results/rq/pot-pr.csv");
+    public static final File OUTPUT_LATEX = new File("experiments-spring/results/rq/pot-pr.tex");
 
     public static void main (String[] args) throws IOException, InterruptedException {
-        new RA5().analyse();
+        new PotenialPRs().analyse();
     }
 
     public void analyse()  {
@@ -79,7 +79,7 @@ public class RA5 extends Experiment {
         TableGenerator csvOutput = new CSVTableGenerator(OUTPUT_CSV);
         TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrrr|");
 
-        this.run(SPRING_MODULES,"RA5 -- additional annotations to be added by type, value in brackets are classes to be modified","tab:ra5",columns,csvOutput,latexOutput);
+        this.run(SPRING_MODULES,"additional annotations to be added by type, value in brackets are classes to be modified","tab:pot-pr",columns,csvOutput,latexOutput);
 
     }
 

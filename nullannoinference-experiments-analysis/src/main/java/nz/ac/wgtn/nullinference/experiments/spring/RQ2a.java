@@ -7,18 +7,18 @@ import static nz.ac.wgtn.nullinference.experiments.spring.Config.SPRING_MODULES;
 import static nz.ac.wgtn.nullinference.experiments.spring.Config.*;
 
 /**
- * Script to produce data for RA2.
+ * Script to produce data for RQ2.
  * @author jens dietrich
  */
-public class RA2a extends Experiment {
+public class RQ2a extends Experiment {
 
 
-    public static final File OUTPUT_CSV = new File("experiments-spring/results/ra/ra2a.csv");
-    public static final File OUTPUT_LATEX = new File("experiments-spring/results/ra/ra2a.tex");
+    public static final File OUTPUT_CSV = new File("experiments-spring/results/rq/rq2a.csv");
+    public static final File OUTPUT_LATEX = new File("experiments-spring/results/rq/rq2a.tex");
 
 
     public static void main (String[] args) throws IOException, InterruptedException {
-        new RA2a().analyse();
+        new RQ2a().analyse();
     }
 
     public void analyse()  {
@@ -96,9 +96,7 @@ public class RA2a extends Experiment {
         TableGenerator csvOutput = new CSVTableGenerator(OUTPUT_CSV);
         TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrrrrr|");
 
-        this.run(SPRING_MODULES,"RA2a -- observed issues after applying sanitisers (base -- no sanitisation applied, " + SANITIZER_NAMES + ")","tab:ra2a",columns,csvOutput,latexOutput);
-
+        this.run(SPRING_MODULES,"RQ2a -- observed issues after applying sanitisers (base -- no sanitisation applied, " + SANITIZER_NAMES + ")","tab:rq2a",columns,csvOutput,latexOutput);
 
     }
-
 }

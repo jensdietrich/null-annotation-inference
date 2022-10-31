@@ -30,5 +30,4 @@ This is a semi-manual process, to be performed as follows:
 3. in the module `spring-core`, locate the class `org.springframework.lang.Nullable`, and use the IDE refactoring to rename it (e.g., to `Foo`). This will also rename all references within the project, and effectively remove `@Nullable`
 4. run `reannotate.sh` -- this will use the extracted issues, and reinsert the `@Nullable` annotations in `projects/reannotated`
 5. because `projects/reannotated` does not have `org.springframework.lang.Nullable` , it needs to be brought back, the easiest way to do this is to open the project in an IDE, and copy the copy made in step 2 (`Foo`) back into `Nullable`
-6. confirm that the project can be compiled by running `gradle compileJava` in `projects/reannotated` -- note that a full build may still fail, for instance, the code produced by the annotator does not satisfy some of the spring-specific checkstyle rules 
-7. 
+6. confirm that the project can be compiled by running `gradle compileJava` in `projects/reannotated` -- note that a full build may still fail, for instance, the code produced by the annotator does not satisfy some of the spring-specific checkstyle rules
