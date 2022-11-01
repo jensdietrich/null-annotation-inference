@@ -32,3 +32,4 @@ experiments-spring/analyses
 experiments-spring/instrumented-gradle-old
 experiments-spring/.annotation-results
 nullannoinference-commons-io/target
+experiments-jastaddj/inferred

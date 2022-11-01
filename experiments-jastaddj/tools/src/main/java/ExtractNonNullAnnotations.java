@@ -20,12 +20,12 @@ public class ExtractNonNullAnnotations {
         File projectFolder = new File(args[0]);
         File outputFile = new File(args[1]);
 
-        Set<Issue> issues = findNullAnnotated(projectFolder);
+        Set<Issue> issues = findNonNullAnnotated(projectFolder);
         IssuePersistency.save(issues,outputFile);
 
     }
 
-    public static Set<Issue> findNullAnnotated( File projectFolder) {
+    public static Set<Issue> findNonNullAnnotated(File projectFolder) {
 
         File binClassFolder = new File(projectFolder,"target/classes");
         Set<File> classFiles = collectJavaFiles(binClassFolder);
