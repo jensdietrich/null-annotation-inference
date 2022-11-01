@@ -47,7 +47,7 @@ public class CollectJavaFiles {
         return files;
     }
 
-    private static void collectJavaFiles(File folder,Set<File> collector) throws IOException {
+    private static void collectJavaFiles(File folder,Set<File> collector) {
         for (File f:folder.listFiles()) {
             if (f.isDirectory()) {
                 collectJavaFiles(f,collector);
