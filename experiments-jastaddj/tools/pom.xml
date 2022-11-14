@@ -10,7 +10,6 @@
     <maven.compiler.target>7</maven.compiler.target>
     <maven.compiler.source>7</maven.compiler.source>
   </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.ow2.asm</groupId>
@@ -21,6 +20,11 @@
       <groupId>org.json</groupId>
       <artifactId>json</artifactId>
       <version>20220924</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>19.0</version>
     </dependency>
   </dependencies>
   <build>
