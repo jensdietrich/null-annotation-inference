@@ -1,4 +1,4 @@
-Copyright (c) <year> <copyright holders>
+Copyright (c) 2022 Jens Dietrich
 
 The Universal Permissive License (UPL), Version 1.0
 
