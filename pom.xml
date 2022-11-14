@@ -13,8 +13,8 @@
 
   <licenses>
         <license>
-            <name>Apache License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <name>The Universal Permissive License (UPL), Version 1.0</name>
+            <url>https://opensource.org/licenses/UPL</url>
             <distribution>repo</distribution>
         </license>
    </licenses>
