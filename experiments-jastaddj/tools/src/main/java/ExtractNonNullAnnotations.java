@@ -87,7 +87,10 @@ public class ExtractNonNullAnnotations {
                         setupIssue(issue,descriptor);
                         issues.add(issue);
                     }
-                    return super.visitAnnotation(descriptor, visible);                }
+                    return super.visitAnnotation(descriptor, visible);
+                }
+
+
             };
         }
 

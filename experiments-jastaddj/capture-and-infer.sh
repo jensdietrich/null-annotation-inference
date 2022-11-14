@@ -1,6 +1,6 @@
 #! sh
 
-PROJECTS=("commons-io-2.5" "commons-cli-3.1" "commons-lang-3.0")
+PROJECTS=("commons-io-2.5" "commons-cli-3.1" "commons-lang-3.0" "commons-math-3.0")
 
 for PROJECT in "${PROJECTS[@]}"; do
     echo "STEP 1: merging captured issues for ${PROJECT} ====== "

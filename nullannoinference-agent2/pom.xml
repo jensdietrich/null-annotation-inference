@@ -16,6 +16,14 @@
     <maven.compile.target>1.7</maven.compile.target>
   </properties>
 
+  <licenses>
+    <license>
+      <name>The Universal Permissive License (UPL), Version 1.0</name>
+      <url>https://opensource.org/licenses/UPL</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
   <build>
     <plugins>
       <plugin>

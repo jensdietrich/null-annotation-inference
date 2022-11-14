@@ -5,6 +5,15 @@
         <artifactId>nullannoinference-parent</artifactId>
         <version>0.0.1</version>
     </parent>
+
+    <licenses>
+        <license>
+            <name>The Universal Permissive License (UPL), Version 1.0</name>
+            <url>https://opensource.org/licenses/UPL</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
     <groupId>nz.ac.wgtn.nullannoinference</groupId>
     <artifactId>nullannoinference-merger</artifactId>
     <packaging>jar</packaging>
