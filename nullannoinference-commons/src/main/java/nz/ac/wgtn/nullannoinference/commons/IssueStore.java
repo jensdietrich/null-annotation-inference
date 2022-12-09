@@ -1,9 +1,6 @@
 package nz.ac.wgtn.nullannoinference.commons;
 
-import javax.management.MBeanServer;
-import javax.management.ObjectName;
 import java.io.File;
-import java.lang.management.ManagementFactory;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
@@ -17,6 +14,8 @@ import java.util.stream.Stream;
  */
 
 public class IssueStore {
+
+    public static final String NULLABLE_ISSUE_FOLDER = System.getProperty("nz.ac.wgtn.nullannoinference.issues.dir");
 
     private static final String INSTRUMENTATION_PACKAGE1 = "nz.ac.wgtn.nullannoinference.agent";
     private static final String INSTRUMENTATION_PACKAGE2 = "nz.ac.wgtn.nullannoinference.agent2";
@@ -134,6 +133,16 @@ public class IssueStore {
             else {
                 String fileName = FILE_NAME + '-' + System.currentTimeMillis() + ".json";
                 File workingDir = new File(System.getProperty("user.dir"));
+
+                if (NULLABLE_ISSUE_FOLDER!=null) {
+                    File tmp = new File(NULLABLE_ISSUE_FOLDER);
+                    if (!tmp.exists()) {
+                        tmp.mkdirs();
+                        System.out.println("created issue folder " + tmp.getAbsolutePath());
+                    }
+                    workingDir = tmp;
+                }
+
                 File file = new File(workingDir, fileName);
                 System.out.println("issues will be save to " + file.getAbsolutePath());
                 System.out.println("saving " + issuesToBeSaved.size() + " issues");
