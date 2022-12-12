@@ -205,10 +205,14 @@ public abstract class Experiment {
     }
 
     protected static String recallPrecision(File folder1, File folder2, String moduleName, Predicate<Issue> filter)  {
+        return recallPrecision(folder1,folder2,moduleName,filter,filter);
+    }
+
+    protected static String recallPrecision(File folder1, File folder2, String moduleName, Predicate<Issue> filter1, Predicate<Issue> filter2)  {
         // always work with aggregated sets !
         try {
-            Set<IssueKernel> set1 = IssueIO.readAndAggregateIssues(getIssueFile(folder1, moduleName), filter).keySet();
-            Set<IssueKernel> set2 = IssueIO.readAndAggregateIssues(getIssueFile(folder2, moduleName), filter).keySet();
+            Set<IssueKernel> set1 = IssueIO.readAndAggregateIssues(getIssueFile(folder1, moduleName), filter1).keySet();
+            Set<IssueKernel> set2 = IssueIO.readAndAggregateIssues(getIssueFile(folder2, moduleName), filter2).keySet();
             int TP = Sets.intersection(set1, set2).size();
             int FP = Sets.difference(set2, set1).size();
             int FN = Sets.difference(set1, set2).size();
@@ -221,6 +225,7 @@ public abstract class Experiment {
             throw new RuntimeException(x);
         }
     }
+
 
     protected static double jaccardSimilarity(File folder1, File folder2,String moduleName)  {
         return jaccardSimilarity(folder1,folder2,moduleName,issue -> true);
