@@ -57,25 +57,25 @@ public class Config {
     public static final Predicate<Issue> ALL = issue -> true;
 
 
-    static {
-        Preconditions.checkArgument(EXTRACTED_ISSUES_FOLDER.exists());
-        Preconditions.checkArgument(EXTRACTED_ISSUES_FOLDER.isDirectory());
-        Preconditions.checkArgument(EXTRACTED_PLUS_ISSUES_FOLDER.exists());
-        Preconditions.checkArgument(EXTRACTED_PLUS_ISSUES_FOLDER.isDirectory());
-        Preconditions.checkArgument(OBSERVED_ISSUES_FOLDER.exists());
-        Preconditions.checkArgument(OBSERVED_ISSUES_FOLDER.isDirectory());
-        Preconditions.checkArgument(OBSERVED_AND_PROPAGATED_ISSUES_FOLDER.exists());
-        Preconditions.checkArgument(OBSERVED_AND_PROPAGATED_ISSUES_FOLDER.isDirectory());
-        Preconditions.checkArgument(SANITIZED_ISSUES_FOLDER.exists());
-        Preconditions.checkArgument(SANITIZED_ISSUES_FOLDER.isDirectory());
-        Preconditions.checkArgument(SANITIZED_ISSUES_SHADED_FOLDER.exists());
-        Preconditions.checkArgument(SANITIZED_ISSUES_SHADED_FOLDER.isDirectory());
-        Preconditions.checkArgument(SANITIZED_ISSUES_DEPRECATED_FOLDER.exists());
-        Preconditions.checkArgument(SANITIZED_ISSUES_DEPRECATED_FOLDER.isDirectory());
-        Preconditions.checkArgument(SANITIZED_ISSUES_MAINSCOPE_FOLDER.exists());
-        Preconditions.checkArgument(SANITIZED_ISSUES_MAINSCOPE_FOLDER.isDirectory());
-        Preconditions.checkArgument(SANITIZED_ISSUES_NEGATIVETESTS_FOLDER.exists());
-        Preconditions.checkArgument(SANITIZED_ISSUES_NEGATIVETESTS_FOLDER.isDirectory());
-    }
+//    static {
+//        Preconditions.checkArgument(EXTRACTED_ISSUES_FOLDER.exists());
+//        Preconditions.checkArgument(EXTRACTED_ISSUES_FOLDER.isDirectory());
+//        Preconditions.checkArgument(EXTRACTED_PLUS_ISSUES_FOLDER.exists());
+//        Preconditions.checkArgument(EXTRACTED_PLUS_ISSUES_FOLDER.isDirectory());
+//        Preconditions.checkArgument(OBSERVED_ISSUES_FOLDER.exists());
+//        Preconditions.checkArgument(OBSERVED_ISSUES_FOLDER.isDirectory());
+//        Preconditions.checkArgument(OBSERVED_AND_PROPAGATED_ISSUES_FOLDER.exists());
+//        Preconditions.checkArgument(OBSERVED_AND_PROPAGATED_ISSUES_FOLDER.isDirectory());
+//        Preconditions.checkArgument(SANITIZED_ISSUES_FOLDER.exists());
+//        Preconditions.checkArgument(SANITIZED_ISSUES_FOLDER.isDirectory());
+//        Preconditions.checkArgument(SANITIZED_ISSUES_SHADED_FOLDER.exists());
+//        Preconditions.checkArgument(SANITIZED_ISSUES_SHADED_FOLDER.isDirectory());
+//        Preconditions.checkArgument(SANITIZED_ISSUES_DEPRECATED_FOLDER.exists());
+//        Preconditions.checkArgument(SANITIZED_ISSUES_DEPRECATED_FOLDER.isDirectory());
+//        Preconditions.checkArgument(SANITIZED_ISSUES_MAINSCOPE_FOLDER.exists());
+//        Preconditions.checkArgument(SANITIZED_ISSUES_MAINSCOPE_FOLDER.isDirectory());
+//        Preconditions.checkArgument(SANITIZED_ISSUES_NEGATIVETESTS_FOLDER.exists());
+//        Preconditions.checkArgument(SANITIZED_ISSUES_NEGATIVETESTS_FOLDER.isDirectory());
+//    }
 
 }
