@@ -32,12 +32,13 @@ The system variable `nz.ac.wgtn.nullannoinference.context` can be used to includ
 are executed. This is useful as API issues might be reported in another systems the system under analysis depends on. Usually this
 information can also be inferred from stack traces captured. 
 
-The system variable `nz.ac.wgtn.nullannoinference.issues.dir` (defined in the commons module) can be used to set the output folder where 
+The system variable `nz.ac.wgtn.nullannoinference.issues.dir` (defined in the `commons` module) can be used to set the output folder where 
 issues encountered during execution will be stored (in JSON format). If not set, the current working directory will be used.
 
 Example usage: `java -Dnz.ac.wgtn.nullannoinference.includes=com.example,org.example -javaagent:nullannoinference-agent.jar .. `
 
-``
+### Building
 
-
-
+To build the agent use `mvn package`. This will also build a special diustribution with the suffix `-nobb`. While the standard
+agent built has all dependencies included, `nobb` stands for _no bytebuddy_ , this is to be used when the project
+instrumented itself uses (a potenially incompatible version of) bytebuddy.
