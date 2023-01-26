@@ -11,17 +11,15 @@ length=${#REPOS[@]}
 for (( i=0; i<${length}; i++ ));
 do
     cd ${ROOT}
-    if [ -d ${PROJECT_FOLDERS[$i]} ]; then
-        echo "Using existing project: ${PROJECT_FOLDERS[$i]}"
+    PROJECT_FOLDER=${PROJECT_FOLDERS}/${NAMES[$i]}
+    if [ -d ${PROJECT_FOLDER} ]; then
+        echo "Using existing project: ${PROJECT_FOLDER}"
     else
-      echo "cloning ${REPOS[$i]} into ${PROJECT_FOLDERS[$i]}"
-      git clone ${REPOS[$i]} ${PROJECT_FOLDERS[$i]}
-      cd ${PROJECT_FOLDERS[$i]}
+      echo "cloning ${REPOS[$i]} into ${PROJECT_FOLDER}"
+      git clone ${REPOS[$i]} ${PROJECT_FOLDER}
+      cd ${PROJECT_FOLDER}
       
       echo "switching to version tags/${VERSIONS[$i]}"
       git checkout tags/${VERSIONS[$i]}
     fi
 done
-
-
-

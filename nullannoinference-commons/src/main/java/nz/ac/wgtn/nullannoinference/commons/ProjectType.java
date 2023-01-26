@@ -1,8 +1,9 @@
 package nz.ac.wgtn.nullannoinference.commons;
 
+import nz.ac.wgtn.nullannoinference.commons.projecttypes.*;
+
 import java.io.File;
 import java.io.IOException;
-import java.io.StreamCorruptedException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public interface ProjectType {
     String LANG_GROOVY = "groovy";
 
     static String[] getValidProjectTypes() {
-        return new String[]{MavenProject.TYPE,GradleProject.TYPE,MultiLanguageGradleProject.TYPE};
+        return new String[]{MavenProject.TYPE,GradleProject.TYPE,MultiLanguageGradleProject.TYPE, GuavaProject.TYPE, ErrorProneProject.TYPE};
     }
 
     static String getValidProjectTypesAsString() {
