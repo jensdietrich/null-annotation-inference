@@ -3,6 +3,12 @@
 ## observe nullability while exercising a program running its tests
 ## @author jens dietrich
 
+
+##
+## notes for building retrofit:
+## - use gradle, not gradlew -- known issue for using Java 19 custom at the time when experiments were conducted
+## - need to set ANDROID_SDK_ROOT for build to work, can be installed with AndroidStudio 
+
 . ./additional.env
 if [ ! -d "$PROJECT_FOLDER" ]; then
     echo "Project folder does not exist, fetch projects first: $PROJECT_FOLDER"

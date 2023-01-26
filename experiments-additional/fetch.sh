@@ -6,7 +6,6 @@
 
 . ./additional.env
 
-
 length=${#REPOS[@]}
 for (( i=0; i<${length}; i++ ));
 do
