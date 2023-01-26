@@ -9,11 +9,11 @@ if [ ! -d "$ANALYSES_FOLDER" ]; then
   echo "Analyses folder does not exit, creating folder: " $ANALYSES_FOLDER
   mkdir -p $ANALYSES_FOLDER
 else
-  echo "Built analyses will be copied " $ANALYSES_FOLDER
+  echo "Build analyses will be copied " $ANALYSES_FOLDER
 fi
 
 cd ..
-#mvn clean install
+mvn clean install
 
 cp nullannoinference-propagator/target/propagator.jar $PROPAGATOR
 cp nullannoinference-sanitizer/target/sanitizer.jar $SANITIZER
