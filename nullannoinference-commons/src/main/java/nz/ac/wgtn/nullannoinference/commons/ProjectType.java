@@ -22,6 +22,8 @@ public interface ProjectType {
     ProjectType MVN = new MavenProject();
     ProjectType GRADLE = new GradleProject();
     ProjectType MULTI_GRADLE = new MultiLanguageGradleProject();
+    ProjectType GUAVA = new GuavaProject();
+    ProjectType ERROR_PRONE = new ErrorProneProject();
 
     // implementation languages
     String LANG_JAVA = "java";
@@ -45,6 +47,12 @@ public interface ProjectType {
         }
         else if (name.equals(MultiLanguageGradleProject.TYPE)) {
             return MULTI_GRADLE;
+        }
+        else if (name.equals(GuavaProject.TYPE)) {
+            return GUAVA;
+        }
+        else if (name.equals(ERROR_PRONE.getType())) {
+            return ERROR_PRONE;
         }
         else {
             throw new IllegalArgumentException("Not known project type: " + name);

@@ -10,7 +10,8 @@ import java.util.List;
  * @author jens dietrich
  */
 public class ErrorProneProject implements ProjectType  {
-    public static final String TYPE = "special.guava";
+
+    public static final String TYPE = "special.errorprone";
 
     @Override
     public List<File> getCompiledMainClasses(File projectRoot) {
