@@ -5,7 +5,7 @@
 
 . ./additional.env
 
-OUTPUT=$RESULT_FOLDER_SANITIZEDD
+OUTPUT=$RESULT_FOLDER_SANITIZEDM
 INPUT=$RESULT_FOLDER_OBSERVED
 
 if [ ! -d "$INPUT" ]; then
@@ -25,7 +25,7 @@ cd ${PROJECT_FOLDER}/guava
 mvn compile
 cd ${ROOT}
 start=`date +%s`
-java -Xmx16g -jar $SANITIZER -d -i ${INPUT}/$NULLABLE-guava.json -p ${PROJECT_FOLDER}/guava -t special.guava -o ${OUTPUT}/$NULLABLE-guava.json -de ${OUTPUT}/deprecated-guava.txt
+java -Xmx16g -jar $SANITIZER -m -i ${INPUT}/$NULLABLE-guava.json -p ${PROJECT_FOLDER}/guava -t special.guava -o ${OUTPUT}/$NULLABLE-guava.json
 end=`date +%s`
 runtime=$((end-start))
 echo "$runtime" > ${OUTPUT}/runtime-guava.log
@@ -35,7 +35,7 @@ cd ${PROJECT_FOLDER}/error-prone
 mvn compile
 cd ${ROOT}
 start=`date +%s`
-java -Xmx16g -jar $SANITIZER -d -i ${INPUT}/$NULLABLE-error-prone.json -p ${PROJECT_FOLDER}/error-prone -t special.errorprone -o ${OUTPUT}/$NULLABLE-error-prone.json -de ${OUTPUT}/deprecated-error-prone.txt
+java -Xmx16g -jar $SANITIZER -m -i ${INPUT}/$NULLABLE-error-prone.json -p ${PROJECT_FOLDER}/error-prone -t special.errorprone -o ${OUTPUT}/$NULLABLE-error-prone.json
 end=`date +%s`
 runtime=$((end-start))
 echo "$runtime" > ${OUTPUT}/runtime-error-prone.log
