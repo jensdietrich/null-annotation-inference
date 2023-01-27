@@ -17,6 +17,15 @@ public class IdentifyNegativeTests {
     public static final String CSV_SEP = "\t";
     public static final Logger LOGGER = LogSystem.getLogger("negative-test-analysis");
 
+
+    public static void main(String[] args) throws Exception {
+        findNegativeTests(
+            ProjectType.ERROR_PRONE,
+            new File("/Users/jens/Development/null-annotation-inference/experiments-additional/projects/original/error-prone"),
+            new File("/Users/jens/Development/null-annotation-inference/experiments-additional/tmp/neg-tests-erroprone.txt")
+        );
+    }
+
     static void dumpNegativeTests(Collection<MethodInfo> negativeTests,File outputFile) {
         try (PrintWriter out = new PrintWriter(new FileWriter(outputFile))) {
             for (MethodInfo m:negativeTests) {
@@ -81,6 +90,11 @@ public class IdentifyNegativeTests {
                     super.visitMethodInsn(opcode, owner, name, descriptor, isInterface);
                     // method is overloaded -- catch all versions by ignoring descriptor
                     if ("org/junit/jupiter/api/Assertions".equals(owner) && "assertThrows".equals(name)) {
+                        methods.add(new MethodInfo(currentClass,currentMethodName,currentDescriptor));
+                    }
+
+                    // this was already defined in junit4 !
+                    if ("org/junit/Assert".equals(owner) && "assertThrows".equals(name)) {
                         methods.add(new MethodInfo(currentClass,currentMethodName,currentDescriptor));
                     }
 
