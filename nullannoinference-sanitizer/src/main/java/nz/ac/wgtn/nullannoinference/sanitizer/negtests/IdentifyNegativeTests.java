@@ -15,7 +15,7 @@ import java.util.*;
 public class IdentifyNegativeTests {
 
     public static final String CSV_SEP = "\t";
-    public static final Logger LOGGER = LogSystem.getLogger("negative-test-analysis")
+    public static final Logger LOGGER = LogSystem.getLogger("negative-test-analysis");
 
     static void dumpNegativeTests(Collection<MethodInfo> negativeTests,File outputFile) {
         try (PrintWriter out = new PrintWriter(new FileWriter(outputFile))) {
