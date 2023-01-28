@@ -82,7 +82,21 @@ public class ExtractNullableAnnotations {
             else {
                 this.currentMethodDescriptor = descriptor;
             }
+
+
+
             return new MethodVisitor(Opcodes.ASM9) {
+
+                @Override
+                public void visitAnnotableParameterCount(int parameterCount, boolean visible) {
+                    super.visitAnnotableParameterCount(parameterCount, visible);
+                }
+
+                @Override
+                public void visitParameter(String name, int access) {
+                    super.visitParameter(name, access);
+                }
+
                 @Override
                 public AnnotationVisitor visitAnnotation(String descriptor, boolean visible) {
                     if (isNullAnnotation.test(descriptor)) {
@@ -100,7 +114,33 @@ public class ExtractNullableAnnotations {
                         setupIssue(issue,descriptor);
                         issues.add(issue);
                     }
-                    return super.visitAnnotation(descriptor, visible);                }
+                    return super.visitAnnotation(descriptor, visible);
+                }
+
+                @Override
+                public AnnotationVisitor visitTypeAnnotation(int typeRef, TypePath typePath, String descriptor, boolean visible) {
+
+                    if (isNullAnnotation.test(descriptor)) {
+                        TypeReference ref = new TypeReference(typeRef);
+                        int sort = ref.getSort();
+                        if (sort==TypeReference.METHOD_RETURN) {
+                            Issue issue = new Issue(currentClassName, currentMethodName, currentMethodDescriptor, null, Issue.IssueType.RETURN_VALUE);
+                            setupIssue(issue, descriptor);
+                            issues.add(issue);
+                        }
+                        else if (sort==TypeReference.METHOD_FORMAL_PARAMETER) {
+                            // TODO: accurately identify parameter
+                            int argIndex = ref.getFormalParameterIndex();
+                            Issue issue = new Issue(currentClassName, currentMethodName, currentMethodDescriptor, null, Issue.IssueType.ARGUMENT,argIndex);
+                            setupIssue(issue, descriptor);
+                            issues.add(issue);
+                        }
+                    }
+
+
+
+                    return super.visitTypeAnnotation(typeRef, typePath, descriptor, visible);
+                }
             };
         }
 
@@ -121,7 +161,8 @@ public class ExtractNullableAnnotations {
 
                 @Override
                 public AnnotationVisitor visitTypeAnnotation(int typeRef, TypePath typePath, String descriptor, boolean visible) {
-                    if (isNullAnnotation.test(descriptor)) {
+                    int sort = new TypeReference(typeRef).getSort();
+                    if (isNullAnnotation.test(descriptor) && sort==TypeReference.FIELD) {
                         Issue issue = new Issue(currentClassName, currentFieldName, currentFieldDescriptor,null, Issue.IssueType.FIELD);
                         setupIssue(issue,descriptor);
                         issues.add(issue);
