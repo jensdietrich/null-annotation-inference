@@ -118,6 +118,16 @@ public class ExtractNullableAnnotations {
                     }
                     return super.visitAnnotation(descriptor, visible);
                 }
+
+                @Override
+                public AnnotationVisitor visitTypeAnnotation(int typeRef, TypePath typePath, String descriptor, boolean visible) {
+                    if (isNullAnnotation.test(descriptor)) {
+                        Issue issue = new Issue(currentClassName, currentFieldName, currentFieldDescriptor,null, Issue.IssueType.FIELD);
+                        setupIssue(issue,descriptor);
+                        issues.add(issue);
+                    }
+                    return super.visitTypeAnnotation(typeRef, typePath, descriptor, visible);
+                }
             };
         }
 
