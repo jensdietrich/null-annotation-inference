@@ -35,15 +35,15 @@ public abstract class Experiment {
         return true;
     }
 
-    protected static int countIssues(File folder, String moduleName, boolean aggregate)  {
+    protected static int countIssues(SearchPath folder, String moduleName, boolean aggregate)  {
         return countIssues(folder,moduleName,aggregate,issue -> true);
     }
 
 
     private static TypeAdapter<Issue> ISSUE_TYPE_ADAPTER = new Gson().getAdapter(Issue.class);
 
-    static Map<IssueKernel,Integer> readAndAggregateIssuesCountMinContextDepth(File folder, String moduleName)  {
-        File file = new File(folder,"nullable-"+moduleName+".json");
+    static Map<IssueKernel,Integer> readAndAggregateIssuesCountMinContextDepth(SearchPath searchPath, String moduleName)  {
+        File file = searchPath.getData(moduleName);
         try (JsonReader reader = new JsonReader(new FileReader(file))) {
             Map<IssueKernel, Integer> issues = new HashMap<>();
             reader.beginArray();
@@ -62,8 +62,8 @@ public abstract class Experiment {
         }
     }
 
-    protected static int countIssues(File folder, String moduleName, boolean aggregate, Predicate<Issue> filter)  {
-        File input = new File(folder,"nullable-"+moduleName+".json");
+    protected static int countIssues(SearchPath searchPath, String moduleName, boolean aggregate, Predicate<Issue> filter)  {
+        File input = searchPath.getData(moduleName);
         try {
             if (aggregate) {
                 return IssueIO.countAggregatedIssues(input,filter);
@@ -78,14 +78,14 @@ public abstract class Experiment {
         }
     }
 
-    protected static double compressionRatio(File folder, String moduleName)  {
-        double compressedCount = countIssues(folder,moduleName,true);
-        double uncompressedCount = countIssues(folder,moduleName,false);
+    protected static double compressionRatio(SearchPath searchPath, String moduleName)  {
+        double compressedCount = countIssues(searchPath,moduleName,true);
+        double uncompressedCount = countIssues(searchPath,moduleName,false);
         return compressedCount / uncompressedCount ;
     }
 
-    protected static Set<? extends AbstractIssue> readIssues(File folder, String moduleName, boolean aggregate)  {
-        return readIssues(folder,moduleName,aggregate, issue -> true);
+    protected static Set<? extends AbstractIssue> readIssues(SearchPath searchPath, String moduleName, boolean aggregate)  {
+        return readIssues(searchPath,moduleName,aggregate, issue -> true);
     }
 
     protected static Set<File> getFiles(File folder,Predicate<File> filter) {
@@ -116,8 +116,8 @@ public abstract class Experiment {
     private static File getIssueFile(File folder,String moduleName) {
         return new File(folder,"nullable-"+moduleName+".json");
     }
-    protected static Set<? extends AbstractIssue> readIssues(File folder, String moduleName, boolean aggregate, Predicate<? extends AbstractIssue> filter)  {
-        File file = getIssueFile(folder,moduleName);
+    protected static Set<? extends AbstractIssue> readIssues(SearchPath searchPath, String moduleName, boolean aggregate, Predicate<? extends AbstractIssue> filter)  {
+        File file = searchPath.getData(moduleName);
         Preconditions.checkState(file.exists());
         Set<Issue> issues = doReadIssues(file);
         if (aggregate) {
@@ -177,21 +177,21 @@ public abstract class Experiment {
 
     }
 
-    protected static double jaccardSimilarity(File folder1, File folder2,String moduleName,Predicate<? extends AbstractIssue> filter)  {
+    protected static double jaccardSimilarity(SearchPath searchPath1, SearchPath searchPath2,String moduleName,Predicate<? extends AbstractIssue> filter)  {
         // always work with aggregated sets !
-        Set<? extends AbstractIssue> set1 = readIssues(folder1,moduleName,true,filter);
-        Set<? extends AbstractIssue> set2 = readIssues(folder2,moduleName,true,filter);
+        Set<? extends AbstractIssue> set1 = readIssues(searchPath1,moduleName,true,filter);
+        Set<? extends AbstractIssue> set2 = readIssues(searchPath2,moduleName,true,filter);
         return ((double)Sets.intersection(set1,set2).size()) / ((double)Sets.union(set1,set2).size());
     }
 
-    protected static String diffMetrics(File folder1, File folder2,String moduleName)  {
-        return diffMetrics(folder1,folder2,moduleName,issue -> true);
+    protected static String diffMetrics(SearchPath searchPath1, SearchPath searchPath2,String moduleName)  {
+        return diffMetrics(searchPath1,searchPath2,moduleName,issue -> true);
     }
 
-    protected static String diffMetrics(File folder1, File folder2,String moduleName,Predicate<? extends AbstractIssue> filter)  {
+    protected static String diffMetrics(SearchPath searchPath1, SearchPath searchPath2,String moduleName,Predicate<? extends AbstractIssue> filter)  {
         // always work with aggregated sets !
-        Set<? extends AbstractIssue> set1 = readIssues(folder1,moduleName,true,filter);
-        Set<? extends AbstractIssue> set2 = readIssues(folder2,moduleName,true,filter);
+        Set<? extends AbstractIssue> set1 = readIssues(searchPath1,moduleName,true,filter);
+        Set<? extends AbstractIssue> set2 = readIssues(searchPath2,moduleName,true,filter);
         double symDiff =  ((double)Sets.intersection(set1,set2).size()) / ((double)Sets.union(set1,set2).size());
         double diffLeftMRight =  ((double)Sets.difference(set1,set2).size()) / ((double)set1.size());
         double diffRightMLeft =  ((double)Sets.difference(set2,set1).size()) / ((double)set2.size());
@@ -200,19 +200,19 @@ public abstract class Experiment {
     }
 
 
-    protected static String recallPrecision(File folder1, File folder2, String moduleName)  {
-        return recallPrecision(folder1,folder2,moduleName, issue -> true);
+    protected static String recallPrecision(SearchPath searchPath1, SearchPath searchPath2, String moduleName)  {
+        return recallPrecision(searchPath1,searchPath2,moduleName, issue -> true);
     }
 
-    protected static String recallPrecision(File folder1, File folder2, String moduleName, Predicate<Issue> filter)  {
-        return recallPrecision(folder1,folder2,moduleName,filter,filter);
+    protected static String recallPrecision(SearchPath searchPath1, SearchPath searchPath2, String moduleName, Predicate<Issue> filter)  {
+        return recallPrecision(searchPath1,searchPath2,moduleName,filter,filter);
     }
 
-    protected static String recallPrecision(File folder1, File folder2, String moduleName, Predicate<Issue> filter1, Predicate<Issue> filter2)  {
+    protected static String recallPrecision(SearchPath searchPath1, SearchPath searchPath2, String moduleName, Predicate<Issue> filter1, Predicate<Issue> filter2)  {
         // always work with aggregated sets !
         try {
-            Set<IssueKernel> set1 = IssueIO.readAndAggregateIssues(getIssueFile(folder1, moduleName), filter1).keySet();
-            Set<IssueKernel> set2 = IssueIO.readAndAggregateIssues(getIssueFile(folder2, moduleName), filter2).keySet();
+            Set<IssueKernel> set1 = IssueIO.readAndAggregateIssues(searchPath1.getData(moduleName), filter1).keySet();
+            Set<IssueKernel> set2 = IssueIO.readAndAggregateIssues(searchPath2.getData(moduleName), filter2).keySet();
             int TP = Sets.intersection(set1, set2).size();
             int FP = Sets.difference(set2, set1).size();
             int FN = Sets.difference(set1, set2).size();
@@ -227,8 +227,8 @@ public abstract class Experiment {
     }
 
 
-    protected static double jaccardSimilarity(File folder1, File folder2,String moduleName)  {
-        return jaccardSimilarity(folder1,folder2,moduleName,issue -> true);
+    protected static double jaccardSimilarity(SearchPath searchPath1, SearchPath searchPath2,String moduleName)  {
+        return jaccardSimilarity(searchPath1,searchPath2,moduleName,issue -> true);
     }
 
     protected void run(List<String> dataset, String caption, String label, Column[] columns, TableGenerator... output) {
@@ -268,6 +268,5 @@ public abstract class Experiment {
                 LOGGER.error("error writing file " + out.getOutput().getAbsolutePath(),x );
             }
         }
-
     }
 }

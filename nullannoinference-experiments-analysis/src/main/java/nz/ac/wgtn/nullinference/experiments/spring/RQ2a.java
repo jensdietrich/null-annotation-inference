@@ -96,7 +96,7 @@ public class RQ2a extends Experiment {
         TableGenerator csvOutput = new CSVTableGenerator(OUTPUT_CSV);
         TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrrrrr|");
 
-        this.run(SPRING_MODULES,"RQ2a -- observed issues after applying sanitisers (base -- no sanitisation applied, " + SANITIZER_NAMES + ")","tab:rq2a",columns,csvOutput,latexOutput);
+        this.run(FULL_DATESET,"RQ2a -- observed issues after applying sanitisers (base -- no sanitisation applied, " + SANITIZER_NAMES + ")","tab:rq2a",columns,csvOutput,latexOutput);
 
     }
 }

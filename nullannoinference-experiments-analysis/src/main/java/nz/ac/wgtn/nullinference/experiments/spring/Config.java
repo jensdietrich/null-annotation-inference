@@ -7,6 +7,8 @@ import nz.ac.wgtn.nullannoinference.commons.IssueKernel;
 import java.io.File;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Experiment configurations.
@@ -24,22 +26,40 @@ public class Config {
         "spring-webmvc"
     );
 
-    public static final File EXTRACTED_ISSUES_FOLDER = new File("experiments-spring/results/extracted");
-    public static final File EXTRACTED_FROM_REANNOTATED_ISSUES_FOLDER = new File("experiments-spring/results/extracted-reannotated");
-    public static final File EXTRACTED_PLUS_ISSUES_FOLDER = new File("experiments-spring/results/extracted+");
-    public static final File OBSERVED_ISSUES_FOLDER = new File("experiments-spring/results/observed");
-    public static final File OBSERVED_AND_PROPAGATED_ISSUES_FOLDER = new File("experiments-spring/results/observed+");
+    public static final List<String> ADDITIONAL_PROGRAMS = List.of(
+        "guava",
+        "error-prone"
+    );
 
-    public static final File OBSERVED_AND_PROPAGATED_SANITIZED_ISSUES_FOLDER = new File("experiments-spring/results/observed++");
+    public static final List<String> FULL_DATESET = Stream.concat(
+        SPRING_MODULES.stream(),ADDITIONAL_PROGRAMS.stream()
+    ).collect(Collectors.toList());
 
+    public static final File SPRING_RESULTS = new File("experiments-spring/results/");
+    public static final File ADDITIONAL_RESULTS = new File("experiments-additional/results/");
 
-    public static final File SANITIZED_ISSUES_FOLDER = new File("experiments-spring/results/sanitized");
-    public static final File SANITIZED_ISSUES_DEPRECATED_FOLDER = new File("experiments-spring/results/sanitizedD");
-    public static final File SANITIZED_ISSUES_MAINSCOPE_FOLDER = new File("experiments-spring/results/sanitizedM");
+    private static File[] getResultFolders(String name) {
+        return new File[] {
+            new File(SPRING_RESULTS,name),
+            new File(ADDITIONAL_RESULTS,name)
+        };
+    };
 
-    public static final File SANITIZED_ISSUES_NONPRIVATEMETHODS_FOLDER = new File("experiments-spring/results/sanitizedP");
-    public static final File SANITIZED_ISSUES_NEGATIVETESTS_FOLDER = new File("experiments-spring/results/sanitizedN");
-    public static final File SANITIZED_ISSUES_SHADED_FOLDER = new File("experiments-spring/results/sanitizedS");
+    public static final SearchPath EXTRACTED_ISSUES_FOLDER = SearchPath.of(getResultFolders("extracted"));
+    public static final SearchPath EXTRACTED_FROM_REANNOTATED_ISSUES_FOLDER = SearchPath.of(getResultFolders("extracted-reannotated"));
+    public static final SearchPath EXTRACTED_PLUS_ISSUES_FOLDER = SearchPath.of(getResultFolders("extracted+"));
+    public static final SearchPath OBSERVED_ISSUES_FOLDER = SearchPath.of(getResultFolders("observed"));
+    public static final SearchPath OBSERVED_AND_PROPAGATED_ISSUES_FOLDER = SearchPath.of(getResultFolders("observed+"));
+
+    public static final SearchPath OBSERVED_AND_PROPAGATED_SANITIZED_ISSUES_FOLDER = SearchPath.of(getResultFolders("observed++"));
+
+    public static final SearchPath SANITIZED_ISSUES_FOLDER = SearchPath.of(getResultFolders("sanitized"));
+    public static final SearchPath SANITIZED_ISSUES_DEPRECATED_FOLDER = SearchPath.of(getResultFolders("sanitizedD"));
+    public static final SearchPath SANITIZED_ISSUES_MAINSCOPE_FOLDER = SearchPath.of(getResultFolders("sanitizedM"));
+
+    public static final SearchPath SANITIZED_ISSUES_NONPRIVATEMETHODS_FOLDER = SearchPath.of(getResultFolders("sanitizedP"));
+    public static final SearchPath SANITIZED_ISSUES_NEGATIVETESTS_FOLDER = SearchPath.of(getResultFolders("sanitizedN"));
+    public static final SearchPath SANITIZED_ISSUES_SHADED_FOLDER = SearchPath.of(getResultFolders("sanitizedS"));
 
     public static final String SANITIZER_NAMES = "D - deprecation, M - main scope, N - negative tests, S - shading";
 

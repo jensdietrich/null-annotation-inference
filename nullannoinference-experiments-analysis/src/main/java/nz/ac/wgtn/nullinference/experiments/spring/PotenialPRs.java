@@ -83,7 +83,7 @@ public class PotenialPRs extends Experiment {
 
     }
 
-    private static String annotationsToAdd(File existing, File inferred, String moduleName, Predicate<? extends AbstractIssue> filter) {
+    private static String annotationsToAdd(SearchPath existing, SearchPath inferred, String moduleName, Predicate<? extends AbstractIssue> filter) {
          Set<IssueKernel> existingIssues = (Set<IssueKernel>)readIssues(existing,moduleName,true,filter);
          Set<IssueKernel> inferredIssues = (Set<IssueKernel>)readIssues(inferred,moduleName,true,filter);
          Set<IssueKernel> newIssues = Sets.difference(inferredIssues,existingIssues);

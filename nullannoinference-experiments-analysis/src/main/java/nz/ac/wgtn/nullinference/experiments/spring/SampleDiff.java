@@ -8,6 +8,7 @@ import com.google.gson.GsonBuilder;
 import nz.ac.wgtn.nullannoinference.commons.*;
 import nz.ac.wgtn.nullinference.experiments.descr.DescriptorParser;
 
+import javax.security.auth.callback.ConfirmationCallback;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -54,8 +55,8 @@ public class SampleDiff extends Experiment {
 
     public void analyse()  {
 
-        Set<Issue> extractedIssues = (Set<Issue>) readIssues(EXTRACTED_FOLDER, MODULE, false);
-        Set<Issue> observedIssues = (Set<Issue>) readIssues(OBSERVED_FOLDER, MODULE, false);
+        Set<Issue> extractedIssues = (Set<Issue>) readIssues(Config.EXTRACTED_ISSUES_FOLDER, MODULE, false);
+        Set<Issue> observedIssues = (Set<Issue>) readIssues(Config.OBSERVED_ISSUES_FOLDER, MODULE, false);
 
         Map<IssueKernel,Set<Issue>> extractedIssueAggregation = IssueAggregator.aggregateAsMap(extractedIssues);
         Map<IssueKernel,Set<Issue>> observedIssueAggregation = IssueAggregator.aggregateAsMap(observedIssues);

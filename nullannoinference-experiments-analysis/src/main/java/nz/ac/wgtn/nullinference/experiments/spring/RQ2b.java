@@ -78,7 +78,7 @@ public class RQ2b extends Experiment {
         TableGenerator csvOutput = new CSVTableGenerator(OUTPUT_CSV);
         TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrrrr|");
 
-        this.run(SPRING_MODULES,
+        this.run(FULL_DATESET,
                 "RQ2b -- precision and recall w.r.t. existing annotations after applying sanitisers (" + SANITIZER_NAMES + ")",
                 "tab:rq2b",columns,csvOutput,latexOutput);
 
