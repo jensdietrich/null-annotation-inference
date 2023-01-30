@@ -26,7 +26,10 @@ public class ExtractNullableAnnotations {
 
     public static Set<Issue> findNullAnnotated(ProjectType project, File projectFolder) {
         // default filter -- look for all annotations containing "Nullable"
-        Predicate<String> filter = n -> n.toLowerCase().contains("nullable");
+        Predicate<String> filter = n -> {
+            String lc = n.toLowerCase();
+            return lc.contains("nullable") || lc.contains("checkfornull") ;
+        };
         return findNullAnnotated(project,projectFolder,filter);
     }
     public static Set<Issue> findNullAnnotated(ProjectType project, File projectFolder, Predicate<String> isDescriptorForNullAnnotation) {
