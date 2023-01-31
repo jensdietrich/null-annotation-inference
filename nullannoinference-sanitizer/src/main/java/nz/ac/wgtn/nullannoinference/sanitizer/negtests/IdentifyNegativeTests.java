@@ -29,7 +29,7 @@ public class IdentifyNegativeTests {
                 out.println();
             }
         } catch (IOException x) {
-            LOGGER.error("error writting negative tests to " + outputFile.getAbsolutePath(),x);
+            LOGGER.error("error writing negative tests to " + outputFile.getAbsolutePath(),x);
         }
 
         LOGGER.info("Analysis results written to " + outputFile.getAbsolutePath());
@@ -99,6 +99,11 @@ public class IdentifyNegativeTests {
                         }
                     }
                     if (owner.startsWith("org/assertj/core/api/") && owner.contains("Throwable") && owner.contains("Assert")) {
+                        methods.add(new MethodInfo(currentClass,currentMethodName,currentDescriptor));
+                    }
+
+                    // special patterns for the guava nullable testing utility
+                    if (owner.equals("com/google/common/testing/NullPointerTester")) {
                         methods.add(new MethodInfo(currentClass,currentMethodName,currentDescriptor));
                     }
                 }

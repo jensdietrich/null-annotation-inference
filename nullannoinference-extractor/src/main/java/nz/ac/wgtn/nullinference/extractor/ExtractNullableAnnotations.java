@@ -28,7 +28,7 @@ public class ExtractNullableAnnotations {
         // default filter -- look for all annotations containing "Nullable"
         Predicate<String> filter = n -> {
             String lc = n.toLowerCase();
-            return lc.contains("nullable") || lc.contains("checkfornull") ;
+            return lc.contains("nullable") || lc.contains("checkfornull") || lc.contains("parametricnullness");
         };
         return findNullAnnotated(project,projectFolder,filter);
     }

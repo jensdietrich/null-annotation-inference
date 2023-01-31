@@ -76,6 +76,5 @@ public class ExtractPrivateMethods {
             else if ((access & Opcodes.ACC_PROTECTED) != 0) return false;
             else return true;
         }
-
     }
 }
