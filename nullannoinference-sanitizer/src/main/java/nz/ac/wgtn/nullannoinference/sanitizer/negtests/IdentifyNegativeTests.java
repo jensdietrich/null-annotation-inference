@@ -75,6 +75,22 @@ public class IdentifyNegativeTests {
                 private String currentMethodName = name;
                 private String currentDescriptor = descriptor;
                 private boolean isJunit4TestAnnotated = false;
+                private Label endOfTryBlock = null;
+
+                // simple analysis -- does not handle nested try-catch -- unlikely to occur in test cases
+                @Override
+                public void visitTryCatchBlock(Label start, Label end, Label handler, String type) {
+                    super.visitTryCatchBlock(start, end, handler, type);
+                    endOfTryBlock = end;
+                }
+
+                @Override
+                public void visitLabel(Label label) {
+                    super.visitLabel(label);
+                    if (label==endOfTryBlock) {
+                        endOfTryBlock = null;
+                    }
+                }
 
                 @Override
                 public void visitMethodInsn(int opcode, String owner, String name, String descriptor, boolean isInterface) {
@@ -106,6 +122,13 @@ public class IdentifyNegativeTests {
                     if (owner.equals("com/google/common/testing/NullPointerTester")) {
                         methods.add(new MethodInfo(currentClass,currentMethodName,currentDescriptor));
                     }
+
+                    // simple code patterns where fail() call occurs in try block
+                    // support both junit4 and junit5
+                    if (endOfTryBlock!=null && name.equals("fail") && (owner.equals("org/junit/Assert") || owner.equals("org/junit/jupiter/api/Assertions"))) {
+                        methods.add(new MethodInfo(currentClass,currentMethodName,currentDescriptor));
+                    }
+
                 }
 
                 @Override
