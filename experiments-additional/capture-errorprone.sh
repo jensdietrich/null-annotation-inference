@@ -48,7 +48,7 @@ start=`date +%s`
 mvn clean test -Dmaven.test.failure.ignore=true -Dmaven.test.error.ignore=true
 end=`date +%s`
 runtime=$((end-start))
-echo "$runtime" > $RESULT_FOLDER_OBSERVED/capture-runtime-${NAMES[$i]}.log
+echo "$runtime" > $RESULT_FOLDER_OBSERVED/capture-runtime-${NAME}.log
 
 echo "merging results"
 java -Xmx20g -jar $MERGER -i ${INSTRUMENTED_PROJECT_FOLDER}/core -o ${RESULT_FOLDER_OBSERVED}/${NULLABLE}-${NAME}.json

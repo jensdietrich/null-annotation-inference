@@ -40,7 +40,12 @@ done
 
 # run tests with instrumentation
 cd $PROJECT_FOLDER_INSTRUMENTED_ROOT/$NAME
+start=`date +%s`
 ./gradlew clean build --continue --no-build-cache
+end=`date +%s`
+runtime=$((end-start))
+echo "$runtime" > $RESULT_FOLDER_OBSERVED/capture-runtime-spring.log
+
 
 # merge issues collected into a single file, copy in result folder
 for module in "${MODULES[@]}" ;do
