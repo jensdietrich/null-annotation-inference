@@ -19,7 +19,7 @@ Several sh scripts can be used to run the processing pipeline. Thiose script con
 7. `sanitizeS.sh` applies the shading sanitiser to the captured issues
 8. `sanitize-all.sh` applies all of the previous sanitisers to the captured issues
 9. `propagate-observed.sh` applies propagation to the captured and sanitised issues
-10. `sanitize-observed-and-propagated.sh` applies sanitisation to already sanitised and then propagated issues, assessing fix-poimnt like properties
+10. `sanitize-observed-and-propagated.sh` applies sanitisation to already sanitised and then propagated issues, assessing fix-point like properties
 
 ## Testing the Annotator
 

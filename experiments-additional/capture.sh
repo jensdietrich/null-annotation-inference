@@ -4,4 +4,4 @@
 ## @author jens dietrich
 
 ./capture-guava.sh
-./capture-error-prone.sh
+./capture-errorprone.sh
