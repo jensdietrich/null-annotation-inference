@@ -1,0 +1,17 @@
+[
+  {
+    "className": "org.springframework.oxm.jaxb.Jaxb2Marshaller",
+    "methodName": "packagesToScan",
+    "descriptor": "[Ljava/lang/String;",
+    "kind": "FIELD",
+    "provenanceType": "OBSERVED",
+    "argsIndex": -1,
+    "context": "springframework-oxm",
+    "stacktrace": [
+      "org.springframework.oxm.jaxb.Jaxb2Marshaller::\u003cinit\u003e:200",
+      "org.springframework.oxm.jaxb.Jaxb2MarshallerTests$2::\u003cinit\u003e:345",
+      "org.springframework.oxm.jaxb.Jaxb2MarshallerTests::unmarshalSaxSourceWithXmlOptions:345"
+    ],
+    "scope": "UNKNOWN"
+  }
+]

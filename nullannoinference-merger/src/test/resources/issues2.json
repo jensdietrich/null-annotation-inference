@@ -1,0 +1,19 @@
+[
+  {
+    "className": "org.springframework.oxm.xstream.XStreamMarshaller",
+    "methodName": "marshalWriter",
+    "descriptor": "(Ljava/lang/Object;Ljava/io/Writer;Lcom/thoughtworks/xstream/converters/DataHolder;)V",
+    "kind": "ARGUMENT",
+    "provenanceType": "OBSERVED",
+    "argsIndex": 2,
+    "context": "springframework-oxm",
+    "stacktrace": [
+      "org.springframework.oxm.xstream.XStreamMarshaller::marshalWriter:747",
+      "org.springframework.oxm.xstream.XStreamMarshaller::marshalWriter:741",
+      "org.springframework.oxm.support.AbstractMarshaller::marshalStreamResult:325",
+      "org.springframework.oxm.support.AbstractMarshaller::marshal:242",
+      "org.springframework.oxm.xstream.XStreamMarshallerTests::implicitCollections:327"
+    ],
+    "scope": "UNKNOWN"
+  }
+]
