@@ -36,7 +36,7 @@ fi
 # copy agents
 echo "copying agents"
 cp $AGENT2 $INSTRUMENTED_PROJECT_FOLDER/core
-cp $AGENT_NOBB $INSTRUMENTED_PROJECT_FOLDER/core
+cp $AGENT $INSTRUMENTED_PROJECT_FOLDER/core
 
 echo "cleaning old issues"
 rm $INSTRUMENTED_PROJECT_FOLDER/core/null-*.json

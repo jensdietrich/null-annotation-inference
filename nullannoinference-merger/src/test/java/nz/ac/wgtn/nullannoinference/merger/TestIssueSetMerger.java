@@ -1,15 +1,13 @@
 package nz.ac.wgtn.nullannoinference.merger;
 
-import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
 import nz.ac.wgtn.nullannoinference.commonsio.IssueIO;
-import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.FileReader;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
@@ -24,7 +22,7 @@ public class TestIssueSetMerger {
         File issueFile2 = new File(resourceFolder,"issues2.json");
         assumeTrue(issueFile1.exists());
         assumeTrue(issueFile2.exists());
-        File mergedIssueFile = new File(resourceFolder,"merged.json");
+        File mergedIssueFile = new File("tmp.json");
 
         IssueSetMerger.main(new String[]{"-i",issueFile1.getAbsolutePath()+","+issueFile2.getAbsolutePath(),"-o",mergedIssueFile.getAbsolutePath()});
 
@@ -66,4 +64,9 @@ public class TestIssueSetMerger {
         assertEquals(issue2.getStacktrace(),mergedIssues.get(1).getStacktrace());
 
     }
+
+//    @AfterEach
+//    public void cleanup () {
+//        new File("tmp.json").deleteOnExit();
+//    }
 }

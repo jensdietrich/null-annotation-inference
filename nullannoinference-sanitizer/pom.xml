@@ -91,5 +91,11 @@
       <artifactId>nullannoinference-commons</artifactId>
       <version>[0.0.1,)</version>
     </dependency>
+      <dependency>
+          <groupId>nz.ac.wgtn.nullannoinference</groupId>
+          <artifactId>nullannoinference-commons-io</artifactId>
+          <version>0.0.1</version>
+          <scope>compile</scope>
+      </dependency>
   </dependencies>
 </project>

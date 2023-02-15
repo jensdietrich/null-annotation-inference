@@ -225,7 +225,7 @@
             --add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED
             --add-opens=java.base/java.math=ALL-UNNAMED
             --add-opens=java.base/java.nio=ALL-UNNAMED
-            -javaagent:nullannoinference-agent-nobb.jar -javaagent:nullannoinference-agent2.jar -Dnz.ac.wgtn.nullannoinference.includes=com.google.errorprone -Dnz.ac.wgtn.nullannoinference.context=com.google.errorprone
+            -javaagent:nullannoinference-agent.jar -javaagent:nullannoinference-agent2.jar -Dnz.ac.wgtn.nullannoinference.includes=com.google.errorprone -Dnz.ac.wgtn.nullannoinference.context=com.google.errorprone
           </argLine>
           <trimStackTrace>false</trimStackTrace>
         </configuration>

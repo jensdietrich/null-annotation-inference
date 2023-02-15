@@ -53,11 +53,17 @@ public class NullLoggerAgent {
                     public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder, TypeDescription typeDescription, ClassLoader classLoader, JavaModule javaModule) {
                         return builder.visit(NullChecks.MethodWithoutReturnValues.VISITOR);
                     }
+                    public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder, TypeDescription typeDescription, ClassLoader classLoader, JavaModule javaModule,ProtectionDomain pd) {
+                        return builder.visit(NullChecks.MethodWithoutReturnValues.VISITOR);
+                    }
                 }
             )
             .transform(
                 new AgentBuilder.Transformer() {
                     public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder, TypeDescription typeDescription, ClassLoader classLoader, JavaModule javaModule) {
+                        return builder.visit(NullChecks.MethodWithReturnValues.VISITOR);
+                    }
+                    public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder, TypeDescription typeDescription, ClassLoader classLoader, JavaModule javaModule,ProtectionDomain pd) {
                         return builder.visit(NullChecks.MethodWithReturnValues.VISITOR);
                     }
                 }
@@ -67,11 +73,17 @@ public class NullLoggerAgent {
                     public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder, TypeDescription typeDescription, ClassLoader classLoader, JavaModule javaModule) {
                         return builder.visit(NullChecks.Constructors.VISITOR);
                     }
+                    public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder, TypeDescription typeDescription, ClassLoader classLoader, JavaModule javaModule, ProtectionDomain pd) {
+                        return builder.visit(NullChecks.Constructors.VISITOR);
+                    }
                 }
             )
             .transform(
                 new AgentBuilder.Transformer() {
                     public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder, TypeDescription typeDescription, ClassLoader classLoader, JavaModule javaModule) {
+                        return builder.visit(NullChecks.StaticBlocks.VISITOR);
+                    }
+                    public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder, TypeDescription typeDescription, ClassLoader classLoader, JavaModule javaModule,ProtectionDomain pd) {
                         return builder.visit(NullChecks.StaticBlocks.VISITOR);
                     }
                 }

@@ -30,11 +30,7 @@ public abstract class Experiment {
 
     private static Map<File,Set<Issue>> ISSUE_CACHE = new HashMap<>();
     private static Map<File,Set<ShadingSpec>> SHADING_SPEC_CACHE = new HashMap<>();
-
-    public boolean aggregateIssues () {
-        return true;
-    }
-
+    
     protected static int countIssues(SearchPath folder, String moduleName, boolean aggregate)  {
         return countIssues(folder,moduleName,aggregate,issue -> true);
     }

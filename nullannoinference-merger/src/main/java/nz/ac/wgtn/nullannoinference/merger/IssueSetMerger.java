@@ -9,8 +9,9 @@ import org.apache.commons.cli.*;
 import org.apache.logging.log4j.Logger;
 import java.io.*;
 import java.lang.reflect.Type;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Utility to merge issue sets.
@@ -49,35 +50,46 @@ public class IssueSetMerger {
         File output = new File(cmd.getOptionValue("output"));
 
         String[] inputNames2 = inputNames.split(",");
-        Set<Issue> issues = new HashSet<>();
-        for (String issueName:inputNames2) {
-            File input = new File(issueName);
-            Preconditions.checkState(input.exists(),"File does not exist: " + input.getAbsolutePath());
-            if (input.isDirectory()) {
-                for (File f:input.listFiles(n -> n.getName().toLowerCase().endsWith(".json"))) {
-                    parseIssues(f,issues);
+        AtomicInteger counter = new AtomicInteger();
+        try (Writer out = new FileWriter(output);) {
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            out.write("[");
+            out.write(System.lineSeparator());
+            AtomicBoolean firstObjectWritten = new AtomicBoolean(false);
+            for (String issueName : inputNames2) {
+                File input = new File(issueName);
+                Preconditions.checkState(input.exists(), "File does not exist: " + input.getAbsolutePath());
+                if (input.isDirectory()) {
+                    for (File f : input.listFiles(n -> n.getName().toLowerCase().endsWith(".json"))) {
+                        parseIssues(f, gson,out,counter,firstObjectWritten);
+                    }
+                } else {
+                    parseIssues(input, gson,out,counter,firstObjectWritten);
                 }
             }
-            else {
-                parseIssues(input,issues);
-            }
-        }
-
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        try (FileWriter out = new FileWriter(output)) {
-            gson.toJson(issues,out);
+            out.write(System.lineSeparator());
+            out.write("]");
         }
         catch (Exception x) {
             LOGGER.error("Error writing issues to file " + output.getAbsolutePath(),x);
         }
-        LOGGER.info(issues.size() + " issues merged and exported to " + output.getAbsolutePath());
+        LOGGER.info(counter + " issues merged and exported to " + output.getAbsolutePath());
     }
 
-    private static void parseIssues(File input, Set<Issue> issues) {
-        Gson gson = new Gson();
+    private static void parseIssues(File input, Gson gson,Writer out, AtomicInteger counter,AtomicBoolean firstObjectWritten) {
         try (FileReader in = new FileReader(input)) {
             Set<Issue> issues2 = gson.fromJson(in,ISSUE_SET_TYPE);
-            issues.addAll(issues2);
+            for (Issue issue:issues2) {
+                if (firstObjectWritten.get()) {
+                    out.write(',');
+                    out.write(System.lineSeparator());
+                }
+                else {
+                    firstObjectWritten.set(true);
+                }
+                gson.toJson(issue,out);
+                counter.incrementAndGet();
+            }
             LOGGER.info(issues2.size() + " issues read from " + input.getAbsolutePath() + " and merged");
         }
         catch (Exception x) {

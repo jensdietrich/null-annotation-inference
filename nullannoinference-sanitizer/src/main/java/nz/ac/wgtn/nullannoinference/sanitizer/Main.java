@@ -1,11 +1,13 @@
 package nz.ac.wgtn.nullannoinference.sanitizer;
 
 import com.google.common.base.Preconditions;
+import com.google.common.base.Predicate;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
 import nz.ac.wgtn.nullannoinference.commons.ProjectType;
+import nz.ac.wgtn.nullannoinference.commonsio.IssueIO;
 import nz.ac.wgtn.nullannoinference.sanitizer.deprecation.DeprecatedElementsSanitizer;
 import nz.ac.wgtn.nullannoinference.sanitizer.mainscope.MainScopeSanitizer;
 import nz.ac.wgtn.nullannoinference.sanitizer.negtests.NegativeTestSanitizer;
@@ -13,13 +15,15 @@ import nz.ac.wgtn.nullannoinference.sanitizer.nonprivate.PrivateMethodSanitizer;
 import nz.ac.wgtn.nullannoinference.sanitizer.shaded.ShadingSanitizer;
 import org.apache.commons.cli.*;
 import org.apache.logging.log4j.Logger;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.Writer;
+
+import java.io.*;
 import java.lang.reflect.Type;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+
+import static nz.ac.wgtn.nullannoinference.sanitizer.Sanitizer.SANITIZATION_SANITIZER_KEY;
+import static nz.ac.wgtn.nullannoinference.sanitizer.Sanitizer.SANITIZATION_VALUE_KEY;
 
 /**
  * Main class, entry point for executable jar that is being built.
@@ -122,20 +126,6 @@ public class Main {
         }
         LOGGER.info("sanitised issues will be saved in: " + sanitisedIssuesFile.getAbsolutePath());
 
-        // load unsanitized issues
-
-
-        Gson gson = new Gson();
-        Set<Issue> issues = null;
-        try (FileReader in = new FileReader(inputFile)) {
-            issues = gson.fromJson(in,ISSUE_SET_TYPE);
-            LOGGER.info(issues.size() + " issues read from " + inputFile.getAbsolutePath());
-        }
-        catch (Exception x) {
-            LOGGER.error("Error reading issues from file " + inputFile.getAbsolutePath(),x);
-        }
-
-
         Sanitizer<Issue> sanitizer = Sanitizer.ALL;
         if (removeIssuesNotInMain) {
             MainScopeSanitizer mainScopeSanitizer = new MainScopeSanitizer(projectType, projectFolder);
@@ -171,28 +161,30 @@ public class Main {
         Sanitizer<Issue> sanitizer2 = sanitizer;
 
         LOGGER.info("using combined sanitizer: " + sanitizer2.name());
-
-        Set<Issue> sanitisedIssues = issues.parallelStream()
-            .filter(issue -> Sanitizer.sanitize(issue,sanitizer2))
-            .collect(Collectors.toSet());
-
         LOGGER.info("sanitizer applied: " + sanitizer2.name());
-        LOGGER.info("issues sanitized: " + sanitisedIssues.size() + " / " + issues.size());
 
-        gson = new GsonBuilder().setPrettyPrinting().create();
         // even if empty, write file
         LOGGER.info("\twriting sanitised set to " + sanitisedIssuesFile.getAbsolutePath());
         if (!sanitisedIssuesFile.getParentFile().exists()) {
             sanitisedIssuesFile.getParentFile().mkdirs();
         }
 
-        try (Writer out = new FileWriter(sanitisedIssuesFile)) {
-            gson.toJson(sanitisedIssues, out);
-        }
-        catch (Exception x) {
-            LOGGER.error("Error writing issues to " + sanitisedIssuesFile.getAbsolutePath());
-        }
+        AtomicInteger counter1 = new AtomicInteger();
+        AtomicInteger counter2 = new AtomicInteger();
+        Predicate<Issue> filter = issue -> {
+            counter1.incrementAndGet();
+            boolean result = sanitizer2.test(issue);
+            // add provenance
+            if (result) {
+                issue.setProperty(SANITIZATION_VALUE_KEY, "" + result);
+                issue.setProperty(SANITIZATION_SANITIZER_KEY, sanitizer2.name());
+                counter2.incrementAndGet();
+            }
+            return result;
+        };
+
+        IssueIO.applyFilter(inputFile,sanitisedIssuesFile,filter);
+        LOGGER.info("issues sanitized: " + counter2.get() + " / " + counter1.get());
 
     }
-
 }
