@@ -48,6 +48,10 @@ public class NullLoggerAgent {
             // .with(AgentBuilder.Listener.StreamWriting.toSystemError())
             .ignore(nameStartsWith("net.bytebuddy.").or(nameStartsWith("java.").or(nameStartsWith("javax.").or(nameStartsWith("sun.")).or(nameStartsWith("com.sun.")))))
             .type(matcher)
+
+             // note: the transform methods are overloaded to account for API changes in transform (the last ProtectionDomain parameter was added between 1.10.20 and 1.12.16)
+             // this will make it possible to work with different versions of bytebuddy when we cannot control the classpath
+             // note that bytebuddy dependencies are common in the wild, through indirect dependencies via mockito
             .transform(
                 new AgentBuilder.Transformer() {
                     public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder, TypeDescription typeDescription, ClassLoader classLoader, JavaModule javaModule) {
