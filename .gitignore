@@ -35,3 +35,8 @@ nullannoinference-commons-io/target
 experiments-jastaddj/inferred
 experiments-additional/analyses
 experiments-jastaddj/analyses
+experiments-additional/results
+log.csv
+experiments-jastaddj/results
+**/inputFiles.lst
+**/createdFiles.lst
