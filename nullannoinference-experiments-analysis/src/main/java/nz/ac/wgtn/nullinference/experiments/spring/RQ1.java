@@ -2,7 +2,7 @@ package nz.ac.wgtn.nullinference.experiments.spring;
 
 import nz.ac.wgtn.nullinference.experiments.Utils;
 import java.io.File;
-import static nz.ac.wgtn.nullinference.experiments.spring.Config.SPRING_MODULES;
+
 import static nz.ac.wgtn.nullinference.experiments.spring.Config.*;
 
 /**
@@ -77,7 +77,7 @@ public class RQ1 extends Experiment {
         TableGenerator csvOutput = new CSVTableGenerator(OUTPUT_CSV);
         TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrrrr|");
 
-        this.run(FULL_DATESET,"RQ1 - existing (ex) vs observed (obs) issues, also reported are the aggregation of observed issues (agg), aggregation ratios (agg/obs) and recall / precision (r,p)","tab:rq1",columns,csvOutput,latexOutput);
+        this.run(FULL_DATASET,"RQ1 - existing (ex) vs observed (obs) issues, also reported are the aggregation of observed issues (agg), aggregation ratios (agg/obs) and recall / precision (r,p)","tab:rq1",columns,csvOutput,latexOutput);
 
     }
 

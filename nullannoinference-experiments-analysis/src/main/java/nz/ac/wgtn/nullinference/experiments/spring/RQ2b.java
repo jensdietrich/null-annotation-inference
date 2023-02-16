@@ -2,7 +2,7 @@ package nz.ac.wgtn.nullinference.experiments.spring;
 
 import java.io.File;
 import java.io.IOException;
-import static nz.ac.wgtn.nullinference.experiments.spring.Config.SPRING_MODULES;
+
 import static nz.ac.wgtn.nullinference.experiments.spring.Config.*;
 
 /**
@@ -78,7 +78,7 @@ public class RQ2b extends Experiment {
         TableGenerator csvOutput = new CSVTableGenerator(OUTPUT_CSV);
         TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrrrr|");
 
-        this.run(FULL_DATESET,
+        this.run(FULL_DATASET,
                 "RQ2b -- precision and recall w.r.t. existing annotations after applying sanitisers (" + SANITIZER_NAMES + ")",
                 "tab:rq2b",columns,csvOutput,latexOutput);
 

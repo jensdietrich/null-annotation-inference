@@ -3,7 +3,7 @@ package nz.ac.wgtn.nullinference.experiments.spring;
 import nz.ac.wgtn.nullinference.experiments.Utils;
 import java.io.File;
 import java.io.IOException;
-import static nz.ac.wgtn.nullinference.experiments.spring.Config.SPRING_MODULES;
+
 import static nz.ac.wgtn.nullinference.experiments.spring.Config.*;
 
 /**
@@ -96,7 +96,7 @@ public class RQ2a extends Experiment {
         TableGenerator csvOutput = new CSVTableGenerator(OUTPUT_CSV);
         TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrrrrr|");
 
-        this.run(FULL_DATESET,"RQ2a -- observed issues after applying sanitisers (base -- no sanitisation applied, " + SANITIZER_NAMES + ")","tab:rq2a",columns,csvOutput,latexOutput);
+        this.run(FULL_DATASET,"RQ2a -- observed issues after applying sanitisers (base -- no sanitisation applied, " + SANITIZER_NAMES + ")","tab:rq2a",columns,csvOutput,latexOutput);
 
     }
 }

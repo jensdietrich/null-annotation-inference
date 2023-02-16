@@ -37,7 +37,7 @@ public class CheckPackageAnnotations extends Experiment {
         Map<String,Set<File>> packagesByModule = new TreeMap<>();
 
         for (String module: SPRING_MODULES) {
-            File src = new File(Config.PROJECTS,module + "/src/main");
+            File src = new File(Config.SPRING_PROJECTS,module + "/src/main");
 
             Set<File> packages = null;
             try (Stream<Path> walk = Files.walk(src.toPath())) {

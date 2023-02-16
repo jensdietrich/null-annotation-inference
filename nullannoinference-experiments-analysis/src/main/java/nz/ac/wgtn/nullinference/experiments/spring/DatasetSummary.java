@@ -29,7 +29,7 @@ public class DatasetSummary extends Experiment {
                 }
                 @Override
                 public String value(String dataName) {
-                    File sourceFolder = new File(PROJECTS, dataName + "/src/main/java");
+                    File sourceFolder = new File(SPRING_PROJECTS, dataName + "/src/main/java");
                     Preconditions.checkState(sourceFolder.exists(),"Folder does not exist: " + sourceFolder);
                     return Utils.format(getFiles(sourceFolder, f -> f.getName().endsWith(".java")).size());
                 }
@@ -42,7 +42,7 @@ public class DatasetSummary extends Experiment {
                 }
                 @Override
                 public String value(String dataName) {
-                    File sourceFolder = new File(PROJECTS, dataName + "/src/main/kotlin");
+                    File sourceFolder = new File(SPRING_PROJECTS, dataName + "/src/main/kotlin");
                     // don't check folder for existence, not all modules have this
                     return Utils.format(getFiles(sourceFolder, f -> f.getName().endsWith(".kt")).size());
                 }
@@ -55,7 +55,7 @@ public class DatasetSummary extends Experiment {
                 }
                 @Override
                 public String value(String dataName) {
-                    File sourceFolder = new File(PROJECTS, dataName + "/src/main/groovy");
+                    File sourceFolder = new File(SPRING_PROJECTS, dataName + "/src/main/groovy");
                     // don't check folder for existence, not all modules have this
                     return Utils.format(getFiles(sourceFolder, f -> f.getName().endsWith(".groovy")).size());
                 }
@@ -69,7 +69,7 @@ public class DatasetSummary extends Experiment {
                 }
                 @Override
                 public String value(String dataName) {
-                    File sourceFolder = new File(PROJECTS, dataName + "/src/test/java");
+                    File sourceFolder = new File(SPRING_PROJECTS, dataName + "/src/test/java");
                     Preconditions.checkState(sourceFolder.exists(),"Folder does not exist: " + sourceFolder);
                     return Utils.format(getFiles(sourceFolder, f -> f.getName().endsWith(".java")).size());
                 }
@@ -82,7 +82,7 @@ public class DatasetSummary extends Experiment {
                 }
                 @Override
                 public String value(String dataName) {
-                    File sourceFolder = new File(PROJECTS, dataName + "/src/test/kotlin");
+                    File sourceFolder = new File(SPRING_PROJECTS, dataName + "/src/test/kotlin");
                     // don't check folder for existence, not all modules have this
                     return Utils.format(getFiles(sourceFolder, f -> f.getName().endsWith(".kt")).size());
                 }
@@ -95,7 +95,7 @@ public class DatasetSummary extends Experiment {
                 }
                 @Override
                 public String value(String dataName) {
-                    File sourceFolder = new File(PROJECTS, dataName + "/src/test/groovy");
+                    File sourceFolder = new File(SPRING_PROJECTS, dataName + "/src/test/groovy");
                     // don't check folder for existence, not all modules have this
                     return Utils.format(getFiles(sourceFolder, f -> f.getName().endsWith(".groovy")).size());
                 }

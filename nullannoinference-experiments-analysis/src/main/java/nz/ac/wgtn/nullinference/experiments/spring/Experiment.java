@@ -252,9 +252,9 @@ public abstract class Experiment {
             for (TableGenerator out:output) {
                 out.nl();
             }
-            String nextLine = Stream.of(columns).map(col -> col.value(data)).collect(Collectors.joining(" , "));
+            //String nextLine = Stream.of(columns).map(col -> col.value(data)).collect(Collectors.joining(" , "));
             ISSUE_CACHE.clear();
-            System.out.println(nextLine);
+            //System.out.println(nextLine);
         }
 
         for (TableGenerator out:output) {

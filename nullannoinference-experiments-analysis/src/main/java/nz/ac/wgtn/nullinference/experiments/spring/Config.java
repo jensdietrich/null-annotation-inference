@@ -1,9 +1,8 @@
 package nz.ac.wgtn.nullinference.experiments.spring;
 
-import com.google.common.base.Preconditions;
 import nz.ac.wgtn.nullannoinference.commons.Issue;
 import nz.ac.wgtn.nullannoinference.commons.IssueKernel;
-
+import nz.ac.wgtn.nullannoinference.commons.ProjectType;
 import java.io.File;
 import java.util.List;
 import java.util.function.Predicate;
@@ -31,9 +30,36 @@ public class Config {
         "error-prone"
     );
 
-    public static final List<String> FULL_DATESET = Stream.concat(
+    public static final List<String> FULL_DATASET = Stream.concat(
         SPRING_MODULES.stream(),ADDITIONAL_PROGRAMS.stream()
     ).collect(Collectors.toList());
+
+
+    public static final ProjectType getProjectType(String name) {
+        if (name.equals("guava")) {
+            return ProjectType.GUAVA;
+        }
+        else if (name.equals("error-prone")) {
+            return ProjectType.ERROR_PRONE;
+        }
+        else if (name.startsWith("spring-")) {
+            return ProjectType.MULTI_GRADLE;
+        }
+        throw new IllegalStateException();
+    }
+
+    public static final ProjectType getProjectRootFolder(String name) {
+        if (name.equals("guava")) {
+            return ProjectType.GUAVA;
+        }
+        else if (name.equals("error-prone")) {
+            return ProjectType.ERROR_PRONE;
+        }
+        else if (name.startsWith("spring-")) {
+            return ProjectType.GRADLE;
+        }
+        throw new IllegalStateException();
+    }
 
     public static final File SPRING_RESULTS = new File("experiments-spring/results/");
     public static final File ADDITIONAL_RESULTS = new File("experiments-additional/results/");
@@ -63,7 +89,20 @@ public class Config {
 
     public static final String SANITIZER_NAMES = "D - deprecation, M - main scope, N - negative tests, S - shading";
 
-    public static final File PROJECTS = new File("experiments-spring/projects/original/spring-framework");
+    public static final File SPRING_PROJECTS = new File("experiments-spring/projects/original/spring-framework");
+    public static final File ADDITIONAL_PROJECTS = new File("experiments-additional/projects/original/");
+    public static final File[] ALL_PROJECTS = new File[]{SPRING_PROJECTS,ADDITIONAL_PROJECTS};
+
+    public static File locateProject(String name) {
+        for (File dir:ALL_PROJECTS) {
+            assert dir.exists();
+            File pr = new File(dir,name);
+            if (pr.exists()) {
+                return pr;
+            }
+        }
+        throw new IllegalStateException("Project not found: " + name);
+    }
 
     public static final Predicate<Issue> FIELDS_ONLY = issue -> issue.getKind()== Issue.IssueType.FIELD;
     public static final Predicate<Issue> PARAM_ONLY = issue -> issue.getKind()== Issue.IssueType.ARGUMENT;
@@ -76,26 +115,5 @@ public class Config {
     public static final Predicate<IssueKernel> AGGRE_ALL = issue -> true;
     public static final Predicate<Issue> ALL = issue -> true;
 
-
-//    static {
-//        Preconditions.checkArgument(EXTRACTED_ISSUES_FOLDER.exists());
-//        Preconditions.checkArgument(EXTRACTED_ISSUES_FOLDER.isDirectory());
-//        Preconditions.checkArgument(EXTRACTED_PLUS_ISSUES_FOLDER.exists());
-//        Preconditions.checkArgument(EXTRACTED_PLUS_ISSUES_FOLDER.isDirectory());
-//        Preconditions.checkArgument(OBSERVED_ISSUES_FOLDER.exists());
-//        Preconditions.checkArgument(OBSERVED_ISSUES_FOLDER.isDirectory());
-//        Preconditions.checkArgument(OBSERVED_AND_PROPAGATED_ISSUES_FOLDER.exists());
-//        Preconditions.checkArgument(OBSERVED_AND_PROPAGATED_ISSUES_FOLDER.isDirectory());
-//        Preconditions.checkArgument(SANITIZED_ISSUES_FOLDER.exists());
-//        Preconditions.checkArgument(SANITIZED_ISSUES_FOLDER.isDirectory());
-//        Preconditions.checkArgument(SANITIZED_ISSUES_SHADED_FOLDER.exists());
-//        Preconditions.checkArgument(SANITIZED_ISSUES_SHADED_FOLDER.isDirectory());
-//        Preconditions.checkArgument(SANITIZED_ISSUES_DEPRECATED_FOLDER.exists());
-//        Preconditions.checkArgument(SANITIZED_ISSUES_DEPRECATED_FOLDER.isDirectory());
-//        Preconditions.checkArgument(SANITIZED_ISSUES_MAINSCOPE_FOLDER.exists());
-//        Preconditions.checkArgument(SANITIZED_ISSUES_MAINSCOPE_FOLDER.isDirectory());
-//        Preconditions.checkArgument(SANITIZED_ISSUES_NEGATIVETESTS_FOLDER.exists());
-//        Preconditions.checkArgument(SANITIZED_ISSUES_NEGATIVETESTS_FOLDER.isDirectory());
-//    }
 
 }
