@@ -1,20 +1,16 @@
 package nz.ac.wgtn.nullinference.experiments.spring;
 
-import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import nz.ac.wgtn.nullannoinference.commons.*;
 import nz.ac.wgtn.nullinference.experiments.descr.DescriptorParser;
-
-import javax.security.auth.callback.ConfirmationCallback;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 /**
@@ -23,21 +19,17 @@ import java.util.stream.Collectors;
  */
 public class SampleDiff extends Experiment {
 
-    public static final File EXTRACTED_FOLDER = new File("experiments-spring/results/extracted/");
-    public static final File OBSERVED_FOLDER = new File("experiments-spring/results/observed+/");
-
-    public static final String MODULE = "spring-beans";
+    public static final String MODULE = "error-prone";
 
     public static final int ISSUE_KERNEL_LIMIT = 3;
-    public static final int ISSUE_INSTANCE_PER_KERNEL_LIMIT = 3;
-
+    public static final int ISSUE_INSTANCE_PER_KERNEL_LIMIT = 1;
 
     public static final Predicate<IssueKernel> ALL = issueKernel -> true;
     public static final Predicate<IssueKernel> ARG = issueKernel -> issueKernel.getKind()== Issue.IssueType.ARGUMENT;
     public static final Predicate<IssueKernel> RET = issueKernel -> issueKernel.getKind()== Issue.IssueType.RETURN_VALUE;
     public static final Predicate<IssueKernel> FLD = issueKernel -> issueKernel.getKind()== Issue.IssueType.FIELD;
 
-    public static final Predicate<IssueKernel> NOTSHADED = issueKernel -> !issueKernel.getClassName().startsWith("org.springframework.asm.");
+    public static final Predicate<IssueKernel> NOTSHADED = issueKernel -> true; //!issueKernel.getClassName().startsWith("org.springframework.asm.");
 
     public static final Map<String,Predicate<IssueKernel>> FILTERS = new LinkedHashMap(){{
         put("all", ALL);
@@ -47,16 +39,13 @@ public class SampleDiff extends Experiment {
     }};
 
     public static void main (String[] args) throws IOException {
-
-        Preconditions.checkArgument(EXTRACTED_FOLDER.exists());
-        Preconditions.checkArgument(OBSERVED_FOLDER.exists());
         new SampleDiff().analyse();
     }
 
     public void analyse()  {
 
         Set<Issue> extractedIssues = (Set<Issue>) readIssues(Config.EXTRACTED_ISSUES_FOLDER, MODULE, false);
-        Set<Issue> observedIssues = (Set<Issue>) readIssues(Config.OBSERVED_ISSUES_FOLDER, MODULE, false);
+        Set<Issue> observedIssues = (Set<Issue>) readIssues(Config.SANITIZED_ISSUES_FOLDER, MODULE, false);
 
         Map<IssueKernel,Set<Issue>> extractedIssueAggregation = IssueAggregator.aggregateAsMap(extractedIssues);
         Map<IssueKernel,Set<Issue>> observedIssueAggregation = IssueAggregator.aggregateAsMap(observedIssues);
