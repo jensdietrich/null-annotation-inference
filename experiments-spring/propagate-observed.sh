@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## propagate extracted annotations applying LSP
+## propagate observed (captured) and sanitized annotations by applying LSP
 ## @author jens dietrich
 
 . ./spring.env

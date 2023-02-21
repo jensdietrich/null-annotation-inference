@@ -34,7 +34,7 @@ public class RQ2b extends Experiment {
 
             new Column() {
                 @Override public String name() {
-                    return "r,p(D)";
+                    return "r,lpb(D)";
                 }
                 @Override public String value(String dataName) {
                     return recallPrecision(EXTRACTED_ISSUES_FOLDER,SANITIZED_ISSUES_DEPRECATED_FOLDER,dataName);
@@ -42,7 +42,7 @@ public class RQ2b extends Experiment {
             },
             new Column() {
                 @Override public String name() {
-                    return "r,p(M)";
+                    return "r,lpb(M)";
                 }
                 @Override public String value(String dataName) {
                     return recallPrecision(EXTRACTED_ISSUES_FOLDER,SANITIZED_ISSUES_MAINSCOPE_FOLDER,dataName);
@@ -50,7 +50,7 @@ public class RQ2b extends Experiment {
             },
             new Column() {
                 @Override public String name() {
-                    return "r,p(N)";
+                    return "r,lpb(N)";
                 }
                 @Override public String value(String dataName) {
                     return recallPrecision(EXTRACTED_ISSUES_FOLDER,SANITIZED_ISSUES_NEGATIVETESTS_FOLDER,dataName);
@@ -58,7 +58,7 @@ public class RQ2b extends Experiment {
             },
             new Column() {
                 @Override public String name() {
-                    return "r,p(S)";
+                    return "r,lpb(S)";
                 }
                 @Override public String value(String dataName) {
                     return recallPrecision(EXTRACTED_ISSUES_FOLDER,SANITIZED_ISSUES_SHADED_FOLDER,dataName);
@@ -66,7 +66,7 @@ public class RQ2b extends Experiment {
             },
             new Column() {
                 @Override public String name() {
-                    return "r,p(all)";
+                    return "r,lpb(all)";
                 }
                 @Override public String value(String dataName) {
                     return recallPrecision(EXTRACTED_ISSUES_FOLDER,SANITIZED_ISSUES_FOLDER,dataName);
@@ -79,7 +79,7 @@ public class RQ2b extends Experiment {
         TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrrrr|");
 
         this.run(FULL_DATASET,
-                "RQ2b -- precision and recall w.r.t. existing annotations after applying sanitisers (" + SANITIZER_NAMES + ")",
+                "RQ2b -- recall and lower precision bound (r,lpb) w.r.t. existing annotations after applying sanitisers (" + SANITIZER_NAMES + ")",
                 "tab:rq2b",columns,csvOutput,latexOutput);
 
     }

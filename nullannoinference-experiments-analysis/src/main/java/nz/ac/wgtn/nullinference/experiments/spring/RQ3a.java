@@ -44,7 +44,7 @@ public class RQ3a extends Experiment {
             },
             new Column() {
                 @Override public String name() {
-                    return "r,p(san-all)";
+                    return "r,lpb(san-all)";
                 }
                 @Override public String value(String dataName) {
                     return recallPrecision(EXTRACTED_ISSUES_FOLDER,SANITIZED_ISSUES_FOLDER,dataName);
@@ -52,7 +52,7 @@ public class RQ3a extends Experiment {
             },
             new Column() {
                 @Override public String name() {
-                    return "r,p(prop)";
+                    return "r,lpb(prop)";
                 }
                 @Override public String value(String dataName) {
                     return recallPrecision(EXTRACTED_ISSUES_FOLDER,OBSERVED_AND_PROPAGATED_ISSUES_FOLDER,dataName);
@@ -63,7 +63,7 @@ public class RQ3a extends Experiment {
         TableGenerator csvOutput = new CSVTableGenerator(OUTPUT_CSV);
         TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrrr|");
 
-        this.run(SPRING_MODULES,"RQ3a -- number of propagated issues and recall / precision of propagation, compared to sanitised issues (after applying all sanitisers)","tab:rq3a",columns,csvOutput,latexOutput);
+        this.run(FULL_DATASET,"RQ3a -- number of propagated issues and recall and lower precision bound (r,lpb) of propagation (after applying all sanitisers), compared to sanitised issues","tab:rq3a",columns,csvOutput,latexOutput);
 
     }
 

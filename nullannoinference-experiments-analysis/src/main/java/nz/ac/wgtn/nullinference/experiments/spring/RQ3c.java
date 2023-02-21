@@ -99,7 +99,7 @@ public class RQ3c extends Experiment {
         TableGenerator csvOutput = new CSVTableGenerator(OUTPUT_CSV);
         TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrrrrr|");
 
-        this.run(SPRING_MODULES,"RQ3c - number of propagated issues and recall / precision of propagated issues by type (F - field, P - method parameters, R - method return types)","tab:rq3c", columns, csvOutput,latexOutput );
+        this.run(FULL_DATASET,"RQ3c - number of propagated issues and recall / precision of propagated issues by type (F - field, P - method parameters, R - method return types)","tab:rq3c", columns, csvOutput,latexOutput );
 
     }
 

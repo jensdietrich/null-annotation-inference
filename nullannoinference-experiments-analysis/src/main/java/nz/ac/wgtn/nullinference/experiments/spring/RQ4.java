@@ -61,7 +61,7 @@ public class RQ4 extends Experiment {
         TableGenerator csvOutput = new CSVTableGenerator(OUTPUT_CSV);
         TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrr|");
 
-        this.run(SPRING_MODULES,"RQ4 -- nullable annotation extracted from original projects, re-annotated projects, and recall / precision of automatically inserted annotations with respect to original annotations","tab:rq4",columns,csvOutput,latexOutput);
+        this.run(FULL_DATASET,"RQ4 -- nullable annotation extracted from original projects, re-annotated projects, and recall / precision of automatically inserted annotations with respect to original annotations","tab:rq4",columns,csvOutput,latexOutput);
     }
 
 }

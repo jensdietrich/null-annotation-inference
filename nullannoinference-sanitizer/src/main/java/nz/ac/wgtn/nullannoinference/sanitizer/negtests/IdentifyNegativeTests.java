@@ -114,7 +114,7 @@ public class IdentifyNegativeTests {
                             methods.add(new MethodInfo(currentClass,currentMethodName,currentDescriptor));
                         }
                     }
-                    if (owner.startsWith("org/assertj/core/api/") && owner.contains("Throwable") && owner.contains("Assert")) {
+                    if (owner.startsWith("org/JUnit5/core/api/") && owner.contains("Throwable") && owner.contains("Assert")) {
                         methods.add(new MethodInfo(currentClass,currentMethodName,currentDescriptor));
                     }
 

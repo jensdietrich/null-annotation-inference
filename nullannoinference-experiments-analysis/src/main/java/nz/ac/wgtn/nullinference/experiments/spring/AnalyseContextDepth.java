@@ -24,10 +24,19 @@ public class AnalyseContextDepth extends Experiment {
     }
 
     private int countContextDepth(Map<IssueKernel,Integer> contextDepths, Predicate<Integer> filter) {
-        return (int)contextDepths.keySet().stream()
-            .map(issueKernel -> contextDepths.get(issueKernel))
-            .filter(filter)
-            .count();
+//        return (int)contextDepths.keySet().stream()
+//            .map(issueKernel -> contextDepths.get(issueKernel))
+//            .filter(filter)
+//            .count();
+        int count = 0;
+        for (IssueKernel kernel:contextDepths.keySet()) {
+            int depth = contextDepths.get(kernel);
+            if (filter.test(depth)) {
+                count = count + 1;
+            }
+        }
+        return count;
+
     }
 
     public void analyse()  {
@@ -36,10 +45,20 @@ public class AnalyseContextDepth extends Experiment {
             Column.First,
             new Column() {
                 @Override public String name() {
+                    return "all";
+                }
+                @Override public String value(String dataName) {
+                    int count = countIssues(SANITIZED_ISSUES_FOLDER, dataName,true);
+                    return Utils.format(count);
+                }
+            },
+
+            new Column() {
+                @Override public String name() {
                     return "2";
                 }
                 @Override public String value(String dataName) {
-                    Map<IssueKernel,Integer> minContextDepths = readAndAggregateIssuesCountMinContextDepth(OBSERVED_AND_PROPAGATED_SANITIZED_ISSUES_FOLDER, dataName);
+                    Map<IssueKernel,Integer> minContextDepths = readAndAggregateIssuesCountMinContextDepth(SANITIZED_ISSUES_FOLDER, dataName);
                     return Utils.format(countContextDepth(minContextDepths,i -> i==2));
                 }
             },
@@ -48,7 +67,7 @@ public class AnalyseContextDepth extends Experiment {
                     return "3";
                 }
                 @Override public String value(String dataName) {
-                    Map<IssueKernel,Integer> minContextDepths = readAndAggregateIssuesCountMinContextDepth(OBSERVED_AND_PROPAGATED_SANITIZED_ISSUES_FOLDER, dataName);
+                    Map<IssueKernel,Integer> minContextDepths = readAndAggregateIssuesCountMinContextDepth(SANITIZED_ISSUES_FOLDER, dataName);
                     return Utils.format(countContextDepth(minContextDepths,i -> i==3));
                 }
             },
@@ -57,7 +76,7 @@ public class AnalyseContextDepth extends Experiment {
                     return "4";
                 }
                 @Override public String value(String dataName) {
-                    Map<IssueKernel,Integer> minContextDepths = readAndAggregateIssuesCountMinContextDepth(OBSERVED_AND_PROPAGATED_SANITIZED_ISSUES_FOLDER, dataName);
+                    Map<IssueKernel,Integer> minContextDepths = readAndAggregateIssuesCountMinContextDepth(SANITIZED_ISSUES_FOLDER, dataName);
                     return Utils.format(countContextDepth(minContextDepths,i -> i==4));
                 }
             },
@@ -66,7 +85,7 @@ public class AnalyseContextDepth extends Experiment {
                     return "5";
                 }
                 @Override public String value(String dataName) {
-                    Map<IssueKernel,Integer> minContextDepths = readAndAggregateIssuesCountMinContextDepth(OBSERVED_AND_PROPAGATED_SANITIZED_ISSUES_FOLDER, dataName);
+                    Map<IssueKernel,Integer> minContextDepths = readAndAggregateIssuesCountMinContextDepth(SANITIZED_ISSUES_FOLDER, dataName);
                     return Utils.format(countContextDepth(minContextDepths,i -> i==5));
                 }
             },
@@ -75,7 +94,7 @@ public class AnalyseContextDepth extends Experiment {
                     return "6";
                 }
                 @Override public String value(String dataName) {
-                    Map<IssueKernel,Integer> minContextDepths = readAndAggregateIssuesCountMinContextDepth(OBSERVED_AND_PROPAGATED_SANITIZED_ISSUES_FOLDER, dataName);
+                    Map<IssueKernel,Integer> minContextDepths = readAndAggregateIssuesCountMinContextDepth(SANITIZED_ISSUES_FOLDER, dataName);
                     return Utils.format(countContextDepth(minContextDepths,i -> i==6));
                 }
             },
@@ -84,7 +103,7 @@ public class AnalyseContextDepth extends Experiment {
                     return "7";
                 }
                 @Override public String value(String dataName) {
-                    Map<IssueKernel,Integer> minContextDepths = readAndAggregateIssuesCountMinContextDepth(OBSERVED_AND_PROPAGATED_SANITIZED_ISSUES_FOLDER, dataName);
+                    Map<IssueKernel,Integer> minContextDepths = readAndAggregateIssuesCountMinContextDepth(SANITIZED_ISSUES_FOLDER, dataName);
                     return Utils.format(countContextDepth(minContextDepths,i -> i==7));
                 }
             },
@@ -93,7 +112,7 @@ public class AnalyseContextDepth extends Experiment {
                     return "8";
                 }
                 @Override public String value(String dataName) {
-                    Map<IssueKernel,Integer> minContextDepths = readAndAggregateIssuesCountMinContextDepth(OBSERVED_AND_PROPAGATED_SANITIZED_ISSUES_FOLDER, dataName);
+                    Map<IssueKernel,Integer> minContextDepths = readAndAggregateIssuesCountMinContextDepth(SANITIZED_ISSUES_FOLDER, dataName);
                     return Utils.format(countContextDepth(minContextDepths,i -> i==8));
                 }
             },
@@ -102,7 +121,7 @@ public class AnalyseContextDepth extends Experiment {
                     return "9";
                 }
                 @Override public String value(String dataName) {
-                    Map<IssueKernel,Integer> minContextDepths = readAndAggregateIssuesCountMinContextDepth(OBSERVED_AND_PROPAGATED_SANITIZED_ISSUES_FOLDER, dataName);
+                    Map<IssueKernel,Integer> minContextDepths = readAndAggregateIssuesCountMinContextDepth(SANITIZED_ISSUES_FOLDER, dataName);
                     return Utils.format(countContextDepth(minContextDepths,i -> i==9));
                 }
             },
@@ -111,7 +130,7 @@ public class AnalyseContextDepth extends Experiment {
                     return "10";
                 }
                 @Override public String value(String dataName) {
-                    Map<IssueKernel,Integer> minContextDepths = readAndAggregateIssuesCountMinContextDepth(OBSERVED_AND_PROPAGATED_SANITIZED_ISSUES_FOLDER, dataName);
+                    Map<IssueKernel,Integer> minContextDepths = readAndAggregateIssuesCountMinContextDepth(SANITIZED_ISSUES_FOLDER, dataName);
                     return Utils.format(countContextDepth(minContextDepths,i -> i==10));
                 }
             },
@@ -120,7 +139,7 @@ public class AnalyseContextDepth extends Experiment {
                     return "$>$10";
                 }
                 @Override public String value(String dataName) {
-                    Map<IssueKernel,Integer> minContextDepths = readAndAggregateIssuesCountMinContextDepth(OBSERVED_AND_PROPAGATED_SANITIZED_ISSUES_FOLDER, dataName);
+                    Map<IssueKernel,Integer> minContextDepths = readAndAggregateIssuesCountMinContextDepth(SANITIZED_ISSUES_FOLDER, dataName);
                     return Utils.format(countContextDepth(minContextDepths,i -> i>10));
                 }
             },
@@ -128,9 +147,9 @@ public class AnalyseContextDepth extends Experiment {
 
 
         TableGenerator csvOutput = new CSVTableGenerator(OUTPUT_CSV);
-        TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrrrrrrrrr|");
+        TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrrrrrrrrrr|");
 
-        this.run(SPRING_MODULES,"Observed and sanitised issues by context depths","tab:context-depth",columns,csvOutput,latexOutput);
+        this.run(FULL_DATASET,"Observed and sanitised issues by context depths","tab:context-depth",columns,csvOutput,latexOutput);
 
     }
 

@@ -65,7 +65,7 @@ public class RQ1 extends Experiment {
             },
             new Column() {
                 @Override public String name() {
-                    return "r,p";
+                    return "r,lpb";
                 }
                 @Override public String value(String dataName) {
                     return recallPrecision(EXTRACTED_ISSUES_FOLDER,OBSERVED_ISSUES_FOLDER,dataName);
@@ -77,7 +77,7 @@ public class RQ1 extends Experiment {
         TableGenerator csvOutput = new CSVTableGenerator(OUTPUT_CSV);
         TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrrrr|");
 
-        this.run(FULL_DATASET,"RQ1 - existing (ex) vs observed (obs) issues, also reported are the aggregation of observed issues (agg), aggregation ratios (agg/obs) and recall / precision (r,p)","tab:rq1",columns,csvOutput,latexOutput);
+        this.run(FULL_DATASET,"RQ1 - existing (ex) vs observed (obs) issues, also reported are the aggregation of observed issues (agg), aggregation ratios (agg/obs) and recall / lower precision bound (r,lpb)","tab:rq1",columns,csvOutput,latexOutput);
 
     }
 

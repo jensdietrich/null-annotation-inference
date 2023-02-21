@@ -63,7 +63,7 @@ public class RQ3b extends Experiment {
         TableGenerator csvOutput = new CSVTableGenerator(OUTPUT_CSV);
         TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrrr|");
 
-        this.run(SPRING_MODULES,"RQ3b -- number of propagated issues and recall / precision of propagation, compared to sanitised issues (after applying all sanitisers), with sanitization applied to propagated issues","tab:rq3b",columns,csvOutput,latexOutput);
+        this.run(FULL_DATASET,"RQ3b -- number of propagated issues and recall / precision of propagation, compared to sanitised issues (after applying all sanitisers), with sanitization applied to propagated issues","tab:rq3b",columns,csvOutput,latexOutput);
 
     }
 

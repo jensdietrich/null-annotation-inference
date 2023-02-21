@@ -184,7 +184,7 @@ public class AnalyseAnnotationRatio extends Experiment {
             },
             new Column() {
                 @Override public String name() {
-                    return "possible";
+                    return "annotatable";
                 }
                 @Override public String value(String dataName) {
                     return Utils.format(countAnnotatable(dataName, EnumSet.allOf(Issue.IssueType.class)));
@@ -192,7 +192,7 @@ public class AnalyseAnnotationRatio extends Experiment {
             },
             new Column() {
                 @Override public String name() {
-                    return "ratio";
+                    return "annotation ratio";
                 }
                 @Override public String value(String dataName) {
                     int count1 = countIssues(EXTRACTED_ISSUES_FOLDER,dataName,true);
@@ -202,7 +202,7 @@ public class AnalyseAnnotationRatio extends Experiment {
             },
             new Column() {
                 @Override public String name() {
-                    return "Void usage";
+                    return "\\texttt{Void} usage";
                 }
                 @Override public String value(String dataName) {
                     return Utils.format(countVoid(dataName, EnumSet.allOf(Issue.IssueType.class)));
@@ -214,7 +214,7 @@ public class AnalyseAnnotationRatio extends Experiment {
         TableGenerator csvOutput = new CSVTableGenerator(OUTPUT_CSV);
         TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrrr|");
 
-        this.run(FULL_DATASET,"Annotated vs annotatable program elements, in the last column the number of annotatable elements of type java.lang.Void is reported","tab:annotation-ratio",columns,csvOutput,latexOutput);
+        this.run(FULL_DATASET,"Annotated vs annotatable program elements, in the last column the number of annotatable elements of type \\texttt{java.lang.Void} is reported","tab:annotation-ratio",columns,csvOutput,latexOutput);
     }
 
 }
