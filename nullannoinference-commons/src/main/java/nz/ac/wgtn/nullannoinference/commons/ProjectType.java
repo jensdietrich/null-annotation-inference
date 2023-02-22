@@ -112,4 +112,28 @@ public interface ProjectType {
         return LANG_JAVA;
     }
 
+    default File getJavaSourceFolder(File root) {
+        return new File(root,"src/main/java");
+    }
+
+    default File getGroovySourceFolder(File root) {
+        return new File(root,"src/main/groovy");
+    }
+
+    default File getKotlinSourceFolder(File root) {
+        return new File(root,"src/main/kotlin");
+    }
+
+    default File getJavaTestSourceFolder(File root) {
+        return new File(root,"src/test/java");
+    }
+
+    default File getGroovyTestSourceFolder(File root) {
+        return new File(root,"src/test/groovy");
+    }
+
+    default File getKotlinTestSourceFolder(File root) {
+        return new File(root,"src/test/kotlin");
+    }
+
 }

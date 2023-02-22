@@ -10,7 +10,7 @@ import java.util.function.Predicate;
 import static nz.ac.wgtn.nullinference.experiments.spring.Config.*;
 
 /**
- * Script to produce data for RA1b.
+ * Script to produce data to analyse the context depth of issues.
  * @author jens dietrich
  */
 public class AnalyseContextDepth extends Experiment {
@@ -24,10 +24,6 @@ public class AnalyseContextDepth extends Experiment {
     }
 
     private int countContextDepth(Map<IssueKernel,Integer> contextDepths, Predicate<Integer> filter) {
-//        return (int)contextDepths.keySet().stream()
-//            .map(issueKernel -> contextDepths.get(issueKernel))
-//            .filter(filter)
-//            .count();
         int count = 0;
         for (IssueKernel kernel:contextDepths.keySet()) {
             int depth = contextDepths.get(kernel);
@@ -36,7 +32,6 @@ public class AnalyseContextDepth extends Experiment {
             }
         }
         return count;
-
     }
 
     public void analyse()  {

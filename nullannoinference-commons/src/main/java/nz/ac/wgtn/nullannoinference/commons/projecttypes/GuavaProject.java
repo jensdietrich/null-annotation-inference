@@ -43,4 +43,14 @@ public class GuavaProject implements ProjectType  {
         }
     }
 
+    @Override
+    public File getJavaSourceFolder(File root) {
+        return new File(root,"guava/src");
+    }
+
+    @Override
+    public File getJavaTestSourceFolder(File root) {
+        return new File(root,"guava-tests/test");
+    }
+
 }

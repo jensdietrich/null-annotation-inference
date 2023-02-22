@@ -44,4 +44,14 @@ public class ErrorProneProject implements ProjectType  {
         }
     }
 
+    @Override
+    public File getJavaSourceFolder(File root) {
+        return new File(root,"core/src/main/java");
+    }
+
+    @Override
+    public File getJavaTestSourceFolder(File root) {
+        return new File(root,"core/src/test/java");
+    }
+
 }
