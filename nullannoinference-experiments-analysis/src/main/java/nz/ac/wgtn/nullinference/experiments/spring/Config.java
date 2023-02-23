@@ -72,6 +72,7 @@ public class Config {
     };
 
     public static final SearchPath EXTRACTED_ISSUES_FOLDER = SearchPath.of(getResultFolders("extracted"));
+    public static final SearchPath EXTRACTED_ISSUES_WITH_VOID_FOLDER = SearchPath.of(getResultFolders("extracted-with-void"));
     public static final SearchPath EXTRACTED_FROM_REANNOTATED_ISSUES_FOLDER = SearchPath.of(getResultFolders("extracted-reannotated"));
     public static final SearchPath EXTRACTED_PLUS_ISSUES_FOLDER = SearchPath.of(getResultFolders("extracted+"));
     public static final SearchPath OBSERVED_ISSUES_FOLDER = SearchPath.of(getResultFolders("observed"));

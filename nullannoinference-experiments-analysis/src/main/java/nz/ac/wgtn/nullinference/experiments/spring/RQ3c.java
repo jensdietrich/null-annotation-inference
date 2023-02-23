@@ -11,13 +11,13 @@ import static nz.ac.wgtn.nullinference.experiments.spring.Config.*;
  * Script to produce data for RQ3.
  * @author jens dietrich
  */
-public class RQ3a extends Experiment {
+public class RQ3c extends Experiment {
 
-    public static final File OUTPUT_CSV = new File("experiments-spring/results/rq/rq3a.csv");
-    public static final File OUTPUT_LATEX = new File("experiments-spring/results/rq/rq3a.tex");
+    public static final File OUTPUT_CSV = new File("experiments-spring/results/rq/rq3c.csv");
+    public static final File OUTPUT_LATEX = new File("experiments-spring/results/rq/rq3c.tex");
 
     public static void main (String[] args) throws IOException, InterruptedException {
-        new RQ3a().analyse();
+        new RQ3c().analyse();
     }
 
     public void analyse()  {
@@ -55,7 +55,7 @@ public class RQ3a extends Experiment {
                     return "r,lpb(s)";
                 }
                 @Override public String value(String dataName) {
-                    return recallPrecision(EXTRACTED_ISSUES_FOLDER,SANITIZED_ISSUES_FOLDER,dataName);
+                    return recallPrecision(EXTRACTED_ISSUES_WITH_VOID_FOLDER,SANITIZED_ISSUES_FOLDER,dataName);
                 }
             },
             new Column() {
@@ -63,7 +63,7 @@ public class RQ3a extends Experiment {
                     return "r,lpb(sp)";
                 }
                 @Override public String value(String dataName) {
-                    return recallPrecision(EXTRACTED_ISSUES_FOLDER,OBSERVED_AND_PROPAGATED_ISSUES_FOLDER,dataName);
+                    return recallPrecision(EXTRACTED_ISSUES_WITH_VOID_FOLDER,OBSERVED_AND_PROPAGATED_ISSUES_FOLDER,dataName);
                 }
             },
             new Column() {
@@ -71,7 +71,7 @@ public class RQ3a extends Experiment {
                     return "r,lpb(sps)";
                 }
                 @Override public String value(String dataName) {
-                    return recallPrecision(EXTRACTED_ISSUES_FOLDER,OBSERVED_AND_PROPAGATED_SANITIZED_ISSUES_FOLDER,dataName);
+                    return recallPrecision(EXTRACTED_ISSUES_WITH_VOID_FOLDER,OBSERVED_AND_PROPAGATED_SANITIZED_ISSUES_FOLDER,dataName);
                 }
             }
         };
@@ -79,7 +79,7 @@ public class RQ3a extends Experiment {
         TableGenerator csvOutput = new CSVTableGenerator(OUTPUT_CSV);
         TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrrrrr|");
 
-        this.run(FULL_DATASET,"RQ3a -- effect of propagation, aggregated issue counts and recall / lower precision bound for santitised issues (s), santitised and then propagated issues (sp) and santitised, propagated and resanitised issues (sps)","tab:rq3a",columns,csvOutput,latexOutput);
+        this.run(ADDITIONAL_PROGRAMS,"RQ3c -- effect of propagation, aggregated issue counts and recall / lower precision bound for santitised issues (s), santitised and then propagated issues (sp) and santitised, propagated and resanitised issues (sps), compared against existing annotations considering java.lang.Void as implicitly annotated @nullable","tab:rq3a",columns,csvOutput,latexOutput);
 
     }
 
