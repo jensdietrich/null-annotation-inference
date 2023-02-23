@@ -1,6 +1,7 @@
 package nz.ac.wgtn.nullinference.extractor;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.GsonBuilder;
@@ -24,6 +25,7 @@ public class Main {
     public static final String ARG_INPUT = "project";
     public static final String ARG_OUTPUT = "issues";
     public static final String ARG_PROJECT_TYPE = "projecttype";
+    public static final String ARG_VOID_IS_NULLABLE = "voidisnullable";
 
     // TODO make this configurable -- only those issues will be configured
     public static final Predicate<Issue> ISSUE_FILTER = issue -> issue.getScope()== Issue.Scope.MAIN;
@@ -36,6 +38,7 @@ public class Main {
         options.addRequiredOption("p",ARG_INPUT, true, "the input mvn project folder");
         options.addRequiredOption("o",ARG_OUTPUT, true, "the file name containing the issues collected (.json)");
         options.addRequiredOption("t", ARG_PROJECT_TYPE, true, "the project type (see nz.ac.wgtn.nullannoinference.commons.Project for valid types: mvn , gradle , ..)");
+        options.addOption("v", ARG_VOID_IS_NULLABLE, false, "if set, java.lang.Void will be treated as implicitly annotated as nullable");
 
         CommandLineParser parser = new DefaultParser() {
             @Override
@@ -64,10 +67,19 @@ public class Main {
         String projectType = cmd.getOptionValue(ARG_PROJECT_TYPE);
         ProjectType project = ProjectType.getProject(projectType);
         project.checkProjectRootFolder(projectFolder);
-        Preconditions.checkState(!project.getCompiledTestClasses(projectFolder).isEmpty(),"no compiled classes found in project, check whether project has been built: " + projectFolder.getAbsolutePath() );
+        Preconditions.checkState(!project.getCompiledMainClasses(projectFolder).isEmpty(),"no compiled classes found in project, check whether project has been built: " + project.getCompiledMainClasses(projectFolder) );
+
+        boolean voidIsNullable = cmd.hasOption(ARG_VOID_IS_NULLABLE);
 
         LOGGER.info("analysing project: " + projectFolder.getAbsolutePath());
         Set<Issue> issues = ExtractNullableAnnotations.findNullAnnotated(project,projectFolder);
+
+        if (voidIsNullable) {
+            LOGGER.info("looking for uses of java.lang.Void (tp be interpreted as nullable)");
+            Set<Issue> issues2 = ExtractVoid.findNullAnnotated(project,projectFolder);
+            issues = Sets.union(issues,issues2);
+        }
+
         LOGGER.info("Existing issues found in analysed projects: " + issues.size());
 
         File issueFile = new File(cmd.getOptionValue(ARG_OUTPUT));

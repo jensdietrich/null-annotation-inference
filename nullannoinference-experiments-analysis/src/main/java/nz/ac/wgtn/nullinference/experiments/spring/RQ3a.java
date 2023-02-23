@@ -26,7 +26,7 @@ public class RQ3a extends Experiment {
             new Column() {
                 @Override
                 public String name() {
-                    return "san(all)";
+                    return "s";
                 }
 
                 @Override
@@ -36,7 +36,7 @@ public class RQ3a extends Experiment {
             },
             new Column() {
                 @Override public String name() {
-                    return "prop";
+                    return "sp";
                 }
                 @Override public String value(String dataName) {
                     return Utils.format(countIssues(OBSERVED_AND_PROPAGATED_ISSUES_FOLDER,dataName,true));
@@ -44,7 +44,15 @@ public class RQ3a extends Experiment {
             },
             new Column() {
                 @Override public String name() {
-                    return "r,lpb(san-all)";
+                    return "sps";
+                }
+                @Override public String value(String dataName) {
+                    return Utils.format(countIssues(OBSERVED_AND_PROPAGATED_SANITIZED_ISSUES_FOLDER,dataName,true));
+                }
+            },
+            new Column() {
+                @Override public String name() {
+                    return "r,lpb(s)";
                 }
                 @Override public String value(String dataName) {
                     return recallPrecision(EXTRACTED_ISSUES_FOLDER,SANITIZED_ISSUES_FOLDER,dataName);
@@ -52,18 +60,26 @@ public class RQ3a extends Experiment {
             },
             new Column() {
                 @Override public String name() {
-                    return "r,lpb(prop)";
+                    return "r,lpb(sp)";
                 }
                 @Override public String value(String dataName) {
                     return recallPrecision(EXTRACTED_ISSUES_FOLDER,OBSERVED_AND_PROPAGATED_ISSUES_FOLDER,dataName);
+                }
+            },
+            new Column() {
+                @Override public String name() {
+                    return "r,lpb(sps)";
+                }
+                @Override public String value(String dataName) {
+                    return recallPrecision(EXTRACTED_ISSUES_FOLDER,OBSERVED_AND_PROPAGATED_SANITIZED_ISSUES_FOLDER,dataName);
                 }
             }
         };
 
         TableGenerator csvOutput = new CSVTableGenerator(OUTPUT_CSV);
-        TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrrr|");
+        TableGenerator latexOutput = new LatexTableGenerator(OUTPUT_LATEX,"|lrrrrrr|");
 
-        this.run(FULL_DATASET,"RQ3a -- number of propagated issues and recall and lower precision bound (r,lpb) of propagation (after applying all sanitisers), compared to sanitised issues","tab:rq3a",columns,csvOutput,latexOutput);
+        this.run(FULL_DATASET,"RQ3a -- effect of propagation, aggergated issue counts and recall / lower precision boound for santitised issues (s), santitised and then propagarted issues (sp) and santitised, propagarted and resanitised issues (sps)","tab:rq3a",columns,csvOutput,latexOutput);
 
     }
 

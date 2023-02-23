@@ -15,4 +15,7 @@ If the project is build with `mvn package`, a jar containing all dependencies wi
 | `-i`  | `--project <arg>`            | the project (folder) to be analysed, the project must have been built   (required) |
 | `-p`  | `--issues <arg>`             | the name of the issue file to be created   (required)                              |
 | `-o`  | `--projecttype <arg>`        | the type of the project -- mvn or gradle (required))                               |
+|`-v`   | `--voidisnullable`           | if set, java.lang.Void will be treated as implicitly annotated as nullable"        |
+
+
 
