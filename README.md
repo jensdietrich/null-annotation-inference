@@ -8,7 +8,7 @@ This tool suite infers `@Nullable` annotations to refine those assumptions using
 
 ## Publication
 
-[Dietrich, Jens, David J. Pearce, and Mahin Chandramohan. "On Leveraging Tests to Infer Nullable Annotations." 37th European Conference on Object-Oriented Programming (ECOOP 2023). Schloss Dagstuhl-Leibniz-Zentrum für Informatik, 2023.] (https://drops.dagstuhl.de/opus/volltexte/2023/18203/pdf/LIPIcs-ECOOP-2023-10.pdf)
+[Dietrich, Jens, David J. Pearce, and Mahin Chandramohan. "On Leveraging Tests to Infer Nullable Annotations." 37th European Conference on Object-Oriented Programming (ECOOP 2023). Schloss Dagstuhl-Leibniz-Zentrum für Informatik, 2023.](https://drops.dagstuhl.de/opus/volltexte/2023/18203/pdf/LIPIcs-ECOOP-2023-10.pdf)
 
 ## Sightings
 
