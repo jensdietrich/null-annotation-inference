@@ -74,7 +74,7 @@
 
 
     <!-- IMPORTANT -->
-    <!-- the bytebuddy version matters as this is a common dependency hrougg mockito, and there have been some incompatible API
+    <!-- the bytebuddy version matters as this is a common dependency through mockito, and there have been some incompatible API
     changes between 1.10.20 and 1.12.16 in net.bytebuddy.agent.builder.AgentBuilder$Transformer#transform
     Note that we also build an agent version that does not use the bytebuddy dependency, but still has the bytebuddy API callsites
     -->
@@ -88,7 +88,6 @@
       <artifactId>byte-buddy-agent</artifactId>
       <version>1.10.20</version>
     </dependency>
-
 
     <dependency>
       <groupId>org.junit.jupiter</groupId>

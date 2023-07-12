@@ -5,6 +5,22 @@ Multiple static null checkers have become in recent years to address what is pro
 
 This tool suite infers `@Nullable` annotations to refine those assumptions using a combination of dynamic and static analyses. This will then lead to a more accurate analysis when using static checkers. In a nutshell, instrumented tests are executed and method invocations and field access is monitored for the use of `null`. Then several static analyses are used to refine the results, reducing both false negatives and false positives.
 
+
+## Publication
+
+[Dietrich, Jens, David J. Pearce, and Mahin Chandramohan. "On Leveraging Tests to Infer Nullable Annotations." 37th European Conference on Object-Oriented Programming (ECOOP 2023). Schloss Dagstuhl-Leibniz-Zentrum für Informatik, 2023.] (https://drops.dagstuhl.de/opus/volltexte/2023/18203/pdf/LIPIcs-ECOOP-2023-10.pdf)
+
+## Sightings
+
+
+nullable annotations added based on this analysis:
+
+1. [guava](https://github.com/google/guava/issues/6510)
+2. [spring](https://github.com/spring-projects/spring-framework/pull/29150)
+
+
+## Design
+
 The tool is designed to work for Maven and Gradle (Gradle support is incomplete at the moment) projects, and contains the following modules: 
 
 1. An __agent__  that can be used to instrument tests (e.g. can be used in the sure-fire plugin in Maven projects) , this will produce json-encoded files listing nulls that have been observed in method returns or arguments (*nullability issues*) or after object creation during test execution. 
